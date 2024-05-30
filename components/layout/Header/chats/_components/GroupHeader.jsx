@@ -52,6 +52,11 @@ const GroupHeader = ({ router }) => {
     setUsername("");
   });
 
+  useEffect(() => {
+    setUsername("");
+    setFoundUsers([]);
+  }, [isSidebarVisible]);
+
   if (pathname.includes(`/chats/groups/join`)) return null;
 
   const fetchUsers = async () => {
@@ -138,11 +143,6 @@ const GroupHeader = ({ router }) => {
       </>
     );
   };
-
-  useEffect(() => {
-    setUsername("");
-    setFoundUsers([]);
-  }, [isSidebarVisible]);
 
   return (
     pathname.includes(`/chats/groups/`) && (
