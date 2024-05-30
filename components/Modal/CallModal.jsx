@@ -113,55 +113,53 @@ const CallModal = () => {
   };
 
   return (
-    call && (
-      <div className=" ">
-        <div className="  z-50 text-[14px] w-full font-ttfirs fixed  top-0 right-0 h-screen flex items-center justify-center">
-          <div className=" bg-[#181818]/40  z-0 text-[14px] w-full font-ttfirs fixed  top-0 right-0 h-screen flex items-center justify-center " />
-          <div className=" w-full z-2 relative py-20 max-w-[350px] p-10 mx-auto bg-[#181818]/50 backdrop-blur-xl  rounded-3xl  border  border-[#393939]">
-            <div className=" grid">
-              <button onClick={leave} className={`p-5 border  border-red-400`}>
-                leave
-              </button>
-              <>
-                <button
-                  onClick={CallAnswered}
-                  className={`p-5 border  border-red-400
+    <div className=" ">
+      <div className="  z-50 text-[14px] w-full font-ttfirs fixed  top-0 right-0 h-screen flex items-center justify-center">
+        <div className=" bg-[#181818]/40  z-0 text-[14px] w-full font-ttfirs fixed  top-0 right-0 h-screen flex items-center justify-center " />
+        <div className=" w-full z-2 relative py-20 max-w-[350px] p-10 mx-auto bg-[#181818]/50 backdrop-blur-xl  rounded-3xl  border  border-[#393939]">
+          <div className=" grid">
+            <button onClick={leave} className={`p-5 border  border-red-400`}>
+              leave
+            </button>
+            <>
+              <button
+                onClick={CallAnswered}
+                className={`p-5 border  border-red-400
                 `}
-                >
-                  CallAnswered
-                </button>
-                <button
-                  onClick={CallUser}
-                  className={`p-5 border border-red-400`}
-                >
-                  CallUser
-                </button>
-                <button
-                  onClick={() => setCall(false)}
-                  className={`p-5 border border-red-400`}
-                >
-                  Cancel
-                </button>
-              </>
-            </div>
-
-            <video
-              playsInline
-              ref={userVideoRef}
-              autoPlay
-              className=" flex w-full h-[200px]"
-            />
-            <video
-              ref={myVideoRef}
-              autoPlay
-              muted={true}
-              playsInline
-              className=" flex w-full h-[200px]"
-            />
+              >
+                CallAnswered
+              </button>
+              <button
+                onClick={CallUser}
+                className={`p-5 border border-red-400`}
+              >
+                CallUser
+              </button>
+              <button
+                onClick={() => setCall(false)}
+                className={`p-5 border border-red-400`}
+              >
+                Cancel
+              </button>
+            </>
           </div>
+
+          <video
+            playsInline
+            ref={userVideoRef}
+            autoPlay
+            className=" flex w-full h-[200px]"
+          />
+          <video
+            ref={myVideoRef}
+            autoPlay
+            muted={true}
+            playsInline
+            className=" flex w-full h-[200px]"
+          />
         </div>
       </div>
-    )
+    </div>
   );
 };
 

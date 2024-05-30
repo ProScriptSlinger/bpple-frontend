@@ -97,7 +97,7 @@ export function PeerConnectionProvider({ children }) {
     <PeerContext.Provider value={value}>
       <CallActionModal />
 
-      <CallModal />
+      {call && <CallModal />}
 
       {children}
     </PeerContext.Provider>
