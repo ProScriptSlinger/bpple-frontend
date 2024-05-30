@@ -42,14 +42,17 @@ const GroupHeader = ({ router }) => {
 
     handleFindGroup();
   }, [groupId, userDetail]);
-
-  if (pathname.includes(`/chats/groups/join`)) return null;
+  useEffect(() => {
+    username.length > 2 && fetchUsers();
+  }, [username]);
 
   useClickOutside(ref, () => {
     setMenuVisible(false);
     setSidebarVisible(false);
     setUsername("");
   });
+
+  if (pathname.includes(`/chats/groups/join`)) return null;
 
   const fetchUsers = async () => {
     try {
@@ -90,10 +93,6 @@ const GroupHeader = ({ router }) => {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    username.length > 2 && fetchUsers();
-  }, [username]);
 
   const handleAddMember = (id) => {
     console.log("Clicked User Id------>", activeUser);

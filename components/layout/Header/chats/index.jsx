@@ -26,9 +26,10 @@ const ChatsHeader = () => {
     handleFindChat();
   }, [id, chats]);
 
+  const { call, setCall } = usePeerConnection();
+
   if (pathname.includes(`/chats/groups/`)) return <GroupHeader />;
 
-  const { call, setCall } = usePeerConnection();
   return (
     <>
       <div className="w-full inline-flex justify-between mt-[40px]">
