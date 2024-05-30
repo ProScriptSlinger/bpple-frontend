@@ -532,7 +532,7 @@ const CommunityList = (props) => {
               Pined Chats
             </div>
             <div className="mt-[20px]">
-              {userDetail?.groups.map((group, index) => (
+              {userDetail?.groups?.map((group, index) => (
                 <GroupList
                   key={index}
                   usersTyping={usersTyping}

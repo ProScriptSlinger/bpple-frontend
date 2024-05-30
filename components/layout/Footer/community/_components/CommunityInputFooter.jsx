@@ -42,7 +42,7 @@ const CommunityInputFooter = () => {
         setChannelData(chal);
       }
     };
-    handleFindChannel();
+    communities && handleFindChannel();
   }, [communityId, channel, communities]);
 
   const handleIstyping = (e) => {

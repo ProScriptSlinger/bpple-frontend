@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
   const [user_messages, setUser_messages] = useState({});
   const [user_group_messages, setUser_group_messages] = useState({});
   const [community_messages, setCommunity_messages] = useState({});
-  const [communities, setCommunities] = useState(null);
+  const [communities, setCommunities] = useState([]);
 
   const { address, isConnecting, isConnected, isDisconnected } = useAccount();
   const { open } = useWeb3Modal();
