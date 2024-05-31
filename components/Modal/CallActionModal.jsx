@@ -326,13 +326,13 @@ const CallActionModal = () => {
                 setCall(false);
               }}
             ></div>
-            <div className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] w-[75%]">
+            <div className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] w-[75%] ">
               <video
                 ref={userVideoRef}
                 autoPlay
                 playsInline
                 alt="my-video"
-                className="w-full h-full"
+                className="w-full max-h-[90vh]"
                 poster={
                   !isCaller
                     ? callDetails?.receiver?.avatar ?? "/icon/person.png"
