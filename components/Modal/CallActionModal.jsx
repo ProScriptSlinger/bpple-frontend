@@ -265,7 +265,11 @@ const CallActionModal = () => {
     setCallActionModal(true);
     setIsCaller(false);
     setRinging(false);
-    console.log("answering call ");
+    console.log("answering call ", {
+      signal: callSignal,
+      details: callDetails,
+      room_id: callDetails.room_id,
+    });
 
     socket.current.emit("user-answered-call", {
       signal: callSignal,
@@ -278,7 +282,7 @@ const CallActionModal = () => {
       userVideoRef.current.srcObject = stream;
     });
 
-    console.log("Peer connected, setting remote description.");
+    console.log("Peer connected, setting remote description.", inCallSignal);
     peerRef.current.signal(inCallSignal);
 
     // Set up error handling for the peer connection
