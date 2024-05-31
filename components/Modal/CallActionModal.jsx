@@ -86,6 +86,8 @@ const CallActionModal = () => {
     setInCallSignal,
   } = usePeerConnection();
 
+  const [streamState, setStreamState] = useState({ video: true, audio: true });
+
   const [isCaller, setIsCaller] = useState(false);
   const userVideoRef = useRef(null);
   const myVideoRef = useRef(null);
@@ -181,6 +183,7 @@ const CallActionModal = () => {
             });
         } else {
           console.log("Camera or microphone is not available.");
+          toast.warning("Camera or microphone is not available.");
           // Handle the case where camera or microphone is not available
         }
       })
