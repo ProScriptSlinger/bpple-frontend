@@ -134,7 +134,10 @@ const CallActionModal = () => {
 
   useEffect(() => {
     console.log("stream ------>", stream);
-    if (peerRef.current && stream) peerRef.current.addStream(stream);
+    if (peerRef.current && stream) {
+      peerRef.current.addStream(stream);
+      myVideoRef.srcObject = stream;
+    }
   }, [stream]);
 
   useEffect(() => {
