@@ -81,12 +81,17 @@ const CallActionModal = () => {
     callDetails,
     callState,
     emitEvent,
+    inCallSignal,
+    setInCallSignal,
   } = usePeerConnection();
+
   const [isCaller, setIsCaller] = useState(false);
-  const peerRef = useRef(null);
   const userVideoRef = useRef(null);
   const myVideoRef = useRef(null);
   const [stream, setStream] = useState();
+
+  const peerRef = useRef(null);
+
   const { socket } = useSocket();
   const callings = [
     { avatar: "/avatar/8.svg", type: "screen", name: "@KitshunaFowyu" },
@@ -101,35 +106,89 @@ const CallActionModal = () => {
   ];
 
   useEffect(() => {
-    const handleMediaStreamError = (error) => {
-      console.error("Error accessing media devices:", error);
-    };
+    console.log("useEffect------->");
+    const peer = new Peer({ initiator: true, trickle: false });
 
-    navigator.mediaDevices
-      .getUserMedia({ audio: true, video: true })
-      .then((stream) => {
-        console.log("my stream ------->", stream);
-        setStream(stream);
-        if (myVideoRef.current) {
-          myVideoRef.current.srcObject = stream;
-        }
-      })
-      .catch(handleMediaStreamError);
+    peer.on("signal", (data) => {
+      console.log("peer signal------->", data);
+      setCallSignal(data);
+    });
+
+    peer.on("stream", (stream) => {
+      console.log("stream------->".stream);
+      userVideoRef.current.srcObject = stream;
+    });
+
+    peer.on("error", (err) => {
+      console.error("Peer connection error:", err);
+    });
+
+    peerRef.current = peer;
 
     return () => {
       if (peerRef.current) {
         peerRef.current.destroy();
-        peerRef.current = null;
       }
     };
+  }, []);
+
+  useEffect(() => {
+    console.log("stream ------>", stream);
+    if (peerRef.current && stream) peerRef.current.addStream(stream);
+  }, [stream]);
+
+  useEffect(() => {
+    navigator.mediaDevices
+      .enumerateDevices()
+      .then((devices) => {
+        console.log("devices ------->", devices);
+        let cameraAvailable = false;
+        let microphoneAvailable = false;
+
+        devices.forEach((device) => {
+          if (device.kind === "videoinput") {
+            cameraAvailable = true;
+          } else if (device.kind === "audioinput") {
+            microphoneAvailable = true;
+          }
+        });
+
+        if (cameraAvailable || microphoneAvailable) {
+          console.log(
+            `Camera or microphone are available.`,
+            cameraAvailable,
+            microphoneAvailable
+          );
+          // Proceed with getUserMedia
+          navigator.mediaDevices
+            .getUserMedia({
+              audio: microphoneAvailable,
+              video: cameraAvailable,
+            })
+            .then((stream) => {
+              // Access the audio and video stream
+              console.log("Found Stream------->", stream);
+              setStream(stream);
+            })
+            .catch((error) => {
+              console.error("Error accessing audio and video stream:", error);
+            });
+        } else {
+          console.log("Camera or microphone is not available.");
+          // Handle the case where camera or microphone is not available
+        }
+      })
+      .catch((error) => {
+        console.error("Error enumerating media devices:", error);
+      });
   }, []);
 
   useEffect(() => {
     if (socket.current) {
       socket.current.on("someone-is-comming", (data) => {
         console.log(data);
+        setInCallSignal(data.signal);
         setRinging(true);
-        setCallSignal(data.signal);
       });
 
       socket.current.on("call-answered", (signal) => {
@@ -156,37 +215,23 @@ const CallActionModal = () => {
   }, [socket.current]);
 
   useEffect(() => {
-    calling && CallUser();
+    calling && callState == "idle" && CallUser();
   }, [calling]);
 
   const CallUser = () => {
-    console.log("calling user ");
-    setIsCaller(true);
-    const peer = new Peer({ initiator: true, trickle: false, stream: stream });
-
-    peer.on("signal", (data) => {
+    if (peerRef.current) {
+      console.log("calling user ");
+      setIsCaller(true);
       socket.current.emit("call-user", {
-        signal: data,
+        signal: callSignal,
         details: callDetails,
         room_id: callDetails.room_id,
       });
-      console.log(data);
-    });
-
-    peer.on("stream", (stream) => {
-      console.log("stream------->".stream);
-      userVideoRef.current.srcObject = stream;
-    });
-
-    peer.on("error", (err) => {
-      console.error("Peer connection error:", err);
-    });
-
-    peerRef.current = peer;
+    } else console.log("have no peer instance------->");
   };
 
   const CallAnswered = () => {
-    if (!callSignal) {
+    if (!inCallSignal) {
       console.error("Call signal is null.");
       return;
     }
@@ -196,36 +241,34 @@ const CallActionModal = () => {
     setRinging(false);
     console.log("answering call ");
 
-    const peer = new Peer({ initiator: false, trickle: false, stream: stream });
-
-    peer.on("signal", (data) => {
-      socket.current.emit("user-answered-call", {
-        signal: data,
-        room_id: callDetails.room_id,
-      });
-      console.log("signal", data);
+    socket.current.emit("user-answered-call", {
+      signal: callSignal,
+      room_id: callDetails.room_id,
     });
 
-    peer.on("stream", (stream) => {
+    peerRef.current.on("stream", (stream) => {
       console.log("stream", stream);
       userVideoRef.current.srcObject = stream;
     });
 
     console.log("Peer connected, setting remote description.");
-    peer.signal(callSignal);
+    peerRef.current.signal(inCallSignal);
 
     // Set up error handling for the peer connection
-    peer.on("error", (err) => {
+    peerRef.current.on("error", (err) => {
       console.error("Peer connection error:", err);
     });
-
-    peerRef.current = peer;
   };
 
   const leave = () => {
-    if (peerRef.current) {
-      peerRef.current.destroy();
-    }
+    if (
+      peerRef?.current &&
+      peerRef?.current.streams &&
+      peerRef?.current.streams.length > 0
+    ) {
+      console.log("Removed sream-------->");
+      peerRef.current.removeStream();
+    } else console.log("No sream-------->");
   };
 
   const rejectCall = () => {

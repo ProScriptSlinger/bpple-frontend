@@ -11,6 +11,7 @@ import { useUser } from "./appContext";
 import CallActionModal from "../components/Modal/CallActionModal";
 import CallModal from "../components/Modal/CallModal";
 import { toast } from "react-toastify";
+import Peer from "simple-peer";
 
 const PeerContext = createContext();
 
@@ -19,15 +20,13 @@ export function usePeerConnection() {
 }
 
 export function PeerConnectionProvider({ children }) {
-  const peer = useRef(null);
   const { socket } = useSocket();
   const [callSignal, setCallSignal] = useState(null);
+  const [inCallSignal, setInCallSignal] = useState(null);
   const [callEnded, setCallEnded] = useState(false);
   const [ringing, setRinging] = useState(false);
   const [callDetails, setCallDetails] = useState(null);
   const [callState, setCallState] = useState("idle");
-  const peerRef = useRef(null);
-
   const [callActionModal, setCallActionModal] = useState(false);
   const [calling, setCalling] = useState(false);
   const [call, setCall] = useState(false);
@@ -40,7 +39,7 @@ export function PeerConnectionProvider({ children }) {
         setCallState("calling");
         setRinging(true);
         setCallDetails(data.details);
-        setCallSignal(data.signal);
+        setInCallSignal(data.signal);
       });
 
       socket.current.on("caller-ended-call", (data) => {
@@ -100,6 +99,8 @@ export function PeerConnectionProvider({ children }) {
     setCalling,
     call,
     setCall,
+    inCallSignal,
+    setInCallSignal,
   };
 
   return (

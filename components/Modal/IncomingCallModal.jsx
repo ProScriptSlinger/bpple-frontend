@@ -5,7 +5,6 @@ import { useEffect } from "react";
 
 const IncomingCallModal = ({ callDetails, rejectCall, CallAnswered }) => {
   const socket = useSocket();
-  console.log("Call Details ----->", callDetails);
   const { caller } = callDetails;
   useEffect(() => {
     socket.current &&

@@ -27,7 +27,6 @@ const ChatsHeader = () => {
     };
 
     handleFindChat();
-    console.log("Other one ----->", chat?.otherUser);
   }, [id, chats]);
 
   useEffect(() => {
