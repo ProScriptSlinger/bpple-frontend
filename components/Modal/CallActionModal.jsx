@@ -136,11 +136,13 @@ const CallActionModal = () => {
   }, []);
 
   useEffect(() => {
-    if (peerRef.current && stream) {
+    if (peerRef.current && callSignal && stream) {
       console.log("Add stream ------>", stream);
       const videoTrack = stream.getVideoTracks()[0];
+      const audioTrack = stream.getAudioTracks()[0];
       peerRef.current.addTrack(videoTrack, stream);
-      peerRef.current.addStream(stream);
+      peerRef.current.addTrack(audioTrack, stream);
+      // peerRef.current.addStream(stream);
       myVideoRef.srcObject = stream;
     }
   }, [stream]);
