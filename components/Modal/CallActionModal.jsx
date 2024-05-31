@@ -144,21 +144,17 @@ const CallActionModal = () => {
           );
           // Proceed with getUserMedia
           navigator.mediaDevices
-            .getUserMedia({
-              audio: true,
-              video: true,
-            })
+            .getUserMedia({ audio: true, video: true })
             .then((stream) => {
               // Access the audio and video stream
               console.log("Found Stream------->", stream);
               // setStream(stream);
+              myVideoRef.current.srcObject = stream;
               const peer = new Peer({
                 initiator: true,
                 trickle: false,
                 stream: stream,
               });
-
-              myVideoRef.srcObject = stream;
 
               peer.on("signal", (data) => {
                 console.log("peer signal------->", data);
@@ -166,7 +162,7 @@ const CallActionModal = () => {
               });
 
               peer.on("stream", (stream) => {
-                console.log("stream------->".stream);
+                console.log("stream------->", stream);
                 userVideoRef.current.srcObject = stream;
               });
 
