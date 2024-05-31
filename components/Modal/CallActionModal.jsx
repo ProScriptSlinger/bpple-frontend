@@ -136,7 +136,7 @@ const CallActionModal = () => {
   }, []);
 
   useEffect(() => {
-    if (peerRef.current && callSignal && stream) {
+    if ((calling || call) && peerRef.current && callSignal && stream) {
       console.log("Add stream ------>", stream);
       const videoTrack = stream.getVideoTracks()[0];
       const audioTrack = stream.getAudioTracks()[0];
@@ -145,7 +145,7 @@ const CallActionModal = () => {
       // peerRef.current.addStream(stream);
       myVideoRef.srcObject = stream;
     }
-  }, [stream]);
+  }, [stream, calling, call]);
 
   useEffect(() => {
     navigator.mediaDevices
