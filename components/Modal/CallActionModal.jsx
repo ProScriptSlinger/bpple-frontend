@@ -228,6 +228,17 @@ const CallActionModal = () => {
   }, [socket.current]);
 
   useEffect(() => {
+    let newStream;
+    newStream.getVideoTracks().forEach((track) => {
+      track.enabled = streamState.video; // Toggle the video track state (stop/start camera)
+    });
+    newStream.getAudioTracks().forEach((track) => {
+      track.enabled = streamState.audio; // Toggle the audio track state (mute/unmute)
+    });
+    setStream(newStream);
+  }, [streamState]);
+
+  useEffect(() => {
     calling && callSignal && CallUser();
   }, [calling]);
 
@@ -366,15 +377,27 @@ const CallActionModal = () => {
                       alt=""
                     />
                     <Image
+                      onClick={() =>
+                        setStreamState({
+                          ...streamState,
+                          video: !streamState.video,
+                        })
+                      }
                       src="/icon/camera_call_grey.svg"
-                      className="w-full h-auto mb-[15%]"
+                      className="w-full h-auto mb-[15%] cursor-pointer"
                       width={0}
                       height={0}
                       alt=""
                     />
                     <Image
+                      onClick={() =>
+                        setStreamState({
+                          ...streamState,
+                          audio: !streamState.audio,
+                        })
+                      }
                       src="/icon/mic_call_grey.svg"
-                      className="w-full h-auto mb-[15%]"
+                      className="w-full h-auto mb-[15%] cursor-pointer"
                       width={0}
                       height={0}
                       alt=""
