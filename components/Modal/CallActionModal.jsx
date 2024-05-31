@@ -108,6 +108,7 @@ const CallActionModal = () => {
     navigator.mediaDevices
       .getUserMedia({ audio: true, video: true })
       .then((stream) => {
+        console.log("my stream ------->", stream);
         setStream(stream);
         if (myVideoRef.current) {
           myVideoRef.current.srcObject = stream;
@@ -256,24 +257,29 @@ const CallActionModal = () => {
             <div className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] w-[75%]">
               <video
                 ref={userVideoRef}
+                autoPlay
+                playsInline
                 alt="my-video"
-                className="w-auto h-auto"
-                // poster={
-                //   !isCaller
-                //     ? callDetails?.receiver?.avatar ?? "/icon/person.png"
-                //     : callDetails?.caller?.avatar ?? "/icon/person.png"
-                // }
+                className="w-full h-full"
+                poster={
+                  !isCaller
+                    ? callDetails?.receiver?.avatar ?? "/icon/person.png"
+                    : callDetails?.caller?.avatar ?? "/icon/person.png"
+                }
               />
               <div className="absolute left-[3%] bottom-[5%] w-full">
                 <video
                   ref={myVideoRef}
+                  autoPlay
+                  muted={true}
+                  playsInline
                   alt="my-video"
                   className="w-[15%] h-auto"
-                  // poster={
-                  //   isCaller
-                  //     ? callDetails?.receiver?.avatar ?? "/icon/person.png"
-                  //     : callDetails?.caller?.avatar ?? "/icon/person.png"
-                  // }
+                  poster={
+                    isCaller
+                      ? callDetails?.receiver?.avatar ?? "/icon/person.png"
+                      : callDetails?.caller?.avatar ?? "/icon/person.png"
+                  }
                 />
               </div>
               <div className="absolute right-[3%] bottom-[55%] w-full">
