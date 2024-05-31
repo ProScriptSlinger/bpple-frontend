@@ -123,16 +123,12 @@ const ChatsHeader = () => {
           )}
           <Image
             onClick={() => {
-              // useMemo(() => computeExpensiveValue(a, b), [callSignal]);
-              // console.log("Set Call funtions------>");
-              if (callSignal) {
-                setCalling(true);
-                setCallDetails({
-                  caller: userDetail,
-                  receiver: chat.otherUser,
-                  room_id: id,
-                });
-              } else toast.warning("Wait a minutes. Connectting server.");
+              setCalling(true);
+              setCallDetails({
+                caller: userDetail,
+                receiver: chat.otherUser,
+                room_id: id,
+              });
             }}
             width={0}
             height={0}

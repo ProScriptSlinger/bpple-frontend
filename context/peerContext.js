@@ -22,7 +22,6 @@ export function usePeerConnection() {
 export function PeerConnectionProvider({ children }) {
   const { socket } = useSocket();
   const [callSignal, setCallSignal] = useState(null);
-  const [inCallSignal, setInCallSignal] = useState(null);
   const [callEnded, setCallEnded] = useState(false);
   const [ringing, setRinging] = useState(false);
   const [callDetails, setCallDetails] = useState(null);
@@ -39,7 +38,7 @@ export function PeerConnectionProvider({ children }) {
         setCallState("calling");
         setRinging(true);
         setCallDetails(data.details);
-        setInCallSignal(data.signal);
+        setCallSignal(data.signal);
       });
 
       socket.current.on("caller-ended-call", (data) => {
@@ -99,8 +98,6 @@ export function PeerConnectionProvider({ children }) {
     setCalling,
     call,
     setCall,
-    inCallSignal,
-    setInCallSignal,
   };
 
   return (
