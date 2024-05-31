@@ -161,7 +161,7 @@ const CallActionModal = () => {
             .then((stream) => {
               // Access the audio and video stream
               console.log("Found Stream------->", stream);
-              setStream(stream);
+              // setStream(stream);
               const peer = new Peer({
                 initiator: true,
                 trickle: false,
