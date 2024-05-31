@@ -1,6 +1,5 @@
 import { MdOutlineCall, MdOutlineCallEnd } from "react-icons/md";
 import { getNameInitials } from "../../utils/functions/getNameInitials";
-import { Image } from "next/image";
 import { useSocket } from "../../context/socketContext";
 import { useEffect } from "react";
 

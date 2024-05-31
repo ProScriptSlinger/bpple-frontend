@@ -99,7 +99,6 @@ const CallActionModal = () => {
     { avatar: "/avatar/8.svg", type: "listening", name: "@KitshunaFowyu" },
     { avatar: "/avatar/8.svg", type: "listening", name: "@KitshunaFowyu" },
   ];
-  const pathName = usePathname();
 
   useEffect(() => {
     const handleMediaStreamError = (error) => {

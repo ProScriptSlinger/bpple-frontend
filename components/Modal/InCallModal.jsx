@@ -1,7 +1,6 @@
 import { MdOutlineCall, MdOutlineCallEnd } from "react-icons/md";
 import { getNameInitials } from "../../utils/functions/getNameInitials";
 import { CiMicrophoneOff } from "react-icons/ci";
-import { Image } from "next/image";
 
 const InCallModal = ({ cancelCall, callDetails }) => {
   const { receiver } = callDetails;
