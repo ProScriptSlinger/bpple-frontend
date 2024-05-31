@@ -155,8 +155,8 @@ const CallActionModal = () => {
           // Proceed with getUserMedia
           navigator.mediaDevices
             .getUserMedia({
-              audio: microphoneAvailable,
-              video: cameraAvailable,
+              audio: true,
+              video: true,
             })
             .then((stream) => {
               // Access the audio and video stream
@@ -165,7 +165,7 @@ const CallActionModal = () => {
               const peer = new Peer({
                 initiator: true,
                 trickle: false,
-                stream,
+                stream: stream,
               });
 
               myVideoRef.srcObject = stream;
