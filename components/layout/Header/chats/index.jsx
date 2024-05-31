@@ -11,10 +11,13 @@ import { usePeerConnection } from "../../../../context/peerContext";
 const ChatsHeader = () => {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  const { chats } = useUser();
-  const { usersTyping } = useSocket();
+  const { chats, userDetail } = useUser();
+  const { usersTyping, socket } = useSocket();
   const pathname = usePathname();
   const [chat, setChat] = useState(null);
+
+  const { call, setCall, calling, setCalling, setCallDetails } =
+    usePeerConnection();
 
   useEffect(() => {
     const handleFindChat = () => {
@@ -24,9 +27,24 @@ const ChatsHeader = () => {
     };
 
     handleFindChat();
+    console.log("Other one ----->", chat?.otherUser);
   }, [id, chats]);
 
-  const { call, setCall } = usePeerConnection();
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.emit("join-room", { room_id: id });
+
+      // socket.current.on("someone-is-comming", (data) => {
+      //   console.log(data);
+      //   setCallSignal(data.signal);
+      // });
+
+      // socket.current.on("call-answered", (signal) => {
+      //   console.log(signal);
+      //   peerRef.current.signal(signal);
+      // });
+    }
+  }, [socket.current]);
 
   if (pathname.includes(`/chats/groups/`)) return <GroupHeader />;
 
@@ -116,8 +134,14 @@ const ChatsHeader = () => {
           )}
           <Image
             onClick={() => {
-              console.log("Set Call funtions------>");
-              setCall(true);
+              // console.log("Set Call funtions------>");
+              // setCall(true);
+              setCallDetails({
+                caller: userDetail,
+                receiver: chat.otherUser,
+                room_id: id,
+              });
+              setCalling(true);
             }}
             width={0}
             height={0}

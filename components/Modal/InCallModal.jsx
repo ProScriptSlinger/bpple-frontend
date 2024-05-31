@@ -2,10 +2,9 @@ import { MdOutlineCall, MdOutlineCallEnd } from "react-icons/md";
 import { getNameInitials } from "../../utils/functions/getNameInitials";
 import { CiMicrophoneOff } from "react-icons/ci";
 import { Image } from "next/image";
-const InCallModal = ({}) => {
-  const caller = {
-    username: "Canon Samson",
-  };
+
+const InCallModal = ({ cancelCall, callDetails }) => {
+  const { receiver } = callDetails;
   return (
     <div>
       <div className=" z-50 text-[14px] w-full font-ttfirs fixed  top-0 right-0 h-screen flex items-center justify-center">
@@ -15,9 +14,9 @@ const InCallModal = ({}) => {
             In Call
           </span>
           <div className=" mt-10">
-            {caller?.avatar ? (
-              <Image
-                src={"/avatar/2.svg"}
+            {receiver?.avatar ? (
+              <img
+                src={receiver?.avatar}
                 className="w-[100px] aspect-square rounded-full mx-auto
                object-cover bg-[#191919] flex items-center justify-center "
                 width={200}
@@ -30,11 +29,11 @@ const InCallModal = ({}) => {
              bg-[#191919] flex items-center   border  border-[#393939] justify-center
               text-[#4C4C4C] text-[40px]"
               >
-                {getNameInitials(caller?.username ?? "B")}
+                {getNameInitials(receiver?.username ?? "B")}
               </div>
             )}
             <div className=" font-medium mt-5 flex  text-center justify-center">
-              <span>{caller?.username}</span>
+              <span>{receiver?.username}</span>
             </div>
           </div>
 
@@ -45,7 +44,10 @@ const InCallModal = ({}) => {
               </div>
               <span>Mute Call</span>
             </button>
-            <button className=" gap-1 flex flex-col items-center justify-center">
+            <button
+              className=" gap-1 flex flex-col items-center justify-center"
+              onClick={() => cancelCall()}
+            >
               <div className=" w-[50px] h-[50px] rounded-full flex items-center justify-center  bg-[#F31816]">
                 <MdOutlineCall size={24} />
               </div>

@@ -222,7 +222,7 @@ const Signup = () => {
               </div>
               <div className="w-full flex justify-center">
                 <button
-                  className="w-[300px] text-center h-[40px] bg-[#50FFFF] rounded-[12px] text-black font-abeezeeItalic hover:bg-opacity-70 transition-all duration-100"
+                  className="w-[300px] flex justify-center h-[40px] bg-[#50FFFF] rounded-[12px] text-black font-abeezeeItalic hover:bg-opacity-70 transition-all duration-100"
                   onClick={async () => {
                     setLoading(true);
                     await getUser();

@@ -1,15 +1,20 @@
 import { MdOutlineCall, MdOutlineCallEnd } from "react-icons/md";
 import { getNameInitials } from "../../utils/functions/getNameInitials";
 import { Image } from "next/image";
+import { useSocket } from "../../context/socketContext";
+import { useEffect } from "react";
 
-
-const IncomingCallModal = ({}) => {
-  const caller = {
-    username: "Canon Samson",
-  };
-
+const IncomingCallModal = ({ callDetails, rejectCall, CallAnswered }) => {
+  const socket = useSocket();
+  console.log("Call Details ----->", callDetails);
+  const { caller } = callDetails;
+  useEffect(() => {
+    socket.current &&
+      socket.current.emit("join-room", { room_id: callDetails.room_id });
+  }, [socket.current]);
   const JoinCall = () => {
     try {
+      CallAnswered();
     } catch (error) {
       console.log(error);
     }
@@ -17,6 +22,7 @@ const IncomingCallModal = ({}) => {
 
   const DeclineCall = () => {
     try {
+      rejectCall();
     } catch (error) {
       console.log(error);
     }
@@ -31,8 +37,8 @@ const IncomingCallModal = ({}) => {
           </span>
           <div className=" mt-10">
             {caller?.avatar ? (
-              <Image
-                src={"/avatar/2.svg"}
+              <img
+                src={caller?.avatar}
                 className="w-[100px] aspect-square rounded-full mx-auto
                object-cover bg-[#191919] flex items-center justify-center "
                 width={200}

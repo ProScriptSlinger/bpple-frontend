@@ -1,10 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSettingModal } from "../../context/communitysetting";
-
+import Peer from "simple-peer";
+import { useRef } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import InCallModal from "./InCallModal";
+import IncomingCallModal from "./IncomingCallModal";
 import { usePeerConnection } from "../../context/peerContext";
+import { useSocket } from "../../context/socketContext";
 const CallingModal = (props) => {
   return (
     <>
@@ -64,13 +68,26 @@ const CallingModal = (props) => {
 
 const CallActionModal = () => {
   const {
+    callSignal,
+    setCallSignal,
     callActionModal,
     setCallActionModal,
     calling,
     setCalling,
     call,
     setCall,
+    ringing,
+    setRinging,
+    callDetails,
+    callState,
+    emitEvent,
   } = usePeerConnection();
+  const [isCaller, setIsCaller] = useState(false);
+  const peerRef = useRef(null);
+  const userVideoRef = useRef(null);
+  const myVideoRef = useRef(null);
+  const [stream, setStream] = useState();
+  const { socket } = useSocket();
   const callings = [
     { avatar: "/avatar/8.svg", type: "screen", name: "@KitshunaFowyu" },
     { avatar: "/avatar/8.svg", type: "speaking", name: "@KitshunaFowyu" },
@@ -84,12 +101,154 @@ const CallActionModal = () => {
   ];
   const pathName = usePathname();
 
+  useEffect(() => {
+    const handleMediaStreamError = (error) => {
+      console.error("Error accessing media devices:", error);
+    };
+
+    navigator.mediaDevices
+      .getUserMedia({ audio: true, video: true })
+      .then((stream) => {
+        setStream(stream);
+        if (myVideoRef.current) {
+          myVideoRef.current.srcObject = stream;
+        }
+      })
+      .catch(handleMediaStreamError);
+
+    return () => {
+      if (peerRef.current) {
+        peerRef.current.destroy();
+        peerRef.current = null;
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("someone-is-comming", (data) => {
+        console.log(data);
+        setRinging(true);
+        setCallSignal(data.signal);
+      });
+
+      socket.current.on("call-answered", (signal) => {
+        setCalling(false);
+        setCall(true);
+        setCallActionModal(true);
+        console.log(signal);
+        peerRef.current.signal(signal);
+      });
+
+      socket.current.on("call-rejected", (signal) => {
+        console.log(signal);
+        leave();
+      });
+      socket.current.on("caller-ended-call", (data) => {
+        console.log("caller-ended-call", data);
+        leave();
+        setCall(false);
+        setRinging(false);
+        setCallActionModal(false);
+      });
+    }
+  }, [socket.current]);
+
+  useEffect(() => {
+    calling && CallUser();
+  }, [calling]);
+
+  const CallUser = () => {
+    console.log("calling user ");
+    setIsCaller(true);
+    const peer = new Peer({ initiator: true, trickle: false, stream: stream });
+
+    peer.on("signal", (data) => {
+      socket.current.emit("call-user", {
+        signal: data,
+        details: callDetails,
+        room_id: callDetails.room_id,
+      });
+      console.log(data);
+    });
+
+    peer.on("stream", (stream) => {
+      console.log(stream);
+      userVideoRef.current.srcObject = stream;
+    });
+
+    peer.on("error", (err) => {
+      console.error("Peer connection error:", err);
+    });
+
+    peerRef.current = peer;
+  };
+
+  const CallAnswered = () => {
+    if (!callSignal) {
+      console.error("Call signal is null.");
+      return;
+    }
+    setCall(true);
+    setCallActionModal(true);
+    setIsCaller(false);
+    setRinging(false);
+    console.log("answering call ");
+
+    const peer = new Peer({ initiator: false, trickle: false, stream: stream });
+
+    peer.on("signal", (data) => {
+      socket.current.emit("user-answered-call", {
+        signal: data,
+        room_id: callDetails.room_id,
+      });
+      console.log("signal", data);
+    });
+
+    peer.on("stream", (stream) => {
+      console.log("stream", stream);
+      userVideoRef.current.srcObject = stream;
+    });
+
+    console.log("Peer connected, setting remote description.");
+    peer.signal(callSignal);
+
+    // Set up error handling for the peer connection
+    peer.on("error", (err) => {
+      console.error("Peer connection error:", err);
+    });
+
+    peerRef.current = peer;
+  };
+
+  const leave = () => {
+    if (peerRef.current) {
+      peerRef.current.destroy();
+    }
+  };
+
+  const rejectCall = () => {
+    emitEvent("reject-call", { room_id: callDetails.room_id });
+    setRinging(false);
+  };
+
+  const cancelCall = () => {
+    emitEvent("end-call", { room_id: callDetails.room_id });
+    leave();
+    setCalling(false);
+    setCallActionModal(false);
+  };
+
   return (
     <>
-      {callActionModal && pathName.includes("/community") && call && (
+      {call && (
         <>
           {/* <div className="fixed left-0 mobile:right-[400px] right-0 top-0 bottom-0 bg-black bg-opacity-[65%] backdrop-blur-[12px] flex items-center justify-center z-30" onClick={() => {setCall(false)}}></div> */}
-          <div className="fixed left-0 mobile:right-[400px] right-0 top-0 bottom-0 flex items-center justify-center z-30">
+          <div
+            className={`fixed left-0 ${
+              callActionModal && "mobile:right-[400px]"
+            } right-0 top-0 bottom-0 flex items-center justify-center z-30`}
+          >
             <div
               className="w-full h-full bg-black bg-opacity-[65%] backdrop-blur-[12px]"
               onClick={() => {
@@ -97,20 +256,26 @@ const CallActionModal = () => {
               }}
             ></div>
             <div className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] w-[75%]">
-              <Image
-                src="/call/bg.svg"
-                width={0}
-                height={0}
-                alt=""
+              <video
+                ref={userVideoRef}
+                alt="my-video"
                 className="w-auto h-auto"
+                poster={
+                  !isCaller
+                    ? callDetails?.receiver?.avatar ?? "/icon/person.png"
+                    : callDetails?.caller?.avatar ?? "/icon/person.png"
+                }
               />
               <div className="absolute left-[3%] bottom-[5%] w-full">
-                <Image
-                  src="/call/person.svg"
-                  width={0}
-                  height={0}
-                  alt=""
+                <video
+                  ref={myVideoRef}
+                  alt="my-video"
                   className="w-[15%] h-auto"
+                  poster={
+                    isCaller
+                      ? callDetails?.receiver?.avatar ?? "/icon/person.png"
+                      : callDetails?.caller?.avatar ?? "/icon/person.png"
+                  }
                 />
               </div>
               <div className="absolute right-[3%] bottom-[55%] w-full">
@@ -155,6 +320,7 @@ const CallActionModal = () => {
                       onClick={() => {
                         setCall(false);
                         setCalling(false);
+                        cancelCall();
                       }}
                     >
                       <Image
@@ -187,10 +353,8 @@ const CallActionModal = () => {
       )}
       <div
         className={`${
-          callActionModal && pathName.includes("/community")
-            ? "w-[400px]"
-            : "w-0"
-        } flex flex-none h-full bg-[#171717] transition-all duration-500 overflow-auto modalWidth:static absolute right-0 z-20 prevent-select`}
+          callActionModal ? "w-[400px]" : "w-0"
+        } flex flex-none h-full bg-[#171717] transition-all duration-500 overflow-auto absolute right-0 z-20 prevent-select`}
       >
         <div className="w-[400px] h-full bg-[#171717] px-[26px] pt-[50px] pb-[50px]">
           <div className="w-[340px] h-full flex flex-col">
@@ -274,12 +438,7 @@ const CallActionModal = () => {
                 alt=""
                 className="w-[50px] h-auto"
               />
-              <button
-                onClick={() => {
-                  setCall(false);
-                  setCalling(false);
-                }}
-              >
+              <button onClick={() => cancelCall()}>
                 <Image
                   src="/icon/call_off.svg"
                   width={0}
@@ -292,6 +451,16 @@ const CallActionModal = () => {
           </div>
         </div>
       </div>
+      {calling && (
+        <InCallModal cancelCall={cancelCall} callDetails={callDetails} />
+      )}
+      {ringing && (
+        <IncomingCallModal
+          CallAnswered={CallAnswered}
+          callDetails={callDetails}
+          rejectCall={rejectCall}
+        />
+      )}
     </>
   );
 };

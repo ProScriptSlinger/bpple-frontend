@@ -8,9 +8,9 @@ import React, {
 } from "react";
 import { useSocket } from "./socketContext";
 import { useUser } from "./appContext";
-import InCallModal from "../components/Modal/InCallModal";
 import CallActionModal from "../components/Modal/CallActionModal";
 import CallModal from "../components/Modal/CallModal";
+import { toast } from "react-toastify";
 
 const PeerContext = createContext();
 
@@ -38,12 +38,16 @@ export function PeerConnectionProvider({ children }) {
       socket.current.on("comming-user", (data) => {
         console.log("comming-user", data);
         setCallState("calling");
+        setRinging(true);
         setCallDetails(data.details);
         setCallSignal(data.signal);
       });
 
       socket.current.on("caller-ended-call", (data) => {
         console.log("caller-ended-call", data);
+        setCall(false);
+        setRinging(false);
+        setCallActionModal(false);
         setCallEnded(true);
         setCallState("idle");
       });
@@ -51,11 +55,16 @@ export function PeerConnectionProvider({ children }) {
       socket.current.on("call-rejected", (data) => {
         console.log("call-rejected", data);
         console.error("Call rejected!");
+        toast.warning("Call rejected!");
+        setCalling(false);
         setCallState("idle");
       });
 
       socket.current.on("call-answered", (data) => {
         console.log("call-answered", data);
+        setCalling(false);
+        setCall(true);
+        setCallActionModal(true);
         setCallState("answered");
       });
 
@@ -96,8 +105,6 @@ export function PeerConnectionProvider({ children }) {
   return (
     <PeerContext.Provider value={value}>
       <CallActionModal />
-
-      {call && <CallModal />}
 
       {children}
     </PeerContext.Provider>
