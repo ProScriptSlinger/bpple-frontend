@@ -7,6 +7,7 @@ import { getNameInitials } from "../../../../utils/functions/getNameInitials";
 import GroupHeader from "./_components/GroupHeader";
 import { useSocket } from "../../../../context/socketContext";
 import { usePeerConnection } from "../../../../context/peerContext";
+import { toast } from "react-toastify";
 
 const ChatsHeader = () => {
   const [loading, setLoading] = useState(true);
@@ -16,8 +17,7 @@ const ChatsHeader = () => {
   const pathname = usePathname();
   const [chat, setChat] = useState(null);
 
-  const { call, setCall, calling, setCalling, setCallDetails } =
-    usePeerConnection();
+  const { callSignal, setCallDetails, setCalling } = usePeerConnection();
 
   useEffect(() => {
     const handleFindChat = () => {
@@ -123,14 +123,16 @@ const ChatsHeader = () => {
           )}
           <Image
             onClick={() => {
+              // useMemo(() => computeExpensiveValue(a, b), [callSignal]);
               // console.log("Set Call funtions------>");
-              // setCall(true);
-              setCallDetails({
-                caller: userDetail,
-                receiver: chat.otherUser,
-                room_id: id,
-              });
-              setCalling(true);
+              if (callSignal) {
+                setCalling(true);
+                setCallDetails({
+                  caller: userDetail,
+                  receiver: chat.otherUser,
+                  room_id: id,
+                });
+              } else toast.warning("Wait a minutes. Connectting server.");
             }}
             width={0}
             height={0}

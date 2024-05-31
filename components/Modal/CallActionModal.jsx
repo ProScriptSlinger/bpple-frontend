@@ -9,6 +9,7 @@ import InCallModal from "./InCallModal";
 import IncomingCallModal from "./IncomingCallModal";
 import { usePeerConnection } from "../../context/peerContext";
 import { useSocket } from "../../context/socketContext";
+import { toast } from "react-toastify";
 const CallingModal = (props) => {
   return (
     <>
@@ -135,6 +136,8 @@ const CallActionModal = () => {
   useEffect(() => {
     if (peerRef.current && stream) {
       console.log("Add stream ------>", stream);
+      const videoTrack = stream.getVideoTracks()[0];
+      peerRef.current.addTrack(videoTrack, stream);
       peerRef.current.addStream(stream);
       myVideoRef.srcObject = stream;
     }
@@ -218,19 +221,22 @@ const CallActionModal = () => {
   }, [socket.current]);
 
   useEffect(() => {
-    calling && callState == "idle" && CallUser();
+    calling && callSignal && CallUser();
   }, [calling]);
 
   const CallUser = () => {
-    if (peerRef.current && peerRef.current.signalingState !== "stable") {
+    if (peerRef.current && callSignal) {
       console.log("calling user ");
+      setCalling(true);
       setIsCaller(true);
       socket.current.emit("call-user", {
         signal: callSignal,
         details: callDetails,
         room_id: callDetails.room_id,
       });
-    } else console.log("have no peer instance------->");
+    } else {
+      console.log("have no peer instance------->");
+    }
   };
 
   const CallAnswered = () => {
