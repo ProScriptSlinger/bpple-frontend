@@ -109,26 +109,26 @@ const CallActionModal = () => {
   ];
 
   useEffect(() => {
-    if (stream) {
-      console.log("useEffect------->");
-      const peer = new Peer({ initiator: true, trickle: false, stream });
+    console.log("useEffect------->");
+    const peer = new Peer({ initiator: true, trickle: false, stream });
 
-      peer.on("signal", (data) => {
-        console.log("peer signal------->", data);
-        setCallSignal(data);
-      });
+    myVideoRef.srcObject = stream;
 
-      peer.on("stream", (stream) => {
-        console.log("stream------->".stream);
-        userVideoRef.current.srcObject = stream;
-      });
+    peer.on("signal", (data) => {
+      console.log("peer signal------->", data);
+      setCallSignal(data);
+    });
 
-      peer.on("error", (err) => {
-        console.error("Peer connection error:", err);
-      });
+    peer.on("stream", (stream) => {
+      console.log("stream------->".stream);
+      userVideoRef.current.srcObject = stream;
+    });
 
-      peerRef.current = peer;
-    }
+    peer.on("error", (err) => {
+      console.error("Peer connection error:", err);
+    });
+
+    peerRef.current = peer;
 
     return () => {
       if (peerRef.current) {
@@ -228,14 +228,16 @@ const CallActionModal = () => {
   }, [socket.current]);
 
   useEffect(() => {
-    let newStream;
-    newStream.getVideoTracks().forEach((track) => {
-      track.enabled = streamState.video; // Toggle the video track state (stop/start camera)
-    });
-    newStream.getAudioTracks().forEach((track) => {
-      track.enabled = streamState.audio; // Toggle the audio track state (mute/unmute)
-    });
-    setStream(newStream);
+    if (stream) {
+      let newStream;
+      newStream.getVideoTracks().forEach((track) => {
+        track.enabled = streamState.video; // Toggle the video track state (stop/start camera)
+      });
+      newStream.getAudioTracks().forEach((track) => {
+        track.enabled = streamState.audio; // Toggle the audio track state (mute/unmute)
+      });
+      setStream(newStream);
+    }
   }, [streamState]);
 
   useEffect(() => {
