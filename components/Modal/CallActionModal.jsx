@@ -258,22 +258,22 @@ const CallActionModal = () => {
                 ref={userVideoRef}
                 alt="my-video"
                 className="w-auto h-auto"
-                poster={
-                  !isCaller
-                    ? callDetails?.receiver?.avatar ?? "/icon/person.png"
-                    : callDetails?.caller?.avatar ?? "/icon/person.png"
-                }
+                // poster={
+                //   !isCaller
+                //     ? callDetails?.receiver?.avatar ?? "/icon/person.png"
+                //     : callDetails?.caller?.avatar ?? "/icon/person.png"
+                // }
               />
               <div className="absolute left-[3%] bottom-[5%] w-full">
                 <video
                   ref={myVideoRef}
                   alt="my-video"
                   className="w-[15%] h-auto"
-                  poster={
-                    isCaller
-                      ? callDetails?.receiver?.avatar ?? "/icon/person.png"
-                      : callDetails?.caller?.avatar ?? "/icon/person.png"
-                  }
+                  // poster={
+                  //   isCaller
+                  //     ? callDetails?.receiver?.avatar ?? "/icon/person.png"
+                  //     : callDetails?.caller?.avatar ?? "/icon/person.png"
+                  // }
                 />
               </div>
               <div className="absolute right-[3%] bottom-[55%] w-full">
