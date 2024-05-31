@@ -88,7 +88,7 @@ const CallActionModal = () => {
   const [isCaller, setIsCaller] = useState(false);
   const userVideoRef = useRef(null);
   const myVideoRef = useRef(null);
-  const [stream, setStream] = useState();
+  const [stream, setStream] = useState(null);
 
   const peerRef = useRef(null);
 
@@ -133,8 +133,8 @@ const CallActionModal = () => {
   }, []);
 
   useEffect(() => {
-    console.log("stream ------>", stream);
     if (peerRef.current && stream) {
+      console.log("Add stream ------>", stream);
       peerRef.current.addStream(stream);
       myVideoRef.srcObject = stream;
     }
