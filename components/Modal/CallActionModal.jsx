@@ -109,43 +109,45 @@ const CallActionModal = () => {
   ];
 
   useEffect(() => {
-    console.log("useEffect------->");
-    const peer = new Peer({ initiator: true, trickle: false });
+    if (stream) {
+      console.log("useEffect------->");
+      const peer = new Peer({ initiator: true, trickle: false, stream });
 
-    peer.on("signal", (data) => {
-      console.log("peer signal------->", data);
-      setCallSignal(data);
-    });
+      peer.on("signal", (data) => {
+        console.log("peer signal------->", data);
+        setCallSignal(data);
+      });
 
-    peer.on("stream", (stream) => {
-      console.log("stream------->".stream);
-      userVideoRef.current.srcObject = stream;
-    });
+      peer.on("stream", (stream) => {
+        console.log("stream------->".stream);
+        userVideoRef.current.srcObject = stream;
+      });
 
-    peer.on("error", (err) => {
-      console.error("Peer connection error:", err);
-    });
+      peer.on("error", (err) => {
+        console.error("Peer connection error:", err);
+      });
 
-    peerRef.current = peer;
+      peerRef.current = peer;
+    }
 
     return () => {
       if (peerRef.current) {
         peerRef.current.destroy();
       }
     };
-  }, []);
+  }, [stream]);
 
-  useEffect(() => {
-    if ((calling || call) && peerRef.current && callSignal && stream) {
-      console.log("Add stream ------>", stream);
-      const videoTrack = stream.getVideoTracks()[0];
-      const audioTrack = stream.getAudioTracks()[0];
-      peerRef.current.addTrack(videoTrack, stream);
-      peerRef.current.addTrack(audioTrack, stream);
-      // peerRef.current.addStream(stream);
-      myVideoRef.srcObject = stream;
-    }
-  }, [stream, calling, call]);
+  // useEffect(() => {
+  //   if ((calling || call) && peerRef.current && callSignal && stream) {
+  //     console.log("Add stream ------>", stream);
+  //     const videoTrack = stream.getVideoTracks()[0];
+  //     const audioTrack = stream.getAudioTracks()[0];
+  //     peerRef.current.addTrack(videoTrack, stream);
+  //     peerRef.current.addTrack(audioTrack, stream);
+  //     // peerRef.current.addStream(stream);
+  //     myVideoRef.srcObject = stream;
+  //   }
+  // }, [stream, calling, call]);
 
   useEffect(() => {
     navigator.mediaDevices
