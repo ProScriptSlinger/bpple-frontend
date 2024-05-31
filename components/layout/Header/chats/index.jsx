@@ -33,16 +33,6 @@ const ChatsHeader = () => {
   useEffect(() => {
     if (socket.current) {
       socket.current.emit("join-room", { room_id: id });
-
-      // socket.current.on("someone-is-comming", (data) => {
-      //   console.log(data);
-      //   setCallSignal(data.signal);
-      // });
-
-      // socket.current.on("call-answered", (signal) => {
-      //   console.log(signal);
-      //   peerRef.current.signal(signal);
-      // });
     }
   }, [socket.current]);
 

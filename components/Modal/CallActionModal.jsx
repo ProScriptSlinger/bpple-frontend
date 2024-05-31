@@ -132,6 +132,7 @@ const CallActionModal = () => {
       });
 
       socket.current.on("call-answered", (signal) => {
+        console.log("call answered ------->", signal);
         setCalling(false);
         setCall(true);
         setCallActionModal(true);
@@ -172,7 +173,7 @@ const CallActionModal = () => {
     });
 
     peer.on("stream", (stream) => {
-      console.log(stream);
+      console.log("stream------->".stream);
       userVideoRef.current.srcObject = stream;
     });
 
@@ -240,13 +241,11 @@ const CallActionModal = () => {
 
   return (
     <>
-      {call && (
-        <>
+      {
+        <div className={`${(!callActionModal || !call) && "hidden"}`}>
           {/* <div className="fixed left-0 mobile:right-[400px] right-0 top-0 bottom-0 bg-black bg-opacity-[65%] backdrop-blur-[12px] flex items-center justify-center z-30" onClick={() => {setCall(false)}}></div> */}
           <div
-            className={`fixed left-0 ${
-              callActionModal && "mobile:right-[400px]"
-            } right-0 top-0 bottom-0 flex items-center justify-center z-30`}
+            className={`fixed left-0 mobile:right-[400px] right-0 top-0 bottom-0 flex items-center justify-center z-30`}
           >
             <div
               className="w-full h-full bg-black bg-opacity-[65%] backdrop-blur-[12px]"
@@ -348,8 +347,8 @@ const CallActionModal = () => {
               </div>
             </div>
           </div>
-        </>
-      )}
+        </div>
+      }
       <div
         className={`${
           callActionModal ? "w-[400px]" : "w-0"
