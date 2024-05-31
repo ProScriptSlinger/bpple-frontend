@@ -108,16 +108,6 @@ const CallActionModal = () => {
     { avatar: "/avatar/8.svg", type: "listening", name: "@KitshunaFowyu" },
   ];
 
-  useEffect(() => {
-    console.log("useEffect------->");
-
-    return () => {
-      if (peerRef.current) {
-        peerRef.current.destroy();
-      }
-    };
-  }, [stream]);
-
   // useEffect(() => {
   //   if ((calling || call) && peerRef.current && callSignal && stream) {
   //     console.log("Add stream ------>", stream);
