@@ -273,6 +273,7 @@ const CallActionModal = () => {
 
     socket.current.emit("user-answered-call", {
       signal: callSignal,
+      details: callDetails,
       room_id: callDetails.room_id,
     });
 
