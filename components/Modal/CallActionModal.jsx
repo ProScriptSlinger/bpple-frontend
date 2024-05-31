@@ -110,25 +110,6 @@ const CallActionModal = () => {
 
   useEffect(() => {
     console.log("useEffect------->");
-    const peer = new Peer({ initiator: true, trickle: false, stream });
-
-    myVideoRef.srcObject = stream;
-
-    peer.on("signal", (data) => {
-      console.log("peer signal------->", data);
-      setCallSignal(data);
-    });
-
-    peer.on("stream", (stream) => {
-      console.log("stream------->".stream);
-      userVideoRef.current.srcObject = stream;
-    });
-
-    peer.on("error", (err) => {
-      console.error("Peer connection error:", err);
-    });
-
-    peerRef.current = peer;
 
     return () => {
       if (peerRef.current) {
@@ -181,19 +162,49 @@ const CallActionModal = () => {
               // Access the audio and video stream
               console.log("Found Stream------->", stream);
               setStream(stream);
+              const peer = new Peer({
+                initiator: true,
+                trickle: false,
+                stream,
+              });
+
+              myVideoRef.srcObject = stream;
+
+              peer.on("signal", (data) => {
+                console.log("peer signal------->", data);
+                setCallSignal(data);
+              });
+
+              peer.on("stream", (stream) => {
+                console.log("stream------->".stream);
+                userVideoRef.current.srcObject = stream;
+              });
+
+              peer.on("error", (err) => {
+                console.error("Peer connection error:", err);
+              });
+
+              peerRef.current = peer;
             })
             .catch((error) => {
               console.error("Error accessing audio and video stream:", error);
             });
         } else {
           console.log("Camera or microphone is not available.");
-          toast.warning("Camera or microphone is not available.");
+          toast.warning(
+            "Camera or microphone is not available. Plz check your camera."
+          );
           // Handle the case where camera or microphone is not available
         }
       })
       .catch((error) => {
         console.error("Error enumerating media devices:", error);
       });
+    return () => {
+      if (peerRef.current) {
+        peerRef.current.destroy();
+      }
+    };
   }, []);
 
   useEffect(() => {
