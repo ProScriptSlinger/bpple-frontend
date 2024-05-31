@@ -222,7 +222,7 @@ const CallActionModal = () => {
   }, [calling]);
 
   const CallUser = () => {
-    if (peerRef.current) {
+    if (peerRef.current && peerRef.current.signalingState !== "stable") {
       console.log("calling user ");
       setIsCaller(true);
       socket.current.emit("call-user", {
