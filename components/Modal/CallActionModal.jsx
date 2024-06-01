@@ -182,7 +182,7 @@ const CallActionModal = () => {
 
       socket.current.on("call-answered", (signal) => {
         console.log("call answered ------->", signal);
-        setCallings([callDetails.receiver, callDetails.caller]);
+        // setCallings([callDetails.receiver, callDetails.caller]);
         setCalling(false);
         setCall(true);
         setCallActionModal(true);
@@ -210,7 +210,8 @@ const CallActionModal = () => {
 
   const CallUser = () => {
     console.log("calling user ");
-    setCallings([callDetails.caller]);
+    setCallings([callDetails.caller, callDetails.receiver]);
+
     const peer = new Peer({ initiator: true, trickle: false, stream: stream });
 
     peer.on("signal", (data) => {
