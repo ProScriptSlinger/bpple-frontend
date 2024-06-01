@@ -7,6 +7,7 @@ const IncomingCallModal = ({ callDetails, rejectCall, CallAnswered }) => {
   const socket = useSocket();
   const { caller } = callDetails;
   useEffect(() => {
+    console.log("join-room socked------->", callDetails.room_id);
     socket.current &&
       socket.current.emit("join-room", { room_id: callDetails.room_id });
   }, [socket.current]);

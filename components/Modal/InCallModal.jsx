@@ -1,8 +1,8 @@
 import { MdOutlineCall, MdOutlineCallEnd } from "react-icons/md";
 import { getNameInitials } from "../../utils/functions/getNameInitials";
-import { CiMicrophoneOff } from "react-icons/ci";
+import { CiMicrophoneOff, CiMicrophoneOn } from "react-icons/ci";
 
-const InCallModal = ({ cancelCall, callDetails }) => {
+const InCallModal = ({ cancelCall, callDetails, isMuted,  toggleMute}) => {
   const { receiver } = callDetails;
   return (
     <div>
@@ -37,9 +37,13 @@ const InCallModal = ({ cancelCall, callDetails }) => {
           </div>
 
           <div className=" flex items-center gap-10 justify-center mt-10">
-            <button className=" gap-1 flex flex-col items-center justify-center">
+            <button className=" gap-1 flex flex-col items-center justify-center" onClick={() => toggleMute()}>
               <div className=" w-[50px] text-black h-[50px] rounded-full flex items-center justify-center  bg-[#53FAFB]">
-                <CiMicrophoneOff size={24} />
+                {isMuted ? (
+                  <CiMicrophoneOn size={24} />
+                ) : (
+                  <CiMicrophoneOff size={24} />
+                )}
               </div>
               <span>Mute Call</span>
             </button>

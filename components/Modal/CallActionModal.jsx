@@ -10,20 +10,29 @@ import IncomingCallModal from "./IncomingCallModal";
 import { usePeerConnection } from "../../context/peerContext";
 import { useSocket } from "../../context/socketContext";
 import { toast } from "react-toastify";
+import {
+  CiMicrophoneOff,
+  CiMicrophoneOn,
+  CiVideoOn,
+  CiVideoOff,
+  CiVolumeHigh,
+  CiVolumeMute,
+} from "react-icons/ci";
+
 const CallingModal = (props) => {
   return (
     <>
       <div className="w-full px-[15px] py-[10px] bg-[#202020] inline-flex items-center justify-between rounded-[12px] mb-[10px]">
-        <div className="inline-flex items-center">
+        <div className="inline-flex items-center rounded-full">
           <Image
             src={props.item.avatar}
             width={0}
             height={0}
             alt=""
-            className="w-[40px] h-auto"
+            className="w-[40px] h-auto rounded-full"
           />
           <div className="ml-[10px] text-left">
-            <p className="text-[13px]">{props.item.name}</p>
+            <p className="text-[13px]">{props.item.username}</p>
             <div className="text-[10px]">
               {props.item.type === "screen" ? (
                 <p className="text-[#4DE265]">Sharing Screen</p>
@@ -84,8 +93,7 @@ const CallActionModal = () => {
     emitEvent,
   } = usePeerConnection();
 
-  const [streamState, setStreamState] = useState({ video: true, audio: true });
-
+  const [isVolumeMute, setVolumeMute] = useState(false);
   const [isCaller, setIsCaller] = useState(false);
   const userVideoRef = useRef(null);
   const myVideoRef = useRef(null);
@@ -93,11 +101,17 @@ const CallActionModal = () => {
 
   const peerRef = useRef(null);
 
+  const [callings, setCallings] = useState([]);
+
   const { socket } = useSocket();
-  const callings = [
-    { avatar: "/avatar/8.svg", type: "screen", name: "@KitshunaFowyu" },
-    { avatar: "/avatar/8.svg", type: "speaking", name: "@KitshunaFowyu" },
-  ];
+
+  const [isMuted, setMuted] = useState(false);
+  const [isCameraStopped, setCameraStopped] = useState(false);
+
+  // const callings = [
+  //   { avatar: "/avatar/8.svg", type: "screen", name: "@KitshunaFowyu" },
+  //   { avatar: "/avatar/8.svg", type: "speaking", name: "@KitshunaFowyu" },
+  // ];
   const callMembers = [
     { avatar: "/avatar/8.svg", type: "rase_hand", name: "@KitshunaFowyu" },
     { avatar: "/avatar/8.svg", type: "listening", name: "@KitshunaFowyu" },
@@ -105,18 +119,6 @@ const CallActionModal = () => {
     { avatar: "/avatar/8.svg", type: "listening", name: "@KitshunaFowyu" },
     { avatar: "/avatar/8.svg", type: "listening", name: "@KitshunaFowyu" },
   ];
-
-  // useEffect(() => {
-  //   if ((calling || call) && peerRef.current && callSignal && stream) {
-  //     console.log("Add stream ------>", stream);
-  //     const videoTrack = stream.getVideoTracks()[0];
-  //     const audioTrack = stream.getAudioTracks()[0];
-  //     peerRef.current.addTrack(videoTrack, stream);
-  //     peerRef.current.addTrack(audioTrack, stream);
-  //     // peerRef.current.addStream(stream);
-  //     myVideoRef.srcObject = stream;
-  //   }
-  // }, [stream, calling, call]);
 
   useEffect(() => {
     navigator.mediaDevices
@@ -180,6 +182,7 @@ const CallActionModal = () => {
 
       socket.current.on("call-answered", (signal) => {
         console.log("call answered ------->", signal);
+        setCallings([callDetails.receiver, callDetails.caller]);
         setCalling(false);
         setCall(true);
         setCallActionModal(true);
@@ -202,25 +205,12 @@ const CallActionModal = () => {
   }, [socket.current]);
 
   useEffect(() => {
-    if (stream) {
-      let newStream;
-      newStream.getVideoTracks().forEach((track) => {
-        track.enabled = streamState.video; // Toggle the video track state (stop/start camera)
-      });
-      newStream.getAudioTracks().forEach((track) => {
-        track.enabled = streamState.audio; // Toggle the audio track state (mute/unmute)
-      });
-      setStream(newStream);
-    }
-  }, [streamState]);
-
-  useEffect(() => {
     calling && callState == "idle" && CallUser();
   }, [calling]);
 
   const CallUser = () => {
     console.log("calling user ");
-
+    setCallings([callDetails.caller]);
     const peer = new Peer({ initiator: true, trickle: false, stream: stream });
 
     peer.on("signal", (data) => {
@@ -244,11 +234,36 @@ const CallActionModal = () => {
     peerRef.current = peer;
   };
 
+  const toggleMute = () => {
+    console.log("peer sream ------>", peerRef.current.stream);
+    var newStream = stream.clone();
+    newStream.getAudioTracks().forEach((track) => {
+      track.enabled = !isMuted;
+    });
+
+    peerRef.current.stream = newStream;
+    setMuted(!isMuted);
+    setStream(newStream);
+  };
+
+  const toggleStopCamera = () => {
+    console.log("peer sream ------>", stream.clone(), peerRef.current.stream);
+    var newStream = stream.clone();
+    newStream.getVideoTracks().forEach((track) => {
+      track.enabled = !isCameraStopped;
+    });
+    peerRef.current.stream = newStream;
+
+    setCameraStopped(!isCameraStopped);
+    setStream(newStream);
+  };
+
   const CallAnswered = () => {
     if (!callSignal) {
       console.error("Call signal is null.");
       return;
     }
+    setCallings([callDetails.caller, callDetails.receiver]);
     setCall(true);
     setCallActionModal(true);
     setIsCaller(false);
@@ -320,6 +335,7 @@ const CallActionModal = () => {
             <div className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] w-[75%] ">
               <video
                 ref={userVideoRef}
+                muted={isVolumeMute}
                 autoPlay
                 playsInline
                 alt="my-video"
@@ -362,40 +378,56 @@ const CallActionModal = () => {
                       height={0}
                       alt=""
                     />
-                    <Image
-                      src="/icon/audio_call_grey.svg"
-                      className="w-full h-auto mb-[15%]"
-                      width={0}
-                      height={0}
-                      alt=""
-                    />
-                    <Image
-                      onClick={() =>
-                        setStreamState({
-                          ...streamState,
-                          video: !streamState.video,
-                        })
-                      }
-                      src="/icon/camera_call_grey.svg"
-                      className="w-full h-auto mb-[15%] cursor-pointer"
-                      width={0}
-                      height={0}
-                      alt=""
-                    />
-                    <Image
-                      onClick={() =>
-                        setStreamState({
-                          ...streamState,
-                          audio: !streamState.audio,
-                        })
-                      }
-                      src="/icon/mic_call_grey.svg"
-                      className="w-full h-auto mb-[15%] cursor-pointer"
-                      width={0}
-                      height={0}
-                      alt=""
-                    />
                     <button
+                      className=" gap-1 flex flex-col items-center justify-center my-2"
+                      onClick={() => setVolumeMute(!isVolumeMute)}
+                    >
+                      <div
+                        className={` w-[50px] text-black h-[50px] rounded-full flex items-center justify-center bg-opacity-70  ${
+                          isVolumeMute ? "bg-[#53FAFB]" : "bg-[#1F1F1F]"
+                        }`}
+                      >
+                        {isVolumeMute ? (
+                          <CiVolumeMute size={25} />
+                        ) : (
+                          <CiVolumeHigh size={25} />
+                        )}
+                      </div>
+                    </button>
+                    <button
+                      className=" gap-1 flex flex-col items-center justify-center my-2"
+                      onClick={() => toggleStopCamera()}
+                    >
+                      <div
+                        className={` w-[50px] text-black h-[50px] rounded-full flex items-center justify-center bg-opacity-70  ${
+                          isCameraStopped ? "bg-[#53FAFB]" : "bg-[#1F1F1F]"
+                        }`}
+                      >
+                        {isCameraStopped ? (
+                          <CiVideoOn size={25} />
+                        ) : (
+                          <CiVideoOff size={25} />
+                        )}
+                      </div>
+                    </button>
+                    <button
+                      className=" gap-1 flex flex-col items-center justify-center my-2"
+                      onClick={() => toggleMute()}
+                    >
+                      <div
+                        className={` w-[50px] text-black h-[50px] rounded-full flex items-center justify-center bg-opacity-70  ${
+                          isMuted ? "bg-[#53FAFB]" : "bg-[#1F1F1F]"
+                        }`}
+                      >
+                        {isMuted ? (
+                          <CiMicrophoneOn size={25} />
+                        ) : (
+                          <CiMicrophoneOff size={25} />
+                        )}
+                      </div>
+                    </button>
+                    <button
+                      className="w-[50px] h-[50px]"
                       onClick={() => {
                         setCall(false);
                         setCalling(false);
@@ -531,7 +563,12 @@ const CallActionModal = () => {
         </div>
       </div>
       {calling && (
-        <InCallModal cancelCall={cancelCall} callDetails={callDetails} />
+        <InCallModal
+          cancelCall={cancelCall}
+          callDetails={callDetails}
+          isMuted={isMuted}
+          toggleMute={toggleMute}
+        />
       )}
       {ringing && (
         <IncomingCallModal
