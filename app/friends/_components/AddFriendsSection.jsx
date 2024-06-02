@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useUser } from "../../../context/appContext";
 import { handleEndpoint } from "../../../utils/api/handleEndpoint";
 import { useSocket } from "../../../context/socketContext";
+import { toast } from "react-toastify";
 
 const AddFriendsSection = () => {
   const { userDetail, setFriendRequestsSent } = useUser();
@@ -26,6 +27,7 @@ const AddFriendsSection = () => {
       );
       if (response.ok) {
         console.log(response);
+        toast.success("Successfullly sent friend request.");
         setFriendRequestsSent((prev) => [response, ...prev]);
         if (socket.current) {
           socket.current.emit("sent-friend-request", response);
@@ -35,7 +37,7 @@ const AddFriendsSection = () => {
         }
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.error);
     } finally {
       setSending(false);
     }

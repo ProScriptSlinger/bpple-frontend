@@ -23,15 +23,15 @@ const handleEndpoint = async (userData, endpoint, method, token) => {
   } catch (error) {
     // Handle different types of errors or provide specific error messages
     if (error.response) {
-      toast.error("Request failed");
+      toast.error(error.response.data.error);
       // The request was made and the server responded with a status code
       // Handle specific status codes if needed
       console.log("Error -------->", error);
       throw new Error(error || "Request failed");
     } else if (error.request) {
       // The request was made but no response was received
-      throw new Error("No response received from server");
       toast.error("No response received from server");
+      throw new Error("No response received from server");
     } else {
       // Something happened in setting up the request that triggered an error
       toast.error("Error setting up the request");

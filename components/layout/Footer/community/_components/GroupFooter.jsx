@@ -29,6 +29,7 @@ const GroupFooter = () => {
 
   const [file, setFile] = useState(null);
   const [upload, setUpload] = useState(false);
+  const [isUploading, setUploading] = useState(false);
 
   const handleIstyping = (e) => {
     setText(e.target.value);
@@ -58,8 +59,8 @@ const GroupFooter = () => {
 
   const sendImage = async () => {
     try {
+      setUploading(true);
       const ImageResponse = await handleUploadFiles(file, groupId);
-
       const time = new Date();
 
       const messageData = {
@@ -78,6 +79,8 @@ const GroupFooter = () => {
         null
       );
       if (response) {
+        setUploading(false);
+
         if (socket.current) {
           socket.current.emit("sent-new-group-message", {
             ...messageData,
@@ -89,6 +92,7 @@ const GroupFooter = () => {
       }
     } catch (error) {
       console.log(error);
+      setUploading(false);
     }
   };
 
@@ -100,8 +104,8 @@ const GroupFooter = () => {
 
   const onSendTextMessage = async () => {
     try {
-      if (!userDetail) {
-        console.error("User detail not available.");
+      if (!userDetail || text == "") {
+        console.error("User detail not available. or text is null");
         return;
       }
 
@@ -187,6 +191,7 @@ const GroupFooter = () => {
               placeholder="Write your message to group"
               onChange={handleIstyping}
               value={text}
+              onKeyPress={(e) => handleKeyPress(e)}
             />
             <div className="absolute left-0 h-full w-[70px] top-0 items-center justify-center inline-flex">
               <button onClick={() => setUpload(!upload)}>
@@ -208,7 +213,7 @@ const GroupFooter = () => {
                 <button className="h-[45px] relative overflow-hidden border-b border-[#4C4C4C] inline-flex items-center mobile:px-[15px] px-[10px] rounded-lg w-[200px] hover:bg-opacity-70">
                   <IoCloudUploadOutline size={24} />
                   <p className=" text-[#4C4C4C] ml-[10px] mr-[10px] mobile:block mt-[3px]">
-                    Upload a File
+                    {isUploading ? "Uplloading..." : "Upload a File"}
                   </p>
 
                   <input

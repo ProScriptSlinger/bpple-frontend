@@ -22,8 +22,11 @@ const CommunityInputFooter = () => {
   const [text, setText] = useState("");
   const { userDetail, communities } = useUser();
   const { socket } = useSocket();
+
   const [file, setFile] = useState(null);
   const [upload, setUpload] = useState(false);
+  const [isUploading, setUploading] = useState(false);
+
   const { communityId, channel } = useParams();
   const [channelData, setChannelData] = useState(null);
   const pathname = usePathname();
@@ -52,7 +55,11 @@ const CommunityInputFooter = () => {
   const sendTextMessage = async () => {
     console.log(channelData);
     try {
-      if (!userDetail) return;
+      if (!userDetail || text == "") {
+        console.error("User detail not available. or text is null");
+        return;
+      }
+
       const time = new Date();
       const textmessage = text;
 
@@ -101,8 +108,8 @@ const CommunityInputFooter = () => {
 
   const sendImage = async () => {
     try {
+      setUploading(true);
       const ImageResponse = await handleUploadFiles(file, communityId);
-
       const time = new Date();
 
       const messageData = {
@@ -122,6 +129,8 @@ const CommunityInputFooter = () => {
         null
       );
       if (response) {
+        setUploading(false);
+
         console.log("sennt ======>", response);
         if (socket.current) {
           socket.current.emit("user-sent-message-to-community", {
@@ -133,6 +142,8 @@ const CommunityInputFooter = () => {
         }
       }
     } catch (error) {
+      setUploading(false);
+
       console.log(error);
     }
   };
@@ -191,6 +202,7 @@ const CommunityInputFooter = () => {
               placeholder="Write your message to group"
               onChange={handleIstyping}
               value={text}
+              onKeyPress={(e) => handleKeyPress(e)}
             />
             <div className="absolute left-0 h-full w-[70px] top-0 items-center justify-center inline-flex">
               <div className=" flex  relative">
@@ -214,7 +226,7 @@ const CommunityInputFooter = () => {
                   <button className="h-[45px] relative overflow-hidden border-b border-[#4C4C4C] inline-flex items-center mobile:px-[15px] px-[10px] rounded-lg w-[200px] hover:bg-opacity-70">
                     <IoCloudUploadOutline size={24} />
                     <p className=" text-[#4C4C4C] ml-[10px] mr-[10px] mobile:block mt-[3px]">
-                      Upload a File
+                      {isUploading ? "Uplloading..." : "Upload a File"}
                     </p>
 
                     <input

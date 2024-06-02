@@ -8,12 +8,35 @@ import { userFindDmById } from "../../../../../hooks/userFindDmById";
 import { handleEndpoint } from "../../../../../utils/api/handleEndpoint";
 import { useSocket } from "../../../../../context/socketContext";
 
+import { IoCloudUploadOutline } from "react-icons/io5";
+import { FaRegEye } from "react-icons/fa6";
+import { RiDeleteBin6Fill } from "react-icons/ri";
+
+import { storage } from "../../../../../firebase_config";
+import { formatFileSize } from "../../../../../utils/functions/formatFileSize";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid";
+import { AiFillFilePdf } from "react-icons/ai";
+import { handleUploadFiles } from "../../../../../utils/functions/handleUploadFiles";
+
 const ChatDmFooter = () => {
   const { callActionModal, setCallActionModal } = useSettingModal();
   const [text, setText] = useState("");
   const [chat, setChat] = useState(null);
   const { chats, userDetail } = useUser();
   const { socket } = useSocket();
+
+  const [file, setFile] = useState(null);
+  const [upload, setUpload] = useState(false);
+  const [isUploading, setUploading] = useState(false);
+
+  const onSend = () => {
+    if (file) {
+      sendImage();
+    } else {
+      onSendTextMessage();
+    }
+  };
 
   const { id } = useParams();
   const pathname = usePathname();
@@ -31,9 +54,52 @@ const ChatDmFooter = () => {
     }, 2000);
   };
 
+  const sendImage = async () => {
+    try {
+      setUploading(true);
+      const ImageResponse = await handleUploadFiles(file, id);
+      const time = new Date();
+
+      const message = {
+        sender: userDetail._id,
+        sender_id: userDetail.user_id,
+        type: file?.type?.startsWith("image/") ? "image" : "file",
+        link: ImageResponse?.downloadURL,
+        when: time.toString(),
+        dm_messages_id: id,
+        fileName: file.name,
+        size: formatFileSize(ImageResponse?.fileInfo.metadata.size),
+      };
+
+      const response = await handleEndpoint(
+        { message },
+        "chat/message",
+        "post",
+        null
+      );
+      if (response) {
+        setUploading(false);
+
+        if (socket.current) {
+          socket.current.emit("sent-direct-message", { ...message });
+          setUpload(false);
+          setFile(null);
+        }
+      }
+    } catch (error) {
+      setUploading(false);
+
+      console.log(error);
+    }
+  };
+
   const onSendTextMessage = async () => {
     try {
-      if (!userDetail) return;
+      if (!userDetail || text == "") {
+        console.error("User detail not available. or text is null");
+        return;
+      }
+
       const time = new Date();
       const textmessage = text;
       const message = {
@@ -65,21 +131,69 @@ const ChatDmFooter = () => {
 
   if (pathname.includes(`/groups/join`)) return null;
 
+  const onChangeAttachment = (e) => {
+    setUpload(false);
+    setFile(e.target.files[0]);
+    console.log(e.target.files[0]);
+  };
+
+  const handleKeyPress = (event) => {
+    console.log("hande key press ------>", event);
+    if (event.key === "Enter") {
+      onSend();
+    }
+  };
+
   return (
     pathname.includes(`/chats/${id}`) && (
       <>
         <div
-          className={`inline-flex bg-[#121212] h-[100px] border-t-[1px] border-t-[#2A2A2A] bottom-0 items-center justify-center w-full flex-none`}
+          className={`relative inline-flex bg-[#121212] h-[100px] border-t-[1px] border-t-[#2A2A2A] bottom-0 items-center justify-center w-full flex-none`}
         >
+          {file && (
+            <div className="  bottom-20 flex absolute p-5 w-full  bg-[#121212] ">
+              <div className=" flex items-center gap-5 w-full overflow-y-visible pt-10   overflow-x-auto">
+                <div className="  relative text-[14px] justify-between p-2 flex-col flex w-[200px] min-w-[200px]   bg-[#2A2A2A]/50 rounded-lg">
+                  <div className=" border-[#4C4C4C] border rounded-lg -top-2 -right-2 flex items-center bg-[#121212] gap-5 p-2 px-4 absolute">
+                    <button className="  ">
+                      <FaRegEye size={16} />
+                    </button>
+                    <button
+                      onClick={() => setFile(null)}
+                      className="  text-red-600"
+                    >
+                      <RiDeleteBin6Fill size={16} />
+                    </button>
+                  </div>
+                  {file?.type?.startsWith("image/") ? (
+                    <img
+                      src={URL.createObjectURL(file)}
+                      width={200}
+                      height={100}
+                      className=" my-10  h-[100px] object-cover w-full flex flex-col  bg-green-400"
+                    />
+                  ) : (
+                    <div className=" flex text-white items-center my-10 justify-center">
+                      <AiFillFilePdf size={100} />
+                    </div>
+                  )}
+
+                  <span>{file.name}</span>
+                </div>
+              </div>
+            </div>
+          )}
+
           <div className="relative w-[97%] h-[50px]">
             <input
               className="w-full h-full bg-[#131313] outline-none border border-[#4C4C4C] rounded-[14px] px-[70px] placeholder-[#4C4C4C]"
               placeholder="Write your message"
               onChange={handleIstyping}
               value={text}
+              onKeyPress={(e) => handleKeyPress(e)}
             />
             <div className="absolute left-0 h-full w-[70px] top-0 items-center justify-center inline-flex">
-              <button>
+              <button onClick={() => setUpload(!upload)}>
                 <Image
                   width={0}
                   height={0}
@@ -88,6 +202,27 @@ const ChatDmFooter = () => {
                   className="w-[15px] h-auto"
                 />
               </button>
+              <div
+                className={`${
+                  upload
+                    ? "bottom-10 h-[100px] w-[200px]  z-50"
+                    : "-bottom-[1000%] "
+                } bg-[#171717] border border-[#4C4C4C] text-[#4C4C4C] absolute rounded-lg `}
+              >
+                <button className="h-[45px] relative overflow-hidden border-b border-[#4C4C4C] inline-flex items-center mobile:px-[15px] px-[10px] rounded-lg w-[200px] hover:bg-opacity-70">
+                  <IoCloudUploadOutline size={24} />
+                  <p className=" text-[#4C4C4C] ml-[10px] mr-[10px] mobile:block mt-[3px]">
+                    {isUploading ? "Uplloading..." : "Upload a File"}
+                  </p>
+
+                  <input
+                    onChange={onChangeAttachment}
+                    type="file"
+                    className="right-0 top-0 h-full absolute opacity-0 w-full flex"
+                    onKeyPress={(e) => handleKeyPress(e)}
+                  />
+                </button>
+              </div>
               <button>
                 <Image
                   width={0}
@@ -109,7 +244,7 @@ const ChatDmFooter = () => {
                 />
               </button>
               <button
-                onClick={onSendTextMessage}
+                onClick={onSend}
                 className="bg-[#53FAFB] ml-[5px] p-[10px] rounded-[7px] mr-[10px]"
               >
                 <Image
