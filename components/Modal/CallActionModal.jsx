@@ -276,6 +276,7 @@ const CallActionModal = () => {
     });
 
     const peer = new Peer({ initiator: false, trickle: false, stream: stream });
+    peer.signal(callSignal);
 
     peer.on("signal", (data) => {
       socket.current.emit("user-answered-call", {
@@ -290,8 +291,7 @@ const CallActionModal = () => {
       userVideoRef.current.srcObject = stream;
     });
 
-    console.log("Peer connected, setting remote description.");
-    peer.signal(callSignal);
+    console.log("Peer connected, setting remote description.", peer);
 
     // Set up error handling for the peer connection
     peer.on("error", (err) => {
