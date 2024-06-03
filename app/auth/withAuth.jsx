@@ -21,6 +21,7 @@ const withAuth = (WrappedComponent) => {
     const [newModal, setModal] = useState(false);
 
     useLayoutEffect(() => {
+      console.log("user detail ------>", userDetail);
       if (!pending) {
         if (address && !userDetail) {
           setModal(true);

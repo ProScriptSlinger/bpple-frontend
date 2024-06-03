@@ -73,13 +73,14 @@ export function AuthProvider({ children }) {
         setPending(true);
         const addresResponse = await getUserByAddress();
         const tokenResponse = await getUserwithToken();
-
+        console.log("address response ------> ", addresResponse);
         if (addresResponse && tokenResponse) {
-          setUserDetail({ ...tokenResponse, ...addresResponse });
+          setUserDetail({ ...tokenResponse, ...addresResponse.user });
         }
 
         if (addresResponse) {
-          setUserDetail(addresResponse);
+          localStorage.setItem("bipple_token", addresResponse.token);
+          setUserDetail(addresResponse.user);
         }
 
         if (tokenResponse) {
