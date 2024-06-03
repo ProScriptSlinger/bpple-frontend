@@ -212,7 +212,18 @@ const CallActionModal = () => {
     console.log("calling user ");
     setCallings([callDetails.caller, callDetails.receiver]);
 
-    const peer = new Peer({ initiator: true, trickle: false, stream: stream });
+    const peer = new Peer({
+      initiator: true,
+      config: {
+        iceServers: [
+          { urls: "stun:stun.l.google.com:19302" },
+          { urls: "stun:stun1.l.google.com:19302" },
+          { urls: "stun:stun2.l.google.com:19302" },
+        ],
+      },
+      trickle: false,
+      stream: stream,
+    });
 
     peer.on("signal", (data) => {
       socket.current.emit("call-user", {
@@ -275,7 +286,18 @@ const CallActionModal = () => {
       room_id: callDetails.room_id,
     });
 
-    const peer = new Peer({ initiator: false, trickle: false, stream: stream });
+    const peer = new Peer({
+      initiator: false,
+      config: {
+        iceServers: [
+          { urls: "stun:stun.l.google.com:19302" },
+          { urls: "stun:stun1.l.google.com:19302" },
+          { urls: "stun:stun2.l.google.com:19302" },
+        ],
+      },
+      trickle: false,
+      stream: stream,
+    });
     peer.signal(callSignal);
 
     peer.on("signal", (data) => {
