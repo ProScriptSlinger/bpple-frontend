@@ -6,7 +6,6 @@ import SiderList from "./sider";
 import { useUser } from "../../../context/appContext";
 import { getNameInitials } from "../../../utils/functions/getNameInitials";
 import { useWalletInfo, useWeb3Modal } from "@web3modal/wagmi/react";
-import { useAccount } from "wagmi";
 import { useSiderBar } from "../../../context/siderbar";
 import { updateGreeting } from "../../../utils/functions/userFunctions";
 
@@ -19,15 +18,22 @@ const Sider = () => {
   const [loading2, setLoading2] = useState(false);
   const [closeButton, setCloseButton] = useState(true);
   const [transition, setTransition] = useState(true);
-  const { setUserDetail, userDetail } = useUser();
+  const { setUserDetail, userDetail, address, isConnecting, isDisconnected } =
+    useUser();
 
-  const { open } = useWeb3Modal();
   const { walletInfo } = useWalletInfo();
-  const { address, isConnecting, isDisconnected } = useAccount();
 
   const { sideBarCloseButton, siderWidth, handleCloseSiderBar } = useSiderBar();
   const handleOpenLogout = () => {
     setLogout(!logout);
+  };
+
+  const handleCopy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (error) {
+      console.error("Error copying text to clipboard:", error);
+    }
   };
 
   const handleLogout = async () => {
@@ -218,20 +224,16 @@ const Sider = () => {
 
               <div className="w-full inline-flex items-center justify-center">
                 <button
-                  onClick={() =>
-                    open({ view: address ? "Account" : "Networks" })
-                  }
+                  onClick={() => handleCopy(address)}
                   className={`${
                     siderWidth > 250 ? "w-[200px]" : "px-[7px] mb-[20px]"
                   } h-[40px] rounded-full border border-[#535353] inline-flex items-center justify-center font-ttfirs text-[12px] mt-[15px] hover:opacity-70 transition-all duration-100`}
                 >
-                  {walletInfo?.icon && (
-                    <img
-                      src={walletInfo.icon}
-                      alt={"logo"}
-                      className="w-[25px] h-auto"
-                    />
-                  )}
+                  <img
+                    src="/icon/phantom.svg"
+                    alt={"logo"}
+                    className="w-[25px] h-auto"
+                  />
                   {siderWidth > 250 ? (
                     <>
                       {isConnecting && (

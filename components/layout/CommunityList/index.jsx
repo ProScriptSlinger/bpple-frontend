@@ -7,6 +7,10 @@ import { useUser } from "../../../context/appContext";
 import { getNameInitials } from "../../../utils/functions/getNameInitials";
 import { useSocket } from "../../../context/socketContext";
 import Link from "next/link";
+// import icons
+import { HiOutlineCollection } from "react-icons/hi";
+import { RiNftLine } from "react-icons/ri";
+
 const ChatList = (props) => {
   const pathName = usePathname();
   return (
@@ -607,6 +611,25 @@ const CommunityList = (props) => {
                       <p className="ml-[12px] text-[14px]">Join Community</p>
                     </div>
                   </button>
+                  <Link href="/create-nft?isCollection=true">
+                    <div className="flex items-center pb-[10px] pl-[20px] w-full">
+                      <div className="inline-flex items-center">
+                        <HiOutlineCollection color="white" size={15} />
+                        <p className="ml-[12px] text-[14px]">
+                          Create Collection
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                  <Link href={"/create-nft?isCollection=false"}>
+                    <div className="flex items-center pb-[10px] pl-[20px] w-full">
+                      <div className="inline-flex items-center">
+                        <RiNftLine color="white" size={15} />
+
+                        <p className="ml-[12px] text-[14px]">Create NFT</p>
+                      </div>
+                    </div>
+                  </Link>
                 </div>
               </>
             ) : null}

@@ -13,6 +13,7 @@ import { config } from "../context/config";
 // Toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { shyftProvider } from "@/context/shyftContext";
 
 export const metadata = {
   title: "Bipple",

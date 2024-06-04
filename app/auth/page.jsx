@@ -6,15 +6,22 @@ import ImageComponent from "../../components/shared/ImageComponent/demo";
 import { useUser } from "../../context/appContext";
 import { useWalletInfo, useWeb3Modal } from "@web3modal/wagmi/react";
 import Link from "next/link";
+import formatAddress from "@/lib/formatAddress";
+
 const Auth = () => {
   const router = useRouter();
   const [iconLoading, setIconLoading] = useState(true);
-  const { address, pending, isConnecting, isConnected, isDisconnected, open } =
-    useUser();
+  const { address, isConnected, solanaConnect } = useUser();
 
   const { walletInfo } = useWalletInfo();
 
   const handlenavigation = (to) => router.push(to);
+
+  const handleClick = () => {
+    if (!isConnected) {
+      solanaConnect();
+    }
+  };
 
   return (
     <div className={`absolute w-full h-full overflow-auto`}>
@@ -73,32 +80,42 @@ const Auth = () => {
             Or continue with
           </div>
           <div className="w-full inline-flex justify-center mt-[40px]">
-            <button
-              onClick={() => open({ view: address ? "Account" : "Networks" })}
-              className={
-                "w-[50%] bg-[#222222] rounded-full text-white border border-[#666666]  h-[45px] flex items-center justify-center gap-2 font-abeezeeItalic text-[13px] hover:bg-opacity-70 transition-all duration-100"
-              }
-            >
-              {walletInfo?.icon && (
-                <img
-                  src={walletInfo.icon}
-                  alt={"logo"}
-                  className="w-[25px] h-auto"
-                />
-              )}
-              {isConnecting && (
-                <div className="ml-[7px] mr-[7px]">Connecting…</div>
-              )}
-              {pending && <div className="ml-[7px] mr-[7px]">Loading...</div>}
-              {isDisconnected && (
-                <div className="ml-[7px] mr-[7px]">Connect Wallet</div>
-              )}
-              {!pending && isConnected && address && (
-                <div className="ml-[7px] mr-[7px]">
-                  {`${address.slice(0, 5)}...${address.slice(-5)}`}
+            <div className="mb-[40px]">
+              <ul className="text-white text-md">
+                <div className="w-full inline-flex items-center justify-center">
+                  <button
+                    className={`${"w-[200px]"} h-[40px] rounded-full border border-[#535353] inline-flex items-center justify-center font-ttfirs text-[12px] hover:opacity-70 transition-all duration-100`}
+                    onClick={handleClick}
+                  >
+                    <Image
+                      src="/icon/phantom.svg"
+                      width={0}
+                      height={0}
+                      alt={"logo"}
+                      priority={true}
+                      className="w-[25px] h-auto"
+                    />
+                    <>
+                      <div className="ml-[7px] mr-[7px]">
+                        {isConnected
+                          ? formatAddress(address)
+                          : "Connect Wallet"}
+                      </div>
+                      {isConnected && (
+                        <Image
+                          src="/icon/copy.svg"
+                          width={0}
+                          height={0}
+                          alt={"logo"}
+                          priority={true}
+                          className="w-[15px] h-auto"
+                        />
+                      )}
+                    </>
+                  </button>
                 </div>
-              )}
-            </button>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

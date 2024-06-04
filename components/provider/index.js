@@ -6,6 +6,7 @@ import { AuthProvider } from "../../context/appContext";
 import { PeerConnectionProvider } from "../../context/peerContext";
 import WithAuthProvider from "../../app/auth/AuthProvider";
 import { SocketIoProvider } from "../../context/socketContext";
+import { ShyftProvider } from "@/context/shyftContext";
 
 const Provider = ({ children }) => {
   return (
@@ -13,9 +14,11 @@ const Provider = ({ children }) => {
       <WithAuthProvider>
         <SocketIoProvider>
           <PeerConnectionProvider>
-            <SideBarProvider>
-              <SettingModalProvider>{children}</SettingModalProvider>
-            </SideBarProvider>
+            <ShyftProvider>
+              <SideBarProvider>
+                <SettingModalProvider>{children}</SettingModalProvider>
+              </SideBarProvider>
+            </ShyftProvider>
           </PeerConnectionProvider>
         </SocketIoProvider>
       </WithAuthProvider>

@@ -2,8 +2,8 @@
 
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { handleEndpoint } from "../utils/api/handleEndpoint";
-import { useAccount } from "wagmi";
-import { useWeb3Modal } from "@web3modal/wagmi/react";
+import { toast } from "react-toastify";
+import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
 
 const AuthContext = createContext();
 
@@ -25,8 +25,10 @@ export function AuthProvider({ children }) {
   const [community_messages, setCommunity_messages] = useState({});
   const [communities, setCommunities] = useState([]);
 
-  const { address, isConnecting, isConnected, isDisconnected } = useAccount();
-  const { open } = useWeb3Modal();
+  const [isConnecting, setConnecting] = useState(false);
+  const [address, setAddress] = useState(null);
+  const [isConnected, setConnected] = useState(false);
+  const [isDisconnected, setDisconnected] = useState(false);
 
   const getUserByAddress = async () => {
     try {
@@ -100,11 +102,11 @@ export function AuthProvider({ children }) {
     try {
       const addresResponse = await getUserByAddress();
       const tokenResponse = await getUserwithToken();
-
+      console.log("address response -------> ", addresResponse);
       if (addresResponse && tokenResponse) {
-        setUserDetail({ ...tokenResponse, ...addresResponse });
+        setUserDetail({ ...tokenResponse, ...addresResponse.user });
       } else if (addresResponse) {
-        setUserDetail(addresResponse);
+        setUserDetail(addresResponse.user);
       } else if (tokenResponse) {
         setUserDetail(tokenResponse);
       }
@@ -233,6 +235,33 @@ export function AuthProvider({ children }) {
     getUserData();
   }, [userDetail]);
 
+  useEffect(() => {
+    solanaConnect();
+  }, []);
+
+  const solanaConnect = async () => {
+    const { solana } = window;
+    if (!solana) {
+      alert("Please Install Solana Wallet");
+    }
+
+    try {
+      const phantom = new PhantomWalletAdapter();
+      await phantom.connect();
+      const wallet = {
+        address: phantom.publicKey && phantom.publicKey.toString(),
+      };
+
+      if (wallet.address) {
+        setAddress(wallet.address);
+        setConnected(true);
+        setDisconnected(false);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const value = {
     pending,
     userDetail,
@@ -253,10 +282,10 @@ export function AuthProvider({ children }) {
     isConnecting,
     isConnected,
     isDisconnected,
-    open,
     setPending,
     communities,
     getCommunities,
+    solanaConnect,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
