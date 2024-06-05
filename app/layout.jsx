@@ -74,6 +74,10 @@ const CallActionModal = dynamic(() =>
 const NewGroupModal = dynamic(() =>
   import("../components/Modal/NewGroupModal")
 );
+const NftListModal = dynamic(() => import("@/components/Modal/NftListModal"));
+const NftUnListModal = dynamic(() =>
+  import("@/components/Modal/NftUnListModal")
+);
 
 export default function RootLayout({ children }) {
   const initialState = cookieToInitialState(config, headers().get("cookie"));
@@ -113,6 +117,8 @@ export default function RootLayout({ children }) {
             <NftBuyConfirmModal />
             <CallActionModal />
             <NewGroupModal />
+            <NftListModal />
+            <NftUnListModal />
           </Provider>
         </Web3ModalProvider>
       </body>

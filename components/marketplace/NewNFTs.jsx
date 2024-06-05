@@ -2,68 +2,41 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useShyft } from "@/context/shyftContext";
 const NewNFTs = (props) => {
   const router = useRouter();
-  const [loading1, setLoading1] = useState(true);
-  const [loading2, setLoading2] = useState(true);
-  const [loading3, setLoading3] = useState(true);
-  const [loading4, setLoading4] = useState(true);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    if (!loading1 && !loading2 && !loading3 && !loading4) {
-      setLoading(false);
-    }
-  }, [loading1, loading2, loading3, loading4]);
+  const { setSelectedNFT } = useShyft();
+  const item = props.item;
+  // useEffect(() => {
+  //   if (!loading1 && !loading2 && !loading3 && !loading4) {
+  //     setLoading(false);
+  //   }
+  // }, [loading1, loading2, loading3, loading4]);
   return (
     <>
-      {loading && (
+      {/* {loading && (
         <div className="w-[200px] rounded-[12px] bg-[#191919] animate-pulse h-[210px]"></div>
-      )}
+      )} */}
       <button
-        className={`w-[200px] flex-none relative mb-[20px] hover:opacity-70 transition-all duration-100 ${loading && "hidden"}`}
+        className={`w-full flex-none relative hover:opacity-70 transition-all duration-100`}
         onClick={() => {
-          router.push(`/nfts/${props.item.id}`);
+          setSelectedNFT(item);
+          router.push(`/marketplace/${item.nft_address}`);
         }}
       >
-        <Image
-          src={props.item.link}
+        <img
+          src={item.nft.cached_image_uri}
           width={0}
           height={0}
           alt=""
-          className="w-[200px] h-auto"
-          priority={true}
-          onLoad={() => setLoading1(false)}
+          className="w-full aspect-[4/3] rounded-[18px]"
         />
-        <div className="w-full h-[40%] bg-black absolute bottom-0 rounded-[18px] bg-opacity-25 backdrop-blur-[10px] flex-row px-[15px] py-[15px]">
+        <div className="w-full h-[30%] bg-black absolute bottom-0 rounded-[18px] bg-opacity-25 backdrop-blur-[10px] flex items-center justify-center px-[20px]">
           <div className="w-full inline-flex justify-between items-center">
-            <p>Supernova ITALY †</p>
-            <Image
-              src={props.item.avatar}
-              width={0}
-              height={0}
-              alt=""
-              className="w-[20px] h-auto"
-              priority={true}
-              onLoad={() => setLoading2(false)}
-            />
-          </div>
-          <div className="w-full inline-flex items-center justify-between mt-[5px]">
-            <div className="h-[30px] w-[76px] rounded-full bg-white bg-opacity-[9%] inline-flex px-[3px] items-center text-[8px]">
-              <Image
-                src={props.item.user}
-                width={0}
-                height={0}
-                alt=""
-                className="w-[20px] h-auto mr-[5px]"
-                priority={true}
-                onLoad={() => setLoading3(false)}
-              />
-              Kemoutyo
-            </div>
+            <p>{item.nft.name}</p>
             <div className="inline-flex items-center">
               <div className="text-right mr-[5px]">
-                <p className="text-[9px]">7,12 SOL</p>
-                <p className="text-[5px]">3 212 USD</p>
+                <p className="text-[9px]">{item.price} SOL</p>
               </div>
               <Image
                 src="/icon/sol.svg"
@@ -72,7 +45,6 @@ const NewNFTs = (props) => {
                 alt=""
                 className="w-[18px] h-auto"
                 priority={true}
-                onLoad={() => setLoading4(false)}
               />
             </div>
           </div>

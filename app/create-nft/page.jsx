@@ -11,10 +11,11 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useShyft } from "@/context/shyftContext";
 
 const NFT = () => {
-  const { createNFT, network, address } = useShyft();
+  const { createNFT, network } = useShyft();
   const searchParams = useSearchParams();
   const isCollectionPa = searchParams.get("isCollection");
   const [isCollection, setCollection] = useState(false);
+  const { address } = useUser();
 
   useEffect(
     () =>

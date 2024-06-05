@@ -160,7 +160,7 @@ export function AuthProvider({ children }) {
 
           if (receivedResponse.ok) {
             setFriendRequestsReceived(receivedResponse.requests);
-            console.log("Friend requests received updated", receivedResponse);
+            // console.log("Friend requests received updated", receivedResponse);
           }
         } catch (error) {
           console.error("Error fetching received friend requests:", error);
@@ -176,7 +176,7 @@ export function AuthProvider({ children }) {
 
           if (receivedResponse.ok) {
             setRequestsReceived(receivedResponse.requests);
-            console.log("Requests received updated", receivedResponse);
+            // console.log("Requests received updated", receivedResponse);
           }
         } catch (error) {
           console.error("Error fetching received friend requests:", error);

@@ -27,6 +27,10 @@ const ModalContext = createContext({
   setCalling: () => {},
   newGroupModal: false,
   setNewGroupModal: () => {},
+  nftListModal: false,
+  setNftListModal: () => {},
+  nftUnListModal: false,
+  setNftUnListModal: () => {},
 });
 
 export const useSettingModal = () => {
@@ -53,6 +57,8 @@ const SettingModalProvider = ({ children }) => {
   const [callActionModal, setCallActionModal] = React.useState(false);
   const [calling, setCalling] = React.useState(false);
   const [newGroupModal, setNewGroupModal] = React.useState(false);
+  const [nftListModal, setNftListModal] = React.useState(false);
+  const [nftUnListModal, setNftUnListModal] = React.useState(false);
 
   const _functions = {
     1: setCommunitySettingmodal,
@@ -69,9 +75,11 @@ const SettingModalProvider = ({ children }) => {
     12: setCalling,
     13: setNewGroupModal,
     14: setCommunityProfileInModal,
+    15: setNftListModal,
+    16: setNftUnListModal,
   };
 
-  const initialValue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+  const initialValue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
   const handleformat = (index) => {
     const functionArray = initialValue.filter((item) => item !== index);
@@ -132,6 +140,13 @@ const SettingModalProvider = ({ children }) => {
     if (newGroupModal) handleformat(13);
   }, [newGroupModal]);
 
+  useEffect(() => {
+    if (nftListModal) handleformat(15);
+  }, [nftListModal]);
+  useEffect(() => {
+    if (nftUnListModal) handleformat(16);
+  }, [nftUnListModal]);
+
   const [sideBarCloseButton, setSideBarCloseButton] = useState(true);
   const [siderWidth, setSiderWidth] = useState(300);
 
@@ -168,6 +183,10 @@ const SettingModalProvider = ({ children }) => {
         setNftBuyModal,
         nftBuyConfirmModal,
         setNftBuyConfirmModal,
+        nftListModal,
+        setNftListModal,
+        nftUnListModal,
+        setNftUnListModal,
         callActionModal,
         setCallActionModal,
         calling,

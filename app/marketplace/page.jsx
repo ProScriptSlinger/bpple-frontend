@@ -1,11 +1,13 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import NFTListLoader from "../../components/marketplace/NFTListLoader";
-const BestCollection = dynamic(
-  () => import("../../components/marketplace/BestCollection")
+import { useShyft } from "@/context/shyftContext";
+import { useUser } from "@/context/appContext";
+const BestCollection = dynamic(() =>
+  import("../../components/marketplace/BestCollection")
 );
 const NewNFTS = dynamic(() => import("../../components/marketplace/NewNFTs"));
 const NFTList = dynamic(() => import("../../components/marketplace/NFTList"), {
@@ -13,7 +15,8 @@ const NFTList = dynamic(() => import("../../components/marketplace/NFTList"), {
   loading: () => <NFTListLoader />,
 });
 const Page = () => {
-  const router = useRouter();
+  const { fetchListings, activeNFTs } = useShyft();
+  const { address } = useUser();
   const bestCollections = [
     { link: "/marketplace/1.svg", avatar: "/avatar/18.svg", id: 1 },
     { link: "/marketplace/2.svg", avatar: "/avatar/18.svg", id: 2 },
@@ -27,62 +30,6 @@ const Page = () => {
     { link: "/marketplace/2.svg", avatar: "/avatar/18.svg", id: 10 },
     { link: "/marketplace/3.svg", avatar: "/avatar/18.svg", id: 11 },
   ];
-  const explorer = [
-    {
-      link: "/marketplace/explore/1.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 1,
-    },
-    {
-      link: "/marketplace/explore/2.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 2,
-    },
-    {
-      link: "/marketplace/explore/3.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 3,
-    },
-    {
-      link: "/marketplace/explore/4.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 4,
-    },
-    {
-      link: "/marketplace/explore/1.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 5,
-    },
-    {
-      link: "/marketplace/explore/2.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 6,
-    },
-    {
-      link: "/marketplace/explore/3.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 7,
-    },
-    {
-      link: "/marketplace/explore/4.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 8,
-    },
-    {
-      link: "/marketplace/explore/1.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 9,
-    },
-  ];
   const newNfts = [
     { logo: "/marketplace/logo.svg" },
     { logo: "/marketplace/logo.svg" },
@@ -93,6 +40,14 @@ const Page = () => {
     { logo: "/marketplace/logo.svg" },
     { logo: "/marketplace/logo.svg" },
   ];
+  const [listingNFTs, setListingNFTs] = useState([]);
+  const fetchNFTs = async () => {
+    const listingRes = await fetchListings();
+    setListingNFTs(listingRes);
+  };
+  useEffect(() => {
+    address && fetchNFTs();
+  }, [address]);
   return (
     <>
       <div className="w-full h-full bg-[#121212] mobile:px-[50px] px-[20px] pt-[30px] pb-[50px] overflow-auto prevent-select">
@@ -110,7 +65,7 @@ const Page = () => {
           <p className="text-[20px]">Explore New NFTs</p>
           <div className="w-full mt-[20px] relative h-[250px] overflow-auto">
             <div className="w-full overflow-auto inline-flex gap-[10px] absolute">
-              {explorer.map((item, index) => (
+              {listingNFTs.map((item, index) => (
                 <div key={index}>
                   <NewNFTS item={item} />
                 </div>

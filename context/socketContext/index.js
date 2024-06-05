@@ -53,7 +53,7 @@ export function SocketIoProvider({ children }) {
 
               if (chatResponse) {
                 setChats(chatResponse);
-                console.log("Chats updated", chatResponse);
+                // console.log("Chats updated", chatResponse);
               }
             } catch (error) {
               console.error("Error fetching sent friend requests:", error);
@@ -68,10 +68,10 @@ export function SocketIoProvider({ children }) {
 
               if (sentResponse.ok) {
                 setFriendRequestsSent(sentResponse.requests);
-                console.log("Friend requests sent updated", sentResponse);
+                // console.log("Friend requests sent updated", sentResponse);
               }
             } catch (error) {
-              console.error("Error fetching sent friend requests:", error);
+              // console.error("Error fetching sent friend requests:", error);
             }
           });
         }
@@ -85,7 +85,7 @@ export function SocketIoProvider({ children }) {
 
         if (!socket.current.hasListeners("received-friend-request")) {
           socket.current.on("received-friend-request", (request) => {
-            console.log("Received friend:", request);
+            // console.log("Received friend:", request);
 
             setFriendRequestsReceived((prev) => [...prev, request]);
           });
@@ -93,7 +93,7 @@ export function SocketIoProvider({ children }) {
 
         if (!socket.current.hasListeners("received-invite-group-request")) {
           socket.current.on("received-invite-group-request", (request) => {
-            console.log("Received friend:", request);
+            // console.log("Received friend:", request);
 
             setRequestsReceived((prev) => [...prev, request]);
           });
@@ -102,7 +102,7 @@ export function SocketIoProvider({ children }) {
         if (!socket.current.hasListeners("new-message-to-group")) {
           console.log("Adding new-message-to-group listener...");
           socket.current.on("new-message-to-group", (message) => {
-            console.log("Received new-message-to-group:", message);
+            // console.log("Received new-message-to-group:", message);
 
             setUser_group_messages((prevMessages) => {
               const updatedMessages = { ...prevMessages };
@@ -121,7 +121,7 @@ export function SocketIoProvider({ children }) {
             });
           });
         } else {
-          console.log("Listener for new-message-to-group already exists.");
+          // console.log("Listener for new-message-to-group already exists.");
         }
       }
     }
@@ -135,7 +135,7 @@ export function SocketIoProvider({ children }) {
 
   useEffect(() => {
     if (userDetail && socket.current) {
-      console.log("userDetail------>", userDetail);
+      // console.log("userDetail------>", userDetail);
       for (let { groupId: group } of userDetail?.groups) {
         socket.current.emit("join-room", {
           room_id: group?._id,
@@ -144,15 +144,15 @@ export function SocketIoProvider({ children }) {
 
       if (!socket.current.hasListeners("new-group-member")) {
         socket.current.on("new-group-member", async (data) => {
-          console.log("new-group-member:", data);
+          // console.log("new-group-member:", data);
           await getUser();
         });
       }
 
       if (!socket.current.hasListeners("new-message-to-group")) {
-        console.log("Adding new-message-to-group listener...");
+        // console.log("Adding new-message-to-group listener...");
         socket.current.on("new-message-to-group", (message) => {
-          console.log("Received new-message-to-group:", message);
+          // console.log("Received new-message-to-group:", message);
 
           setUser_group_messages((prevMessages) => {
             const updatedMessages = { ...prevMessages };
@@ -171,7 +171,7 @@ export function SocketIoProvider({ children }) {
           });
         });
       } else {
-        console.log("Listener for new-message-to-group already exists.");
+        // console.log("Listener for new-message-to-group already exists.");
       }
     }
   }, [userDetail, socket.current]);
@@ -182,7 +182,7 @@ export function SocketIoProvider({ children }) {
     if (socketInstance && communities) {
       if (!socketInstance.hasListeners("new-message-to-community")) {
         socketInstance.on("new-message-to-community", (message) => {
-          console.log("new-message-to-community", message);
+          // console.log("new-message-to-community", message);
 
           setCommunity_messages((prevMessages) => {
             const updatedMessages = { ...prevMessages };
@@ -213,7 +213,7 @@ export function SocketIoProvider({ children }) {
 
         if (!socket.current.hasListeners("new-community-member")) {
           socket.current.on("new-community-member", async (data) => {
-            console.log("new-community-member:", data);
+            // console.log("new-community-member:", data);
             await getCommunities();
           });
         }
@@ -246,7 +246,7 @@ export function SocketIoProvider({ children }) {
       if (!socket.current.hasListeners("user-is-typing")) {
         socket.current.on("user-is-typing", (data) => {
           setUsersTyping((prevSet) => new Set([...prevSet, data.room_id]));
-          console.log("User-typing:", data);
+          // console.log("User-typing:", data);
         });
 
         socket.current.on("user-stoped-typing", (data) => {
@@ -255,13 +255,13 @@ export function SocketIoProvider({ children }) {
           );
           setUsersTyping(new Set([...user_still_typing]));
 
-          console.log("User typing:", data);
+          // console.log("User typing:", data);
         });
       }
 
       if (!socket.current.hasListeners("new-direct-message")) {
         socket.current.on("new-direct-message", (message) => {
-          console.log("new-direct-message", message);
+          // console.log("new-direct-message", message);
 
           setUser_messages((prevMessages) => {
             const updatedMessages = { ...prevMessages };

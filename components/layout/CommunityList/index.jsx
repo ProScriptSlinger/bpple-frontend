@@ -10,9 +10,11 @@ import Link from "next/link";
 // import icons
 import { HiOutlineCollection } from "react-icons/hi";
 import { RiNftLine } from "react-icons/ri";
+import { useShyft } from "@/context/shyftContext";
 
 const ChatList = (props) => {
   const pathName = usePathname();
+
   return (
     <>
       <Link href={`/chats/${props.item.dm_messages_id}`}>
@@ -330,6 +332,7 @@ const CommunityList = (props) => {
   }, [change]);
 
   if (pathName.includes(`/join/`)) return;
+  const { createMarketplace } = useShyft();
 
   return (
     <>
@@ -630,6 +633,18 @@ const CommunityList = (props) => {
                       </div>
                     </div>
                   </Link>
+                  {/* <button
+                    className="flex items-center pb-[10px] pl-[20px] w-full"
+                    onClick={() => createMarketplace()}
+                  >
+                    <div className="inline-flex items-center">
+                      <RiNftLine color="white" size={15} />
+
+                      <p className="ml-[12px] text-[14px]">
+                        Create Marketplace
+                      </p>
+                    </div>
+                  </button> */}
                 </div>
               </>
             ) : null}
