@@ -19,7 +19,7 @@ import { AiFillFilePdf } from "react-icons/ai";
 import { handleUploadFiles } from "../../../../../utils/functions/handleUploadFiles";
 
 const GroupFooter = () => {
-  const { callActionModal, setCallActionModal } = useSettingModal();
+  const { recordingModal, setRecordingModal } = useSettingModal();
   const [text, setText] = useState("");
   const { userDetail } = useUser();
   const { socket } = useSocket();
@@ -235,7 +235,7 @@ const GroupFooter = () => {
               </button>
             </div>
             <div className="absolute right-0 h-full w-[70px] top-0 items-center justify-center inline-flex">
-              <button onClick={() => setCallActionModal(!callActionModal)}>
+              <button>
                 <Image
                   width={0}
                   height={0}
