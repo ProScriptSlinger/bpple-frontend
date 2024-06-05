@@ -282,6 +282,8 @@ const CommunityList = (props) => {
   };
   let handle = document.querySelector(".resize-handle1");
   let sidebar = document.querySelector(".resize-current1");
+  const { createMarketplace } = useShyft();
+
   const [change, setChange] = useState(true);
 
   useEffect(() => {
@@ -332,7 +334,6 @@ const CommunityList = (props) => {
   }, [change]);
 
   if (pathName.includes(`/join/`)) return;
-  const { createMarketplace } = useShyft();
 
   return (
     <>
