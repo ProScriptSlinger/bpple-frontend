@@ -123,12 +123,16 @@ const ChatsHeader = () => {
           )}
           <Image
             onClick={() => {
-              setCalling(true);
-              setCallDetails({
-                caller: userDetail,
-                receiver: chat.otherUser,
-                room_id: id,
-              });
+              if (!chat.otherUser) {
+                toast.warning("You can not make call while loading");
+              } else {
+                setCalling(true);
+                setCallDetails({
+                  caller: userDetail,
+                  receiver: chat.otherUser,
+                  room_id: id,
+                });
+              }
             }}
             width={0}
             height={0}
