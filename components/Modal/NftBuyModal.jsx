@@ -55,7 +55,7 @@ const NftBuyModal = (props) => {
               SOL?
             </p>
             <button
-              className="w-full h-[40px] bg-[#50FFFF] text-black font-bold rounded-full text-[13px] mt-[80px]"
+              className="w-full h-[40px] bg-[#50FFFF] text-black font-bold rounded-full text-[13px] mt-[80px] flex justify-center items-center"
               onClick={() => handleBuyNFT()}
               disabled={isLoading}
             >
