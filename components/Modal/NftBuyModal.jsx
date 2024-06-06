@@ -13,7 +13,9 @@ const NftBuyModal = (props) => {
   const pathName = usePathname();
   const { selectedNFT, buyNFT } = useShyft();
   const handleBuyNFT = async () => {
+    setLoading(true);
     await buyNFT();
+    setLoading(false);
     setNftBuyModal(false);
   };
   return (
