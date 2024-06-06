@@ -40,10 +40,8 @@ const Page = () => {
     { logo: "/marketplace/logo.svg" },
     { logo: "/marketplace/logo.svg" },
   ];
-  const [listingNFTs, setListingNFTs] = useState([]);
   const fetchNFTs = async () => {
-    const listingRes = await fetchListings();
-    setListingNFTs(listingRes);
+    await fetchListings();
   };
   useEffect(() => {
     address && fetchNFTs();
@@ -65,7 +63,7 @@ const Page = () => {
           <p className="text-[20px]">Explore New NFTs</p>
           <div className="w-full mt-[20px] relative h-[250px] overflow-auto">
             <div className="w-full overflow-auto inline-flex gap-[10px] absolute">
-              {listingNFTs.map((item, index) => (
+              {activeNFTs.map((item, index) => (
                 <div key={index}>
                   <NewNFTS item={item} />
                 </div>

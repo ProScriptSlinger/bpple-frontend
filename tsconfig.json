@@ -30,7 +30,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "lib/utils.js", "lib/getVersionedTransaction.js", "lib/getProvider.js", "lib/formatAddress.js", "lib/signAndConfirmTransaction.js", "app/create-nft/page.jsx", "components/Modal/NftUnListModal.jsx", "components/Modal/NftListModal.jsx"  ],
+, "lib/utils.js", "lib/getVersionedTransaction.js", "lib/getProvider.js", "lib/formatAddress.js", "lib/signAndConfirmTransaction.js", "app/create-nft/page.jsx", "components/Modal/NftUnListModal.jsx", "components/Modal/NftListModal.jsx", "app/marketplace/[id]/page.jsx"  ],
   "exclude": [
     "node_modules"
   ]

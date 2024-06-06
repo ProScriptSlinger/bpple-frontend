@@ -51,17 +51,16 @@ const NFT = () => {
     setIsLoading(true);
     const data = {
       network,
-      wallet: address,
       name,
       symbol,
       description,
       external_url: url,
       max_supply: maxSupply,
       royalty,
-      file,
     };
     console.log("Creating NFT ------>", data);
-    const res = await createNFT(data);
+    await createNFT({ ...data, image: file, creator_wallet: address });
+
     setIsLoading(false);
   };
 
@@ -114,7 +113,7 @@ const NFT = () => {
                         width={0}
                         height={0}
                         alt=""
-                        src={"/avatar/21.png"}
+                        src={"/avatar/20.png"}
                         className="w-[45px] h-auto rounded-[8px]"
                       />
                       <div className="ml-[20px] text-left">

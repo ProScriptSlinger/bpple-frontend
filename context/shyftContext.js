@@ -24,6 +24,7 @@ export function ShyftProvider({ children }) {
 
   const xKey = process.env.NEXT_PUBLIC_API_KEY.toString();
   const endPoint = process.env.NEXT_PUBLIC_API_ENDPOINT;
+  const endPoint_v2 = process.env.NEXT_PUBLIC_API_ENDPOINT_V2;
   const marketplaceAddress = process.env.NEXT_PUBLIC_MARKETPLACE_ADDRESS;
 
   //   useEffect(() => {
@@ -65,7 +66,8 @@ export function ShyftProvider({ children }) {
 
   //   create NFT
   const createNFT = async (data) => {
-    const createNFTUrl = `${endPoint}nft/create_detach`;
+    console.log("creating data ------>", data);
+    const createNFTUrl = `${endPoint_v2}nft/create`;
     try {
       const res = await axios.post(createNFTUrl, data, {
         headers: {
@@ -83,6 +85,7 @@ export function ShyftProvider({ children }) {
           network,
           transaction
         );
+        fetchAllMyNFTs();
         toast.success("NFT created successfully");
       }
     } catch (err) {
@@ -93,26 +96,63 @@ export function ShyftProvider({ children }) {
     }
   };
 
+  //   create NFT
+  //   const createNFT = async (data) => {
+  //     console.log("creating data------->", data);
+  //     const createNFTUrl = `${endPoint}nft/create_detach`;
+  //     try {
+  //       const res = await axios.post(createNFTUrl, data, {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //           "x-api-key": xKey,
+  //           Accept: "*/*",
+  //           "Access-Control-Allow-Origin": "*",
+  //         },
+  //       });
+  //       console.log("create NFT result ------> ", res);
+  //       if (res.data.success === true) {
+  //         const transaction = res.data.result.encoded_transaction;
+  //         const mint = res.data.result.mint;
+  //         const ret_result = await signAndConfirmTransaction(
+  //           network,
+  //           transaction
+  //         );
+  //         toast.success("NFT created successfully");
+  //       }
+  //     } catch (err) {
+  //       // Catch errors if any
+  //       console.log("create NFT Error ------> ", err);
+  //       toast.error("Something went wrong");
+  //       return [];
+  //     }
+  //   };
+
   //   fetch NFTs of MarketPlace
-  const fetchListings = async () => {
-    const nftUrl = `${endPoint}marketplace/active_listings?network=${network}&marketplace_address=${marketplaceAddress}`;
+  const fetchListings = async (id = null) => {
+    const nftUrl = `${endPoint_v2}marketplace/active_listings`;
     try {
       const res = await axios.get(nftUrl, {
         headers: {
           "Content-Type": "application/json",
           "x-api-key": xKey,
         },
+        params: {
+          network: network,
+          marketplace_address: marketplaceAddress,
+          nft_address: id,
+        },
       });
       console.log("listingURl ------->", res);
       if (res.data.success === true) {
-        setActiveNFTs(res.data.result);
-        return res.data.result;
+        setActiveNFTs(res.data.result.data);
+        return res.data.result.data;
       } else {
         setActiveNFTs([]);
         toast.info("No NFTs");
         return [];
       }
     } catch (err) {
+      console.log("listing error ----->", err);
       // Catch errors if any
       toast.warning(err.response.data.message);
       setActiveNFTs([]);
@@ -192,30 +232,8 @@ export function ShyftProvider({ children }) {
     }
   };
 
-  //   fetch one NFT by id
-  const getNFTById = async (id) => {
-    const nftByIdUrl = `${endPoint}nft/read`;
-    try {
-      const res = await axios.get(nftByIdUrl, {
-        headers: {
-          "x-api-key": xKey,
-        },
-        params: {
-          network: network,
-          token_address: id,
-        },
-      });
-      if (res.data.success === true) {
-        return res.data.result;
-      }
-    } catch (err) {
-      // Catch errors if any
-      toast.error("Something went wrong");
-    }
-  };
-
   //   buy NFT
-  const buyNFT = async (selectedNFT) => {
+  const buyNFT = async () => {
     const buyNFTUrl = `${endPoint}marketplace/buy`;
     const data = {
       network: network,
@@ -294,11 +312,11 @@ export function ShyftProvider({ children }) {
       if (res.data.success) {
         setSelectedNFT(res.data.result);
         return res.data.result;
-      }
+      } else return {};
     } catch (err) {
       console.log("Read NFT ------>", err);
       toast.error("NFT not found");
-      return [];
+      return {};
     }
   };
 
@@ -341,6 +359,78 @@ export function ShyftProvider({ children }) {
     }
   };
 
+  //   Get Collections In Wallet
+  const getCollectionsWallet = async () => {
+    const getColUrl = `${endPoint}wallet/collections`;
+    try {
+      const res = await axios.get(getColUrl, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": xKey,
+        },
+        params: {
+          network: network,
+          wallet_address: address,
+        },
+      });
+      console.log("Collections Res ----->", res);
+      if (res.data.success === true) {
+        const cols = res.data.result.collections;
+        setCollections(cols);
+        toast.success(res.data.message);
+        return cols;
+      } else {
+        setCollections([]);
+        toast.warning(res.data.message);
+        return [];
+      }
+    } catch (err) {
+      setCollections([]);
+      console.log("Get Collections Err------>", err);
+      toast.error("Get collections failed");
+      return [];
+    }
+  };
+
+  //   Get Active Bids
+  //   getFrom : {
+  //     marketplace_address
+  //     nft_address
+  //     buyer_address
+  //   }
+  const getActiveBids = async (getFrom) => {
+    const getBidsUrl = `${endPoint}marketplace/active_bids`;
+    try {
+      const res = await axios.get(getColUrl, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": xKey,
+        },
+        params: {
+          network: network,
+          marketplace_address: marketplaceAddress,
+          ...getFrom,
+        },
+      });
+      console.log("Collections Res ----->", res);
+      if (res.data.success === true) {
+        const cols = res.data.result.collections;
+        setCollections(cols);
+        toast.success(res.data.message);
+        return true;
+      } else {
+        setCollections([]);
+        toast.warning(res.data.message);
+        return false;
+      }
+    } catch (err) {
+      setCollections([]);
+      console.log("Get Collections Err------>", err);
+      toast.error("Get collections failed");
+      return false;
+    }
+  };
+
   const value = {
     // shyft integration
     network,
@@ -357,12 +447,14 @@ export function ShyftProvider({ children }) {
     fetchMyNFTs,
     fetchNFTsByCol,
     fetchCollections,
-    getNFTById,
     buyNFT,
     fetchAllMyNFTs,
     readNFT,
     listNFT,
     createMarketplace,
+    collections,
+    getCollectionsWallet,
+    getActiveBids,
   };
 
   return (

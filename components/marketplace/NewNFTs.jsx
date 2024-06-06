@@ -25,7 +25,7 @@ const NewNFTs = (props) => {
         }}
       >
         <img
-          src={item.nft.cached_image_uri}
+          src={item.nft.image_uri}
           width={0}
           height={0}
           alt=""
