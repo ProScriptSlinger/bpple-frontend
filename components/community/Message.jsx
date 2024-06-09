@@ -132,6 +132,30 @@ const MessageComponent = (message, rightFlag) => {
         ) : null}
       </div>
     );
+  } else if (message?.type === "audio") {
+    return (
+      <div className="flex flex-col">
+        <div className="p-[20px] bg-[#232323] inline-flex items-center text-[#979797] rounded-[12px]">
+          <audio src={message.link} controls />
+        </div>
+        {message.readStatus ? (
+          <div className="ml-[20px] inline-flex items-center mt-[10px]">
+            <div>
+              <Image
+                src="/icon/read.svg"
+                width={0}
+                height={0}
+                alt=""
+                className="w-[15px] h-auto"
+              />
+            </div>
+            <p className="text-[#797C7B] text-[10px] ml-[5px]">
+              {message.when}
+            </p>
+          </div>
+        ) : null}
+      </div>
+    );
   }
 };
 export default MessageComponent;

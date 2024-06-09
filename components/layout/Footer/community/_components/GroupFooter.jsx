@@ -30,6 +30,7 @@ const GroupFooter = () => {
   const [file, setFile] = useState(null);
   const [upload, setUpload] = useState(false);
   const [isUploading, setUploading] = useState(false);
+  const [emojiPickerVisible, setEmojiPickerVisible] = useState(false);
 
   const handleIstyping = (e) => {
     setText(e.target.value);
@@ -143,6 +144,11 @@ const GroupFooter = () => {
     }
   };
 
+  const addEmoji = (emoji) => {
+    setText(text + emoji.native);
+    setEmojiPickerVisible(false);
+  };
+
   if (pathname.includes(`/groups/join`)) return null;
 
   return (
@@ -151,6 +157,23 @@ const GroupFooter = () => {
         <div
           className={`relative inline-flex bg-[#121212] h-[100px] border-t-[1px] border-t-[#2A2A2A] bottom-0 items-center justify-center w-full flex-none`}
         >
+          {emojiPickerVisible && (
+            <div
+              style={{
+                position: "absolute",
+                bottom: "80px",
+                left: "10px",
+              }}
+              className="z-20"
+            >
+              {/* <Picker onSelect={addEmoji} /> */}
+              <Picker
+                data={data}
+                onEmojiSelect={(emoji) => addEmoji(emoji)}
+                theme={"dark"}
+              />
+            </div>
+          )}
           {file && (
             <div className="  bottom-20 flex absolute p-5 w-full  bg-[#121212] ">
               <div className=" flex items-center gap-5 w-full overflow-y-visible pt-10   overflow-x-auto">
@@ -224,7 +247,9 @@ const GroupFooter = () => {
                   />
                 </button>
               </div>
-              <button>
+              <button
+                onClick={() => setEmojiPickerVisible(!emojiPickerVisible)}
+              >
                 <Image
                   width={0}
                   height={0}

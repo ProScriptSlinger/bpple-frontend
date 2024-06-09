@@ -132,3 +132,8 @@ body {
 * {
   color: white
 }
+
+.color-main path{
+  color: #50FFFF!important
+}
+

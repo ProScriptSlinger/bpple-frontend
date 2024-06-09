@@ -4,7 +4,6 @@ import { useSettingModal } from "../../context/communitysetting";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { getNameInitials } from "../../utils/functions/getNameInitials";
-
 const CommunityProfileModal = () => {
   const {
     communityProfileModal,

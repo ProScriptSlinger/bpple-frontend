@@ -30,6 +30,8 @@ export function AuthProvider({ children }) {
   const [isConnected, setConnected] = useState(false);
   const [isDisconnected, setDisconnected] = useState(false);
 
+  const [currentCommunity, setCurrentCommunity] = useState(null);
+
   const getUserByAddress = async () => {
     try {
       if (!address || !isConnected || userDetail?.email) return;
@@ -286,6 +288,8 @@ export function AuthProvider({ children }) {
     communities,
     getCommunities,
     solanaConnect,
+    currentCommunity,
+    setCurrentCommunity,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

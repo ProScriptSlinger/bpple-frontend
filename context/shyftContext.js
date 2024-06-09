@@ -21,6 +21,9 @@ export function ShyftProvider({ children }) {
   const [selectedNFT, setSelectedNFT] = useState({});
   const [activeNFTs, setActiveNFTs] = useState([]);
   const [collections, setCollections] = useState([]);
+  const [colId, setColId] = useState(null);
+  const [allNFTs, setAllNFTs] = useState([]);
+  const [activeCol, setActiveCol] = useState({});
 
   const xKey = process.env.NEXT_PUBLIC_API_KEY.toString();
   const endPoint = process.env.NEXT_PUBLIC_API_ENDPOINT;
@@ -85,7 +88,7 @@ export function ShyftProvider({ children }) {
           network,
           transaction
         );
-        fetchAllMyNFTs();
+        await fetchAllMyNFTs();
         toast.success("NFT created successfully");
       }
     } catch (err) {
@@ -257,6 +260,7 @@ export function ShyftProvider({ children }) {
           transaction
         );
         toast.success("Transaction success!");
+        await fetchAllMyNFTs();
       } else {
         toast.warning(res.data.message);
       }
@@ -269,7 +273,6 @@ export function ShyftProvider({ children }) {
   //   fetch my All NFTs
   const fetchAllMyNFTs = async () => {
     const allMyNFTUrl = `${endPoint}nft/read_all`;
-    console.log("network and address -----> ", network, address);
     try {
       const res = await axios.get(allMyNFTUrl, {
         headers: {
@@ -282,15 +285,18 @@ export function ShyftProvider({ children }) {
       });
       console.log("fetchAllMyNFTs ------>", res);
       if (res.data.success === true) {
+        setAllNFTs(res.data.success);
         return res.data.result;
       } else {
         toast.warning(res.data.message);
+        setAllNFTs([]);
         return [];
       }
     } catch (err) {
       console.log("fetchAllMyNFTs Error ------> ", err);
       // Catch errors if any
       toast.error("Error loading NFTs");
+      setAllNFTs([]);
       return [];
     }
   };
@@ -377,7 +383,6 @@ export function ShyftProvider({ children }) {
       if (res.data.success === true) {
         const cols = res.data.result.collections;
         setCollections(cols);
-        toast.success(res.data.message);
         return cols;
       } else {
         setCollections([]);
@@ -431,6 +436,137 @@ export function ShyftProvider({ children }) {
     }
   };
 
+  // transfer NFT to other wallet
+  const transferNFT = async (toAddress) => {
+    const xKey = process.env.NEXT_PUBLIC_API_KEY.toString();
+    const endPoint = process.env.NEXT_PUBLIC_API_ENDPOINT;
+    let nftUrl = `${endPoint}nft/transfer_detach`;
+    const data = {
+      network: network,
+      token_address: selectedNFT.mint,
+      from_address: address,
+      to_address: toAddress,
+    };
+    try {
+      const res = await axios.post(nftUrl, data, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": xKey,
+        },
+      });
+      console.log("transferNFT Res ----->", res);
+      if (res.data.success === true) {
+        const transactions = res.data.result.encoded_transaction;
+        const ret_result = await signAndConfirmTransaction(
+          network,
+          transactions
+        );
+        toast.success("Transfer success");
+      } else {
+        //setShowLister(false);
+        toast.warning(res.data.message);
+      }
+    } catch (err) {
+      setCollections([]);
+      console.log("Get Collections Err------>", err);
+      toast.error("Transfer failed");
+      return false;
+    }
+  };
+
+  // burn NFT of wallet
+  const burnNFT = async () => {
+    const xKey = process.env.NEXT_PUBLIC_API_KEY;
+    const endPoint = process.env.NEXT_PUBLIC_API_ENDPOINT;
+    let burnNftUrl = `${endPoint}nft/burn_detach`;
+    const data = {
+      network: network,
+      wallet: address,
+      token_address: selectedNFT.mint,
+    };
+
+    console.log("burning data------->", data);
+    try {
+      const res = await axios.delete(burnNftUrl, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": xKey,
+        },
+        data,
+      });
+      console.log("Burn NFT Res ----->", res);
+      if (res.data.success === true) {
+        const transactions = res.data.result.encoded_transaction;
+        const ret_result = await signAndConfirmTransaction(
+          network,
+          transactions
+        );
+        toast.success("Burn success");
+        await fetchAllMyNFTs();
+      } else {
+        //setShowLister(false);
+        toast.warning(res.data.message);
+      }
+    } catch (err) {
+      console.log("Burn NFT Err------>", err);
+      toast.error("Burn failed");
+      return false;
+    }
+  };
+
+  const getColById = async (id) => {
+    try {
+      const colsRes = await getCollectionsWallet();
+      console.log("colsRes ------> ", colsRes);
+      return colsRes.find((item) => item.address == id);
+    } catch (err) {
+      console.log("getColById error------>", err);
+      return [];
+    }
+  };
+
+  // get NFTs of collection
+  const getNFTsCollection = async (colAddress) => {
+    // const getNFTsUrl = `${endPoint}collections/get_nfts`;
+    console.log("getNFTsCollection ------> ", colAddress);
+    try {
+      // const res = await axios.get(getNFTsUrl, {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     "x-api-key": xKey,
+      //   },
+      //   params: {
+      //     network: network,
+      //     collection_address: colAddress,
+      //   },
+      // });
+      // console.log("Collection's NFTs Res ----->", res);
+      // if (res.data.success === true) {
+      //   toast.success(res.data.message);
+      //   return res.data.result;
+      // } else {
+      //   toast.warning(res.data.message);
+      //   return [];
+      // }
+      const allNFTsRes = await fetchAllMyNFTs();
+      console.log("1 ------>", allNFTsRes);
+      const nftsRes = await getColById(colAddress);
+      console.log("2 ------->", nftsRes.nfts);
+      let nftIdList = [];
+      nftsRes?.nfts.map((item) => nftIdList.push(item.mint));
+      console.log("3 ------>", nftIdList);
+      const nftsOfCol = allNFTsRes.filter((item) =>
+        nftIdList.includes(item.mint)
+      );
+      console.log("nftsOfCol ------>", nftsOfCol);
+      return nftsOfCol;
+    } catch (err) {
+      console.log("Get Collection's Err------>", err);
+      toast.error("Get NFTs of collection failed");
+      return [];
+    }
+  };
+
   const value = {
     // shyft integration
     network,
@@ -455,6 +591,14 @@ export function ShyftProvider({ children }) {
     collections,
     getCollectionsWallet,
     getActiveBids,
+    colId,
+    setColId,
+    transferNFT,
+    burnNFT,
+    getNFTsCollection,
+    allNFTs,
+    activeCol,
+    setActiveCol,
   };
 
   return (

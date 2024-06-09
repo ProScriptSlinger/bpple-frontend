@@ -11,6 +11,7 @@ import Link from "next/link";
 import { HiOutlineCollection } from "react-icons/hi";
 import { RiNftLine } from "react-icons/ri";
 import { useShyft } from "@/context/shyftContext";
+import { RiPlayListAddFill } from "react-icons/ri";
 
 const ChatList = (props) => {
   const pathName = usePathname();
@@ -333,6 +334,18 @@ const CommunityList = (props) => {
     };
   }, [change]);
 
+  const { setColId } = useShyft();
+
+  const handleSetColId = () => {
+    // Split the pathName string into an array of parts
+    const parts = pathName.split("/");
+
+    // Get the last part of the array, which is the desired value
+    const colId = parts[parts.length - 1];
+
+    setColId(colId);
+  };
+
   if (pathName.includes(`/join/`)) return;
 
   return (
@@ -615,25 +628,59 @@ const CommunityList = (props) => {
                       <p className="ml-[12px] text-[14px]">Join Community</p>
                     </div>
                   </button>
-                  <Link href="/create-nft?isCollection=true">
-                    <div className="flex items-center pb-[10px] pl-[20px] w-full">
-                      <div className="inline-flex items-center">
-                        <HiOutlineCollection color="white" size={15} />
-                        <p className="ml-[12px] text-[14px]">
-                          Create Collection
-                        </p>
-                      </div>
-                    </div>
-                  </Link>
-                  <Link href={"/create-nft?isCollection=false"}>
-                    <div className="flex items-center pb-[10px] pl-[20px] w-full">
-                      <div className="inline-flex items-center">
-                        <RiNftLine color="white" size={15} />
-
-                        <p className="ml-[12px] text-[14px]">Create NFT</p>
-                      </div>
-                    </div>
-                  </Link>
+                  {pathName.includes("/nfts") && (
+                    <>
+                      <Link href="/create-nft?nftType=collection">
+                        <div className="flex items-center pb-[10px] pl-[20px] w-full">
+                          <div className="inline-flex items-center">
+                            <HiOutlineCollection color="white" size={15} />
+                            <p className="ml-[12px] text-[14px]">
+                              Create Collection
+                            </p>
+                          </div>
+                        </div>
+                      </Link>
+                      <Link href={"/create-nft?nftType=nft"}>
+                        <div className="flex items-center pb-[10px] pl-[20px] w-full">
+                          <div className="inline-flex items-center">
+                            <RiNftLine color="white" size={15} />
+                            <p className="ml-[12px] text-[14px]">Create NFT</p>
+                          </div>
+                        </div>
+                      </Link>
+                      <Link href={"/transfer"}>
+                        <div className="flex items-center pb-[10px] pl-[20px] w-full">
+                          <div className="inline-flex items-center">
+                            <Image
+                              src={"/icon/transfer_white.svg"}
+                              height={15}
+                              width={15}
+                              alt=""
+                              className="w-[20px] h-auto"
+                            />
+                            <p className="ml-[12px] text-[14px]">
+                              Transfer NFT
+                            </p>
+                          </div>
+                        </div>
+                      </Link>
+                    </>
+                  )}
+                  {pathName.includes("/col-nfts") && (
+                    <>
+                      <Link href="/create-nft?nftType=add-nft">
+                        <div
+                          className="flex items-center pb-[10px] pl-[20px] w-full"
+                          onClick={() => handleSetColId()}
+                        >
+                          <div className="inline-flex items-center">
+                            <RiPlayListAddFill color="white" size={15} />
+                            <p className="ml-[12px] text-[14px]">Add NFT</p>
+                          </div>
+                        </div>
+                      </Link>
+                    </>
+                  )}
                   {/* <button
                     className="flex items-center pb-[10px] pl-[20px] w-full"
                     onClick={() => createMarketplace()}

@@ -34,6 +34,8 @@ const ModalContext = createContext({
   setNftUnListModal: () => {},
   recordingModal: false,
   setRecordingModal: () => {},
+  nftTransferModal: false,
+  setNftTransferModal: () => {},
 });
 
 export const useSettingModal = () => {
@@ -63,7 +65,7 @@ const SettingModalProvider = ({ children }) => {
   const [nftListModal, setNftListModal] = React.useState(false);
   const [nftUnListModal, setNftUnListModal] = React.useState(false);
   const [recordingModal, setRecordingModal] = React.useState(false);
-
+  const [nftTransferModal, setNftTransferModal] = React.useState(false);
   const _functions = {
     1: setCommunitySettingmodal,
     2: setCommunityProfileModal,
@@ -82,10 +84,11 @@ const SettingModalProvider = ({ children }) => {
     15: setNftListModal,
     16: setNftUnListModal,
     17: setRecordingModal,
+    18: setNftTransferModal
   };
 
   const initialValue = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
   ];
 
   const handleformat = (index) => {
@@ -159,6 +162,10 @@ const SettingModalProvider = ({ children }) => {
     if (recordingModal) handleformat(17);
   }, [recordingModal]);
 
+  useEffect(() => {
+    if (nftTransferModal) handleformat(18);
+  }, [nftTransferModal]);
+
   const [sideBarCloseButton, setSideBarCloseButton] = useState(true);
   const [siderWidth, setSiderWidth] = useState(300);
 
@@ -209,6 +216,8 @@ const SettingModalProvider = ({ children }) => {
         setCommunityProfileInModal,
         recordingModal,
         setRecordingModal,
+        nftTransferModal,
+        setNftTransferModal
       }}
     >
       {children}

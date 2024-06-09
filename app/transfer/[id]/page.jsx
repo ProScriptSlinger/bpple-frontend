@@ -5,16 +5,15 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useSettingModal } from "@/context/communitysetting";
+import { useShyft } from "@/context/shyftContext";
 import { toast } from "react-toastify";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { useShyft } from "@/context/shyftContext";
-import Link from "next/link";
 
 const NFT = ({ params: { id } }) => {
   const router = useRouter();
-  const { nftListModal, nftUnListModal, setNftListModal, setNftUnListModal } =
+  const { nftTransferModal, setNftTransferModal } =
     useSettingModal();
-  const { network, activeNFTs, readNFT, setColId, burnNFT } = useShyft();
+  const { network, activeNFTs, readNFT, setColId } = useShyft();
   const [NFT, setNFT] = useState({
     name: "",
     cached_image_uri: "",
@@ -25,7 +24,6 @@ const NFT = ({ params: { id } }) => {
     royalty: 0,
   });
   const [active, setActive] = useState(false);
-  const [isBurning, setBurning] = useState(false);
 
   const getNFT = async (id) => {
     const res = await readNFT(id);
@@ -42,13 +40,6 @@ const NFT = ({ params: { id } }) => {
   useEffect(() => {
     if (id) getNFT(id);
   }, [id]);
-
-  const handleBurnNFT = async () => {
-    setBurning(true);
-    await burnNFT();
-    setBurning(false);
-    router.back();
-  };
 
   return (
     <>
@@ -92,9 +83,9 @@ const NFT = ({ params: { id } }) => {
                         src={"/avatar/21.png"}
                         className="w-[45px] h-auto rounded-[8px]"
                       />
-                      {/* <div className="ml-[20px] text-left">
+                      <div className="ml-[20px] text-left">
                         <p>SOFT COQ INU</p>
-                      </div> */}
+                      </div>
                     </button>
                   </div>
                 </div>
@@ -142,57 +133,24 @@ const NFT = ({ params: { id } }) => {
                   </div>
                 </div>
               </div>
-              <div className="flex justify-center gap-4">
-                <button
-                  className={`w-[130px] h-[45px] flex justify-center items-center rounded-full border border-[#53FAFB] text-[#53FAFB] mr-[10px] ${
-                    !nftListModal && "hover:bg-[#53FAFB] hover:text-black"
-                  } `}
-                  onClick={() => {
-                    active
-                      ? setNftUnListModal(!nftUnListModal)
-                      : setNftListModal(!nftListModal);
-                  }}
-                  disabled={nftListModal || nftUnListModal}
-                >
-                  {nftListModal || nftUnListModal ? (
-                    <AiOutlineLoading3Quarters
-                      size={24}
-                      className=" animate-spin"
-                    />
-                  ) : active ? (
-                    "Unlist"
-                  ) : (
-                    "List"
-                  )}
-                </button>
-                <button
-                  className={`w-[130px] h-[45px] flex justify-center items-center rounded-full border border-[#53FAFB] text-white mr-[10px] ${
-                    !isBurning && "hover:bg-[#53FAFB] hover:text-black"
-                  } `}
-                  onClick={() => handleBurnNFT()}
-                  disabled={isBurning}
-                >
-                  {isBurning ? (
-                    <AiOutlineLoading3Quarters
-                      size={24}
-                      className=" animate-spin"
-                    />
-                  ) : (
-                    "Burn"
-                  )}
-                </button>
-                {!NFT?.collection?.address && (
-                  <Link href="/create-nft?nftType=add-nft">
-                    <div
-                      className={`w-[130px] h-[45px] flex justify-center items-center rounded-full border border-[#53FAFB] text-[#53FAFB] mr-[10px] ${"hover:bg-[#53FAFB] hover:text-black"} `}
-                      onClick={() => setColId(id)}
-                      // disabled={nftListModal || nftUnListModal}
-                    >
-                      Add NFT
-                    </div>
-                  </Link>
+              <button
+                className={`w-[130px] h-[45px] rounded-full border border-[#53FAFB] text-[#53FAFB] mr-[10px] ${
+                  !nftTransferModal && "hover:bg-[#53FAFB] hover:text-black"
+                } `}
+                onClick={() => {
+                  setNftTransferModal(!nftTransferModal);
+                }}
+                disabled={nftTransferModal}
+              >
+                {nftTransferModal ? (
+                  <AiOutlineLoading3Quarters
+                    size={24}
+                    className=" animate-spin"
+                  />
+                ) : (
+                  "Transfer"
                 )}
-              </div>
+              </button>
             </div>
           </div>
         </div>

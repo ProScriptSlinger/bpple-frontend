@@ -6,17 +6,21 @@ import { useSettingModal } from "../../context/communitysetting";
 import { usePathname } from "next/navigation";
 import { useShyft } from "@/context/shyftContext";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 const NftBuyModal = (props) => {
   const { nftBuyModal, setNftBuyModal } = useSettingModal();
   const [isLoading, setLoading] = useState(false);
   const pathName = usePathname();
   const { selectedNFT, buyNFT } = useShyft();
+  const router = useRouter();
+
   const handleBuyNFT = async () => {
     setLoading(true);
     await buyNFT();
     setLoading(false);
     setNftBuyModal(false);
+    router.push("/nft");
   };
   return (
     <>

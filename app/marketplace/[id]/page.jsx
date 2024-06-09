@@ -62,15 +62,15 @@ const NFT = ({ params: { id } }) => {
                   </div>
                   <div className="w-full inline-flex items-center justify-center">
                     <button className="inline-flex items-center">
-                      <img
+                      {/* <img
                         width={0}
                         height={0}
                         alt=""
                         src={"/avatar/21.png"}
                         className="w-[45px] h-auto rounded-[8px]"
-                      />
+                      /> */}
                       <div className="ml-[20px] text-left">
-                        <p className="py-auto">SOFT COQ INU</p>
+                        <p className="py-auto">NFT Image</p>
                       </div>
                     </button>
                   </div>

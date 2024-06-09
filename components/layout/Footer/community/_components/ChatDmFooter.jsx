@@ -18,9 +18,12 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 import { AiFillFilePdf } from "react-icons/ai";
 import { handleUploadFiles } from "../../../../../utils/functions/handleUploadFiles";
+import RecordingModal from "../../../../modal/RecordingModal";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
 
 const ChatDmFooter = () => {
-  const { recordingModal, setRecordingModal } = useSettingModal();
+  const [recordingModal, setRecordingModal] = useState(false);
   const [text, setText] = useState("");
   const [chat, setChat] = useState(null);
   const { chats, userDetail } = useUser();
@@ -29,6 +32,8 @@ const ChatDmFooter = () => {
   const [file, setFile] = useState(null);
   const [upload, setUpload] = useState(false);
   const [isUploading, setUploading] = useState(false);
+
+  const [emojiPickerVisible, setEmojiPickerVisible] = useState(false);
 
   const onSend = () => {
     if (file) {
@@ -70,22 +75,7 @@ const ChatDmFooter = () => {
         fileName: file.name,
         size: formatFileSize(ImageResponse?.fileInfo.metadata.size),
       };
-
-      const response = await handleEndpoint(
-        { message },
-        "chat/message",
-        "post",
-        null
-      );
-      if (response) {
-        setUploading(false);
-
-        if (socket.current) {
-          socket.current.emit("sent-direct-message", { ...message });
-          setUpload(false);
-          setFile(null);
-        }
-      }
+      await handleSendMessage(message);
     } catch (error) {
       setUploading(false);
 
@@ -111,21 +101,28 @@ const ChatDmFooter = () => {
         content: textmessage,
         when: time.toString(),
       };
-      if (socket.current) {
-        socket.current.emit("sent-direct-message", { ...message });
-        setText("");
-      }
-      const reponse = await handleEndpoint(
-        { message },
-        "chat/message",
-        "post",
-        null
-      );
-      if (reponse) {
-        console.log(" socket.current.emit(user-send-dm { ...message })");
-      }
+      await handleSendMessage(message);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleSendMessage = async (message) => {
+    const response = await handleEndpoint(
+      { message },
+      "chat/message",
+      "post",
+      null
+    );
+    if (response) {
+      setUploading(false);
+      setText("");
+      setFile(null);
+      if (socket.current) {
+        socket.current.emit("sent-direct-message", { ...message });
+        setUpload(false);
+        setFile(null);
+      }
     }
   };
 
@@ -144,12 +141,34 @@ const ChatDmFooter = () => {
     }
   };
 
+  const addEmoji = (emoji) => {
+    setText(text + emoji.native);
+    setEmojiPickerVisible(false);
+  };
+
   return (
     pathname.includes(`/chats/${id}`) && (
       <>
         <div
           className={`relative inline-flex bg-[#121212] h-[100px] border-t-[1px] border-t-[#2A2A2A] bottom-0 items-center justify-center w-full flex-none`}
         >
+          {emojiPickerVisible && (
+            <div
+              style={{
+                position: "absolute",
+                bottom: "80px",
+                left: "10px",
+              }}
+              className="z-20"
+            >
+              {/* <Picker onSelect={addEmoji} /> */}
+              <Picker
+                data={data}
+                onEmojiSelect={(emoji) => addEmoji(emoji)}
+                theme={"dark"}
+              />
+            </div>
+          )}
           {file && (
             <div className="  bottom-20 flex absolute p-5 w-full  bg-[#121212] ">
               <div className=" flex items-center gap-5 w-full overflow-y-visible pt-10   overflow-x-auto">
@@ -223,7 +242,9 @@ const ChatDmFooter = () => {
                   />
                 </button>
               </div>
-              <button>
+              <button
+                onClick={() => setEmojiPickerVisible(!emojiPickerVisible)}
+              >
                 <Image
                   width={0}
                   height={0}
@@ -258,6 +279,11 @@ const ChatDmFooter = () => {
             </div>
           </div>
         </div>
+        <RecordingModal
+          recordingModal={recordingModal}
+          setRecordingModal={setRecordingModal}
+          handleSendMessage={handleSendMessage}
+        />
       </>
     )
   );

@@ -4,9 +4,15 @@ import Image from "next/image";
 import { useSettingModal } from "../../context/communitysetting";
 import UserComponent from "../../components/community/CommunitySettingUserComponent";
 import MemberComponent from "../../components/community/CommunitySettingMemberComponent";
+import { useUser } from "@/context/appContext";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 const CommunitySetting = (props) => {
+  const router = useRouter();
   const [place, setPlace] = useState("marketplace");
   const [privateStatus, setPrivateStatus] = useState(true);
+  const { currentCommunity } = useUser();
   const { communitySettingmodal, setCommunitySettingmodal } = useSettingModal();
   const handleOpenProfileModal = () => {
     setCommunitySettingmodal(!communitySettingmodal);
@@ -110,8 +116,8 @@ const CommunitySetting = (props) => {
               Tunn on or off to make private or public channel
             </p>
           </div>
-          <div>
-            <p className="text-[#9D9D9D]">Add link’s NFTs</p>
+          <div className="flex justify-center">
+            {/* <p className="text-[#9D9D9D]">Add link’s NFTs</p>
             <input
               className="w-full mt-[15px] border-b border-[#9D9D9D] bg-transparent pt-4 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#53FAFB] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px] text-[17px]"
               placeholder="Input link"
@@ -127,7 +133,16 @@ const CommunitySetting = (props) => {
                 className="w-[17px] mt-[3px] ml-[2px] mr-[2px]"
               />
               Tenso
-            </div>
+            </div> */}
+            <Link href={`/community/edit-marketplace`}>
+              <div
+                className={`w-[200px] h-[45px] flex justify-center items-center rounded-full border border-[#53FAFB] text-[#53FAFB] mr-[10px] ${"hover:bg-[#53FAFB] hover:text-black"} `}
+                // disabled={nftListModal || nftUnListModal}
+                // onClick={() => router.push(`/community/edit-marketplace`)}
+              >
+                Add or Remove NFTs
+              </div>
+            </Link>
           </div>
           <div>
             <div className="w-full h-[55px] bg-[#1A1A1A] rounded-[12px] mt-[10px] px-[20px] py-[10px]">

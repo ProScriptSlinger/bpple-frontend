@@ -9,18 +9,24 @@ import { toast } from "react-toastify";
 import { useUser } from "@/context/appContext";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useShyft } from "@/context/shyftContext";
+import { useRouter } from "next/navigation";
 
 const NFT = () => {
-  const { createNFT, network } = useShyft();
+  const { createNFT, network, colId, setColId } = useShyft();
   const searchParams = useSearchParams();
-  const isCollectionPa = searchParams.get("isCollection");
-  const [isCollection, setCollection] = useState(false);
+  const nftTypeParam = searchParams.get("nftType");
+  const [nftType, setNftType] = useState("nft");
   const { address } = useUser();
+  const router = useRouter();
 
   useEffect(
     () =>
-      isCollectionPa == "true" ? setCollection(true) : setCollection(false),
-    [isCollectionPa]
+      nftTypeParam == "collection"
+        ? setNftType("collection")
+        : nftTypeParam == "nft"
+        ? setNftType("nft")
+        : setNftType("add-nft"),
+    [nftTypeParam]
   );
 
   const [file, setFile] = useState(null);
@@ -57,11 +63,13 @@ const NFT = () => {
       external_url: url,
       max_supply: maxSupply,
       royalty,
+      collection_address: colId,
     };
     console.log("Creating NFT ------>", data);
     await createNFT({ ...data, image: file, creator_wallet: address });
-
+    setColId(null);
     setIsLoading(false);
+    router.back();
   };
 
   return (
@@ -71,7 +79,11 @@ const NFT = () => {
           <div className="w-full flex justify-center">
             <div className="mt-[30px] w-full inline-flex justify-between items-center mb-[30px]">
               <p className="text-[25px]">
-                {isCollection ? "New Collection" : "New NFT"}
+                {nftType == "collection"
+                  ? "New Collection"
+                  : nftType == "add-nft"
+                  ? "Add new NFT to collection"
+                  : "New NFT"}
               </p>
             </div>
           </div>
@@ -109,24 +121,22 @@ const NFT = () => {
                   </div>
                   <div className="w-full inline-flex items-center justify-center">
                     <button className="inline-flex items-center">
-                      <img
+                      {/* <img
                         width={0}
                         height={0}
                         alt=""
                         src={"/avatar/20.png"}
                         className="w-[45px] h-auto rounded-[8px]"
-                      />
+                      /> */}
                       <div className="ml-[20px] text-left">
-                        <p>{isCollection ? "Collection Image" : "NFT Image"}</p>
+                        <p>{"NFT Image"}</p>
                       </div>
                     </button>
                   </div>
                 </div>
                 <div className="h-full gridWidth:w-[500px] w-[380px] flex flex-col overflow-auto flex-1 px-[20px] gap-[25px]">
                   <input
-                    placeholder={
-                      isCollection ? "Enter Collection Name" : "Enter NFT Name"
-                    }
+                    placeholder={"Enter NFT Name"}
                     onChange={(e) => {
                       setName(e.target.value);
                     }}
@@ -154,9 +164,7 @@ const NFT = () => {
                     className="bg-[#191919] border-none outline-none placeholder:text-[#707070] py-[15px] px-[25px] w-full rounded-[12px] text-[14px]"
                   />
                   <div className="flex items-center gap-[20px]">
-                    {isCollection ? (
-                      <></>
-                    ) : (
+                    {/* {nftType !== "collection" && (
                       <input
                         placeholder="Enter Max Supply"
                         type="number"
@@ -165,7 +173,7 @@ const NFT = () => {
                         }}
                         className="bg-[#191919] border-none outline-none placeholder:text-[#707070] py-[15px] px-[25px] w-full rounded-[12px] text-[14px]"
                       />
-                    )}
+                    )} */}
                     <input
                       placeholder="Enter Loyalty"
                       type="number"

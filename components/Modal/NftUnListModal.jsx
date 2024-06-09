@@ -60,7 +60,7 @@ const NftUnListModal = () => {
             toast.success("Unlisting success");
           } else {
             //setShowLister(false);
-            // toast.warning(res.data.message);
+            toast.warning(res.data.message);
           }
         })
         // Catch errors if any

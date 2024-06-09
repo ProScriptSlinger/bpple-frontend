@@ -9,7 +9,7 @@ import { useUser } from "@/context/appContext";
 const BestCollection = dynamic(() =>
   import("../../components/marketplace/BestCollection")
 );
-const NewNFTS = dynamic(() => import("../../components/marketplace/NewNFTs"));
+const NewNFTS = dynamic(() => import("../../components/marketplace/MarketNFT"));
 const NFTList = dynamic(() => import("../../components/marketplace/NFTList"), {
   ssr: false,
   loading: () => <NFTListLoader />,
@@ -17,29 +17,7 @@ const NFTList = dynamic(() => import("../../components/marketplace/NFTList"), {
 const Page = () => {
   const { fetchListings, activeNFTs } = useShyft();
   const { address } = useUser();
-  const bestCollections = [
-    { link: "/marketplace/1.svg", avatar: "/avatar/18.svg", id: 1 },
-    { link: "/marketplace/2.svg", avatar: "/avatar/18.svg", id: 2 },
-    { link: "/marketplace/3.svg", avatar: "/avatar/18.svg", id: 3 },
-    { link: "/marketplace/1.svg", avatar: "/avatar/18.svg", id: 4 },
-    { link: "/marketplace/2.svg", avatar: "/avatar/18.svg", id: 5 },
-    { link: "/marketplace/3.svg", avatar: "/avatar/18.svg", id: 6 },
-    { link: "/marketplace/2.svg", avatar: "/avatar/18.svg", id: 7 },
-    { link: "/marketplace/3.svg", avatar: "/avatar/18.svg", id: 8 },
-    { link: "/marketplace/1.svg", avatar: "/avatar/18.svg", id: 9 },
-    { link: "/marketplace/2.svg", avatar: "/avatar/18.svg", id: 10 },
-    { link: "/marketplace/3.svg", avatar: "/avatar/18.svg", id: 11 },
-  ];
-  const newNfts = [
-    { logo: "/marketplace/logo.svg" },
-    { logo: "/marketplace/logo.svg" },
-    { logo: "/marketplace/logo.svg" },
-    { logo: "/marketplace/logo.svg" },
-    { logo: "/marketplace/logo.svg" },
-    { logo: "/marketplace/logo.svg" },
-    { logo: "/marketplace/logo.svg" },
-    { logo: "/marketplace/logo.svg" },
-  ];
+
   const fetchNFTs = async () => {
     await fetchListings();
   };
@@ -53,11 +31,11 @@ const Page = () => {
           <p className="text-[20px]">Best & Trends Collections</p>
           <div className="w-full h-[200px] overflow-auto">
             <div className="mt-[20px] w-full overflow-auto inline-flex gap-[15px] absolute">
-              {bestCollections.map((item, index) => (
+              {/* {bestCollections.map((item, index) => (
                 <div key={index}>
                   <BestCollection item={item} />
                 </div>
-              ))}
+              ))} */}
             </div>
           </div>
           <p className="text-[20px]">Explore New NFTs</p>
@@ -95,7 +73,7 @@ const Page = () => {
             </div>
           </div>
           <div className="w-full mt-[20px] overflow-auto">
-            {newNfts.map((item, index) => (
+            {activeNFTs.map((item, index) => (
               <div key={index}>
                 <NFTList item={item} index={index} />
               </div>

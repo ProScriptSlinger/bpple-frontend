@@ -27,7 +27,8 @@ const CommunityHeader = (props) => {
     setCalling,
   } = useSettingModal();
   const { communityId, channel } = useParams();
-  const { userDetail, communities } = useUser();
+
+  const { userDetail, communities, setCurrentCommunity } = useUser();
   const [options, setOptions] = useState([]);
   const pathname = usePathname();
   const [community, setCommunity] = useState(null);
@@ -49,16 +50,18 @@ const CommunityHeader = (props) => {
       });
     }
   }, [communityId, community, channel]);
+
   useEffect(() => {
     const handleFindCommunity = () => {
       const communityById = communities?.find(
         (community) => community._id == communityId
       );
 
-      console.log(communityById);
+      console.log("community ------>", communityById);
       setCommunity(communityById);
+      setCurrentCommunity(communityById);
     };
-    handleFindCommunity();
+    communityId && handleFindCommunity();
   }, [communityId, userDetail, communities]);
 
   const [currentOption, setCurrentOption] = useState({
@@ -372,7 +375,7 @@ const CommunityHeader = (props) => {
                         } else if (item.title === "Create a Room") {
                           setNewRoomModal(true);
                         } else if (item.title === "Marketplace") {
-                          router.push(`${pathName}/marketplace`);
+                          router.push(`/community/${communityId}/marketplace`);
                         } else if (item.title === "Team") {
                           router.push("/community/team");
                         }
