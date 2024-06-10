@@ -17,6 +17,9 @@ import { v4 } from "uuid";
 import { AiFillFilePdf } from "react-icons/ai";
 import { handleUploadFiles } from "../../../../../utils/functions/handleUploadFiles";
 
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+
 const CommunityInputFooter = () => {
   const { callActionModal, setCallActionModal } = useSettingModal();
   const [text, setText] = useState("");
