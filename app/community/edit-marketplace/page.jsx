@@ -9,12 +9,14 @@ const NewNFTS = dynamic(() => import("@/components/marketplace/MarketNFT"));
 import { MdRadioButtonChecked } from "react-icons/md";
 import { MdRadioButtonUnchecked } from "react-icons/md";
 import { handleEndpoint } from "@/utils/api/handleEndpoint";
+import { toast } from "react-toastify";
 
 const Page = () => {
   const { fetchListings, activeNFTs } = useShyft();
   const { address, currentCommunity, getCommunities } = useUser();
   const [isSaving, setSaving] = useState(false);
   const [list, setList] = useState([]);
+  const router = useRouter();
 
   const fetchNFTs = async () => {
     await fetchListings();
@@ -41,6 +43,7 @@ const Page = () => {
         null
       );
       await getCommunities();
+      toast.success("NFTs successfully add to community");
       setSaving(false);
       router.push(`community/${currentCommunity?._id}/marketplace`);
     } catch (err) {
