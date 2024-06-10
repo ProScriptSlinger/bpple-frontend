@@ -42,6 +42,7 @@ const Page = () => {
       );
       await getCommunities();
       setSaving(false);
+      router.push(`community/${currentCommunity?._id}/marketplace`);
     } catch (err) {
       console.log(err);
       setSaving(false);

@@ -20,7 +20,7 @@ const NftBuyModal = (props) => {
     await buyNFT();
     setLoading(false);
     setNftBuyModal(false);
-    router.push("/nft");
+    router.push("/nfts");
   };
   return (
     <>
