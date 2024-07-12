@@ -69,6 +69,7 @@ const ChartTable = (props) => {
         <div className="flex flex-wrap justify-around mx-4 pb-2">
           {tableLabels.map((item, index) => (
             <Label
+              key={index}
               label={item}
               isActivated={index == tableType}
               onClick={() => setTableType(index)}
