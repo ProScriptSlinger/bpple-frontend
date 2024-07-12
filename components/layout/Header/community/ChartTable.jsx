@@ -36,8 +36,8 @@ const ChartTable = (props) => {
       <div className="flex flex-col">
         <div className="flex flex-wrap justify-around gap-2 items-center">
           <div className="flex gap-4">
-            {labels.map((item) => (
-              <Label {...item} />
+            {labels.map((item, index) => (
+              <Label key={index} {...item} />
             ))}
           </div>
           <div className="flex gap-1">

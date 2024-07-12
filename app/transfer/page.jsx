@@ -33,7 +33,7 @@ const Marketplace = () => {
           <div className="w-full h-full mt-[30px] mb-[30px] overflow-auto relative">
             <div className="w-full flex-none grid grid-cols-4 gap-[30px] overflow-auto absolute max-h-full">
               {NFTs.map((nft) => (
-                <Link href={`/transfer/${nft.mint}`}>
+                <Link key={nft.mint} href={`/transfer/${nft.mint}`}>
                   <div key={nft.mint} className="relative">
                     <MyNFT item={nft} />
                   </div>

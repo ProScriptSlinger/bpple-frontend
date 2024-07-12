@@ -28,7 +28,7 @@ const Page = () => {
     <>
       <div className="w-full h-full bg-[#121212] mobile:px-[50px] px-[20px] pt-[30px] pb-[50px] overflow-auto prevent-select">
         <div className="flex justify-between">
-          <p className="text-[20px]">Community's NFTs</p>
+          <p className="text-[20px]">Community&apos;s NFTs</p>
         </div>
         <div className="w-full mt-[20px] relative h-[250px] overflow-auto">
           <div className="w-full overflow-auto inline-flex gap-[10px] absolute">

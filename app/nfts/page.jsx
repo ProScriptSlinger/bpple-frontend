@@ -82,8 +82,8 @@ const Marketplace = () => {
           </div> */}
           <div className="w-full h-full mt-[30px] mb-[30px] overflow-auto p-[10px] relative">
             <div className="w-full flex-none grid grid-cols-4 gap-[30px] max-h-full">
-              {colList.map((col) => (
-                <Link href={`/col-nfts/${col.address}`}>
+              {colList.map((col, index) => (
+                <Link key={index} href={`/col-nfts/${col.address}`}>
                   <div
                     key={col.address}
                     className="relative"

@@ -258,7 +258,7 @@ const NewCommunityModal = () => {
                   onChange={handleName}
                 />
                 <p className="text-[#9D9D9D] text-[13px] mt-[10px]">
-                  Enter the project's X account
+                  Enter the project&apos;s X account
                 </p>
                 <input
                   className="mt-[20px] w-full border-b border-[#9D9D9D] bg-transparent pt-4 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"

@@ -33,7 +33,7 @@ const CollectionNFTs = ({ params: { colId } }) => {
     <>
       <div className="w-full h-full bg-[#121212] flex flex-col gap-4">
         <div className="w-full bg-[#121212] flex flex-col px-[50px]">
-          <p className="text-[20px] mt-[20px]">Collections's NFTs</p>
+          <p className="text-[20px] mt-[20px]">Collections&apos;s NFTs</p>
           <div className="w-full h-full mt-[30px] mb-[30px] overflow-auto p-[10px] relative">
             <div className="w-full flex-none grid grid-cols-4 gap-[30px]  max-h-full">
               {NFTs.map((nft) => (
