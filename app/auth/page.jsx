@@ -95,9 +95,9 @@ const Auth = () => {
                   className="w-[25px] h-auto"
                 />
               )}
-              {/* {isConnecting && (
+              {isConnecting && (
                 <div className="ml-[7px] mr-[7px]">Connecting…</div>
-              )} */}
+              )}
               {/* {pending && <div className="ml-[7px] mr-[7px]">Loading...</div>} */}
               {isDisconnected && (
                 <div className="ml-[7px] mr-[7px]">Connect Wallet</div>
