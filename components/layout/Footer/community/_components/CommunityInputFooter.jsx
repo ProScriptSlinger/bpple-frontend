@@ -293,7 +293,7 @@ const CommunityInputFooter = () => {
               </button> */}
             <button
               onClick={onSend}
-              className="bg-[#3772FF] ml-[5px] p-[10px] rounded-full mr-[20px]"
+              className="bg-[#3772FF] ml-[5px] p-[10px] rounded-full mr-[30px]"
             >
               <Image
                 width={0}
