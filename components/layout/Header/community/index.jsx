@@ -96,10 +96,9 @@ const CommunityHeader = (props) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  const [isChartOpened, setChartOpened] = useState(false);
 
   if (pathname.includes(`/join/`)) return;
-
-  const [isChartOpened, setChartOpened] = useState(false);
 
   const CoinItem = (props) => {
     return (
