@@ -2,17 +2,15 @@
 import React from "react";
 import SliderLoader from "../../../components/home/Slider/loader";
 import dynamic from "next/dynamic";
-import RecommandLoader from "../../../components/home/Recommand/loader";
-import LastCommunityLoader from "../../../components/home/NewLaunch/loader";
 const Slider = dynamic(() => import("../../../components/home/Slider"), {
   ssr: false,
   loading: () => <SliderLoader />,
 });
-const Recommand = dynamic(
-  () => import("../../../components/home/Recommand")
+const Trending = dynamic(
+  () => import("@/components/home/Trending")
   // , {
   //   ssr: false,
-  //   loading: () => <RecommandLoader />,
+  //   loading: () => <TrendingLoader />,
   // }
 );
 const NewLaunch = dynamic(
@@ -30,7 +28,7 @@ const Home = () => {
         style={{ height: "var(--homemain-height)" }}
       >
         <Slider />
-        <Recommand />
+        <Trending />
         <NewLaunch />
       </div>
     </>

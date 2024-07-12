@@ -18,7 +18,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 import { AiFillFilePdf } from "react-icons/ai";
 import { handleUploadFiles } from "../../../../../utils/functions/handleUploadFiles";
-import RecordingModal from "../../../../modal/RecordingModal";
+// import RecordingModal from "../../../../modal/RecordingModal";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 
@@ -279,11 +279,11 @@ const ChatDmFooter = () => {
             </div>
           </div>
         </div>
-        <RecordingModal
+        {/* <RecordingModal
           recordingModal={recordingModal}
           setRecordingModal={setRecordingModal}
           handleSendMessage={handleSendMessage}
-        />
+        /> */}
       </>
     )
   );
