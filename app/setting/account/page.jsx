@@ -10,7 +10,7 @@ const AccountSetting = () => {
         <div className="w-full h-full">
           <div className="flex items-center justify-center">
             <button className="bg-[#191919] w-[150px] aspect-square rounded-[20px] flex items-center justify-center">
-              <div className="w-[50px] aspect-square rounded-[12px] bg-[#53FAFB] bg-opacity-5 flex items-center justify-center">
+              <div className="w-[50px] aspect-square rounded-[12px] bg-[#3772FF] bg-opacity-5 flex items-center justify-center">
                 <Image
                   src="/icon/camera_green.svg"
                   width={0}
@@ -39,8 +39,13 @@ const AccountSetting = () => {
               className="bg-[#191919] border-none outline-none placeholder:text-[#707070] py-[15px] px-[25px] w-full rounded-[12px] text-[14px]"
             />
           </div>
-          <p className="w-full mt-[10px] text-[#707070] text-[12px] mobile:px-[30px] px-[10px]">The terms and conditions contained in this Agreement shall constitute the entire agreement between ...</p>
-          <p className="w-full mt-[30px] text-[15px] text-[#494949]">Setting 01</p>
+          <p className="w-full mt-[10px] text-[#707070] text-[12px] mobile:px-[30px] px-[10px]">
+            The terms and conditions contained in this Agreement shall
+            constitute the entire agreement between ...
+          </p>
+          <p className="w-full mt-[30px] text-[15px] text-[#494949]">
+            Setting 01
+          </p>
           <input
             placeholder="Bio"
             onChange={(e) => {
@@ -48,7 +53,9 @@ const AccountSetting = () => {
             }}
             className="bg-[#191919] border-none outline-none placeholder:text-[#707070] py-[15px] px-[25px] w-full rounded-[12px] text-[14px] mt-[10px]"
           />
-          <p className="w-full mt-[30px] text-[15px] text-[#494949]">Username</p>
+          <p className="w-full mt-[30px] text-[15px] text-[#494949]">
+            Username
+          </p>
           <input
             placeholder="username"
             onChange={(e) => {

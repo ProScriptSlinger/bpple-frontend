@@ -20,7 +20,7 @@ const TeamMember = () => {
           24 Mutual Friends
         </p>
         <div className="w-full flex justify-center">
-          <button className="bg-[#53FAFB] rounded-full w-[100px] h-[35px] mt-[20px] text-black text-[12px] font-semibold flex items-center justify-center">
+          <button className="bg-[#3772FF] rounded-full w-[100px] h-[35px] mt-[20px] text-black text-[12px] font-semibold flex items-center justify-center">
             Add Friend
           </button>
         </div>

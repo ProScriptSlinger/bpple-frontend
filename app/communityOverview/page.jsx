@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Image from "next/image"
+import Image from "next/image";
 const CommunityOverview = () => {
   const [windowWidth, setWindowWidth] = useState(0);
   const tradingData = [
@@ -85,7 +85,7 @@ const CommunityOverview = () => {
                 <p className="mobile:text-[23px] text-[15px]">Insights</p>
                 <p className="mobile:text-[13px] text-[10px]">Balance Trends</p>
               </div>
-              <div className="h-[50px] border-l-[1px] border-l-[#50FFFF]"></div>
+              <div className="h-[50px] border-l-[1px] border-l-[#3772FF]"></div>
               <div className="ml-[30px] mr-[20px]">
                 <p className="mobile:text-[23px] text-[15px]">87, 9 SOL</p>
                 <p className="mobile:text-[13px] text-[10px]">
@@ -196,7 +196,7 @@ const CommunityOverview = () => {
                 <div>
                   <p className="text-[#656565] text-[13px]">Revenue/month</p>
                   <p className="font-semibold text-[18px] mt-[3px]">23K SOL</p>
-                  <div className="rounded-full w-[70px] h-[25px] bg-[#53FAFB] bg-opacity-20 mt-[3px] inline-flex items-center justify-center">
+                  <div className="rounded-full w-[70px] h-[25px] bg-[#3772FF] bg-opacity-20 mt-[3px] inline-flex items-center justify-center">
                     <div>
                       <Image
                         src="/icon/rise_green.svg"

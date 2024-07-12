@@ -54,7 +54,7 @@ const NewRoomModal = () => {
                 Add name here
               </p>
               <input
-                className="w-full border-b border-[#9D9D9D] bg-transparent pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#53FAFB] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
+                className="w-full border-b border-[#9D9D9D] bg-transparent pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
                 placeholder="Name is here"
                 onChange={handleName}
               />
@@ -62,7 +62,7 @@ const NewRoomModal = () => {
                 The terms and conditions contained in.
               </p>
               <input
-                className="mt-[20px] w-full border-b border-[#9D9D9D] bg-transparent pt-4 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#53FAFB] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
+                className="mt-[20px] w-full border-b border-[#9D9D9D] bg-transparent pt-4 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
                 placeholder="Choose Emoji"
                 onChange={handleDescription}
               />
@@ -81,14 +81,14 @@ const NewRoomModal = () => {
                   />
                   <div
                     className={`relative w-11 h-6 rounded-full ring-[#6D6D6D] ring-1 peer peer-focus:ring-1 dark:bg-transparent peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] ${
-                      enable ? "after:bg-[#50FFFF]" : "after:bg-[#6D6D6D]"
+                      enable ? "after:bg-[#3772FF]" : "after:bg-[#6D6D6D]"
                     } after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-transparent`}
                   ></div>
                 </label>
               </div>
             </div>
             <button
-              className="w-full h-[40px] rounded-[12px] bg-[#53FAFB] text-black mt-[20px] bottom-0 flex-none"
+              className="w-full h-[40px] rounded-[12px] bg-[#3772FF] text-black mt-[20px] bottom-0 flex-none"
               onClick={handleCreate}
             >
               Create

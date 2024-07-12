@@ -20,18 +20,18 @@ const SignUpForm = ({
   registering,
   userDetail,
   page,
-  handleChangePage
+  handleChangePage,
 }) => {
   const router = useRouter();
 
   useEffect(() => {
     setServerErrors(null);
   }, [values]);
-  useEffect( () => {
+  useEffect(() => {
     if (userDetail) {
-      handleChangePage(1)
+      handleChangePage(1);
     }
-  }, [userDetail, page])
+  }, [userDetail, page]);
   return (
     <>
       <div className="flex items-center relative">
@@ -114,7 +114,7 @@ const SignUpForm = ({
       )}
       <button
         disabled={disable}
-        className={`w-full mx-auto  flex items-center justify-center font-abeezeeItalic disabled:bg-[#282828] bg-[#50FFFF] disabled:text-[#6D6D6D] text-black mt-[20px] text-[15px] rounded-[15px] font-bold py-[15px] relative transition-all duration-300 hover:bg-opacity-[70%]`}
+        className={`w-full mx-auto  flex items-center justify-center font-abeezeeItalic disabled:bg-[#282828] bg-[#3772FF] disabled:text-[#6D6D6D] text-black mt-[20px] text-[15px] rounded-[15px] font-bold py-[15px] relative transition-all duration-300 hover:bg-opacity-[70%]`}
         onClick={handleSubmit}
       >
         {registering ? (
@@ -136,7 +136,7 @@ const SignUpForm = ({
           height={20}
           className="mr-[10px] mt-[-1px]"
         />
-        Back to <div className="text-[#53FAFB] ml-[5px]">Sign In</div>
+        Back to <div className="text-[#3772FF] ml-[5px]">Sign In</div>
       </button>
     </>
   );

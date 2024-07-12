@@ -126,7 +126,7 @@ const CommunityProfileModal = () => {
                 } Members `}
             </p>
             <div className="inline-flex w-full justify-center mt-[20px]">
-              <button className="w-[85px] h-[32px] bg-[#53FAFB] rounded-full inline-flex items-center justify-center mr-[10px]">
+              <button className="w-[85px] h-[32px] bg-[#3772FF] rounded-full inline-flex items-center justify-center mr-[10px]">
                 <p className="text-[10px] text-black font-bold">Joined</p>
                 <Image
                   className="mt-[1px] ml-[10px] w-[10px] h-auto"
@@ -208,21 +208,21 @@ const CommunityProfileModal = () => {
                   Mutual Friends Joined
                 </p>
               </div>
-              <button className="w-[95px] h-[40px] bg-[#53FAFB] bg-opacity-10 mt-[-20px] ml-[15px] rounded-full text-[12px]">
+              <button className="w-[95px] h-[40px] bg-[#3772FF] bg-opacity-10 mt-[-20px] ml-[15px] rounded-full text-[12px]">
                 View All
               </button>
             </div>
             <div className="w-full grid grid-cols-4 text-[13px] font-bold gap-[10px]">
-              <button className="h-[40px] rounded-full focus:bg-[#53FAFB] focus:text-black text-[#606060]">
+              <button className="h-[40px] rounded-full focus:bg-[#3772FF] focus:text-black text-[#606060]">
                 Media
               </button>
-              <button className="h-[40px] rounded-full focus:bg-[#53FAFB] focus:text-black text-[#606060]">
+              <button className="h-[40px] rounded-full focus:bg-[#3772FF] focus:text-black text-[#606060]">
                 Documents
               </button>
-              <button className="h-[40px] rounded-full focus:bg-[#53FAFB] focus:text-black text-[#606060]">
+              <button className="h-[40px] rounded-full focus:bg-[#3772FF] focus:text-black text-[#606060]">
                 Voices
               </button>
-              <button className="h-[40px] rounded-full focus:bg-[#53FAFB] focus:text-black text-[#606060]">
+              <button className="h-[40px] rounded-full focus:bg-[#3772FF] focus:text-black text-[#606060]">
                 Links
               </button>
             </div>
@@ -243,7 +243,7 @@ const CommunityProfileModal = () => {
                 `${window.location.origin}/community/join/${communityProfileInModal?._id}`
               )
             }
-            className="w-full h-[50px] bg-[#53FAFB] mt-[20px] rounded-[12px] flex items-center justify-center text-black font-bold"
+            className="w-full h-[50px] bg-[#3772FF] mt-[20px] rounded-[12px] flex items-center justify-center text-black font-bold"
           >
             <Image
               src="/icon/send.svg"

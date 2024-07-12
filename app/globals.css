@@ -130,10 +130,9 @@ body {
 }
 
 * {
-  color: white
+  color: white;
 }
 
-.color-main path{
-  color: #50FFFF!important
+.color-main path {
+  color: #3772ff !important;
 }
-

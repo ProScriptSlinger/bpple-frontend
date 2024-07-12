@@ -49,13 +49,13 @@ const NftBuyConfirmModal = (props) => {
             </button>
             <div className="grid grid-cols-2 gap-[20px] w-full mt-[100px]">
               <button
-                className="w-full h-[40px] border-[1px] border-[#50FFFF] text-[#50FFFF] font-bold rounded-full text-[13px]"
+                className="w-full h-[40px] border-[1px] border-[#3772FF] text-[#3772FF] font-bold rounded-full text-[13px]"
                 onClick={() => setNftBuyConfirmModal(false)}
               >
                 Cancel
               </button>
               <button
-                className="w-full h-[40px] bg-[#50FFFF] text-black font-bold rounded-full text-[13px]"
+                className="w-full h-[40px] bg-[#3772FF] text-black font-bold rounded-full text-[13px]"
                 onClick={() => setNftBuyConfirmModal(false)}
               >
                 Confirm

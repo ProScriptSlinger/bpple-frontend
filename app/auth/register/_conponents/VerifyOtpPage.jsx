@@ -78,7 +78,7 @@ const VerifyOtpPage = ({
           <VerificationInput
             classNames={{
               character:
-                "bg-[#191919] rounded-[20px] border-none outline-[1px] flex items-center justify-center outline-[#53FAFB] text-white",
+                "bg-[#191919] rounded-[20px] border-none outline-[1px] flex items-center justify-center outline-[#3772FF] text-white",
               container: "h-[100px] w-[400px]",
             }}
             onChange={handleVerificationChange}
@@ -101,11 +101,11 @@ const VerifyOtpPage = ({
           onClick={handleOtpSender}
         >
           <RiMailSendLine size={16} className="mr-[10px]" />
-          Re send <div className="text-[#53FAFB] ml-[5px]">Otp</div>
+          Re send <div className="text-[#3772FF] ml-[5px]">Otp</div>
         </button>
         <div className="w-full flex justify-center mt-[150px] text-black">
           <button
-            className="w-[270px] mx-auto h-[40px] rounded-[12px]  flex items-center justify-center disabled:bg-[#282828] bg-[#50FFFF] disabled:text-[#6D6D6D] text-black font-abeezeeItalic hover:opacity-70 transition-all duration-100"
+            className="w-[270px] mx-auto h-[40px] rounded-[12px]  flex items-center justify-center disabled:bg-[#282828] bg-[#3772FF] disabled:text-[#6D6D6D] text-black font-abeezeeItalic hover:opacity-70 transition-all duration-100"
             onClick={handleOtpVerify}
             disabled={disableOtpBtn || isSendingotp || isVerifingOtp}
           >
@@ -119,7 +119,7 @@ const VerifyOtpPage = ({
         <div>
           <p className="w-full text-center text-[12px] mt-[30px]">
             Don’t received email?{" "}
-            <button className="text-[#53FAFB]">Click to resend</button>
+            <button className="text-[#3772FF]">Click to resend</button>
           </p>
         </div>
       </div>

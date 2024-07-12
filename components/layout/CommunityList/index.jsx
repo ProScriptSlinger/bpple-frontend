@@ -22,9 +22,9 @@ const ChatList = (props) => {
         <button
           className={`w-full h-[60px] inline-flex ${
             props.siderWidth < 188 ? "justify-center" : "justify-between"
-          } mb-[5px] px-[12px] py-[5px] hover:bg-[#50FFFF] hover:bg-opacity-5 focus:bg-[#50FFFF] focus:bg-opacity-5 ${
+          } mb-[5px] px-[12px] py-[5px] hover:bg-[#3772FF] hover:bg-opacity-5 focus:bg-[#3772FF] focus:bg-opacity-5 ${
             pathName === `/chats/${props.item.dm_messages_id}`
-              ? "bg-[#50FFFF] bg-opacity-5"
+              ? "bg-[#3772FF] bg-opacity-5"
               : ""
           } rounded-[10px] items-center`}
           // onClick={() => {
@@ -54,7 +54,7 @@ const ChatList = (props) => {
               <p className="text-left capitalize">
                 {props?.item?.otherUser?.username}
               </p>
-              <p className="text-[#50FFFF] text-[12px]">
+              <p className="text-[#3772FF] text-[12px]">
                 {[...props.usersTyping]?.includes(props.item.dm_messages_id) &&
                   ` ${props?.item?.otherUser?.username} is typing ...`}
               </p>
@@ -82,7 +82,7 @@ const ChatList = (props) => {
                 />
               )}
               {props?.item?.unreadMessage !== 0 ? (
-                <div className="px-[5px] py-[2px] rounded-full bg-[#53FAFB] text-[10px] text-black">
+                <div className="px-[5px] py-[2px] rounded-full bg-[#3772FF] text-[10px] text-black">
                   {props.item.unreadMessage}
                 </div>
               ) : (
@@ -110,9 +110,9 @@ const GroupList = (props) => {
       <button
         className={`w-full h-[60px] inline-flex ${
           props.siderWidth < 188 ? "justify-center" : "justify-between"
-        } mb-[5px] px-[12px] py-[5px] hover:bg-[#50FFFF] hover:bg-opacity-5 focus:bg-[#50FFFF] focus:bg-opacity-5 ${
+        } mb-[5px] px-[12px] py-[5px] hover:bg-[#3772FF] hover:bg-opacity-5 focus:bg-[#3772FF] focus:bg-opacity-5 ${
           pathName === `/chats/groups/${props?.group?._id}`
-            ? "bg-[#50FFFF] bg-opacity-5"
+            ? "bg-[#3772FF] bg-opacity-5"
             : ""
         } rounded-[10px] items-center`}
         onClick={() => {
@@ -142,7 +142,7 @@ const GroupList = (props) => {
             <p className="text-left capitalize">{props?.group?.name}</p>
 
             {[...props.usersTyping]?.includes(props?.group?.name) ? (
-              <p className="text-[#50FFFF] text-[12px]">
+              <p className="text-[#3772FF] text-[12px]">
                 ` ${props?.group?.name} is typing ...`
               </p>
             ) : (
@@ -174,7 +174,7 @@ const GroupList = (props) => {
               />
             )}
             {props?.group?.unreadMessage !== (0 || null) ? (
-              <div className="px-[5px] py-[2px] rounded-full bg-[#53FAFB] text-[10px] text-black">
+              <div className="px-[5px] py-[2px] rounded-full bg-[#3772FF] text-[10px] text-black">
                 {props?.group?.unreadMessage}
               </div>
             ) : (
@@ -215,6 +215,40 @@ const CommunityList = (props) => {
   } = useSettingModal();
   const [selectCommunityType, setSelectCommunityType] = useState(false);
   const [transition, setTransition] = useState(true);
+  const comList = [
+    {
+      _id: "id_1",
+      id: "id_1",
+      name: "A Test",
+      tredingStat: "up",
+      avatar: "/community/icons/com_icon.svg",
+      unreadMessage: "false",
+    },
+    {
+      _id: "id_2",
+      id: "id_2",
+      name: "B Test",
+      tredingStat: "down",
+      avatar: "/community/icons/com_icon.svg",
+      unreadMessage: "false",
+    },
+    {
+      _id: "id_3",
+      id: "id_3",
+      name: "C Test",
+      tredingStat: "no",
+      avatar: "/community/icons/com_icon.svg",
+      unreadMessage: "false",
+    },
+    {
+      _id: "id_4",
+      id: "id_4",
+      name: "D Test",
+      tredingStat: "no",
+      avatar: "/community/icons/com_icon.svg",
+      unreadMessage: "false",
+    },
+  ];
 
   const Components = (props) => {
     const [hover, setHover] = useState(false);
@@ -225,30 +259,46 @@ const CommunityList = (props) => {
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         >
-          <span className="tooltip ml-[100px] w-[150px] mt-[-2px] h-[50px] rounded-[12px] bg-[#50FFFF] backdrop-blur-xl bg-opacity-35 p-1 text-left font-normal text-white shadow-lg flex items-center justify-center text-[14px]">
+          <span className="tooltip ml-[100px] w-[150px] mt-[-2px] h-[50px] rounded-[12px] bg-[#3772FF] backdrop-blur-xl bg-opacity-35 p-1 text-left font-normal text-white shadow-lg flex items-center justify-center text-[14px]">
             {props.item.name}
           </span>
           <button
             className={`w-full flex items-center justify-center mt-[17px] relative hover:opacity-70 ${
-              pathName === `/home/community/${props.item.id}`
-                ? "border-r-[3px] border-r-[#53FAFB] rounded-l-full"
+              props.item.id === "id_3"
+                ? "border-r-[3px] border-r-[#3772FF] rounded-l-full"
                 : ""
             } `}
             onClick={() => {
               router.push(`/community/${props.item._id}`);
             }}
           >
-            <Image
-              src={props.item?.avatar}
-              className={` w-[50px] aspect-square rounded-xl 
-              ${
-                !props.item?.avatar && "hidden"
-              }   object-cover bg-[#191919] flex items-center justify-center `}
-              width={45}
-              height={45}
-              alt={"YC EC"}
-              priority={true}
-            />
+            <div className="relative">
+              <Image
+                src={props.item?.avatar}
+                className={` w-[50px] aspect-square rounded-xl 
+                ${
+                  !props.item?.avatar && "hidden"
+                }   object-cover bg-[#191919] flex items-center justify-center `}
+                width={45}
+                height={45}
+                alt={"YC EC"}
+                priority={true}
+              />
+              {props.item.tredingStat != "no" && (
+                <Image
+                  src={
+                    props.item.tredingStat == "up"
+                      ? "/community/icons/trending_up.svg"
+                      : "/community/icons/trending_down.svg"
+                  }
+                  className={` w-[20px] absolute right-0 bottom-0 mr-[-5px]`}
+                  width={0}
+                  height={0}
+                  alt={"trending_stat"}
+                  priority={true}
+                />
+              )}
+            </div>
             {props.item?.avatar == null && (
               <div
                 className="w-[45px] aspect-square rounded-xl
@@ -273,7 +323,7 @@ const CommunityList = (props) => {
             ) : null}
             {pathName === `/community/${props.item._id}` || hover ? (
               <>
-                <div className="absolute border-r-[3px] rounded-l-full border-r-[#53FAFB] h-full right-0"></div>
+                <div className="absolute border-r-[3px] rounded-l-full border-r-[#3772FF] h-full right-0"></div>
               </>
             ) : null}
           </button>
@@ -416,7 +466,7 @@ const CommunityList = (props) => {
               >
                 <div className="relative">
                   <button
-                    className="w-[50px] aspect-square rounded-full bg-[#53FAFB] bg-opacity-20 flex items-center justify-center mt-[20px] hover:opacity-70 transition-all"
+                    className="w-[50px] aspect-square rounded-full bg-[#3772FF] bg-opacity-20 flex items-center justify-center mt-[20px] hover:opacity-70 transition-all"
                     onClick={() => setDropdown(!dropdown)}
                   >
                     <Image
@@ -483,9 +533,9 @@ const CommunityList = (props) => {
               }`}
             >
               <button
-                className={`rounded-full  text-[14px] font-bold py-[7px] hover:bg-[#53FAFB] hover:bg-opacity-70 transition-all duration-100 ${
+                className={`rounded-full  text-[14px] font-bold py-[7px] hover:bg-[#3772FF] hover:bg-opacity-70 transition-all duration-100 ${
                   category === "chat"
-                    ? "bg-[#53FAFB] text-black"
+                    ? "bg-[#3772FF] text-black"
                     : "text-[#606060]"
                 }`}
                 onClick={() => {
@@ -495,9 +545,9 @@ const CommunityList = (props) => {
                 Chat
               </button>
               <button
-                className={`rounded-full  text-[14px] font-bold py-[7px] hover:bg-[#53FAFB] hover:bg-opacity-70 transition-all duration-100 ${
+                className={`rounded-full  text-[14px] font-bold py-[7px] hover:bg-[#3772FF] hover:bg-opacity-70 transition-all duration-100 ${
                   category === "status"
-                    ? "bg-[#53FAFB] text-black"
+                    ? "bg-[#3772FF] text-black"
                     : "text-[#606060]"
                 }`}
                 onClick={() => setCategory("status")}
@@ -505,9 +555,9 @@ const CommunityList = (props) => {
                 Status
               </button>
               <button
-                className={`rounded-full  text-[14px] font-bold py-[7px] hover:bg-[#53FAFB] hover:bg-opacity-70 transition-all duration-100 ${
+                className={`rounded-full  text-[14px] font-bold py-[7px] hover:bg-[#3772FF] hover:bg-opacity-70 transition-all duration-100 ${
                   category === "call"
-                    ? "bg-[#53FAFB] text-black"
+                    ? "bg-[#3772FF] text-black"
                     : "text-[#606060]"
                 }`}
                 onClick={() => {
@@ -534,7 +584,7 @@ const CommunityList = (props) => {
                 </div>
                 <p className="mt-[3px] ml-[5px]">Archived</p>
               </div>
-              <div className="bg-[#53FAFB] text-[12px] text-black px-[7px] rounded-full">
+              <div className="bg-[#3772FF] text-[12px] text-black px-[7px] rounded-full">
                 23
               </div>
             </div>
@@ -575,11 +625,11 @@ const CommunityList = (props) => {
         </div>
       ) : (
         <div
-          className={`!w-[80px] desktop:block hidden justify-center bg-[#1C1C1C] h-full flex-none prevent-select`}
+          className={`!w-[80px] desktop:block hidden justify-center bg-[#191919] h-full flex-none prevent-select`}
         >
           <div className="w-full flex items-center justify-center mb-[30px] relative">
             <button
-              className="h-[45px] w-[45px] mt-[60px] bg-[#53FAFB] bg-opacity-10 rounded-[12px] flex items-center justify-center hover:opacity-70"
+              className="h-[45px] w-[45px] mt-[60px] bg-[#3772FF] bg-opacity-10 rounded-[12px] flex items-center justify-center hover:opacity-70"
               // onClick={() => setNewCommunityModal(!newCommunityModal)}
               onClick={() => {
                 setSelectCommunityType(!selectCommunityType);
@@ -628,7 +678,7 @@ const CommunityList = (props) => {
                       <p className="ml-[12px] text-[14px]">Join Community</p>
                     </div>
                   </button>
-                  {pathName.includes("/nfts") && (
+                  {/* {pathName.includes("/nfts") && (
                     <>
                       <Link href="/create-nft?nftType=collection">
                         <div className="flex items-center pb-[10px] pl-[20px] w-full">
@@ -680,7 +730,7 @@ const CommunityList = (props) => {
                         </div>
                       </Link>
                     </>
-                  )}
+                  )} */}
                   {/* <button
                     className="flex items-center pb-[10px] pl-[20px] w-full"
                     onClick={() => createMarketplace()}
@@ -703,7 +753,7 @@ const CommunityList = (props) => {
           pathName === "/nfts" ||
           pathName === "/marketplace" ? null : (
             <>
-              {communities?.map((item, index) => (
+              {comList?.map((item, index) => (
                 <div key={index}>
                   <Components item={item} />
                 </div>

@@ -144,8 +144,8 @@ const NFT = ({ params: { id } }) => {
               </div>
               <div className="flex justify-center gap-4">
                 <button
-                  className={`w-[130px] h-[45px] flex justify-center items-center rounded-full border border-[#53FAFB] text-[#53FAFB] mr-[10px] ${
-                    !nftListModal && "hover:bg-[#53FAFB] hover:text-black"
+                  className={`w-[130px] h-[45px] flex justify-center items-center rounded-full border border-[#3772FF] text-[#3772FF] mr-[10px] ${
+                    !nftListModal && "hover:bg-[#3772FF] hover:text-black"
                   } `}
                   onClick={() => {
                     active
@@ -166,8 +166,8 @@ const NFT = ({ params: { id } }) => {
                   )}
                 </button>
                 <button
-                  className={`w-[130px] h-[45px] flex justify-center items-center rounded-full border border-[#53FAFB] text-white mr-[10px] ${
-                    !isBurning && "hover:bg-[#53FAFB] hover:text-black"
+                  className={`w-[130px] h-[45px] flex justify-center items-center rounded-full border border-[#3772FF] text-white mr-[10px] ${
+                    !isBurning && "hover:bg-[#3772FF] hover:text-black"
                   } `}
                   onClick={() => handleBurnNFT()}
                   disabled={isBurning}
@@ -184,7 +184,7 @@ const NFT = ({ params: { id } }) => {
                 {!NFT?.collection?.address && (
                   <Link href="/create-nft?nftType=add-nft">
                     <div
-                      className={`w-[130px] h-[45px] flex justify-center items-center rounded-full border border-[#53FAFB] text-[#53FAFB] mr-[10px] ${"hover:bg-[#53FAFB] hover:text-black"} `}
+                      className={`w-[130px] h-[45px] flex justify-center items-center rounded-full border border-[#3772FF] text-[#3772FF] mr-[10px] ${"hover:bg-[#3772FF] hover:text-black"} `}
                       onClick={() => setColId(id)}
                       // disabled={nftListModal || nftUnListModal}
                     >

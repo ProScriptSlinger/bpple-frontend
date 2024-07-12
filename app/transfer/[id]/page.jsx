@@ -11,8 +11,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const NFT = ({ params: { id } }) => {
   const router = useRouter();
-  const { nftTransferModal, setNftTransferModal } =
-    useSettingModal();
+  const { nftTransferModal, setNftTransferModal } = useSettingModal();
   const { network, activeNFTs, readNFT, setColId } = useShyft();
   const [NFT, setNFT] = useState({
     name: "",
@@ -134,8 +133,8 @@ const NFT = ({ params: { id } }) => {
                 </div>
               </div>
               <button
-                className={`w-[130px] h-[45px] rounded-full border border-[#53FAFB] text-[#53FAFB] mr-[10px] ${
-                  !nftTransferModal && "hover:bg-[#53FAFB] hover:text-black"
+                className={`w-[130px] h-[45px] rounded-full border border-[#3772FF] text-[#3772FF] mr-[10px] ${
+                  !nftTransferModal && "hover:bg-[#3772FF] hover:text-black"
                 } `}
                 onClick={() => {
                   setNftTransferModal(!nftTransferModal);

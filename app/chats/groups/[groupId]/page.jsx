@@ -296,7 +296,7 @@ const Group = () => {
                 `${window?.location.origin}/chats/groups/join/${groupId}`
               )
             }
-            className="w-full text-center text-[#50FFFF] mt-[20px]"
+            className="w-full text-center text-[#3772FF] mt-[20px]"
           >
             Click to Invite People
           </button>

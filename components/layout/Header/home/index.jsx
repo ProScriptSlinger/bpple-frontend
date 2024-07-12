@@ -8,7 +8,7 @@ const HomeHeader = () => {
   const { userDetail } = useUser();
   return (
     <>
-      <div className="w-full h-full mt-[30px]">
+      <div className="w-full h-full p-[30px]">
         <div className="w-full inline-flex justify-between items-center">
           <div>
             <p className="text-[12px]">Hello, {userDetail?.username}!</p>

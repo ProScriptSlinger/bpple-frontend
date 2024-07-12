@@ -115,7 +115,7 @@ const JoinGroup = () => {
           <button
             onClick={handleJoinGroup}
             disabled={joining}
-            className={`w-full  flex items-center justify-center font-abeezeeItalic disabled:bg-[#282828] bg-[#50FFFF] disabled:text-[#6D6D6D] text-black mt-[20px] text-[15px] rounded-[15px] font-bold py-[15px] relative transition-all duration-300 hover:bg-opacity-[70%]`}
+            className={`w-full  flex items-center justify-center font-abeezeeItalic disabled:bg-[#282828] bg-[#3772FF] disabled:text-[#6D6D6D] text-black mt-[20px] text-[15px] rounded-[15px] font-bold py-[15px] relative transition-all duration-300 hover:bg-opacity-[70%]`}
           >
             {joining ? (
               <AiOutlineLoading3Quarters size={24} className=" animate-spin " />

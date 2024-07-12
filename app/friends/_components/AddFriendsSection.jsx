@@ -65,7 +65,7 @@ const AddFriendsSection = () => {
         <button
           onClick={haddleSendFriendRequest}
           disabled={sending}
-          className="bg-[#53FAFB] w-[350px] h-[50px] font-bold text-black text-[20px] rounded-[12px] mt-[30px] hover:opacity-70"
+          className="bg-[#3772FF] w-[350px] h-[50px] font-bold text-black text-[20px] rounded-[12px] mt-[30px] hover:opacity-70"
         >
           {sending ? "Sending Request..." : "  Send Friend Request"}
         </button>

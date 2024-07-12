@@ -93,7 +93,7 @@ const Setting = () => {
                         setting1 === true
                           ? "after:bg-black"
                           : "after:bg-[#565656]"
-                      } after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#50FFFF]`}
+                      } after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#3772FF]`}
                     ></div>
                   </label>
                 </div>
@@ -117,7 +117,7 @@ const Setting = () => {
                         setting2 === true
                           ? "after:bg-black"
                           : "after:bg-[#565656]"
-                      } after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#50FFFF]`}
+                      } after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#3772FF]`}
                     ></div>
                   </label>
                 </div>
@@ -213,7 +213,9 @@ const Setting = () => {
                   <p>Back up</p>
                 </div>
                 <div className="inline-flex">
-                  <p className="mr-[15px] text-[#5A5A5A] mobile:w-full w-[50px] truncate">Server01/TestFolder/Data981712..</p>
+                  <p className="mr-[15px] text-[#5A5A5A] mobile:w-full w-[50px] truncate">
+                    Server01/TestFolder/Data981712..
+                  </p>
                   <Image
                     src="/icon/right_grey.svg"
                     width={0}
@@ -235,7 +237,9 @@ const Setting = () => {
                   <p>Back up</p>
                 </div>
                 <div className="inline-flex">
-                  <p className="mr-[15px] text-[#5A5A5A] mobile:w-full w-[50px] truncate">Server01/TestFolder/Data981712..</p>
+                  <p className="mr-[15px] text-[#5A5A5A] mobile:w-full w-[50px] truncate">
+                    Server01/TestFolder/Data981712..
+                  </p>
                   <Image
                     src="/icon/right_grey.svg"
                     width={0}

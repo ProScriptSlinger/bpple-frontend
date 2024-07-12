@@ -75,13 +75,13 @@ const Page4 = () => {
               />
             </div>
             <div
-              className={`w-full text-center text-[#53FAFB] text-[12px] mt-[15px] ${
+              className={`w-full text-center text-[#3772FF] text-[12px] mt-[15px] ${
                 show ? "block" : "hidden"
               }`}
             >
               Great Your Password is matched!
             </div>
-            <button className="w-full rounded-[12px] bg-[#50FFFF] h-[45px] text-black mt-[100px] font-abeezeeItalic hover:bg-opacity-70 transition-all duration-100">
+            <button className="w-full rounded-[12px] bg-[#3772FF] h-[45px] text-black mt-[100px] font-abeezeeItalic hover:bg-opacity-70 transition-all duration-100">
               Confirm
             </button>
           </div>

@@ -70,7 +70,7 @@ const Page = () => {
         <div className="flex justify-between">
           <p className="text-[20px]">Community's NFTs</p>
           <button
-            className="text-[#50FFFF] hover:opacity-70"
+            className="text-[#3772FF] hover:opacity-70"
             onClick={handleSave}
             disabled={isSaving}
           >

@@ -63,7 +63,7 @@ const IncomingCallModal = ({ callDetails, rejectCall, CallAnswered }) => {
               onClick={JoinCall}
               className=" gap-1 flex flex-col items-center justify-center"
             >
-              <div className=" w-[50px] text-black h-[50px] rounded-full flex items-center justify-center  bg-[#53FAFB]">
+              <div className=" w-[50px] text-black h-[50px] rounded-full flex items-center justify-center  bg-[#3772FF]">
                 <MdOutlineCall size={24} />
               </div>
               <span>Answer Call</span>

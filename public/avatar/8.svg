@@ -1,6 +1,6 @@
 <svg width="97" height="97" viewBox="0 0 97 97" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <circle cx="48.4996" cy="48.4" r="48.4" fill="url(#pattern0)"/>
-<rect x="72.9151" y="76.794" width="17.4704" height="17.4704" rx="8.73521" fill="#53FAFB" stroke="black" stroke-width="2.42"/>
+<rect x="72.9151" y="76.794" width="17.4704" height="17.4704" rx="8.73521" fill="#3772FF" stroke="black" stroke-width="2.42"/>
 <defs>
 <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0_1916_10912" transform="scale(0.000925926)"/>

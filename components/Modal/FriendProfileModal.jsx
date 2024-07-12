@@ -44,18 +44,30 @@ const FriendProfileModal = () => {
               </button>
             </div>
             <div className="flex justify-center w-full mt-[20px]">
-              <Image src="/avatar/8.svg" width={0} height={0} alt="" className="w-[80px] h-auto"/>
+              <Image
+                src="/avatar/8.svg"
+                width={0}
+                height={0}
+                alt=""
+                className="w-[80px] h-auto"
+              />
             </div>
             <div className="inline-flex items-center justify-center w-full mt-[10px]">
               <p className="mr-[5px]">Kitshuna Fowyu</p>
-              <Image src="/icon/check.svg" width={0} height={0} alt="" className="w-[15px] h-auto"/>
+              <Image
+                src="/icon/check.svg"
+                width={0}
+                height={0}
+                alt=""
+                className="w-[15px] h-auto"
+              />
             </div>
 
             <p className="flex justify-center w-full text-[11px] text-[#979797]">
               @KitshunaFowyu
             </p>
             <div className="inline-flex w-full justify-center mt-[20px]">
-              <button className="w-[100px] h-[40px] rounded-full inline-flex items-center justify-center mr-[10px] border-[1px] border-[#50FFFF]">
+              <button className="w-[100px] h-[40px] rounded-full inline-flex items-center justify-center mr-[10px] border-[1px] border-[#3772FF]">
                 <Image
                   className="mr-[5px] w-[15px] h-auto"
                   src="/icon/unfriend.svg"
@@ -63,7 +75,7 @@ const FriendProfileModal = () => {
                   height={0}
                   alt=""
                 />
-                <p className="text-[11px] text-[#50FFFF] mt-[2px]">Unfriend</p>
+                <p className="text-[11px] text-[#3772FF] mt-[2px]">Unfriend</p>
               </button>
               <button className="w-[100px] h-[40px] rounded-full inline-flex items-center justify-center mr-[10px] border-[1px] border-[#353535]">
                 <p className="text-[11px] text-white mt-[2px]">Message</p>
@@ -123,16 +135,16 @@ const FriendProfileModal = () => {
               <p className="text-white mt-[2px]">Tuerp.1lsuy</p>
             </div>
             <div className="w-full grid grid-cols-4 text-[13px] mt-[20px]">
-              <button className="h-[40px] rounded-full focus:bg-[#53FAFB] focus:bg-opacity-5 focus:text-white text-[#606060]">
+              <button className="h-[40px] rounded-full focus:bg-[#3772FF] focus:bg-opacity-5 focus:text-white text-[#606060]">
                 Items
               </button>
-              <button className="h-[40px] rounded-full focus:bg-[#53FAFB] focus:bg-opacity-5 focus:text-white text-[#606060]">
+              <button className="h-[40px] rounded-full focus:bg-[#3772FF] focus:bg-opacity-5 focus:text-white text-[#606060]">
                 Saved
               </button>
-              <button className="h-[40px] rounded-full focus:bg-[#53FAFB] focus:bg-opacity-5 focus:text-white text-[#606060]">
+              <button className="h-[40px] rounded-full focus:bg-[#3772FF] focus:bg-opacity-5 focus:text-white text-[#606060]">
                 Activity
               </button>
-              <button className="h-[40px] rounded-full focus:bg-[#53FAFB] focus:bg-opacity-5 focus:text-white text-[#606060]">
+              <button className="h-[40px] rounded-full focus:bg-[#3772FF] focus:bg-opacity-5 focus:text-white text-[#606060]">
                 Groups
               </button>
             </div>

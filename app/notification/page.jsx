@@ -117,7 +117,7 @@ const Notification = () => {
         <button
           className={`${
             currentCategory === title
-              ? "bg-[#53FAFB] text-black"
+              ? "bg-[#3772FF] text-black"
               : "bg-[#1E1E1E] text-[#6D6D6D]"
           } items-center justify-center px-[20px] py-[10px] text-[12px] rounded-full font-ttfirs font-[600] inline-flex`}
           onClick={() => {
@@ -130,7 +130,7 @@ const Notification = () => {
               className={`${
                 currentCategory === title
                   ? "bg-black text-black"
-                  : "bg-[#53FAFB] text-[#53FAFB]"
+                  : "bg-[#3772FF] text-[#3772FF]"
               } bg-opacity-10 text-[10px] px-[10px] py-[2px] rounded-full ml-[5px] font-thin`}
             >
               {counter}
@@ -165,7 +165,7 @@ const Notification = () => {
           </div>
           <div className="text-white font-ttfirs text-[15px] mt-[30px] inline-flex relative w-full mb-[5px] prevent-select">
             Today
-            <button className="text-[#53FAFB] absolute right-0">
+            <button className="text-[#3772FF] absolute right-0">
               Mark all as read
             </button>
           </div>

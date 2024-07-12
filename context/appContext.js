@@ -4,6 +4,8 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { handleEndpoint } from "../utils/api/handleEndpoint";
 import { toast } from "react-toastify";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
+import { useAccount } from "wagmi";
+import { useWeb3Modal } from "@web3modal/wagmi/react";
 
 const AuthContext = createContext();
 
@@ -25,12 +27,10 @@ export function AuthProvider({ children }) {
   const [community_messages, setCommunity_messages] = useState({});
   const [communities, setCommunities] = useState([]);
 
-  const [isConnecting, setConnecting] = useState(false);
-  const [address, setAddress] = useState(null);
-  const [isConnected, setConnected] = useState(false);
-  const [isDisconnected, setDisconnected] = useState(false);
-
   const [currentCommunity, setCurrentCommunity] = useState(null);
+
+  const { address, isConnecting, isConnected, isDisconnected } = useAccount();
+  const { open } = useWeb3Modal();
 
   const getUserByAddress = async () => {
     try {
@@ -237,32 +237,32 @@ export function AuthProvider({ children }) {
     getUserData();
   }, [userDetail]);
 
-  useEffect(() => {
-    solanaConnect();
-  }, []);
+  // useEffect(() => {
+  //   solanaConnect();
+  // }, []);
 
-  const solanaConnect = async () => {
-    const { solana } = window;
-    if (!solana) {
-      alert("Please Install Solana Wallet");
-    }
+  // const solanaConnect = async () => {
+  //   const { solana } = window;
+  //   if (!solana) {
+  //     alert("Please Install Solana Wallet");
+  //   }
 
-    try {
-      const phantom = new PhantomWalletAdapter();
-      await phantom.connect();
-      const wallet = {
-        address: phantom.publicKey && phantom.publicKey.toString(),
-      };
+  //   try {
+  //     const phantom = new PhantomWalletAdapter();
+  //     await phantom.connect();
+  //     const wallet = {
+  //       address: phantom.publicKey && phantom.publicKey.toString(),
+  //     };
 
-      if (wallet.address) {
-        setAddress(wallet.address);
-        setConnected(true);
-        setDisconnected(false);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //     if (wallet.address) {
+  //       setAddress(wallet.address);
+  //       setConnected(true);
+  //       setDisconnected(false);
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const value = {
     pending,
@@ -284,10 +284,11 @@ export function AuthProvider({ children }) {
     isConnecting,
     isConnected,
     isDisconnected,
+    open,
     setPending,
     communities,
     getCommunities,
-    solanaConnect,
+    // solanaConnect,
     currentCommunity,
     setCurrentCommunity,
   };

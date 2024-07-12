@@ -37,9 +37,9 @@ const CallingModal = (props) => {
               {props.item.type === "screen" ? (
                 <p className="text-[#4DE265]">Sharing Screen</p>
               ) : props.item.type === "speaking" ? (
-                <p className="text-[#50FFFF]">Speaking</p>
+                <p className="text-[#3772FF]">Speaking</p>
               ) : props.item.type === "rase_hand" ? (
-                <p className="text-[#50FFFF]">Raise hand</p>
+                <p className="text-[#3772FF]">Raise hand</p>
               ) : props.item.type === "listening" ? (
                 <p className="text-[#6F6F6F]">Listening</p>
               ) : null}
@@ -407,7 +407,7 @@ const CallActionModal = () => {
                     >
                       <div
                         className={` w-[50px] text-black h-[50px] rounded-full flex items-center justify-center bg-opacity-70  ${
-                          isVolumeMute ? "bg-[#53FAFB]" : "bg-[#1F1F1F]"
+                          isVolumeMute ? "bg-[#3772FF]" : "bg-[#1F1F1F]"
                         }`}
                       >
                         {isVolumeMute ? (
@@ -423,7 +423,7 @@ const CallActionModal = () => {
                     >
                       <div
                         className={` w-[50px] text-black h-[50px] rounded-full flex items-center justify-center bg-opacity-70  ${
-                          isCameraStopped ? "bg-[#53FAFB]" : "bg-[#1F1F1F]"
+                          isCameraStopped ? "bg-[#3772FF]" : "bg-[#1F1F1F]"
                         }`}
                       >
                         {isCameraStopped ? (
@@ -439,7 +439,7 @@ const CallActionModal = () => {
                     >
                       <div
                         className={` w-[50px] text-black h-[50px] rounded-full flex items-center justify-center bg-opacity-70  ${
-                          isMuted ? "bg-[#53FAFB]" : "bg-[#1F1F1F]"
+                          isMuted ? "bg-[#3772FF]" : "bg-[#1F1F1F]"
                         }`}
                       >
                         {isMuted ? (

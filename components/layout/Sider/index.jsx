@@ -211,7 +211,7 @@ const Sider = () => {
                           className={` bg-[#6C6C6C] w-full h-[7px] rounded-xl relative`}
                         />
                         <span
-                          className={` left-0 w-[20%] bg-[#53FAFB]  duration-700 h-[7px] rounded-xl  absolute`}
+                          className={` left-0 w-[20%] bg-[#3772FF]  duration-700 h-[7px] rounded-xl  absolute`}
                         />
                       </div>
                     </div>
@@ -229,11 +229,13 @@ const Sider = () => {
                     siderWidth > 250 ? "w-[200px]" : "px-[7px] mb-[20px]"
                   } h-[40px] rounded-full border border-[#535353] inline-flex items-center justify-center font-ttfirs text-[12px] mt-[15px] hover:opacity-70 transition-all duration-100`}
                 >
-                  <img
-                    src="/icon/phantom.svg"
-                    alt={"logo"}
-                    className="w-[25px] h-auto"
-                  />
+                  {walletInfo?.icon && (
+                    <img
+                      src={walletInfo.icon}
+                      alt={"logo"}
+                      className="w-[25px] h-auto"
+                    />
+                  )}
                   {siderWidth > 250 ? (
                     <>
                       {isConnecting && (
@@ -297,13 +299,13 @@ const Sider = () => {
             </p>
             <div className="w-full flex justify-center mt-[30px]">
               <button
-                className="w-[120px] h-[45px] border border-[#53FAFB] rounded-full text-[#53FAFB] text-[14px] mr-[15px] hover:opacity-70"
+                className="w-[120px] h-[45px] border border-[#3772FF] rounded-full text-[#3772FF] text-[14px] mr-[15px] hover:opacity-70"
                 onClick={handleOpenLogout}
               >
                 Cancel
               </button>
               <button
-                className="w-[120px] h-[45px] bg-[#53FAFB] rounded-full text-black text-[14px] font-bold hover:opacity-70"
+                className="w-[120px] h-[45px] bg-[#3772FF] rounded-full text-black text-[14px] font-bold hover:opacity-70"
                 onClick={handleLogout}
               >
                 Logout

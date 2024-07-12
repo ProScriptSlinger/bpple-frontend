@@ -101,7 +101,7 @@ const NftUnListModal = () => {
               Are you sure you want to Unlist this NFT?
             </p>
             <button
-              className="w-full h-[40px] bg-[#50FFFF] text-black font-bold rounded-full text-[13px] mt-[80px] flex justify-center items-center"
+              className="w-full h-[40px] bg-[#3772FF] text-black font-bold rounded-full text-[13px] mt-[80px] flex justify-center items-center"
               onClick={handleList}
             >
               {isLoading ? (
@@ -114,7 +114,7 @@ const NftUnListModal = () => {
               )}
             </button>
             <button
-              className="w-full h-[40px] border-[1px] border-[#50FFFF] text-[#50FFFF] font-bold rounded-full text-[13px] mt-[20px]"
+              className="w-full h-[40px] border-[1px] border-[#3772FF] text-[#3772FF] font-bold rounded-full text-[13px] mt-[20px]"
               onClick={() => {
                 setNftUnListModal(false);
                 setIsLoading(false);

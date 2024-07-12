@@ -21,7 +21,7 @@ const searchResultItem = () => {
           </p>
         </div>
       </div>
-      <button className="w-[75px] h-[35px] bg-[#53FAFB] bg-opacity-10 rounded-full text-[#53FAFB] text-[12px]">
+      <button className="w-[75px] h-[35px] bg-[#3772FF] bg-opacity-10 rounded-full text-[#3772FF] text-[12px]">
         Leave
       </button>
     </div>
@@ -49,8 +49,19 @@ const UserSearchModal = () => {
         } flex flex-none h-full bg-[#171717] transition-all duration-500 overflow-auto modalWidth:static absolute right-0 z-20 prevent-select`}
       >
         <div className="w-[400px] h-full  px-[30px] pt-[30px] pb-[40px] relative">
-          <button className="absolute right-[30px] top-[30px]" onClick={() => {setUserSearchModal(false)}}>
-            <Image src="/icon/close.svg" width={0} height={0} alt="" className="w-[12px] h-auto"/>
+          <button
+            className="absolute right-[30px] top-[30px]"
+            onClick={() => {
+              setUserSearchModal(false);
+            }}
+          >
+            <Image
+              src="/icon/close.svg"
+              width={0}
+              height={0}
+              alt=""
+              className="w-[12px] h-auto"
+            />
           </button>
           <div className="w-[340px] h-full relative">
             <div className="w-full relative mt-[40px]">
@@ -85,7 +96,7 @@ const UserSearchModal = () => {
             </div>
             <div className="w-full inline-flex justify-between mt-[20px] items-end">
               <p>Results</p>
-              <p className="text-[13px] text-[#53FAFB]">Clear All</p>
+              <p className="text-[13px] text-[#3772FF]">Clear All</p>
             </div>
             <p className="text-[#656565] text-[13px] mt-[5px]">
               105 Items Found

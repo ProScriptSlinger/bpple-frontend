@@ -266,7 +266,7 @@ const ChatDmFooter = () => {
               </button>
               <button
                 onClick={onSend}
-                className="bg-[#53FAFB] ml-[5px] p-[10px] rounded-[7px] mr-[10px]"
+                className="bg-[#3772FF] ml-[5px] p-[10px] rounded-[7px] mr-[10px]"
               >
                 <Image
                   width={0}

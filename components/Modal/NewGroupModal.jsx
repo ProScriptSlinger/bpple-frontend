@@ -121,7 +121,7 @@ const NewRoomModal = () => {
                 Add name of Group
               </p>
               <input
-                className="w-full border-b border-[#9D9D9D] bg-transparent pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#53FAFB] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
+                className="w-full border-b border-[#9D9D9D] bg-transparent pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
                 placeholder="Name is here"
                 onChange={(event) =>
                   setGroup((prev) => ({
@@ -135,7 +135,7 @@ const NewRoomModal = () => {
                 The terms and conditions contained in.
               </p>
               <input
-                className="mt-[20px] w-full border-b border-[#9D9D9D] bg-transparent pt-4 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#53FAFB] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
+                className="mt-[20px] w-full border-b border-[#9D9D9D] bg-transparent pt-4 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
                 placeholder="Description is here"
                 onChange={(event) =>
                   setGroup((prev) => ({
@@ -150,7 +150,7 @@ const NewRoomModal = () => {
               </p>
             </div>
             <button
-              className="w-full h-[40px] disabled:bg-[#282828] disabled:text-[#6D6D6D] rounded-[12px] bg-[#53FAFB] text-black mt-[20px] bottom-0 flex-none"
+              className="w-full h-[40px] disabled:bg-[#282828] disabled:text-[#6D6D6D] rounded-[12px] bg-[#3772FF] text-black mt-[20px] bottom-0 flex-none"
               onClick={handleCreate}
               disabled={creating}
             >

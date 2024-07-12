@@ -8,9 +8,9 @@ const SettingItem = (props) => {
   return (
     <>
       <button
-        className={`w-full inline-flex items-center mb-[15px] px-[15px] py-[10px] rounded-[14px] hover:bg-[#53FAFB] hover:bg-opacity-10 ${
+        className={`w-full inline-flex items-center mb-[15px] px-[15px] py-[10px] rounded-[14px] hover:bg-[#3772FF] hover:bg-opacity-10 ${
           props.siderWidth > 270 ? "justify-between" : "justify-center"
-        } ${pathName === props.url ? "bg-[#53FAFB] bg-opacity-10" : ""}`}
+        } ${pathName === props.url ? "bg-[#3772FF] bg-opacity-10" : ""}`}
         onClick={() => {
           router.push(props?.url);
         }}
@@ -54,17 +54,13 @@ const SettingSider = () => {
   const router = useRouter();
   const handleCloseSiderBar = () => {
     setSiderWidth(80);
-    const sidebar = document.querySelector(
-      ".settingBar-current"
-    ) 
+    const sidebar = document.querySelector(".settingBar-current");
     sidebar.style.width = `${80}px`;
     setCloseButton(false);
   };
   useEffect(() => {
-    const handle = document.querySelector(".settingBar-handle") 
-    const sidebar = document.querySelector(
-      ".settingBar-current"
-    ) 
+    const handle = document.querySelector(".settingBar-handle");
+    const sidebar = document.querySelector(".settingBar-current");
     if (!handle || !sidebar) {
       return;
     }
@@ -78,10 +74,10 @@ const SettingSider = () => {
       setTransition(false);
     });
 
-    document.addEventListener("mousemove", (e ) => {
+    document.addEventListener("mousemove", (e) => {
       if (!isResizing) return;
 
-      const width = (e ).clientX;
+      const width = e.clientX;
       if (width > 350) {
         setSiderWidth(350);
         sidebar.style.width = `${350}px`;

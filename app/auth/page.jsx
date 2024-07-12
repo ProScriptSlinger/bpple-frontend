@@ -11,22 +11,24 @@ import formatAddress from "@/lib/formatAddress";
 const Auth = () => {
   const router = useRouter();
   const [iconLoading, setIconLoading] = useState(true);
-  const { address, isConnected, solanaConnect } = useUser();
+
+  const { address, pending, isConnecting, isConnected, isDisconnected, open } =
+    useUser();
 
   const { walletInfo } = useWalletInfo();
 
   const handlenavigation = (to) => router.push(to);
 
-  const handleClick = () => {
-    if (!isConnected) {
-      solanaConnect();
-    }
-  };
+  // const handleClick = () => {
+  //   if (!isConnected) {
+  //     solanaConnect();
+  //   }
+  // };
 
   return (
     <div className={`absolute w-full h-full overflow-auto`}>
       <div className="w-full h-full bg-cover bg-center bg-[url('/bg.svg')] flex items-center justify-center">
-        <div className="mobile:w-[450px] mobile:h-[600px] w-full h-full bg-gradient-to-br from-[#292929] to-black mobile:rounded-[20px] mobile:border mobile:border-[#3b3b3b]">
+        <div className="mobile:w-[450px] mobile:h-[400px] w-full h-full bg-gradient-to-br from-[#292929] to-black mobile:rounded-[20px] mobile:border mobile:border-[#3b3b3b]">
           <div className="inline-flex w-full justify-center mt-[60px]">
             {iconLoading && (
               <div
@@ -54,12 +56,12 @@ const Auth = () => {
             Our goal is to ensure that you have everything you need to feel{" "}
             <br /> comfortable, confident, and ready to make an impact.
           </div>
-          <div className="w-full h-[50px] flex justify-center mt-[45px]">
+          {/* <div className="w-full h-[50px] flex justify-center mt-[45px]">
             <div className="w-[280px] h-[45px] bg-[#222222] rounded-full border border-[#666666]">
               <Link href={"/auth/register"}>
                 <button
                   className={
-                    "w-[50%] h-full rounded-full bg-[#50FFFF] text-black font-abeezeeItalic text-[13px] hover:bg-opacity-70 transition-all duration-100"
+                    "w-[50%] h-full rounded-full bg-[#3772FF] text-black font-abeezeeItalic text-[13px] hover:bg-opacity-70 transition-all duration-100"
                   }
                 >
                   Register
@@ -75,47 +77,37 @@ const Auth = () => {
                 </button>
               </Link>
             </div>
-          </div>
-          <div className="text-[12px] mt-[40px] w-full justify-center flex font-ttfirs">
+          </div> */}
+          {/* <div className="text-[12px] mt-[40px] w-full justify-center flex font-ttfirs">
             Or continue with
-          </div>
+          </div> */}
           <div className="w-full inline-flex justify-center mt-[40px]">
-            <div className="mb-[40px]">
-              <ul className="text-white text-md">
-                <div className="w-full inline-flex items-center justify-center">
-                  <button
-                    className={`${"w-[200px]"} h-[40px] rounded-full border border-[#535353] inline-flex items-center justify-center font-ttfirs text-[12px] hover:opacity-70 transition-all duration-100`}
-                    onClick={handleClick}
-                  >
-                    <Image
-                      src="/icon/phantom.svg"
-                      width={0}
-                      height={0}
-                      alt={"logo"}
-                      priority={true}
-                      className="w-[25px] h-auto"
-                    />
-                    <>
-                      <div className="ml-[7px] mr-[7px]">
-                        {isConnected
-                          ? formatAddress(address)
-                          : "Connect Wallet"}
-                      </div>
-                      {isConnected && (
-                        <Image
-                          src="/icon/copy.svg"
-                          width={0}
-                          height={0}
-                          alt={"logo"}
-                          priority={true}
-                          className="w-[15px] h-auto"
-                        />
-                      )}
-                    </>
-                  </button>
+            <button
+              onClick={() => open({ view: address ? "Account" : "Networks" })}
+              className={
+                "w-[50%] bg-[#222222] rounded-full text-white border border-[#666666]  h-[45px] flex items-center justify-center gap-2 font-abeezeeItalic text-[13px] hover:bg-opacity-70 transition-all duration-100"
+              }
+            >
+              {walletInfo?.icon && (
+                <img
+                  src={walletInfo.icon}
+                  alt={"logo"}
+                  className="w-[25px] h-auto"
+                />
+              )}
+              {isConnecting && (
+                <div className="ml-[7px] mr-[7px]">Connecting…</div>
+              )}
+              {pending && <div className="ml-[7px] mr-[7px]">Loading...</div>}
+              {isDisconnected && (
+                <div className="ml-[7px] mr-[7px]">Connect Wallet</div>
+              )}
+              {!pending && isConnected && address && (
+                <div className="ml-[7px] mr-[7px]">
+                  {`${address.slice(0, 5)}...${address.slice(-5)}`}
                 </div>
-              </ul>
-            </div>
+              )}
+            </button>
           </div>
         </div>
       </div>

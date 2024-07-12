@@ -80,7 +80,7 @@ const CommunityRooms = (props) => {
                           )
                         }
                         key={index}
-                        className=" p-2 rounded-[10px] w-full hover:bg-[#50FFFF] hover:bg-opacity-5 focus:bg-[#50FFFF] focus:bg-opacity-5 text-[#7A7A7A] flex items-center gap-2 "
+                        className=" p-2 rounded-[10px] w-full hover:bg-[#3772FF] hover:bg-opacity-5 focus:bg-[#3772FF] focus:bg-opacity-5 text-[#7A7A7A] flex items-center gap-2 "
                       >
                         <HiHashtag size={16} />
                         {channelId.name}
@@ -114,7 +114,7 @@ const CommunityRooms = (props) => {
                             `/community/${communityId}/${channelId.name}`
                           )
                         }
-                        className=" p-2 rounded-[10px] w-full hover:bg-[#50FFFF] hover:bg-opacity-5 focus:bg-[#50FFFF] focus:bg-opacity-5 text-[#7A7A7A] flex items-center gap-2 "
+                        className=" p-2 rounded-[10px] w-full hover:bg-[#3772FF] hover:bg-opacity-5 focus:bg-[#3772FF] focus:bg-opacity-5 text-[#7A7A7A] flex items-center gap-2 "
                       >
                         <AiOutlineSound size={16} />
                         {channelId.name}

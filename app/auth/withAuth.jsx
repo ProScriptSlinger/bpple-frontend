@@ -140,7 +140,7 @@ const Modal = ({ newModal, setModal, address, router }) => {
               <input
                 className="w-full border-b border-[#9D9D9D] bg-transparent
                  pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs 
-                 focus:border-[#53FAFB] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
+                 focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
                 placeholder="Name is here"
                 onChange={handleName}
                 value={username}
@@ -151,7 +151,7 @@ const Modal = ({ newModal, setModal, address, router }) => {
             </div>
             <div className=" grid w-full gap-4 bottom-0 ">
               <button
-                className="w-full h-[40px] rounded-[12px] bg-[#53FAFB] text-black mt-[20px] flex-none"
+                className="w-full h-[40px] rounded-[12px] bg-[#3772FF] text-black mt-[20px] flex-none"
                 onClick={handleCreate}
                 disabled={updating}
               >
@@ -159,7 +159,7 @@ const Modal = ({ newModal, setModal, address, router }) => {
               </button>
               <Link href={"/auth"}>
                 <button
-                  className="w-full h-[40px] rounded-[12px] border-[#53FAFB] text-[#53FAFB] mt-[20px]  flex-none"
+                  className="w-full h-[40px] rounded-[12px] border-[#3772FF] text-[#3772FF] mt-[20px]  flex-none"
                   onClick={handleLogout}
                   disabled={updating}
                 >

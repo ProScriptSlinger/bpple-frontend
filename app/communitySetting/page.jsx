@@ -22,7 +22,7 @@ const CommunitySetting = (props) => {
       <div className="inline-flex mt-[22px]">
         <button
           className={`w-[190px] h-[45px] hover:opacity-70 ${
-            place === "marketplace" ? "bg-[#50FFFF]" : ""
+            place === "marketplace" ? "bg-[#3772FF]" : ""
           } bg-opacity-10 rounded-full flex items-center justify-center`}
           onClick={() => setPlace("marketplace")}
         >
@@ -46,7 +46,7 @@ const CommunitySetting = (props) => {
 
           <p
             className={`${
-              place === "marketplace" ? "text-[#50FFFF]" : ""
+              place === "marketplace" ? "text-[#3772FF]" : ""
             } ml-[15px]`}
           >
             Marketplace
@@ -54,7 +54,7 @@ const CommunitySetting = (props) => {
         </button>
         <button
           className={`w-[170px] h-[45px] hover:opacity-70 ${
-            place === "role" ? "bg-[#50FFFF]" : ""
+            place === "role" ? "bg-[#3772FF]" : ""
           }  bg-opacity-10 rounded-full flex items-center justify-center`}
           onClick={() => {
             setPlace("role");
@@ -79,7 +79,7 @@ const CommunitySetting = (props) => {
           )}
 
           <p
-            className={`${place === "role" ? "text-[#50FFFF]" : ""} ml-[15px]`}
+            className={`${place === "role" ? "text-[#3772FF]" : ""} ml-[15px]`}
           >
             Roles
           </p>
@@ -108,7 +108,7 @@ const CommunitySetting = (props) => {
                     className="sr-only peer"
                     onClick={() => setPrivateStatus(!privateStatus)}
                   />
-                  <div className="relative w-9 h-5 rounded-full ring-[#50FFFF] ring-1 peer peer-focus:ring-1 dark:bg-transparent peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-[#50FFFF] after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-transparent"></div>
+                  <div className="relative w-9 h-5 rounded-full ring-[#3772FF] ring-1 peer peer-focus:ring-1 dark:bg-transparent peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-[#3772FF] after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-transparent"></div>
                 </label>
               </div>
             </div>
@@ -119,7 +119,7 @@ const CommunitySetting = (props) => {
           <div className="flex justify-center">
             {/* <p className="text-[#9D9D9D]">Add link’s NFTs</p>
             <input
-              className="w-full mt-[15px] border-b border-[#9D9D9D] bg-transparent pt-4 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#53FAFB] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px] text-[17px]"
+              className="w-full mt-[15px] border-b border-[#9D9D9D] bg-transparent pt-4 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px] text-[17px]"
               placeholder="Input link"
               // onChange={}
             />
@@ -136,7 +136,7 @@ const CommunitySetting = (props) => {
             </div> */}
             <Link href={`/community/edit-marketplace`}>
               <div
-                className={`w-[200px] h-[45px] flex justify-center items-center rounded-full border border-[#53FAFB] text-[#53FAFB] mr-[10px] ${"hover:bg-[#53FAFB] hover:text-black"} `}
+                className={`w-[200px] h-[45px] flex justify-center items-center rounded-full border border-[#3772FF] text-[#3772FF] mr-[10px] ${"hover:bg-[#3772FF] hover:text-black"} `}
                 // disabled={nftListModal || nftUnListModal}
                 // onClick={() => router.push(`/community/edit-marketplace`)}
               >
@@ -164,7 +164,7 @@ const CommunitySetting = (props) => {
                     className="sr-only peer"
                     onClick={() => setPrivateStatus(!privateStatus)}
                   />
-                  <div className="relative w-9 h-5 rounded-full ring-[#50FFFF] ring-1 peer peer-focus:ring-1 dark:bg-transparent peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-[#50FFFF] after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-transparent"></div>
+                  <div className="relative w-9 h-5 rounded-full ring-[#3772FF] ring-1 peer peer-focus:ring-1 dark:bg-transparent peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-[#3772FF] after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-transparent"></div>
                 </label>
               </div>
             </div>

@@ -33,8 +33,8 @@ const Community = () => {
               ) : (
                 <div
                   className="w-[45px] aspect-square rounded-full
-             bg-[#191919] flex items-center justify-center
-              text-[#4C4C4C] text-[22px]"
+                  bg-[#191919] flex items-center justify-center
+                    text-[#4C4C4C] text-[22px]"
                 >
                   {getNameInitials(messages[index]?.senderId.username ?? "B")}
                 </div>
@@ -208,22 +208,22 @@ const Community = () => {
     getMessages();
   }, [communityId, channelData]);
 
-  useEffect(() => {
-    if (community_messages[communityId]?.channel[channelData?._id]) {
-      setMessages([
-        ...storedMessages,
-        ...community_messages[communityId]?.channel[channelData?._id],
-      ]);
-    } else {
-      setMessages([...storedMessages]);
-    }
-  }, [community_messages, channelData, communityId]);
+  // useEffect(() => {
+  //   if (community_messages[communityId]?.channel[channelData?._id]) {
+  //     setMessages([
+  //       ...storedMessages,
+  //       ...community_messages[communityId]?.channel[channelData?._id],
+  //     ]);
+  //   } else {
+  //     setMessages([...storedMessages]);
+  //   }
+  // }, [community_messages, channelData, communityId]);
 
-  useEffect(() => {
-    if (storedMessages) {
-      setMessages([...storedMessages]);
-    }
-  }, [storedMessages]);
+  // useEffect(() => {
+  //   if (storedMessages) {
+  //     setMessages([...storedMessages]);
+  //   }
+  // }, [storedMessages]);
 
   useEffect(() => {
     if (chatContainerRef.current) {
@@ -246,6 +246,83 @@ const Community = () => {
     };
   }, []);
 
+  const msgList = [
+    {
+      type: "context",
+      content:
+        "Hello world please let me know if this NFTs can be more than cryptocurrencies in the mint world of NFTs, you can use our platform",
+      senderId: {
+        _id: "id_1",
+        username: "Mussa OUEL",
+        avatar: "/community/icons/MsgIcon.svg",
+      },
+      emoji: ["hot_face", "head_bandage", "rage"],
+      link: "https://test_link",
+      readStatus: true,
+      when: "Yesterday 03:21 PM",
+    },
+    {
+      type: "context",
+      content:
+        "Hello world please let me know if this NFTs can be more than cryptocurrencies in the mint world of NFTs, you can use our platform",
+      senderId: {
+        _id: "id_1",
+        username: "Mussa OUEL",
+        avatar: "/community/icons/MsgIcon.svg",
+      },
+      emoji: ["hot_face", "head_bandage", "rage"],
+      link: "https://test_link",
+      readStatus: true,
+      when: "Yesterday 03:21 PM",
+    },
+    {
+      type: "voice",
+      senderId: {
+        _id: "id_1",
+        username: "Mussa OUEL",
+        avatar: "/community/icons/MsgIcon.svg",
+      },
+      length: "0:21",
+      emoji: ["hot_face", "head_bandage", "rage"],
+      link: "https://test_link",
+      readStatus: true,
+      when: "Yesterday 03:21 PM",
+    },
+    {
+      type: "voice",
+      senderId: {
+        _id: "id_1",
+        username: "Mussa OUEL",
+        avatar: "/community/icons/MsgIcon.svg",
+      },
+      isPlaying: true,
+      length: "0:19",
+      emoji: ["hot_face", "head_bandage", "rage"],
+      link: "https://test_link",
+      readStatus: true,
+      when: "2024/07/12",
+    },
+    {
+      type: "file",
+      fileName: "Fichier.pdf",
+      size: "0 KB – 291 MB ",
+      senderId: {
+        _id: "id_1",
+        username: "Mussa OUEL",
+        avatar: "/community/icons/MsgIcon.svg",
+      },
+      img_uri: "/community/icons/file.svg",
+      emoji: ["hot_face", "head_bandage", "rage"],
+      link: "https://test_link",
+      readStatus: true,
+      when: "2024/07/12",
+    },
+  ];
+
+  useEffect(() => {
+    setMessages(msgList);
+  }, []);
+
   return (
     <>
       <div className="w-full h-full relative">
@@ -257,7 +334,6 @@ const Community = () => {
               {Message(index)}
             </div>
           ))}
-
           <div ref={chatContainerRef} className="w-full h-[20px]"></div>
         </div>
       </div>

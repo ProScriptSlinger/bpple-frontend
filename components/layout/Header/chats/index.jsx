@@ -80,7 +80,7 @@ const ChatsHeader = () => {
            text-start capitalize"
           >
             <p> {chat?.otherUser?.username} </p>
-            <p className="text-[#50FFFF] text-[12px]">
+            <p className="text-[#3772FF] text-[12px]">
               {[...usersTyping]?.includes(id) &&
                 ` ${chat?.otherUser?.username} is typing ...`}
             </p>

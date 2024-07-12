@@ -7,14 +7,23 @@ const MessageComponent = (message, rightFlag) => {
   if (message?.type === "context") {
     return (
       <>
-        <div
-          className={`max-w-[455px] rounded-[20px] bg-[#232323] py-[15px] px-[20px] font-thin text-[13px] opacity-80 text-left break-all`}
-        >
-          {isURL(message?.content) ? (
-            <a href={message?.content ?? "#"}>{message?.content}</a>
-          ) : (
-            message?.content
-          )}
+        <div className="flex gap-4 items-center">
+          <div
+            className={`max-w-[455px] rounded-[20px] bg-[#232323] py-[15px] px-[20px] font-thin text-[13px] opacity-80 text-left break-all`}
+          >
+            {isURL(message?.content) ? (
+              <a href={message?.content ?? "#"}>{message?.content}</a>
+            ) : (
+              message?.content
+            )}
+          </div>
+          <Image
+            src={"/community/icons/reply.svg"}
+            width={0}
+            height={0}
+            className="w-[30px] cursor-pointer"
+            alt="reply icon"
+          />
         </div>
         <div
           className={`inline-flex mt-[10px]  items-center ${
@@ -27,7 +36,7 @@ const MessageComponent = (message, rightFlag) => {
             }`}
           >
             {message?.emoji?.length > 0 ? (
-              <div className="inline-flex gap-[5px] px-[5px] py-[3px] bg-[#53FAFB] bg-opacity-10 rounded-full items-center justify-center">
+              <div className="inline-flex gap-[5px] px-[5px] py-[3px] bg-[#3772FF] bg-opacity-10 rounded-full items-center justify-center">
                 {message.emoji.map((item, index) => (
                   <div key={index}>
                     <Image
@@ -66,15 +75,25 @@ const MessageComponent = (message, rightFlag) => {
     );
   } else if (message?.type === "voice") {
     return (
-      <div className="bg-[#53FAFB] px-[5px] py-[5px] inline-flex items-center rounded-full mt-[5px]">
+      <div className="bg-[#3772FF] px-[5px] py-[5px] inline-flex items-center rounded-full mt-[5px]">
         <button>
-          <Image
-            src={`/icon/play.svg`}
-            width={0}
-            height={0}
-            alt=""
-            className="w-[20px] h-auto"
-          />
+          {message.isPlaying ? (
+            <Image
+              src={`/icon/pause-circle.svg`}
+              width={0}
+              height={0}
+              alt="pause"
+              className="w-[20px] h-[20px]"
+            />
+          ) : (
+            <Image
+              src={`/icon/play.svg`}
+              width={0}
+              height={0}
+              alt="play"
+              className="w-[20px] h-[20px]"
+            />
+          )}
         </button>
         <div className="ml-[5px]">
           <Image
@@ -85,19 +104,29 @@ const MessageComponent = (message, rightFlag) => {
             className="w-[60px] h-auto"
           />
         </div>
-        <p className="text-[10px] text-black">{message.length}</p>
+        <p className="text-[10px] ml-4 text-black">{message.length}</p>
       </div>
     );
   } else if (message?.type === "file") {
     return (
-      <div className="p-[20px] bg-[#53FAFB] bg-opacity-5 inline-flex items-center text-[#979797] rounded-[12px]">
-        <div className=" flex w-[40px]  text-white items-center justify-center">
-          <AiFillFilePdf size={50} />
+      <div className="p-[20px] bg-[#3772FF] bg-opacity-5 inline-flex items-center text-[#979797] rounded-[12px]">
+        <div className=" flex w-[100px]  text-white items-center justify-center">
+          {message.img_uri ? (
+            <Image
+              src={message.img_uri}
+              alt="file_image"
+              width={0}
+              height={0}
+              className="w-[100px]"
+            />
+          ) : (
+            <AiFillFilePdf size={50} />
+          )}
         </div>
         <div className="text-left ml-[20px]">
           <p>{message.fileName}</p>
           <div className="text-[10px] inline-flex">
-            {message?.size} - <span className="text-[#53FAFB]">Download</span>
+            {message?.size} - <span className="text-[#3772FF]">Download</span>
           </div>
         </div>
       </div>

@@ -13,7 +13,6 @@ import { config } from "../context/config";
 // Toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { shyftProvider } from "@/context/shyftContext";
 
 export const metadata = {
   title: "Bipple",
@@ -104,7 +103,7 @@ export default function RootLayout({ children }) {
             <Sider />
             <CommunityList />
             <div className="flex-col flex w-full h-full">
-              <NextTopLoader color="#50FFFF" />
+              <NextTopLoader color="#3772FF" />
               <Header />
               {children}
               <Footer />

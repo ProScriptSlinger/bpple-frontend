@@ -78,7 +78,7 @@ const CommunityUserModal = () => {
                   <div
                     className={`relative w-11 h-6 rounded-full ring-[#6D6D6D] ring-1 peer peer-focus:ring-1 dark:bg-transparent peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] ${
                       permissionStatus1
-                        ? "after:bg-[#50FFFF]"
+                        ? "after:bg-[#3772FF]"
                         : "after:bg-[#6D6D6D]"
                     } after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-transparent`}
                   ></div>
@@ -96,7 +96,7 @@ const CommunityUserModal = () => {
                   <div
                     className={`relative w-11 h-6 rounded-full ring-[#6D6D6D] ring-1 peer peer-focus:ring-1 dark:bg-transparent peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] ${
                       permissionStatus2
-                        ? "after:bg-[#50FFFF]"
+                        ? "after:bg-[#3772FF]"
                         : "after:bg-[#6D6D6D]"
                     } after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-transparent`}
                   ></div>
@@ -114,7 +114,7 @@ const CommunityUserModal = () => {
                   <div
                     className={`relative w-11 h-6 rounded-full ring-[#6D6D6D] ring-1 peer peer-focus:ring-1 dark:bg-transparent peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] ${
                       permissionStatus3
-                        ? "after:bg-[#50FFFF]"
+                        ? "after:bg-[#3772FF]"
                         : "after:bg-[#6D6D6D]"
                     } after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-transparent`}
                   ></div>
@@ -132,7 +132,7 @@ const CommunityUserModal = () => {
                   <div
                     className={`relative w-11 h-6 rounded-full ring-[#6D6D6D] ring-1 peer peer-focus:ring-1 dark:bg-transparent peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] ${
                       permissionStatus4
-                        ? "after:bg-[#50FFFF]"
+                        ? "after:bg-[#3772FF]"
                         : "after:bg-[#6D6D6D]"
                     } after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-transparent`}
                   ></div>
@@ -150,7 +150,7 @@ const CommunityUserModal = () => {
                   <div
                     className={`relative w-11 h-6 rounded-full ring-[#6D6D6D] ring-1 peer peer-focus:ring-1 dark:bg-transparent peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] ${
                       permissionStatus5
-                        ? "after:bg-[#50FFFF]"
+                        ? "after:bg-[#3772FF]"
                         : "after:bg-[#6D6D6D]"
                     } after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-transparent`}
                   ></div>
@@ -158,7 +158,7 @@ const CommunityUserModal = () => {
               </div>
             </div>
             <button
-              className="mt-[100px] w-full h-[50px] bg-[#53FAFB] text-black rounded-[12px] font-bold bottom-0 flex-none"
+              className="mt-[100px] w-full h-[50px] bg-[#3772FF] text-black rounded-[12px] font-bold bottom-0 flex-none"
               onClick={() => setCommunityMemberProfileModal(false)}
             >
               Save

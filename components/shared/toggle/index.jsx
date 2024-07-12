@@ -16,7 +16,7 @@ const Toggle = (props) => {
             !props.setting ? "bg-[#363636]" : ""
           } peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full border-none after:content-[''] after:absolute after:top-0.5 after:start-[2px] ${
             props.setting === true ? "after:bg-black" : "after:bg-[#565656]"
-          } after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#50FFFF]`}
+          } after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#3772FF]`}
         ></div>
       </label>
     </>

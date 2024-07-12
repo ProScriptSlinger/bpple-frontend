@@ -41,7 +41,7 @@ const NftBuyModal = (props) => {
               />
             </button>
             <div className="w-full flex justify-center mt-[180px]">
-              <div className="w-[150px] h-[40px] rounded-full border-[#53FAFB] border-[1px] flex items-center justify-center text-[#53FAFB] text-[14px]">
+              <div className="w-[150px] h-[40px] rounded-full border-[#3772FF] border-[1px] flex items-center justify-center text-[#3772FF] text-[14px]">
                 <Image
                   src="/icon/sol.svg"
                   width={0}
@@ -59,7 +59,7 @@ const NftBuyModal = (props) => {
               SOL?
             </p>
             <button
-              className="w-full h-[40px] bg-[#50FFFF] text-black font-bold rounded-full text-[13px] mt-[80px] flex justify-center items-center"
+              className="w-full h-[40px] bg-[#3772FF] text-black font-bold rounded-full text-[13px] mt-[80px] flex justify-center items-center"
               onClick={() => handleBuyNFT()}
               disabled={isLoading}
             >
@@ -73,7 +73,7 @@ const NftBuyModal = (props) => {
               )}
             </button>
             <button
-              className="w-full h-[40px] border-[1px] border-[#50FFFF] text-[#50FFFF] font-bold rounded-full text-[13px] mt-[20px]"
+              className="w-full h-[40px] border-[1px] border-[#3772FF] text-[#3772FF] font-bold rounded-full text-[13px] mt-[20px]"
               onClick={() => setNftBuyModal(false)}
             >
               Cancel

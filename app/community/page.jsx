@@ -27,7 +27,7 @@ const Page = () => {
                   will appearing chat here
                 </p>
 
-                <button className="bg-[#53FAFB] w-[350px] h-[50px] font-bold text-black text-[20px] rounded-[12px] mt-[30px] hover:opacity-70">
+                <button className="bg-[#3772FF] w-[350px] h-[50px] font-bold text-black text-[20px] rounded-[12px] mt-[30px] hover:opacity-70">
                   Find Communities Biples
                 </button>
               </div>

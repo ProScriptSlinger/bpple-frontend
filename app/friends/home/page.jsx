@@ -3,7 +3,7 @@ import React from "react";
 import SliderLoader from "../../../components/home/Slider/loader";
 import dynamic from "next/dynamic";
 import RecommandLoader from "../../../components/home/Recommand/loader";
-import LastCommunityLoader from "../../../components/home/LastCommunity/loader";
+import LastCommunityLoader from "../../../components/home/NewLaunch/loader";
 const Slider = dynamic(() => import("../../../components/home/Slider"), {
   ssr: false,
   loading: () => <SliderLoader />,
@@ -15,11 +15,11 @@ const Recommand = dynamic(
   //   loading: () => <RecommandLoader />,
   // }
 );
-const LastCommunity = dynamic(
-  () => import("../../../components/home/LastCommunity")
+const NewLaunch = dynamic(
+  () => import("../../../components/home/NewLaunch")
   // {
   //   ssr: false,
-  //   loading: () => <LastCommunityLoader />,
+  //   loading: () => <NewLaunchLoader />,
   // }
 );
 const Home = () => {
@@ -31,7 +31,7 @@ const Home = () => {
       >
         <Slider />
         <Recommand />
-        <LastCommunity />
+        <NewLaunch />
       </div>
     </>
   );

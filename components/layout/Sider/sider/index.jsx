@@ -1,7 +1,6 @@
 import ListComponent from "../../../../components/layout/Sider/components/index";
 
 const SiderList1 = (props) => {
-  
   return (
     <>
       <ul className="text-[#D4D4D4] text-md mt-[10px] h-full overflow-auto">
@@ -29,7 +28,7 @@ const SiderList1 = (props) => {
           pathname={props.pathname}
           siderWidth={props.siderWidth}
         />
-        <ListComponent
+        {/* <ListComponent
           _name="Friends"
           _icon="/icon/community.svg"
           _clickedIcon="/icon/community_blue.svg"
@@ -52,7 +51,7 @@ const SiderList1 = (props) => {
           _url="/marketplace"
           pathname={props.pathname}
           siderWidth={props.siderWidth}
-        />
+        /> */}
       </ul>
     </>
   );

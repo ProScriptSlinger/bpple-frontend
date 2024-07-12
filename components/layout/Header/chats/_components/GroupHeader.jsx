@@ -110,7 +110,7 @@ const GroupHeader = ({ router }) => {
       <>
         <button
           onClick={() => onClick(user_id)}
-          className={`w-full h-[60px] inline-flex justify-between bg-[#50FFFF] mb-[5px] px-[12px] py-[5px] hover:bg-opacity-5 focus:bg-opacity-5 ${
+          className={`w-full h-[60px] inline-flex justify-between bg-[#3772FF] mb-[5px] px-[12px] py-[5px] hover:bg-opacity-5 focus:bg-opacity-5 ${
             activeUser == user_id ? "border-white border-2" : ""
           }  bg-opacity-5 rounded-[10px] items-center`}
         >
@@ -283,7 +283,7 @@ const GroupHeader = ({ router }) => {
                   Please input username or email
                 </p>
                 <input
-                  className="w-full border-b border-[#9D9D9D] bg-transparent pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#53FAFB] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
+                  className="w-full border-b border-[#9D9D9D] bg-transparent pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
                   placeholder="Name is here"
                   onChange={(event) => setUsername(event.target.value)}
                   value={username}
@@ -297,7 +297,7 @@ const GroupHeader = ({ router }) => {
                   : "No users"}
               </div>
               <button
-                className="w-full h-[40px] disabled:bg-[#282828] disabled:text-[#6D6D6D] rounded-[12px] bg-[#53FAFB] text-black mt-[20px] bottom-0 flex-none"
+                className="w-full h-[40px] disabled:bg-[#282828] disabled:text-[#6D6D6D] rounded-[12px] bg-[#3772FF] text-black mt-[20px] bottom-0 flex-none"
                 onClick={handleAddMember}
                 disabled={!activeUser}
               >

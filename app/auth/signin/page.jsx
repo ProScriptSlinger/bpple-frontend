@@ -92,8 +92,8 @@ const Register = () => {
           <div className="w-full flex items-center justify-center mt-[60px]">
             <div className="relative desktop:w-[65%] w-[90%] flex justify-center text-[14px]">
               <button
-                className={`py-[9px] w-[50%] transition-all duration-100 hover:bg-opacity-[7%] hover:bg-[#53FAFB] ${
-                  signupType == "email" ? "bg-[#53FAFB]" : ""
+                className={`py-[9px] w-[50%] transition-all duration-100 hover:bg-opacity-[7%] hover:bg-[#3772FF] ${
+                  signupType == "email" ? "bg-[#3772FF]" : ""
                 } font-ttfirs bg-opacity-[5%] text-white rounded-full`}
                 onClick={() => {
                   setSignupType("email");
@@ -102,8 +102,8 @@ const Register = () => {
                 Email Address
               </button>
               <button
-                className={`py-[9px] w-[50%] transition-all duration-100 hover:bg-opacity-[7%] hover:bg-[#53FAFB] ${
-                  signupType == "email" ? "" : "bg-[#53FAFB]"
+                className={`py-[9px] w-[50%] transition-all duration-100 hover:bg-opacity-[7%] hover:bg-[#3772FF] ${
+                  signupType == "email" ? "" : "bg-[#3772FF]"
                 } font-ttfirs bg-opacity-[5%] text-white rounded-full`}
                 onClick={() => {
                   setSignupType("phone");
@@ -169,7 +169,7 @@ const Register = () => {
           <div className="w-full flex justify-center mt-[20px]">
             <button
               type="submit"
-              className={`desktop:w-[65%] w-[90%] flex items-center justify-center font-abeezeeItalic disabled:bg-[#282828] bg-[#50FFFF] disabled:text-[#6D6D6D] text-black mt-[20px] text-[15px] rounded-[15px] font-bold py-[15px] relative transition-all duration-300 hover:bg-opacity-[70%]`}
+              className={`desktop:w-[65%] w-[90%] flex items-center justify-center font-abeezeeItalic disabled:bg-[#282828] bg-[#3772FF] disabled:text-[#6D6D6D] text-black mt-[20px] text-[15px] rounded-[15px] font-bold py-[15px] relative transition-all duration-300 hover:bg-opacity-[70%]`}
               disabled={disable}
               onClick={handleSubmit}
             >
@@ -197,7 +197,7 @@ const Register = () => {
               height={20}
               className="mr-[10px] mt-[-1px]"
             />
-            Back to <div className="text-[#53FAFB] ml-[5px]">Register</div>
+            Back to <div className="text-[#3772FF] ml-[5px]">Register</div>
           </button>
           <div
             className={`w-full flex justify-center font-ttfirs text-[12px] mt-[80px]`}

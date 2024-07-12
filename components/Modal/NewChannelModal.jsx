@@ -5,6 +5,7 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { handleEndpoint } from "../../utils/api/handleEndpoint";
 import { useUser } from "../../context/appContext";
+import ImageComponent from "../shared/ImageComponent/demo";
 
 const NewChannelModal = () => {
   const { newChannelModal, setNewChannelModal } = useSettingModal();
@@ -52,6 +53,7 @@ const NewChannelModal = () => {
       console.log(error);
     }
   };
+
   useEffect(() => {
     if (formInput.name && formInput.description) {
       setDisable(false);
@@ -61,7 +63,8 @@ const NewChannelModal = () => {
   function formatChannelName(channelName) {
     return channelName.replace(/\s+/g, "-").toLowerCase();
   }
-  
+  const [preview, setPreview] = useState("");
+
   return (
     <>
       <div
@@ -100,7 +103,7 @@ const NewChannelModal = () => {
                   Add Channel’s Name
                 </p>
                 <input
-                  className="w-full border-b border-[#9D9D9D] bg-transparent pt-[10px] pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#53FAFB] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
+                  className="w-full border-b border-[#9D9D9D] bg-transparent pt-[10px] pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
                   placeholder="Name is here"
                   onChange={(e) =>
                     setFormInput((prev) => ({
@@ -123,8 +126,8 @@ const NewChannelModal = () => {
                     }
                     className={`${
                       formInput.type == "text"
-                        ? " border-[#53FAFB]"
-                        : "border-[#252525] hover:border-[#53FAFB]"
+                        ? " border-[#3772FF]"
+                        : "border-[#252525] hover:border-[#3772FF]"
                     }  border-[1px]  rounded-[20px] flex justify-center  flex-col w-full items-center`}
                   >
                     <div className="w-full flex justify-center mt-[20px]">
@@ -141,9 +144,9 @@ const NewChannelModal = () => {
                   <button
                     className={`${
                       formInput.type == "voice"
-                        ? "border-[#53FAFB]"
+                        ? "border-[#3772FF]"
                         : "border-[#252525]"
-                    } border-[1px]  rounded-[20px] flex justify-center focus:border-[#53FAFB] flex-col w-full items-center`}
+                    } border-[1px]  rounded-[20px] flex justify-center focus:border-[#3772FF] flex-col w-full items-center`}
                     onClick={() =>
                       setFormInput((prev) => ({
                         ...prev,
@@ -164,7 +167,7 @@ const NewChannelModal = () => {
                   </button>
                 </div>
                 <input
-                  className="mt-[20px] w-full border-b border-[#9D9D9D] bg-transparent pt-4 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#53FAFB] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
+                  className="mt-[20px] w-full border-b border-[#9D9D9D] bg-transparent pt-4 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
                   placeholder="Description is here"
                   onChange={(e) =>
                     setFormInput((prev) => ({
@@ -221,7 +224,7 @@ const NewChannelModal = () => {
                       className="sr-only peer"
                       onClick={handleMarketPlaceStatus}
                     />
-                    <div className="relative w-9 h-5 rounded-full ring-[#50FFFF] ring-1 peer peer-focus:ring-1 dark:peer-focus:ring-[#50FFFF] dark:bg-transparent peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-[#50FFFF] after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-transparent"></div>
+                    <div className="relative w-9 h-5 rounded-full ring-[#3772FF] ring-1 peer peer-focus:ring-1 dark:peer-focus:ring-[#3772FF] dark:bg-transparent peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-[#3772FF] after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-transparent"></div>
                   </label>
                 </div>
                 <p className="text-[#707070] text-[13px] mt-[20px]">
@@ -229,7 +232,7 @@ const NewChannelModal = () => {
                 </p>
                 <div className="w-full relative">
                   <input
-                    className="mt-[10px] w-full border-b border-[#9D9D9D] bg-transparent pt-4 pb-1.5 pr-[30px] text-white outline outline-0 placeholder:font-ttfirs focus:border-[#53FAFB] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
+                    className="mt-[10px] w-full border-b border-[#9D9D9D] bg-transparent pt-4 pb-1.5 pr-[30px] text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
                     placeholder="Link is here"
                     onChange={(e) =>
                       setFormInput((prev) => ({
@@ -264,7 +267,7 @@ const NewChannelModal = () => {
                 </div>
               </div>
               <button
-                className="w-full h-[40px] rounded-[12px] bg-[#53FAFB] text-black mt-[20px] mb-[30px] bottom-0 flex-none"
+                className="w-full h-[40px] rounded-[12px] bg-[#3772FF] text-black mt-[20px] mb-[30px] bottom-0 flex-none"
                 onClick={handleCreate}
               >
                 Create
@@ -301,7 +304,7 @@ const NewChannelModal = () => {
                   Add Voice Name
                 </p>
                 <input
-                  className="w-full border-b border-[#9D9D9D] bg-transparent pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#53FAFB] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
+                  className="w-full border-b border-[#9D9D9D] bg-transparent pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
                   placeholder="Name is here"
                   onChange={handleName}
                 />
@@ -312,7 +315,7 @@ const NewChannelModal = () => {
                   Add Date here
                 </p>
                 <input
-                  className="w-full border-b border-[#9D9D9D] bg-transparent pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#53FAFB] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
+                  className="w-full border-b border-[#9D9D9D] bg-transparent pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
                   placeholder="Description is here"
                   onChange={handleDescription}
                 />
@@ -321,7 +324,7 @@ const NewChannelModal = () => {
                 </p>
               </div>
               <button
-                className="w-full h-[40px] rounded-[12px] bg-[#53FAFB] text-black mt-[20px] mb-[30px] disabled:bg-[#212121] disabled:text-[#878787] bottom-0 flex-none"
+                className="w-full h-[40px] rounded-[12px] bg-[#3772FF] text-black mt-[20px] mb-[30px] disabled:bg-[#212121] disabled:text-[#878787] bottom-0 flex-none"
                 onClick={handleCreate}
                 disabled={disable}
               >

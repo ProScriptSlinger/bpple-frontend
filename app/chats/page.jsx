@@ -29,7 +29,7 @@ const Page = () => {
                 appearing chat here
               </p>
 
-              <button className="bg-[#53FAFB] w-[350px] h-[50px] font-bold text-black text-[20px] rounded-[12px] mt-[30px] hover:opacity-70">
+              <button className="bg-[#3772FF] w-[350px] h-[50px] font-bold text-black text-[20px] rounded-[12px] mt-[30px] hover:opacity-70">
                 Send Friend Request
               </button>
             </div>
@@ -38,7 +38,13 @@ const Page = () => {
           <div className="flex w-full h-full items-center justify-center">
             <div className="flex-col text-center">
               <div className=" bg-[#232323]  items-center justify-center  mb-5  p-5 rounded-full  inline-block">
-                <Image width={40} height={40} alt="" src="/icon/chats.svg" className=" " />
+                <Image
+                  width={40}
+                  height={40}
+                  alt=""
+                  src="/icon/chats.svg"
+                  className=" "
+                />
               </div>
               <p className="text-[30px]">Access Your Chats Here</p>
               <p className="text-[15px]   flex justify-center text-[#707070] mt-[30px]">

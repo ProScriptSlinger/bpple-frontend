@@ -17,7 +17,7 @@ const NFTHeader = () => {
             placeholder="Search NFT"
           />
         </div>
-        <button className="flex items-center justify-center bg-[#53FAFB] rounded-[10px] w-[43px] ml-[10px] h-[43px]">
+        <button className="flex items-center justify-center bg-[#3772FF] rounded-[10px] w-[43px] ml-[10px] h-[43px]">
           <Image
             src="/icon/browse.svg"
             width={0}
