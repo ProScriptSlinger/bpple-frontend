@@ -221,7 +221,7 @@ const CommunityInputFooter = () => {
 
           <div className="relative w-[97%] h-[50px]">
             <input
-              className="w-full border-[#4C4C4C] h-full bg-[#131313] outline-none border  rounded-[14px] pl-[120px] pr-[50px] placeholder-[#4C4C4C]"
+              className="w-full border-[#4C4C4C] h-full bg-[#131313] outline-none border  rounded-[14px] pl-[150px] pr-[50px] placeholder-[#4C4C4C]"
               placeholder="Write your message to group"
               onChange={handleIstyping}
               value={text}
@@ -260,16 +260,8 @@ const CommunityInputFooter = () => {
                     />
                   </button>
                 </div> */}
-              {/* <button onClick={() => setEmojiPickerVisible(!emojiPickerVisible)}>
-              <Image
-                width={0}
-                height={0}
-                alt=""
-                src="/icon/smile.svg"
-                className="ml-[10px] w-[15px] h-auto"
-              />
-              </button> */}
-              <div className="rounded-full ml-4 bg-[#6D6D6D] flex gap-2 p-1 px-4">
+
+              <div className="rounded-full ml-4 bg-[#6D6D6D] flex items-center gap-2 p-1 px-4">
                 <Image
                   width={0}
                   height={0}
@@ -277,8 +269,19 @@ const CommunityInputFooter = () => {
                   src="/community/icons/lock.svg"
                   className="w-[20px] h-auto"
                 />
-                <p className="text-white text-[15px]">Menu</p>
+                <p className="text-white text-[15px] mt-1">Menu</p>
               </div>
+              <button
+                onClick={() => setEmojiPickerVisible(!emojiPickerVisible)}
+              >
+                <Image
+                  width={0}
+                  height={0}
+                  alt=""
+                  src="/icon/smile.svg"
+                  className="ml-[10px] w-[15px] h-auto"
+                />
+              </button>
             </div>
           </div>
           <div className="absolute right-0 h-full w-[70px] top-0 items-center justify-center inline-flex">

@@ -102,30 +102,30 @@ const CommunityHeader = (props) => {
 
   const CoinItem = (props) => {
     return (
-      <div className="p-2 rounded-lg bg-[#2A2A2A] flex items-center gap-4">
+      <div className="p-2 rounded-lg bg-[#2A2A2A] flex items-center gap-4 border-[#464646] border-[1px]">
         <Image
           src="/community/icons/pepe.svg"
           width={0}
           height={0}
           alt="logo"
-          className="w-[55px] h-auto"
+          className="w-[50px] h-auto"
         />
         <div className="flex flex-col gap-2">
-          <div className="flex gap-2 items-center">
-            <p className="text-white text-[20px]">PEPE</p>
+          <div className="flex gap-1 items-center ">
+            <p className="text-white text-[18px] font-bold">PEPE</p>
             <Image
               src="/home/icons/guard.svg"
               width={0}
               height={0}
               alt="guard"
-              className="w-[15px] h-auto"
+              className="w-[11px] h-[11px]"
             />
             <Image
               src="/home/icons/fire 1.svg"
               width={0}
               height={0}
               alt="fire"
-              className="w-[14px] h-auto"
+              className="w-[12px] h-auto"
             />
           </div>
           <div className="flex gap-4">
@@ -167,8 +167,8 @@ const CommunityHeader = (props) => {
     setModalType(type);
   };
   return (
-    <>
-      <div className="flex flex-col relative">
+    <div className="font-poppins">
+      <div className="flex flex-col relative border-b-[#2A2A2A] border-b-[1px] pb-2">
         <div
           className={`w-full flex px-4  justify-between items-center ${
             calling ? "flex-row" : ""
@@ -485,10 +485,10 @@ const CommunityHeader = (props) => {
           </div>
         </div>
         <div className="border-b-[1px] border-b-[#2A2A2A] w-full py-1" />
-        <div className="flex items-center justify-around pt-2">
+        <div className="flex items-center justify-between mx-4 pt-2">
           <div className="flex items-center gap-4 justify-around">
             <div className="flex gap-1">
-              <p className="text-white text-[16px]">PEPE</p>
+              <p className="text-white text-[16px] font-medium">PEPE</p>
               <p className="text-[#7B7995] text-[16px]">SOL</p>
             </div>
             <div className="flex gap-1">
@@ -496,7 +496,7 @@ const CommunityHeader = (props) => {
               <p className="text-[#30E0A1] text-[16px]">62.80%</p>
             </div>
           </div>
-          <div className="rounded-md bg-[#FEF2F2] p-2 flex gap-10">
+          <div className="rounded-md bg-[#FEF2F2] p-1 px-2 flex gap-10">
             <div className="flex gap-2 items-center">
               <div className="bg-[#FEE2E2] rounded-full p-2">
                 <Image
@@ -522,13 +522,13 @@ const CommunityHeader = (props) => {
           </div>
           <div className="flex gap-2">
             <button
-              className="bg-[#43CD75] p-1 px-10 rounded-full"
+              className="bg-[#43CD75] p-1 px-10 rounded-full text-[16px]"
               onClick={() => handleModal("buy")}
             >
               Buy
             </button>
             <button
-              className="bg-[#FF3331] p-1 px-10 rounded-full"
+              className="bg-[#FF3331] p-1 px-10 rounded-full text-[16px]"
               onClick={() => handleModal("sell")}
             >
               Sell
@@ -573,7 +573,7 @@ const CommunityHeader = (props) => {
       {isModalOpen && (
         <ActionCoinModal setModalOpen={setModalOpen} modalType={modalType} />
       )}
-    </>
+    </div>
   );
 };
 export default CommunityHeader;

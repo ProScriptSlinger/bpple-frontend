@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -19,6 +20,10 @@
 /* Track */
 ::-webkit-scrollbar-track {
   /* background: #f1f1f1;  */
+}
+
+.font-poppins {
+  font-family: 'Poppins', sans-serif !important;
 }
 
 /* Handle */
@@ -135,4 +140,25 @@ body {
 
 .color-main path {
   color: #3772ff !important;
+}
+
+.coin-item {
+  overflow: hidden;
+}
+
+.bottom-up-animation {
+  transform: translateY(100%); /* Start offscreen */
+  transition: transform 0.3s ease-in-out; /* Smooth transition */
+}
+
+.coin-item:hover .bottom-up-animation {
+  transform: translateY(0); /* Move back to its normal position */
+}
+
+.side-item-des {
+  display: none;
+}
+
+.side-item-icon:hover .side-item-des {
+  display:flex;
 }

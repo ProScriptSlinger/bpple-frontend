@@ -1,12 +1,8 @@
 import React from "react";
-const Layout = ({
-  children,
-}) => {
+const Layout = ({ children }) => {
   return (
     <>
-      <div className="w-full h-full bg-[#121212]">
-        {children}
-      </div>
+      <div className="w-full h-full ">{children}</div>
     </>
   );
 };

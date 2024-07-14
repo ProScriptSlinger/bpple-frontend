@@ -11,9 +11,9 @@ export function useSiderBar() {
 
 export function SideBarProvider({ children }) {
   const [sideBarCloseButton, setSideBarCloseButton] = useState(true);
-  const [siderWidth, setSiderWidth] = useState(300);
+  const [siderWidth, setSiderWidth] = useState(80);
   const pathname = usePathname();
-  
+
   const handleCloseSiderBar = () => {
     if (pathname.includes(`/join/`)) return;
     setSiderWidth(80);

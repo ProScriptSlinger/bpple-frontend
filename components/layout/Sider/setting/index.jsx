@@ -44,7 +44,7 @@ const SettingItem = (props) => {
 };
 const SettingSider = () => {
   const [transition, setTransition] = useState(true);
-  const [siderWidth, setSiderWidth] = useState(350);
+  const [siderWidth, setSiderWidth] = useState(80);
   const [closeButton, setCloseButton] = useState(true);
   const [search, setSearch] = useState("");
   const router = useRouter();
@@ -54,48 +54,7 @@ const SettingSider = () => {
     sidebar.style.width = `${80}px`;
     setCloseButton(false);
   };
-  useEffect(() => {
-    const handle = document.querySelector(".settingBar-handle");
-    const sidebar = document.querySelector(".settingBar-current");
-    if (!handle || !sidebar) {
-      return;
-    }
 
-    let isResizing = false;
-    let lastDownX = 0;
-
-    handle.addEventListener("mousedown", (e) => {
-      isResizing = true;
-      lastDownX = e.clientX || 0;
-      setTransition(false);
-    });
-
-    document.addEventListener("mousemove", (e) => {
-      if (!isResizing) return;
-
-      const width = e.clientX;
-      if (width > 350) {
-        setSiderWidth(350);
-        sidebar.style.width = `${350}px`;
-      } else if (width > 80) {
-        setSiderWidth(width);
-        sidebar.style.width = `${width}px`;
-      } else {
-        setSiderWidth(80);
-        sidebar.style.width = `${80}px`;
-      }
-    });
-
-    document.addEventListener("mouseup", () => {
-      isResizing = false;
-      setTransition(true);
-    });
-
-    return () => {
-      document.removeEventListener("mousemove", () => {});
-      document.removeEventListener("mouseup", () => {});
-    };
-  }, []);
   return (
     <>
       <div

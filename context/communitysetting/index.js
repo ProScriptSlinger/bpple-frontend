@@ -84,11 +84,11 @@ const SettingModalProvider = ({ children }) => {
     15: setNftListModal,
     16: setNftUnListModal,
     17: setRecordingModal,
-    18: setNftTransferModal
+    18: setNftTransferModal,
   };
 
   const initialValue = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
   ];
 
   const handleformat = (index) => {
@@ -217,7 +217,7 @@ const SettingModalProvider = ({ children }) => {
         recordingModal,
         setRecordingModal,
         nftTransferModal,
-        setNftTransferModal
+        setNftTransferModal,
       }}
     >
       {children}

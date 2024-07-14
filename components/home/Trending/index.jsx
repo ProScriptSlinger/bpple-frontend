@@ -27,13 +27,13 @@ const Trending = () => {
   };
 
   return (
-    <div className="w-full mt-[20px] relative">
-      <div className="w-full flex justify-between items-end">
-        <div className="text-[40px]">Trending</div>
+    <div className="w-full md:mt-[60px] mt-[30px] relative">
+      <div className="w-full flex justify-between items-center">
+        <div className="text-[35px]">Trending</div>
         <FontBtn content={"View All"} />
       </div>
       <div className="overflow-auto w-full inline-flex mt-[20px] relative">
-        <div className="w-full overflow-auto flex flex-wrap gap-8">
+        <div className="w-full overflow-auto flex gap-8">
           {recommendList.map((item, index) => (
             <TrendingItem bg_uri={item.image} key={index} />
           ))}

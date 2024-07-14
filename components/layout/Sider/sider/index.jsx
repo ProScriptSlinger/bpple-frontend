@@ -3,7 +3,7 @@ import ListComponent from "../../../../components/layout/Sider/components/index"
 const SiderList1 = (props) => {
   return (
     <>
-      <ul className="text-[#D4D4D4] text-md mt-[10px] h-full overflow-auto">
+      <ul className="text-[#D4D4D4] text-md mt-[10px] h-full overflow-show">
         <ListComponent
           _name="Home"
           _icon="/icon/home.svg"

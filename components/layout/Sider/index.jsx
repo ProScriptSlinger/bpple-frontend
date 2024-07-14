@@ -45,57 +45,12 @@ const Sider = () => {
 
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (pathname.includes(`/join/`)) return;
-    const handle = document.querySelector(".resize-sidebar-handle");
-    const sidebar = document.querySelector(".resize-sidebar-current");
-
-    if (!handle || !sidebar) {
-      return;
-    }
-
-    let isResizing = false;
-    let lastDownX = 0;
-
-    handle.addEventListener("mousedown", (e) => {
-      isResizing = true;
-      lastDownX = e.clientX || 0;
-      setTransition(false);
-    });
-
-    document.addEventListener("mousemove", (e) => {
-      if (!isResizing) return;
-
-      const width = e.clientX;
-      if (width > 300) {
-        setSiderWidth(300);
-        sidebar.style.width = `${300}px`;
-      } else if (width > 80) {
-        setSiderWidth(width);
-        sidebar.style.width = `${width}px`;
-      } else {
-        setSiderWidth(80);
-        sidebar.style.width = `${80}px`;
-      }
-    });
-
-    document.addEventListener("mouseup", () => {
-      isResizing = false;
-      setTransition(true);
-    });
-
-    return () => {
-      document.removeEventListener("mousemove", () => {});
-      document.removeEventListener("mouseup", () => {});
-    };
-  }, []);
-
   if (pathname.includes(`/join/`)) return;
 
   return (
     <>
       <div
-        className={`desktop:flex-none prevent-select desktop:flex hidden justify-center bg-[#171717] h-full relative resize-sidebar-current w-[300px] overflow-auto ${
+        className={`desktop:flex-none prevent-select desktop:flex hidden justify-center bg-[#1F1F1F] h-full relative resize-sidebar-current w-[80px] overflow-auto ${
           transition ? "transition-[width] duration-200" : "transition-none"
         }`}
       >
@@ -110,31 +65,13 @@ const Sider = () => {
             cursor: "ew-resize",
           }}
         ></div>
-        <button
-          className={`absolute right-[40px] top-[60px] ${
-            siderWidth > 250 ? "block" : "hidden"
-          }`}
-          onClick={() => handleCloseSiderBar()}
-        >
-          <Image
-            src="/icon/close.svg"
-            width={0}
-            height={0}
-            alt=""
-            className="w-[15px] h-auto"
-          />
-        </button>
         <div className="w-[80%] flex flex-col h-full">
           <div
-            className={`mt-[65px]  ${
-              siderWidth > 250
-                ? "inline-flex ml-[20px] mb-[30px]"
-                : `flex justify-center mb-[40px]`
+            className={`mt-[65px]
+                flex justify-center mb-[40px]
             }`}
           >
-            <div
-              className={`h-auto ${siderWidth > 250 ? "w-[50px]" : "w-[40px]"}`}
-            >
+            <div className={`h-auto w-[40px]`}>
               {loading && (
                 <div className="w-full aspect-square bg-[#121212] rounded-[10px]"></div>
               )}
@@ -155,9 +92,8 @@ const Sider = () => {
           <div className="bottom-0">
             <ul className="text-white text-md mt-5">
               <button
-                className={`mt-[35px] inline-flex w-full hover:opacity-70 transition-all duration-100 ${
-                  siderWidth > 250 ? "ml-[22px]" : "justify-center"
-                }`}
+                className={`mt-[35px] inline-flex w-full transition-all duration-100 justify-center
+                `}
                 onClick={() => router.push("/setting")}
               >
                 <div className="w-[40px]">
@@ -167,7 +103,7 @@ const Sider = () => {
                   {userDetail?.avatar ? (
                     <Image
                       src={userDetail?.avatar ?? "/avatar/2.svg"}
-                      className={`w-[50px] aspect-square rounded-xl
+                      className={`w-[40px] aspect-square rounded-full
                       object-cover bg-[#191919] flex items-center justify-center ${
                         loading1 && "hidden"
                       }`}
@@ -178,26 +114,23 @@ const Sider = () => {
                     />
                   ) : (
                     <div
-                      className="w-[50px] aspect-square rounded-xl
+                      className="w-[40px] aspect-square rounded-full
              bg-[#191919] flex items-center justify-center
-              text-[#4C4C4C] text-[22px]"
+              text-[#4C4C4C] text-[22px] side-item-icon"
                     >
                       {getNameInitials(userDetail?.username ?? "B I")}
+                      <div
+                        className={`capitalize font-ttfirs  items-center flex rounded-lg  fixed left-[70px] px-2 h-[40px] side-item-des bg-[#3772FF] bg-opacity-35 `}
+                      >
+                        <div className="text-[14px]">
+                          {userDetail?.username}
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>
-                {siderWidth > 250 ? (
-                  <div
-                    className={`ml-[10px]  capitalize font-ttfirs  items-start flex flex-col`}
-                  >
-                    <div className="text-[#575757] text-[12px]">
-                      {updateGreeting()}
-                    </div>
-                    <div className="text-[14px]">{userDetail?.username}</div>
-                  </div>
-                ) : null}
               </button>
-              {siderWidth > 250 ? (
+              {/* {siderWidth > 250 ? (
                 <div className="w-full flex justify-center mt-[15px]">
                   <div className="w-[200px] h-[70px] bg-[#4F4F4F] bg-opacity-10 rounded-[20px] flex-col justify-center hover:opacity-70 transition-all duration-100">
                     <p className="text-[#A9A9A9] text-[14px] mt-[7px] text-center">
@@ -220,14 +153,12 @@ const Sider = () => {
                     </p>
                   </div>
                 </div>
-              ) : null}
+              ) : null} */}
 
-              <div className="w-full inline-flex items-center justify-center">
+              <div className="w-full inline-flex items-center justify-center side-item-icon">
                 <button
                   onClick={() => handleCopy(address)}
-                  className={`${
-                    siderWidth > 250 ? "w-[200px]" : "px-[7px] mb-[20px]"
-                  } h-[40px] rounded-full border border-[#535353] inline-flex items-center justify-center font-ttfirs text-[12px] mt-[15px] hover:opacity-70 transition-all duration-100`}
+                  className={`px-[7px] mb-[20px] h-[40px] rounded-full border border-[#535353] inline-flex items-center justify-center font-ttfirs text-[12px] mt-[15px] transition-all duration-100`}
                 >
                   {walletInfo?.icon && (
                     <img
@@ -236,50 +167,50 @@ const Sider = () => {
                       className="w-[25px] h-auto"
                     />
                   )}
-                  {siderWidth > 250 ? (
-                    <>
-                      {isConnecting && (
-                        <div className="ml-[7px] mr-[7px]">Connecting…</div>
-                      )}
-                      {isDisconnected && (
-                        <div className="ml-[7px] mr-[7px]">Connect Wallet</div>
-                      )}
-                      {address && (
-                        <div className="ml-[7px] mr-[7px]">
-                          {`${address.slice(0, 5)}...${address.slice(-5)}`}
-                        </div>
-                      )}
+                  <div className="fixed p-2 px-2 h-[40px] flex items-center rounded-lg left-[70px] side-item-des bg-[#3772FF] bg-opacity-35 ">
+                    {isConnecting && (
+                      <div className="ml-[7px] mr-[7px]">Connecting…</div>
+                    )}
+                    {isDisconnected && (
+                      <div className="ml-[7px] mr-[7px]">Connect Wallet</div>
+                    )}
+                    {address && (
+                      <div className="ml-[7px] mr-[7px]">
+                        {`${address.slice(0, 5)}...${address.slice(-5)}`}
+                      </div>
+                    )}
 
-                      {address && (
-                        <Image
-                          src="/icon/copy.svg"
-                          width={0}
-                          height={0}
-                          alt={"logo"}
-                          priority={true}
-                          className="w-[15px] h-auto"
-                        />
-                      )}
-                    </>
-                  ) : null}
+                    {address && (
+                      <Image
+                        src="/icon/copy.svg"
+                        width={0}
+                        height={0}
+                        alt={"logo"}
+                        priority={true}
+                        className="w-[15px] h-auto"
+                      />
+                    )}
+                  </div>
                 </button>
               </div>
-              {siderWidth > 250 ? (
-                <button
-                  className="w-full inline-flex items-center justify-center text-[#FF5252] font-ttfirs font-thin text-[13px] mt-[30px] mb-[30px] hover:opacity-70"
-                  onClick={handleOpenLogout}
+              <button
+                className="w-full inline-flex items-center justify-center text-white font-ttfirs font-thin text-[13px] mt-[30px] mb-[30px] side-item-icon"
+                onClick={handleOpenLogout}
+              >
+                <Image
+                  className="w-[20px] h-auto"
+                  src="/icon/logout.svg"
+                  width={0}
+                  height={0}
+                  alt={"logo"}
+                  priority={true}
+                />
+                <div
+                  className={`capitalize font-ttfirs  items-center flex rounded-lg  fixed left-[70px] px-2 h-[40px] side-item-des bg-[#3772FF] bg-opacity-35 `}
                 >
-                  Logout{" "}
-                  <Image
-                    className="ml-[10px] w-[14px] h-auto"
-                    src="/icon/logout.svg"
-                    width={0}
-                    height={0}
-                    alt={"logo"}
-                    priority={true}
-                  />
-                </button>
-              ) : null}
+                  <div className="text-[14px]">Log out</div>
+                </div>
+              </button>
             </ul>
           </div>
         </div>

@@ -26,7 +26,7 @@ const Page = () => {
   }, [address]);
   return (
     <>
-      <div className="w-full h-full bg-[#121212] mobile:px-[50px] px-[20px] pt-[30px] pb-[50px] overflow-auto prevent-select">
+      <div className="w-full h-full  mobile:px-[50px] px-[20px] pt-[30px] pb-[50px] overflow-auto prevent-select">
         <div className="w-full h-full relative overflow-auto">
           <p className="text-[20px]">Best & Trends Collections</p>
           <div className="w-full h-[200px] overflow-auto">

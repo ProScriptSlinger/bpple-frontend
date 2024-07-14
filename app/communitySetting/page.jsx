@@ -18,7 +18,7 @@ const CommunitySetting = (props) => {
     setCommunitySettingmodal(!communitySettingmodal);
   };
   return (
-    <div className="w-full h-full bg-[#121212] px-[44px] relative overflow-auto">
+    <div className="w-full h-full  bg-[#1E1E1E] px-[44px] relative overflow-auto">
       <div className="inline-flex mt-[22px]">
         <button
           className={`w-[190px] h-[45px] hover:opacity-70 ${

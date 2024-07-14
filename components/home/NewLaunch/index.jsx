@@ -33,21 +33,21 @@ export const LaunchItem = (props) => {
           priority={true}
         />
         <div className="flex flex-col gap-1">
-          <p className="text-[20px]">{unit}</p>
-          <p className="text-[14px] text-[#6D6D6D]">{price}</p>
+          <p className="lg:text-[16px] text-[12px]">{unit}</p>
+          <p className="lg:text-[12px] text-[10px] text-[#6D6D6D]">{price}</p>
         </div>
       </div>
     );
   };
   return (
-    <div className="rounded-2xl p-4 flex justify-between items-center bg-[#252525]">
+    <div className="rounded-2xl p-4 py-2 flex justify-between items-center  min-w-[680px] bg-[#252525]">
       <div className="flex items-center gap-2">
         <Image
           src={"/home/icons/fire 1.svg"}
           width={0}
           height={0}
           alt=""
-          className="w-[34px] h-auto rounded-full"
+          className="max-w-[34px] w-[100%] h-auto rounded-full"
           priority={true}
         />
         <div className="flex items-center gap-2 mx-4">
@@ -56,10 +56,10 @@ export const LaunchItem = (props) => {
             width={0}
             height={0}
             alt=""
-            className="w-[34px] h-auto rounded-full"
+            className="max-w-[50px] w-[100%] h-auto rounded-full"
             priority={true}
           />
-          <p className="text-[25px]">SLERF</p>
+          <p className="lg:text-[20px] text-[16px]">SLERF</p>
         </div>
         <Image
           src={"/home/icons/solscan.svg"}
@@ -92,7 +92,7 @@ export const LaunchItem = (props) => {
               width={0}
               height={0}
               alt=""
-              className="w-[24px] h-auto rounded-full"
+              className="max-w-[20px] w-[70%] lg:w-[100%] h-auto rounded-full"
               priority={true}
             />
           }
@@ -108,9 +108,9 @@ const NewLaunch = () => {
     setCloseShow(false);
   };
   return (
-    <div className="w-full mt-[20px] relative">
-      <div className="w-full flex justify-between items-end">
-        <div className="text-[40px]">New Launch</div>
+    <div className="w-full mt-[30px] lg:mt-[60px] relative">
+      <div className="w-full flex justify-between items-center">
+        <div className="text-[35px]">New Launch</div>
         <div className="flex gap-4  transition-all">
           <SpinBox />
           <FontBtn content="Refresh" />

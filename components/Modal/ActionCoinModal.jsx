@@ -27,10 +27,10 @@ const BuyCoinModal = ({ setModalOpen, modalType }) => {
             <Image
               width={0}
               height={0}
-              className="w-[100px] my-4"
+              className="w-[100px] my-4 mt-8"
               src={"/community/icons/featured-pepe.svg"}
             />
-            <p className="text-white font-bold text-[20px] my-4">
+            <p className="text-white font-bold text-[20px] my-6">
               {modalType == "buy"
                 ? "You’re buying PEPECOIN"
                 : "You own 167K $PEPE"}
@@ -38,18 +38,18 @@ const BuyCoinModal = ({ setModalOpen, modalType }) => {
           </div>
           <div className="relative my-2">
             <input
-              className="w-full h-[50px] px-4 pr-6 bg-black bg-opacity-30 rounded-lg border-2 border-[#2A2A2A] pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
+              className="w-full h-[50px] px-4 pr-6 bg-black bg-opacity-30 rounded-xl border-2 border-[#2A2A2A] pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
               placeholder="Amount"
               // onChange={handleName}
             ></input>
             <p className="absolute text-[#FCFCF9] text-[15px] bold text-center right-2 top-4">
-              SOL
+              PEPE
             </p>
           </div>
           <RangePicker label="485$ ( 13 SOL)" />
           <div className="relative mt-4">
             <input
-              className="w-full h-[50px] px-4 pr-6 bg-black bg-opacity-30 rounded-lg border-2 border-[#2A2A2A] pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
+              className="w-full h-[50px] px-4 pr-6 bg-black bg-opacity-30 rounded-xl border-2 border-[#2A2A2A] pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
               placeholder="Slippage"
               // onChange={handleName}
             ></input>
@@ -57,9 +57,9 @@ const BuyCoinModal = ({ setModalOpen, modalType }) => {
               SOL
             </p>
           </div>
-          <div className="relative mt-2">
+          <div className="relative mt-4">
             <input
-              className="w-full h-[50px] px-4 pr-6 bg-black bg-opacity-30 rounded-lg border-2 border-[#2A2A2A] pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
+              className="w-full h-[50px] px-4 pr-6 bg-black bg-opacity-30 rounded-xl border-2 border-[#2A2A2A] pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
               placeholder="Priority Fees"
               // onChange={handleName}
             ></input>
@@ -67,8 +67,8 @@ const BuyCoinModal = ({ setModalOpen, modalType }) => {
               SOL
             </p>
           </div>
-          <div className="border-b-2 border-[#2A2A2A] w-full mt-2" />
-          <div className="flex justify-between w-full mt-2">
+          <div className="border-b-2 border-[#2A2A2A] w-full mt-4" />
+          <div className="flex justify-between w-full mt-4">
             <p className="text-[#777E90] text-[16px]">
               {modalType == "buy" ? "You will pay" : "You will receive"}
             </p>
@@ -79,7 +79,7 @@ const BuyCoinModal = ({ setModalOpen, modalType }) => {
               modalType == "buy" ? "bg-[#3772FF]" : "bg-[#FF3331]"
             } flex justify-center items-center rounded-lg p-2 w-full mt-8`}
           >
-            <div className="flex gap-2">
+            <div className="flex gap-2 font-semibold">
               <p className="text-white text-[15px]">
                 {modalType == "buy" ? "Swap" : "Sell"}
               </p>

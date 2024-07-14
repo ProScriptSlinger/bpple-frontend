@@ -41,7 +41,7 @@ const Team = () => {
   }, [communities]);
   return (
     <>
-      <div className="w-full h-full bg-[#121212] mobile:px-[50px] px-[20px] pt-[50px] overflow-auto prevent-select">
+      <div className="w-full h-full  mobile:px-[50px] px-[20px] pt-[50px] overflow-auto prevent-select">
         <div className="w-full">
           <p className="text-[22px] mb-[22px]">Team</p>
           <div className="flex flex-wrap gap-[20px] mb-[30px]">

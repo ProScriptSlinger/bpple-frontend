@@ -15,16 +15,16 @@ export const RangePicker = (props) => {
   const [rangeValue, setRangeValue] = useState(0);
   return (
     <div className="flex flex-col gap-4 items-center w-full">
-      <div className="relative w-full">
+      <div className="relative w-full h-[24px] flex items-center">
         <input
           style={{ accentColor: "white" }}
           id="default-range"
           type="range"
           onChange={(e) => setRangeValue(e.target.value)}
           value={rangeValue}
-          className="w-full h-1 bg-[#353945] rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+          className="w-full h-1 bg-[#353945] rounded-[16px] appearance-none cursor-pointer dark:bg-gray-700"
         />
-        <div className="absolute top-2 w-full flex justify-between">
+        <div className="absolute top-[8px] w-full flex justify-between">
           <div className="border-l-2 border-white h-[8px]" />
           <div className="border-l-2 border-white h-[8px]" />
           <div className="border-l-2 border-white h-[8px]" />
@@ -175,11 +175,11 @@ const NewCommunityModal = () => {
           (pathName.includes("/community/") || pathName === "/community")
             ? "w-[400px]"
             : "w-0"
-        } flex flex-none h-full bg-[#171717] transition-all duration-500 overflow-auto modalWidth:static absolute right-0 z-20 prevent-select`}
+        } flex flex-none h-full bg-[#171717] transition-all duration-500 overflow-auto modalWidth:static absolute right-0 z-20 prevent-select font-poppins`}
       >
         <div className="w-[400px] h-full relative px-[30px] pb-[50px] flex flex-col">
           <button
-            className="w-[340px] inline-flex items-center mt-[60px]"
+            className="w-[340px] inline-flex items-center mt-[30px]"
             onClick={handlePreviousPage}
           >
             <Image
@@ -189,7 +189,7 @@ const NewCommunityModal = () => {
               height={0}
               alt=""
             />
-            <p className="text-[15px]">Create New Community</p>
+            <p className="text-[22px]">Create New Community</p>
           </button>
           <>
             {page == 0 ? (
@@ -225,7 +225,7 @@ const NewCommunityModal = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex gap-1 h-fit mt-[50px]">
+                <div className="flex gap-1 h-fit mt-[45px]">
                   <p className="text-[#7D8E98] text-[15.5px] z-50 ">
                     COMMUNITY
                   </p>
@@ -241,14 +241,14 @@ const NewCommunityModal = () => {
                   The terms and conditions contained in.
                 </p>
                 <input
-                  className="mt-[20px] w-full border-b border-[#9D9D9D] bg-transparent pt-4 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
+                  className="mt-[10px] w-full border-b border-[#9D9D9D] bg-transparent pt-4 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
                   placeholder="Description is here"
                   onChange={handleDescription}
                 />
                 <p className="text-[#9D9D9D] text-[13px] mt-[10px] mb-[20px]">
                   The terms and conditions contained in.
                 </p>
-                <div className="flex gap-1 h-fit mt-[50px]">
+                <div className="flex gap-1 h-fit mt-[45px]">
                   <p className="text-[#7D8E98] text-[15.5px] z-50 ">SOCIAL</p>
                 </div>
 
@@ -261,7 +261,7 @@ const NewCommunityModal = () => {
                   Enter the project&apos;s X account
                 </p>
                 <input
-                  className="mt-[20px] w-full border-b border-[#9D9D9D] bg-transparent pt-4 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
+                  className="mt-[10px] w-full border-b border-[#9D9D9D] bg-transparent pt-4 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
                   placeholder="Telegram Link"
                   onChange={handleDescription}
                 />
@@ -279,8 +279,8 @@ const NewCommunityModal = () => {
                     alt="icon"
                   />
                 </div>
-                <div className="w-full flex justify-between items-center">
-                  <p className="text-[#7D8E98] text-[15px] mt-[10px]">Token</p>
+                <div className="w-full flex justify-between items-center mt-[40px]">
+                  <p className="text-[#7D8E98] text-[15px] ">Token</p>
                   <div className="flex gap-1 items-center">
                     <SpinBox />
                     <Image
@@ -291,7 +291,7 @@ const NewCommunityModal = () => {
                     />
                   </div>
                 </div>
-                <div className="mt-8">
+                <div className="mt-4">
                   <input
                     className="w-full border-b border-[#9D9D9D] bg-transparent pt-2 pb-1.5 text-white outline outline-0 placeholder:font-ttfirs focus:border-[#3772FF] focus:outline-0 placeholder-[#9D9D9D] placeholder:text-[14px]"
                     placeholder="$NAME"
@@ -301,7 +301,7 @@ const NewCommunityModal = () => {
                     Choose the name of your token
                   </p>
                 </div>
-                <div className="flex justify-around w-full">
+                <div className="flex justify-around w-full mt-[30px]">
                   <IconSpinlCmp icon="fire" />
                   <IconSpinlCmp icon="guard" />
                 </div>
@@ -404,17 +404,19 @@ const NewCommunityModal = () => {
                 <div className="border-b-2 border-[#353945] w-full  my-2" />
               </div>
             )}
-            <p className="text-[#9D9D9D] text-[13px] mt-4 mb-[10px]">
-              By creating a temporary token, you agree to our terms of use and
-              acknowledge that we hold no liability.
-            </p>
-            <button
-              className="w-full mt-4 h-8 flex-none text-white disabled:bg-[#212121] disabled:text-[#878787] rounded-[12px] bg-[#3772FF] mb-[20px] bottom-0"
-              // disabled={disable || creating}
-              onClick={handlePage}
-            >
-              Next
-            </button>
+            <div className="h-full flex flex-col just">
+              <p className="text-[#9D9D9D] text-[13px] mt-4 mb-[10px]">
+                By creating a temporary token, you agree to our terms of use and
+                acknowledge that we hold no liability.
+              </p>
+              <button
+                className="w-full mt-4 h-[40px] flex-none text-white disabled:bg-[#212121] disabled:text-[#878787] rounded-[10px] bg-[#3772FF] mb-[20px] bottom-0"
+                // disabled={disable || creating}
+                onClick={handlePage}
+              >
+                Next
+              </button>
+            </div>
           </>
         </div>
       </div>

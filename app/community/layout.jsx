@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
   const pathName = usePathname();
   return (
     <>
-      <div className="w-full h-full flex flex-col">
+      <div className="w-full h-full  bg-[#1E1E1E] flex flex-col">
         {children}
         {!pathName.includes("/community" && "/marketplace") && <Footer />}
       </div>

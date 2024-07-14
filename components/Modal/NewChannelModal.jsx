@@ -73,7 +73,7 @@ const NewChannelModal = () => {
           (pathName.includes("/community/") || pathName === "/community")
             ? "w-[400px]"
             : "w-0"
-        } flex flex-none h-full bg-[#171717] transition-all duration-500 modalWidth:static absolute right-0 z-20 prevent-select`}
+        } flex flex-none h-full bg-[#191919] transition-all duration-500 modalWidth:static absolute right-0 z-20 prevent-select`}
       >
         <div className="w-[400px] h-full relative px-[30px] pb-[50px]">
           {page === 0 ? (

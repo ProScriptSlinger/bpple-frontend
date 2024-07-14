@@ -22,7 +22,7 @@ const _renderLinkItem = (props) => {
         {/* <div className={`${loading ? "hidden" : "block"}`}> */}
         <li
           // onClick={() => handleNavigate(props._url)}
-          className={`relative flex items-center mb-[10px] py-3 focus:bg-[#3772FF0D] ${
+          className={`relative side-item-icon flex items-center mb-[10px] py-3 focus:bg-[#3772FF0D] ${
             props.siderWidth < 250 ? "justify-center w-[40px]" : "px-5 w-full"
           } text-white hover:border-[#F7F9FC] hover:bg-[#3772FF0D] cursor-pointer text-sm rounded-[10px] font-ttfirs ${
             props._url === "/home" && props._url === props.pathname
@@ -76,7 +76,7 @@ const _renderLinkItem = (props) => {
               />
             </div>
           )}
-          {props.siderWidth > 250 ? (
+          {/* {props.siderWidth > 250 ? (
             <>
               {props._name}
               {props._url === "/home" && props._url === props.pathname ? (
@@ -106,7 +106,10 @@ const _renderLinkItem = (props) => {
                 <></>
               )}
             </>
-          ) : null}
+          ) : null} */}
+          <div className="fixed z-50 left-[70px] flex items-center h-[40px] px-4 bg-[#3772FF] bg-opacity-35 rounded-lg side-item-des">
+            <p>{props._name}</p>
+          </div>
         </li>
       </div>
     </Link>

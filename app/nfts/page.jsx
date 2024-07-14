@@ -57,7 +57,7 @@ const Marketplace = () => {
   }, [address]);
   return (
     <>
-      <div className="w-full h-full bg-[#121212] flex flex-col gap-4">
+      <div className="w-full h-full  flex flex-col gap-4">
         <div className="w-full bg-[#121212] flex flex-col px-[50px]">
           <p className="text-[20px] mt-[20px]">My Collections</p>
           {/* <div className="inline-flex items-center">

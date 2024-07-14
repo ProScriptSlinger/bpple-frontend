@@ -14,10 +14,10 @@ const MarketplaceHeader = dynamic(() => import("./marketplace"), {
   ssr: false,
   loading: () => <MarketplaceHeaderLoader />,
 });
-const HomeHeader = dynamic(() => import("./home"), {
-  ssr: false,
-  loading: () => <HomeLoader />,
-});
+// const HomeHeader = dynamic(() => import("./home"), {
+//   ssr: false,
+//   loading: () => <HomeLoader />,
+// });
 const CommunityHeader = dynamic(() => import("./community"), {
   ssr: false,
   loading: () => <CommunityHeaderLoader />,
@@ -42,10 +42,8 @@ const Header = () => {
     return;
   return (
     <>
-      <div className="w-full py-2 border-b-[1px] border-b-[#2A2A2A] flex-none prevent-select bg-[#121212]">
-        {pathname === "/home" ? (
-          <HomeHeader />
-        ) : pathname === "/notification" ? (
+      <div className="w-full py-2 flex-none prevent-select bg-[#1E1E1E]">
+        {pathname === "/notification" ? (
           <NotificationHeader />
         ) : pathname.includes("/community/") || pathname === "/community" ? (
           <CommunityHeader />
