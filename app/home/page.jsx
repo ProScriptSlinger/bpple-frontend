@@ -10,13 +10,6 @@ const Slider = dynamic(() => import("../../components/home/Slider"), {
   loading: () => <SliderLoader />,
 });
 
-const NewLaunch = dynamic(
-  () => import("../../components/home/NewLaunch")
-  // , {
-  //   ssr: false,
-  //   loading: () => <RecommandLoader />,
-  // }
-);
 const Trending = dynamic(
   () => import("../../components/home/Trending")
   // {
@@ -28,10 +21,9 @@ const Trending = dynamic(
 const Home = () => {
   return (
     <>
-      <div className="w-full mobile:px-[50px] px-[20px] h-full overflow-auto prevent-select py-8">
+      <div className="w-full mobile:px-[50px] px-[20px] h-full overflow-auto prevent-select py-4">
         <Slider />
         <Trending />
-        <NewLaunch />
       </div>
     </>
   );

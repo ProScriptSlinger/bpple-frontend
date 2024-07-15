@@ -128,7 +128,7 @@ const CommunityHeader = (props) => {
               className="w-[12px] h-auto"
             />
           </div>
-          <div className="flex gap-4">
+          <div className="flex items-center gap-4">
             <div className="flex gap-1">
               <p className="text-white text-[11.65px]">6.5K</p>
               <Image
@@ -219,16 +219,16 @@ const CommunityHeader = (props) => {
                 alt={"YC EC"}
                 priority={true}
               />
-              {/* {community?.avatar == null && (
-              <div
-                className="w-[50px] aspect-square rounded-xl
+              {community?.avatar == null && (
+                <div
+                  className="w-[50px] aspect-square rounded-xl
              bg-[#191919] flex items-center justify-center
               text-[#4C4C4C] text-[22px]"
-              >
-                {getNameInitials(community?.username ?? "B")}
-              </div>
-            )} */}
-              <CoinItem />
+                >
+                  {getNameInitials(community?.username ?? "B")}
+                </div>
+              )}
+              {/* <CoinItem /> */}
 
               {calling ? (
                 windowWidth > 1220 ||
@@ -236,25 +236,66 @@ const CommunityHeader = (props) => {
                 (windowWidth < 700 && windowWidth > 580) ? (
                   <div className="ml-[20px] text-left w-[161px]">
                     <p className="">{community?.name}</p>
-                    <p className="text-[12px] text-[#7A7A7A]">
-                      {channel
-                        ? channel
-                        : community?.members &&
-                          ` ${
-                            Object.keys(community?.members).length
-                          } Members – 1 Active`}
-                    </p>
+
+                    <div className="flex gap-4">
+                      <div className="flex gap-1">
+                        <p className="text-white text-[11.65px]">6.5K</p>
+                        <Image
+                          src="/community/icons/user.svg"
+                          width={0}
+                          height={0}
+                          alt="user"
+                          className="w-[12px] h-auto"
+                        />
+                      </div>
+                      <div className="flex gap-1">
+                        <p className="text-white text-[11.65px]">
+                          {channel
+                            ? channel
+                            : community?.members &&
+                              ` ${Object.keys(community?.members).length} `}
+                        </p>
+                        <Image
+                          src="/community/icons/user_icon_green.svg"
+                          width={0}
+                          height={0}
+                          alt="user_green"
+                          className="w-[12px] h-auto"
+                        />
+                      </div>
+                    </div>
                   </div>
                 ) : null
               ) : (
                 <div className="ml-[20px] text-left w-[161px]">
                   <p className="">{community?.name}</p>
-                  <p className="text-[12px] text-[#7A7A7A]">
-                    {community?.members &&
-                      ` ${
-                        Object.keys(community?.members).length
-                      } Members – 1 Active`}
-                  </p>
+                  <div className="flex gap-4 items-center">
+                    <div className="flex items-center gap-1">
+                      <p className="text-[#7A7A7A] text-[11.65px]">6.5K</p>
+                      <Image
+                        src="/community/icons/user.svg"
+                        width={0}
+                        height={0}
+                        alt="user"
+                        className="w-[12px] h-auto"
+                      />
+                    </div>
+                    <div className="flex gap-1">
+                      <p className="text-[#7A7A7A] text-[11.65px]">
+                        {channel
+                          ? channel
+                          : community?.members &&
+                            ` ${Object.keys(community?.members).length} `}
+                      </p>
+                      <Image
+                        src="/community/icons/user_icon_green.svg"
+                        width={0}
+                        height={0}
+                        alt="user_green"
+                        className="w-[12px] h-auto"
+                      />
+                    </div>
+                  </div>
                 </div>
               )}
             </button>
@@ -343,132 +384,140 @@ const CommunityHeader = (props) => {
             )}
 
             {/* {!dropdown ? (
-            <button
-              className="h-[45px] inline-flex flex-none items-center justify-between bg-[#3772FF] rounded-[12px] mobile:px-[15px] mobile:mx-[15px] mx-[5px] px-[10px] mobile:w-[220px] w-[45px] text-[15px] hover:opacity-70"
-              onClick={() => setDropdown(!dropdown)}
-            >
-              {!currentOption.icon ? (
-                <span className=" bg-black/5  text-black h-[25px] w-[25px] flex relative rounded-full items-center justify-center">
-                  {getNameInitials(currentOption?.title.toLowerCase() ?? "B")}
-                </span>
-              ) : (
-                <Image
-                  width={0}
-                  height={0}
-                  alt=""
-                  src={currentOption.icon}
-                  className="w-[25px] h-auto"
-                />
-              )}
-              <p className="text-black ml-[5px] mr-[10px] mobile:flex mt-[3px] hidden">
-                {currentOption.title}
-              </p>
-
-              <Image
-                width={0}
-                height={0}
-                alt=""
-                src={`${dropdown ? "/icon/dropup.svg" : "/icon/dropdown.svg"}`}
-                className="mr-[5px] mobile:block hidden mt-[3px] w-[10px] h-auto"
-              />
-            </button>
-          ) : (
-            <>
-              <div
-                className="fixed left-0 right-0 top-0 bottom-0"
-                onClick={() => setDropdown(false)}
-              ></div>
-              <div className="h-[365px] relative overflow-x-auto bg-[#3772FF] rounded-[12px] mobile:w-[220px] w-[45px] mobile:mx-[15px] mx-[5px] text-[15px] z-10">
-                <button
-                  className=" z-20  sticky top-0 h-[45px] inline-flex items-center justify-between bg-[#3772FF] rounded-[12px] mobile:px-[15px] px-[10px] mobile:w-[220px] w-[45px]"
-                  onClick={() => setDropdown(!dropdown)}
-                >
-                  {!currentOption.icon ? (
-                    <span className=" bg-black/5  text-black h-[25px] w-[25px] flex relative rounded-full items-center justify-center">
-                      {getNameInitials(
-                        currentOption?.title.toLowerCase() ?? "B"
-                      )}
-                    </span>
-                  ) : (
-                    <Image
-                      width={0}
-                      height={0}
-                      alt=""
-                      src={currentOption.icon}
-                      className="w-[25px] h-auto"
-                    />
-                  )}
-                  <p className="text-black ml-[10px] mr-[10px] mobile:block hidden mt-[3px]">
-                    {currentOption.title}
-                  </p>
+              <button
+                className="h-[45px] inline-flex flex-none items-center justify-between bg-[#3772FF] rounded-[12px] mobile:px-[15px] mobile:mx-[15px] mx-[5px] px-[10px] mobile:w-[220px] w-[45px] text-[15px] hover:opacity-70"
+                onClick={() => setDropdown(!dropdown)}
+              >
+                {!currentOption.icon ? (
+                  <span className=" bg-black/5  text-black h-[25px] w-[25px] flex relative rounded-full items-center justify-center">
+                    {getNameInitials(currentOption?.title.toLowerCase() ?? "B")}
+                  </span>
+                ) : (
                   <Image
                     width={0}
                     height={0}
                     alt=""
-                    src={`${
-                      dropdown ? "/icon/dropup.svg" : "/icon/dropdown.svg"
-                    }`}
-                    className="mr-[5px] mobile:block hidden mt-[3px] w-[10px] h-auto"
+                    src={currentOption.icon}
+                    className="w-[25px] h-auto"
                   />
-                </button>
+                )}
+                <p className="text-black ml-[5px] mr-[10px] mobile:flex mt-[3px] hidden">
+                  {currentOption.title}
+                </p>
 
-                <div>
-                  {community?.channels.map(({ channelId: channel }, index) => (
-                    <button
-                      onClick={() => {
-                        router.push(
-                          `/community/${communityId}/${channel.name}`
-                        );
-                        setDropdown(!dropdown);
-                      }}
-                      key={index}
-                      className={` ${
-                        community?.channels.length - 1 === index ? "  " : ""
-                      } text-black  h-[45px] inline-flex items-center mobile:px-[15px] px-[10px] w-[210px] hover:bg-opacity-70`}
-                    >
-                      <span className=" bg-black/5  h-[25px] w-[25px] flex relative rounded-full items-center justify-center">
-                        {getNameInitials(channel?.name.toLowerCase() ?? "B")}
+                <Image
+                  width={0}
+                  height={0}
+                  alt=""
+                  src={`${
+                    dropdown ? "/icon/dropup.svg" : "/icon/dropdown.svg"
+                  }`}
+                  className="mr-[5px] mobile:block hidden mt-[3px] w-[10px] h-auto"
+                />
+              </button>
+            ) : (
+              <>
+                <div
+                  className="fixed left-0 right-0 top-0 bottom-0"
+                  onClick={() => setDropdown(false)}
+                ></div>
+                <div className="h-[365px] relative overflow-x-auto bg-[#3772FF] rounded-[12px] mobile:w-[220px] w-[45px] mobile:mx-[15px] mx-[5px] text-[15px] z-10">
+                  <button
+                    className=" z-20  sticky top-0 h-[45px] inline-flex items-center justify-between bg-[#3772FF] rounded-[12px] mobile:px-[15px] px-[10px] mobile:w-[220px] w-[45px]"
+                    onClick={() => setDropdown(!dropdown)}
+                  >
+                    {!currentOption.icon ? (
+                      <span className=" bg-black/5  text-black h-[25px] w-[25px] flex relative rounded-full items-center justify-center">
+                        {getNameInitials(
+                          currentOption?.title.toLowerCase() ?? "B"
+                        )}
                       </span>
-                      <p className="text-black ml-[10px] mr-[10px] mobile:block hidden mt-[3px]">
-                        {channel.name}
-                      </p>
-                    </button>
-                  ))}
-
-                  {options.map((item, index) => (
-                    <button
-                      key={index}
-                      className="h-[45px] inline-flex items-center mobile:px-[15px] px-[10px] w-[210px] hover:bg-opacity-70"
-                      onClick={() => {
-                        setCurrentOption(options[index]);
-                        setDropdown(!dropdown);
-                        if (item.title === "Create a Channel") {
-                          setNewChannelModal(!newChannelModal);
-                        } else if (item.title === "Create a Room") {
-                          setNewRoomModal(true);
-                        } else if (item.title === "Marketplace") {
-                          router.push(`/community/${communityId}/marketplace`);
-                        } else if (item.title === "Team") {
-                          router.push("/community/team");
-                        }
-                      }}
-                    >
+                    ) : (
                       <Image
                         width={0}
                         height={0}
                         alt=""
-                        src={item.icon}
+                        src={currentOption.icon}
                         className="w-[25px] h-auto"
                       />
-                      <p className="text-black ml-[10px] mr-[10px] mobile:block hidden mt-[3px]">
-                        {item.title}
-                      </p>
-                    </button>
-                  ))}
+                    )}
+                    <p className="text-black ml-[10px] mr-[10px] mobile:block hidden mt-[3px]">
+                      {currentOption.title}
+                    </p>
+                    <Image
+                      width={0}
+                      height={0}
+                      alt=""
+                      src={`${
+                        dropdown ? "/icon/dropup.svg" : "/icon/dropdown.svg"
+                      }`}
+                      className="mr-[5px] mobile:block hidden mt-[3px] w-[10px] h-auto"
+                    />
+                  </button>
+
+                  <div>
+                    {community?.channels.map(
+                      ({ channelId: channel }, index) => (
+                        <button
+                          onClick={() => {
+                            router.push(
+                              `/community/${communityId}/${channel.name}`
+                            );
+                            setDropdown(!dropdown);
+                          }}
+                          key={index}
+                          className={` ${
+                            community?.channels.length - 1 === index ? "  " : ""
+                          } text-black  h-[45px] inline-flex items-center mobile:px-[15px] px-[10px] w-[210px] hover:bg-opacity-70`}
+                        >
+                          <span className=" bg-black/5  h-[25px] w-[25px] flex relative rounded-full items-center justify-center">
+                            {getNameInitials(
+                              channel?.name.toLowerCase() ?? "B"
+                            )}
+                          </span>
+                          <p className="text-black ml-[10px] mr-[10px] mobile:block hidden mt-[3px]">
+                            {channel.name}
+                          </p>
+                        </button>
+                      )
+                    )}
+
+                    {options.map((item, index) => (
+                      <button
+                        key={index}
+                        className="h-[45px] inline-flex items-center mobile:px-[15px] px-[10px] w-[210px] hover:bg-opacity-70"
+                        onClick={() => {
+                          setCurrentOption(options[index]);
+                          setDropdown(!dropdown);
+                          if (item.title === "Create a Channel") {
+                            setNewChannelModal(!newChannelModal);
+                          } else if (item.title === "Create a Room") {
+                            setNewRoomModal(true);
+                          } else if (item.title === "Marketplace") {
+                            router.push(
+                              `/community/${communityId}/marketplace`
+                            );
+                          } else if (item.title === "Team") {
+                            router.push("/community/team");
+                          }
+                        }}
+                      >
+                        <Image
+                          width={0}
+                          height={0}
+                          alt=""
+                          src={item.icon}
+                          className="w-[25px] h-auto"
+                        />
+                        <p className="text-black ml-[10px] mr-[10px] mobile:block hidden mt-[3px]">
+                          {item.title}
+                        </p>
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </>
-          )} */}
+              </>
+            )} */}
 
             <button
               className="w-[45px] h-[45px] bg-[#252525] mx-4 rounded-[12px] flex items-center justify-center flex-none hover:opacity-70"
@@ -496,7 +545,7 @@ const CommunityHeader = (props) => {
               <p className="text-[#30E0A1] text-[16px]">62.80%</p>
             </div>
           </div>
-          <div className="rounded-md bg-[#FEF2F2] p-1 px-2 flex gap-10">
+          <div className="rounded-full bg-[#151515] border-[1px] border-[#292929] p-1 px-2 flex gap-10">
             <div className="flex gap-2 items-center">
               <div className="bg-[#FEE2E2] rounded-full p-2">
                 <Image
@@ -507,7 +556,7 @@ const CommunityHeader = (props) => {
                   className="w-[12px] h-auto"
                 />
               </div>
-              <div className="text-[#991B1B]  text-[14px]">MKT :16K/30K$</div>
+              <div className="text-white  text-[14px]">MKT :16K/30K$</div>
             </div>
             <div className="flex gap-2 items-center">
               <Image
@@ -517,7 +566,7 @@ const CommunityHeader = (props) => {
                 src={"/home/icons/clock-hour-1.svg"}
                 className="w-[24px] h-auto"
               />
-              <div className="text-[#991B1B]  text-[14px]">53 mins</div>
+              <div className="text-white  text-[14px]">53 mins</div>
             </div>
           </div>
           <div className="flex gap-2">

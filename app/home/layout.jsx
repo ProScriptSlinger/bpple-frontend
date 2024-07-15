@@ -1,7 +1,7 @@
 const Layout = ({ children }) => {
   return (
     <>
-      <div className={`w-full h-full bg-[#1E1E1E] `}>{children}</div>
+      <div className={`w-full h-full bg-[#111111] `}>{children}</div>
     </>
   );
 };

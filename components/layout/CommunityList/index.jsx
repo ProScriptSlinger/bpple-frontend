@@ -753,7 +753,7 @@ const CommunityList = (props) => {
           pathName === "/nfts" ||
           pathName === "/marketplace" ? null : (
             <>
-              {comList?.map((item, index) => (
+              {communities?.map((item, index) => (
                 <div key={index}>
                   <Components item={item} />
                 </div>

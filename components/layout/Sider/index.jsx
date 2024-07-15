@@ -50,7 +50,7 @@ const Sider = () => {
   return (
     <>
       <div
-        className={`desktop:flex-none prevent-select desktop:flex hidden justify-center bg-[#1F1F1F] h-full relative resize-sidebar-current w-[80px] overflow-auto ${
+        className={`desktop:flex-none prevent-select desktop:flex hidden justify-center bg-[#171717] h-full relative resize-sidebar-current w-[80px] overflow-auto ${
           transition ? "transition-[width] duration-200" : "transition-none"
         }`}
       >

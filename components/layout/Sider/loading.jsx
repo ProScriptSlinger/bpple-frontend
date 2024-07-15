@@ -10,7 +10,7 @@ const Loading = () => {
   return (
     <>
       <div
-        className={`desktop:flex-none prevent-select desktop:flex hidden justify-center bg-[#171717] h-full relative w-[300px] overflow-auto`}
+        className={`desktop:flex-none prevent-select desktop:flex hidden justify-center bg-[#171717] h-full relative w-[80px] overflow-auto`}
       >
         <div className="w-[80%] flex flex-col h-full">
           <div className={`h-auto w-[50px] mt-[65px] mb-[30px]`}>

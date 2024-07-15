@@ -1,6 +1,6 @@
 import { ImCross } from "react-icons/im";
 import Image from "next/image";
-import { RangePicker } from "./NewCommunityModal";
+import { RangePicker } from "./NewCommunityModal_updated";
 import { useEffect } from "react";
 
 const BuyCoinModal = ({ setModalOpen, modalType }) => {

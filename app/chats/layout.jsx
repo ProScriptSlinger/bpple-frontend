@@ -6,7 +6,7 @@ const Footer = dynamic(() =>
 const Layout = ({ children }) => {
   return (
     <>
-      <div className="w-full h-full  bg-[#1E1E1E] flex flex-col">
+      <div className="w-full h-full  bg-[#111111] flex flex-col">
         {children}
         <Footer />
       </div>

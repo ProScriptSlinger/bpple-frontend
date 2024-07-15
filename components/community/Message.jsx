@@ -17,13 +17,6 @@ const MessageComponent = (message, rightFlag) => {
               message?.content
             )}
           </div>
-          <Image
-            src={"/community/icons/reply.svg"}
-            width={0}
-            height={0}
-            className="w-[30px] cursor-pointer"
-            alt="reply icon"
-          />
         </div>
         <div
           className={`inline-flex mt-[10px]  items-center ${
