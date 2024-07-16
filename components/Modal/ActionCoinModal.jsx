@@ -1,6 +1,6 @@
 import { ImCross } from "react-icons/im";
 import Image from "next/image";
-import { RangePicker } from "./NewCommunityModal_updated";
+import { RangePicker } from "./NewCommunityModal";
 import { useEffect } from "react";
 
 const BuyCoinModal = ({ setModalOpen, modalType }) => {
@@ -8,7 +8,7 @@ const BuyCoinModal = ({ setModalOpen, modalType }) => {
     <div>
       <div className=" z-50 text-[14px] bg-[] w-full font-ttfirs fixed  top-0 right-0 h-screen flex items-center justify-center">
         <div className=" bg-[#22252D]/90  z-0 text-[14px] w-full font-ttfirs fixed  top-0 right-0 h-screen flex items-center justify-center " />
-        <div className=" w-full z-2 max-w-[350px] p-4 mx-auto bg-[#171717] backdrop-blur-xl  rounded-3xl  border  border-[#393939]">
+        <div className=" w-full z-2 max-w-[350px] p-4 mx-auto bg-[#171717] backdrop-blur-xl  rounded-3xl ">
           <div className="w-full flex justify-end">
             <button
               onClick={() => {

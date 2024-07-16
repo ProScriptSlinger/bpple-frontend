@@ -134,6 +134,8 @@ const CommunityInputFooter = () => {
       );
       if (response) {
         setUploading(false);
+
+        console.log("sennt ======>", response);
         if (socket.current) {
           socket.current.emit("user-sent-message-to-community", {
             ...messageData,
@@ -145,6 +147,7 @@ const CommunityInputFooter = () => {
       }
     } catch (error) {
       setUploading(false);
+
       console.log(error);
     }
   };
@@ -221,14 +224,14 @@ const CommunityInputFooter = () => {
 
           <div className="relative w-[97%] h-[50px]">
             <input
-              className="w-full border-[#4C4C4C] h-full bg-[#131313] outline-none border  rounded-[14px] pl-[150px] pr-[50px] placeholder-[#4C4C4C]"
+              className="w-full border-[#4C4C4C] h-full bg-[#131313] outline-none border  rounded-[14px] px-[70px] placeholder-[#4C4C4C]"
               placeholder="Write your message to group"
               onChange={handleIstyping}
               value={text}
               onKeyPress={(e) => handleKeyPress(e)}
             />
-            <div className="absolute left-0 h-full w-fit top-0 items-center justify-center inline-flex">
-              {/* <div className=" flex  relative">
+            <div className="absolute left-0 h-full w-[70px] top-0 items-center justify-center inline-flex">
+              <div className=" flex  relative">
                 <button onClick={() => setUpload(!upload)}>
                   <Image
                     width={0}
@@ -259,17 +262,7 @@ const CommunityInputFooter = () => {
                       onKeyPress={handleKeyPress}
                     />
                   </button>
-                </div> */}
-
-              <div className="rounded-full ml-4 bg-[#6D6D6D] flex items-center gap-2 p-1 px-4">
-                <Image
-                  width={0}
-                  height={0}
-                  alt=""
-                  src="/community/icons/lock.svg"
-                  className="w-[20px] h-auto"
-                />
-                <p className="text-white text-[15px] mt-1">Menu</p>
+                </div>
               </div>
               <button
                 onClick={() => setEmojiPickerVisible(!emojiPickerVisible)}
@@ -283,9 +276,8 @@ const CommunityInputFooter = () => {
                 />
               </button>
             </div>
-          </div>
-          <div className="absolute right-0 h-full w-[70px] top-0 items-center justify-center inline-flex">
-            {/* <button onClick={() => setCallActionModal(!callActionModal)}>
+            <div className="absolute right-0 h-full w-[70px] top-0 items-center justify-center inline-flex">
+              <button onClick={() => setCallActionModal(!callActionModal)}>
                 <Image
                   width={0}
                   height={0}
@@ -293,19 +285,20 @@ const CommunityInputFooter = () => {
                   src="/icon/mic.svg"
                   className="w-[15px] h-auto mr-[10px]"
                 />
-              </button> */}
-            <button
-              onClick={onSend}
-              className="bg-[#3772FF] ml-[5px] p-[10px] rounded-full mr-[30px]"
-            >
-              <Image
-                width={0}
-                height={0}
-                alt=""
-                src="/community/icons/arrow-right.svg"
-                className="w-[20px] h-auto"
-              />
-            </button>
+              </button>
+              <button
+                onClick={onSend}
+                className="bg-[#3772FF] ml-[5px] p-[10px] rounded-[7px] mr-[10px]"
+              >
+                <Image
+                  width={0}
+                  height={0}
+                  alt=""
+                  src="/icon/send.svg"
+                  className="w-[15px] h-auto"
+                />
+              </button>
+            </div>
           </div>
         </div>
       </>

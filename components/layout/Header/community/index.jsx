@@ -282,10 +282,8 @@ const CommunityHeader = (props) => {
                     </div>
                     <div className="flex gap-1">
                       <p className="text-[#7A7A7A] text-[11.65px]">
-                        {channel
-                          ? channel
-                          : community?.members &&
-                            ` ${Object.keys(community?.members).length} `}
+                        {community?.members &&
+                          ` ${Object.keys(community?.members).length} `}
                       </p>
                       <Image
                         src="/community/icons/user_icon_green.svg"
@@ -614,7 +612,7 @@ const CommunityHeader = (props) => {
           </div>
         </div>
         {isChartOpened && (
-          <div className="w-full h-[400px] bg-[#1C1C1C] absolute top-[140px] z-50">
+          <div className="w-full h-[400px] bg-[#1C1C1C] absolute top-[110px] z-50">
             <ChartTable />
           </div>
         )}

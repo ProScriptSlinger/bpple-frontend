@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { BlueBtn } from "../Trending/Item";
-import { FontBtn } from "../Trending";
+// import { FontBtn } from "../Trending";
 
 export const SpinBox = (props) => {
   const { checked } = props;
@@ -113,7 +113,7 @@ const NewLaunch = () => {
         <div className="text-[35px]">New Launch</div>
         <div className="flex gap-4  transition-all">
           <SpinBox />
-          <FontBtn content="Refresh" />
+          {/* <FontBtn content="Refresh" /> */}
         </div>
       </div>
       <div className="overflow-auto w-full flex flex-col gap-4 mt-[20px] relative">
