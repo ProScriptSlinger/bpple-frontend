@@ -1,6 +1,24 @@
 import Image from "next/image";
+import { useUser } from "../../context/appContext";
+import { useWalletInfo } from "@web3modal/wagmi/react";
+import { useEffect } from "react";
 
 const Header = () => {
+  const {
+    address,
+    pending,
+    isConnecting,
+    isConnected,
+    isDisconnected,
+    open,
+    status,
+  } = useUser();
+
+  useEffect(() => {
+    console.log("wallet status ------->", status);
+  }, []);
+
+  const { walletInfo } = useWalletInfo();
   const CommunityCard = () => {
     return (
       <div className="hidden md:block">
@@ -54,9 +72,30 @@ const Header = () => {
         />
         <CommunityCard />
       </div>
-      <div className="cursor-pointer w-[197px] h-[57px] px-4 py-3 rounded-[90px] border hover:bg-[#17181A] border-blue-500 justify-center items-center gap-3 inline-flex">
+      <div
+        onClick={() => open({ view: address ? "Account" : "Networks" })}
+        className="cursor-pointer w-[197px] h-[57px] px-4 py-3 rounded-[90px] border hover:bg-[#17181A] border-blue-500 justify-center items-center gap-3 inline-flex"
+      >
         <div className="text-center text-white text-sm font-bold font-['Poppins']  leading-none">
-          Connect Wallet
+          {walletInfo?.icon && (
+            <img
+              src={walletInfo.icon}
+              alt={"logo"}
+              className="w-[25px] h-auto"
+            />
+          )}
+          {(status == "connecting" || status == "reconnecting") && (
+            <div className="ml-[7px] mr-[7px]">Connect Wallet</div>
+          )}
+          {/* {pending && <div className="ml-[7px] mr-[7px]">Loading...</div>} */}
+          {status == "disconnected" && (
+            <div className="ml-[7px] mr-[7px]">Connect Wallet</div>
+          )}
+          {status == "connected" && address && (
+            <div className="ml-[7px] mr-[7px]">
+              {`${address.slice(0, 5)}...${address.slice(-5)}`}
+            </div>
+          )}
         </div>
       </div>
     </div>

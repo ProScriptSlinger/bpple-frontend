@@ -5,6 +5,7 @@ import { useUser } from "../../context/appContext";
 
 import { handleEndpoint } from "../../utils/api/handleEndpoint";
 import Link from "next/link";
+import { disconnect } from "process";
 
 const withAuth = (WrappedComponent) => {
   const Wrapper = (props) => {
@@ -17,6 +18,7 @@ const withAuth = (WrappedComponent) => {
       getUserByAddress,
       address,
       isConnected,
+      disconnect,
     } = useUser();
     const [newModal, setModal] = useState(false);
 
@@ -109,6 +111,7 @@ const Modal = ({ newModal, setModal, address, router }) => {
   const handleLogout = async () => {
     setUserDetail(null);
     // router.push("/auth");
+    disconnect();
     setLogout(false);
     localStorage.clear();
   };

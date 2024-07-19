@@ -12,21 +12,6 @@ import Content from "@/components/auth/Content";
 import Footer from "@/components/auth/Footer";
 const Auth = () => {
   const router = useRouter();
-  const [iconLoading, setIconLoading] = useState(true);
-
-  const { address, pending, isConnecting, isConnected, isDisconnected, open } =
-    useUser();
-
-  const { walletInfo } = useWalletInfo();
-
-  const handlenavigation = (to) => router.push(to);
-
-  // const handleClick = () => {
-  //   if (!isConnected) {
-  //     solanaConnect();
-  //   }
-  // };
-
   return (
     <div className="bg-cover bg-no-repeat bg-[url('/images/gradient_bg.svg')] bg-right-bottom min-h-[100vh] p-1 sm:p-[30px] sm:px-[60px] flex items-center justify-center relative">
       <div className="bg-stone-950 rounded-[32px] shadow-inner border border-neutral-500 backdrop-blur-[100px] h-full w-full max-w-[2000px]">
@@ -39,7 +24,7 @@ const Auth = () => {
         width={0}
         height={0}
         src={"/images/01.png"}
-        className="w-[80vw] lg:w-[60vw] h-[800px] absolute top-[40px] left-[200px] lg:left-[100px] opacity-30"
+        className="w-[80vw] lg:w-[70vw] h-[900px] absolute top-[40px] left-[200px] lg:left-[100px] opacity-30"
       />
     </div>
   );

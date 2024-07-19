@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { handleEndpoint } from "../utils/api/handleEndpoint";
 import { toast } from "react-toastify";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
-import { useAccount } from "wagmi";
+import { useAccount, useDisconnect } from "wagmi";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 
 const AuthContext = createContext();
@@ -26,10 +26,12 @@ export function AuthProvider({ children }) {
   const [user_group_messages, setUser_group_messages] = useState({});
   const [community_messages, setCommunity_messages] = useState({});
   const [communities, setCommunities] = useState([]);
+  const { disconnect } = useDisconnect();
 
   const [currentCommunity, setCurrentCommunity] = useState(null);
 
-  const { address, isConnecting, isConnected, isDisconnected } = useAccount();
+  const { address, isConnecting, isConnected, isDisconnected, status } =
+    useAccount();
   const { open } = useWeb3Modal();
 
   const getUserByAddress = async () => {
@@ -284,6 +286,7 @@ export function AuthProvider({ children }) {
     isConnecting,
     isConnected,
     isDisconnected,
+    disconnect,
     open,
     setPending,
     communities,
@@ -291,6 +294,7 @@ export function AuthProvider({ children }) {
     // solanaConnect,
     currentCommunity,
     setCurrentCommunity,
+    status,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
