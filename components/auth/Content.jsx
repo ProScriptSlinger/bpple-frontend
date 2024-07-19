@@ -25,7 +25,7 @@ const Content = () => {
     );
   };
   return (
-    <div className="flex-col md:flex-col md:flex lg:flex-col xl:flex-row  justify-between items-center xl:items-start 2xl:items-center pr-6 pl-0 2xl:px-[60px] pb-4 min-h-[65vh] h-fit">
+    <div className="flex-col md:flex-col md:flex lg:flex-col xl:flex-row  justify-between items-center xl:items-start 2xl:items-center pr-0 lg:-6 pl-0 2xl:px-[60px] pb-4 min-h-[65vh] h-fit">
       <div className="pt-10 pl-4 sm:pt-20 sm:pl-9  w-full">
         <div className="flex items-center justify-between ">
           <div className="flex flex-col w-full 2xl:text-[93px] 2xl:leading-[93px]  md:text-[70px] md:leading-[70px] text-[50px] leading-[50px]">
@@ -65,7 +65,7 @@ const Content = () => {
       </div>
       <div className="flex w-full md:w-fit justify-center xl:justify-start">
         <div className="flex flex-col w-fit ">
-          <div className="mt-4 w-[371px] md:w-[505px] mb-16 md:mb-0 2xl:w-[567px] h-fit p-[20px] bg-neutral-900 rounded-[40px] border border-gray-800 flex-col inline-flex overflow-hidden items-center">
+          <div className="mt-4 w-[371px] md:w-[505px] mb-16 md:mb-0 2xl:w-[567px] h-fit p-[5px] md:p-[20px] bg-neutral-900 rounded-[40px] border border-gray-800 flex-col inline-flex overflow-hidden items-center">
             <Grid />
             <Image
               width={0}
