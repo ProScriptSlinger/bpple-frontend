@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useUser } from "../../../context/appContext";
-import { userFindDmById } from "../../../hooks/userFindDmById";
+import { useDMsById } from "@/hooks/useDMsById";
 import { useParams } from "next/navigation";
 import MessageComponent from "../../../components/community/Message";
 import { useSettingModal } from "../../../context/communitysetting";
@@ -18,10 +18,10 @@ const Page = () => {
   const { id } = useParams();
   const { chats, userDetail } = useUser();
   const { user_messages } = useSocket();
-  const [chat, setChat] = useState(null);
+  // const [chat, setChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [stored_messages, setStored_Messages] = useState([]);
-  userFindDmById(id, chats, setChat);
+  const [isLoading, chat] = useDMsById(id, chats);
 
   const Message = (index, sender) => {
     if (index === 0) {

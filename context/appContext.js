@@ -152,107 +152,106 @@ export function AuthProvider({ children }) {
     }
   };
 
-  useEffect(() => {
-    const getUserData = async () => {
-      if (userDetail) {
-        try {
-          const communityResponse = await handleEndpoint(
-            null,
-            `community/${userDetail._id}/user`,
-            "get",
-            null
-          );
+  const getUserData = async () => {
+    if (userDetail) {
+      try {
+        const communityResponse = await handleEndpoint(
+          null,
+          `community/${userDetail._id}/user`,
+          "get",
+          null
+        );
 
-          if (communityResponse) {
-            setCommunities(communityResponse);
-            console.log("Communities updated", communityResponse);
-          }
-        } catch (error) {
-          console.error("Error fetching communities:", error);
+        if (communityResponse) {
+          setCommunities(communityResponse);
+          console.log("Communities updated", communityResponse);
         }
-
-        try {
-          const receivedResponse = await handleEndpoint(
-            null,
-            `friend-request/received/${userDetail._id}/user`,
-            "get",
-            null
-          );
-
-          if (receivedResponse.ok) {
-            setFriendRequestsReceived(receivedResponse.requests);
-            // console.log("Friend requests received updated", receivedResponse);
-          }
-        } catch (error) {
-          console.error("Error fetching received friend requests:", error);
-        }
-
-        try {
-          const receivedResponse = await handleEndpoint(
-            null,
-            `request/received/${userDetail._id}/user`,
-            "get",
-            null
-          );
-
-          if (receivedResponse.ok) {
-            setRequestsReceived(receivedResponse.requests);
-            // console.log("Requests received updated", receivedResponse);
-          }
-        } catch (error) {
-          console.error("Error fetching received friend requests:", error);
-        }
-
-        try {
-          const sentResponse = await handleEndpoint(
-            null,
-            `friend-request/sent/${userDetail._id}/user`,
-            "get",
-            null
-          );
-
-          if (sentResponse.ok) {
-            setFriendRequestsSent(sentResponse.requests);
-            console.log("Friend requests sent updated", sentResponse);
-          }
-        } catch (error) {
-          console.error("Error fetching sent friend requests:", error);
-        }
-
-        try {
-          const sentResponse = await handleEndpoint(
-            null,
-            `request/sent/${userDetail._id}/user`,
-            "get",
-            null
-          );
-
-          if (sentResponse.ok) {
-            setRequestsSent(sentResponse.requests);
-            console.log("Requests sent updated", sentResponse);
-          }
-        } catch (error) {
-          console.error("Error fetching sent requests:", error);
-        }
-
-        try {
-          const chatResponse = await handleEndpoint(
-            null,
-            `chat/${userDetail.user_id}`,
-            "get",
-            null
-          );
-
-          if (chatResponse) {
-            setChats(chatResponse);
-            console.log("Chats updated", chatResponse);
-          }
-        } catch (error) {
-          console.error("Error fetching chats:", error);
-        }
+      } catch (error) {
+        console.error("Error fetching communities:", error);
       }
-    };
 
+      try {
+        const receivedResponse = await handleEndpoint(
+          null,
+          `friend-request/received/${userDetail._id}/user`,
+          "get",
+          null
+        );
+
+        if (receivedResponse.ok) {
+          setFriendRequestsReceived(receivedResponse.requests);
+          // console.log("Friend requests received updated", receivedResponse);
+        }
+      } catch (error) {
+        console.error("Error fetching received friend requests:", error);
+      }
+
+      try {
+        const receivedResponse = await handleEndpoint(
+          null,
+          `request/received/${userDetail._id}/user`,
+          "get",
+          null
+        );
+
+        if (receivedResponse.ok) {
+          setRequestsReceived(receivedResponse.requests);
+          // console.log("Requests received updated", receivedResponse);
+        }
+      } catch (error) {
+        console.error("Error fetching received friend requests:", error);
+      }
+
+      try {
+        const sentResponse = await handleEndpoint(
+          null,
+          `friend-request/sent/${userDetail._id}/user`,
+          "get",
+          null
+        );
+
+        if (sentResponse.ok) {
+          setFriendRequestsSent(sentResponse.requests);
+          console.log("Friend requests sent updated", sentResponse);
+        }
+      } catch (error) {
+        console.error("Error fetching sent friend requests:", error);
+      }
+
+      try {
+        const sentResponse = await handleEndpoint(
+          null,
+          `request/sent/${userDetail._id}/user`,
+          "get",
+          null
+        );
+
+        if (sentResponse.ok) {
+          setRequestsSent(sentResponse.requests);
+          console.log("Requests sent updated", sentResponse);
+        }
+      } catch (error) {
+        console.error("Error fetching sent requests:", error);
+      }
+
+      try {
+        const chatResponse = await handleEndpoint(
+          null,
+          `chat/${userDetail.user_id}`,
+          "get",
+          null
+        );
+
+        if (chatResponse) {
+          setChats(chatResponse);
+          console.log("Chats updated", chatResponse);
+        }
+      } catch (error) {
+        console.error("Error fetching chats:", error);
+      }
+    }
+  };
+  useEffect(() => {
     getUserData();
   }, [userDetail]);
 
@@ -312,6 +311,7 @@ export function AuthProvider({ children }) {
     // solanaConnect,
     currentCommunity,
     setCurrentCommunity,
+    getUserData,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

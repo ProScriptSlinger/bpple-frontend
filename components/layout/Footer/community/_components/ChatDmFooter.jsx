@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useSettingModal } from "../../../../../context/communitysetting";
 import { useUser } from "../../../../../context/appContext";
 import { useParams, usePathname } from "next/navigation";
-import { userFindDmById } from "../../../../../hooks/userFindDmById";
+import { useDMsById } from "../../../../../hooks/useDMsById";
 import { handleEndpoint } from "../../../../../utils/api/handleEndpoint";
 import { useSocket } from "../../../../../context/socketContext";
 
@@ -45,7 +45,7 @@ const ChatDmFooter = () => {
 
   const { id } = useParams();
   const pathname = usePathname();
-  userFindDmById(id, chats, setChat);
+  useDMsById(id, chats, setChat);
 
   const handleIstyping = (e) => {
     setText(e.target.value);

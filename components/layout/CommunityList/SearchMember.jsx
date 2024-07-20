@@ -3,14 +3,18 @@ import Image from "next/image";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { handleEndpoint } from "@/utils/api/handleEndpoint";
 import { useUser } from "@/context/appContext";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const SearchMember = (props) => {
   const [search, setSearch] = useState("");
   const [foundUsers, setFoundUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [activeUser, setActiveUser] = useState();
-  const { userDetail } = useUser();
+  const { userDetail, getUserData } = useUser();
+  console.log("userDetail ------>", userDetail);
   const { siderWidth } = props;
+  const router = useRouter();
 
   const fetchUsers = async () => {
     try {
@@ -30,14 +34,30 @@ const SearchMember = (props) => {
     }
   };
 
+  const handleAddChart = async (_id) => {
+    setLoading(true);
+    console.log("userId ----->", _id);
+    const res = await handleEndpoint(
+      null,
+      `chat/add-chat/${userDetail._id}-${_id}`,
+      "post",
+      null
+    );
+    await getUserData();
+    console.log("handleAddChart ------>", res);
+    props.setVisibleSearch(false);
+    setLoading(false);
+    router.push(`/chats/${res.dmID}`);
+  };
+
   const UserItem = (props) => {
-    const { username, avatar, onClick, user_id } = props;
+    const { username, avatar, onClick, _id } = props;
     return (
       <>
         <button
-          onClick={() => onClick(user_id)}
+          onClick={() => onClick(_id)}
           className={`w-full h-[60px] inline-flex justify-between bg-[#3772FF] mb-[5px] px-[12px] py-[5px] hover:bg-opacity-5 focus:bg-opacity-5 ${
-            activeUser == user_id ? "border-[#9D9D9D] border-[1px]" : ""
+            activeUser == _id ? "border-[#9D9D9D] border-[1px]" : ""
           }  bg-opacity-5 rounded-[10px] items-center`}
         >
           <div className="inline-flex items-center">
@@ -108,7 +128,7 @@ const SearchMember = (props) => {
             foundUsers.map(
               (item, index) =>
                 userDetail._id !== item._id && (
-                  <UserItem onClick={setActiveUser} key={index} {...item} />
+                  <UserItem onClick={handleAddChart} key={index} {...item} />
                 )
             )
           ) : (

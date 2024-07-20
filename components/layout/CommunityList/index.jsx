@@ -209,40 +209,6 @@ const CommunityList = (props) => {
   } = useSettingModal();
   const [selectCommunityType, setSelectCommunityType] = useState(false);
   const [transition, setTransition] = useState(true);
-  const comList = [
-    {
-      _id: "id_1",
-      id: "id_1",
-      name: "A Test",
-      tredingStat: "up",
-      avatar: "/community/icons/com_icon.svg",
-      unreadMessage: "false",
-    },
-    {
-      _id: "id_2",
-      id: "id_2",
-      name: "B Test",
-      tredingStat: "down",
-      avatar: "/community/icons/com_icon.svg",
-      unreadMessage: "false",
-    },
-    {
-      _id: "id_3",
-      id: "id_3",
-      name: "C Test",
-      tredingStat: "no",
-      avatar: "/community/icons/com_icon.svg",
-      unreadMessage: "false",
-    },
-    {
-      _id: "id_4",
-      id: "id_4",
-      name: "D Test",
-      tredingStat: "no",
-      avatar: "/community/icons/com_icon.svg",
-      unreadMessage: "false",
-    },
-  ];
 
   const Components = (props) => {
     const [hover, setHover] = useState(false);
@@ -385,7 +351,7 @@ const CommunityList = (props) => {
     setColId(colId);
   };
 
-  const [visibleSearch, setVisibleSeach] = useState(false);
+  const [visibleSearch, setVisibleSearch] = useState(false);
 
   if (pathName.includes(`/join/`)) return;
 
@@ -428,7 +394,7 @@ const CommunityList = (props) => {
                   height={0}
                   alt=""
                   className="w-[35px] h-[35px] mr-[8px] cursor-pointer hover:opacity-70"
-                  onClick={() => setVisibleSeach(!visibleSearch)}
+                  onClick={() => setVisibleSearch(!visibleSearch)}
                 />
                 <div className="relative h-fit flex flex-col justify-center">
                   <button
@@ -522,7 +488,10 @@ const CommunityList = (props) => {
             </div> */}
             {visibleSearch ? (
               <>
-                <SearchMember siderWidth={siderWidth} />
+                <SearchMember
+                  siderWidth={siderWidth}
+                  setVisibleSearch={setVisibleSearch}
+                />
               </>
             ) : (
               <>
