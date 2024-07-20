@@ -18,7 +18,6 @@ const NftUnListModal = () => {
   const xKey = process.env.NEXT_PUBLIC_API_KEY.toString();
   const endPoint = process.env.NEXT_PUBLIC_API_ENDPOINT;
   const marketplaceAddress = process.env.NEXT_PUBLIC_MARKETPLACE_ADDRESS;
-  console.log("selected NFT ------> ", selectedNFT);
   const handleList = () => {
     setIsLoading(true);
     const nftUrl = `${endPoint}marketplace/unlist`;
@@ -101,7 +100,7 @@ const NftUnListModal = () => {
               Are you sure you want to Unlist this NFT?
             </p>
             <button
-              className="w-full h-[40px] bg-[#3772FF] text-black font-bold rounded-full text-[13px] mt-[80px] flex justify-center items-center"
+              className="w-full h-[40px] bg-[#3772FF] text-white font-bold rounded-full text-[13px] mt-[80px] flex justify-center items-center"
               onClick={handleList}
             >
               {isLoading ? (

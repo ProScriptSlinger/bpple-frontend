@@ -107,7 +107,7 @@ const Page = () => {
               ))}
             </div>
           </div>
-          <p className="text-[20px]">Explore New Communities</p>
+          {/* <p className="text-[20px]">Explore New Communities</p>
           <div className="w-full mt-[20px] relative h-[250px] overflow-auto">
             <div className="w-full overflow-auto inline-flex gap-[10px] absolute">
               {explorer.map((item, index) => (
@@ -116,7 +116,7 @@ const Page = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
           <div className="w-full inline-flex justify-between items-center">
             <p className="text-[20px]">Explore New Projects</p>
             <div className="w-[150px] h-[40px] bg-[#2B2B2B] bg-opacity-65 rounded-[10px] flex items-center justify-center">

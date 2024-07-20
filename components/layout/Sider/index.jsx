@@ -5,29 +5,27 @@ import { usePathname, useRouter } from "next/navigation";
 import SiderList from "./sider";
 import { useUser } from "../../../context/appContext";
 import { getNameInitials } from "../../../utils/functions/getNameInitials";
-import { useWalletInfo, useWeb3Modal } from "@web3modal/wagmi/react";
+// import { useWalletInfo, useWeb3Modal } from "@web3modal/wagmi/react";
 import { useSiderBar } from "../../../context/siderbar";
 import { updateGreeting } from "../../../utils/functions/userFunctions";
+import { usePrivy, useWallets } from "@privy-io/react-auth";
 
 const Sider = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const { wallets } = useWallets();
+  // const wallet = wallets[0]?.meta?.icon ? wallets[0] : wallets[1];
+  const wallet = wallets[0];
   // const [siderWidth, setSiderWidth] = useState(300);
   const [logout, setLogout] = useState(false);
   const [loading1, setLoading1] = useState(false);
   const [loading2, setLoading2] = useState(false);
   const [closeButton, setCloseButton] = useState(true);
   const [transition, setTransition] = useState(true);
-  const {
-    setUserDetail,
-    userDetail,
-    address,
-    isConnecting,
-    isDisconnected,
-    disconnect,
-  } = useUser();
 
-  const { walletInfo } = useWalletInfo();
+  const { setUserDetail, userDetail, address, disconnect } = useUser();
+
+  // const { walletInfo } = useWalletInfo();
 
   const { sideBarCloseButton, siderWidth, handleCloseSiderBar } = useSiderBar();
   const handleOpenLogout = () => {
@@ -101,7 +99,7 @@ const Sider = () => {
               <button
                 className={`mt-[35px] inline-flex w-full transition-all duration-100 justify-center
                 `}
-                onClick={() => router.push("/setting")}
+                // onClick={() => router.push("/setting")}
               >
                 <div className="w-[40px]">
                   {loading1 && (
@@ -167,27 +165,30 @@ const Sider = () => {
                   onClick={() => handleCopy(address)}
                   className={`px-[7px] mb-[20px] h-[40px] rounded-full border border-[#535353] inline-flex items-center justify-center font-ttfirs text-[12px] mt-[15px] transition-all duration-100`}
                 >
-                  {walletInfo?.icon && (
+                  {wallet && (
                     <img
-                      src={walletInfo.icon}
-                      alt={"logo"}
+                      src={wallet?.meta?.icon}
+                      alt={"wallet icon"}
                       className="w-[25px] h-auto"
                     />
                   )}
                   <div className="fixed p-2 px-2 h-[40px] flex items-center rounded-lg left-[70px] side-item-des bg-[#3772FF] bg-opacity-35 ">
-                    {isConnecting && (
+                    {/* {isConnecting && (
                       <div className="ml-[7px] mr-[7px]">Connecting…</div>
                     )}
                     {isDisconnected && (
                       <div className="ml-[7px] mr-[7px]">Connect Wallet</div>
-                    )}
-                    {address && (
+                    )} */}
+                    {wallet && (
                       <div className="ml-[7px] mr-[7px]">
-                        {`${address.slice(0, 5)}...${address.slice(-5)}`}
+                        {`${wallet.address.slice(
+                          0,
+                          5
+                        )}...${wallet.address.slice(-5)}`}
                       </div>
                     )}
 
-                    {address && (
+                    {wallet && (
                       <Image
                         src="/icon/copy.svg"
                         width={0}
@@ -243,7 +244,7 @@ const Sider = () => {
                 Cancel
               </button>
               <button
-                className="w-[120px] h-[45px] bg-[#3772FF] rounded-full text-black text-[14px] font-bold hover:opacity-70"
+                className="w-[120px] h-[45px] bg-[#3772FF] rounded-full text-white text-[14px] font-bold hover:opacity-70"
                 onClick={handleLogout}
               >
                 Logout

@@ -7,11 +7,7 @@ import { useUser } from "../../../context/appContext";
 import { getNameInitials } from "../../../utils/functions/getNameInitials";
 import { useSocket } from "../../../context/socketContext";
 import Link from "next/link";
-// import icons
-import { HiOutlineCollection } from "react-icons/hi";
-import { RiNftLine } from "react-icons/ri";
-import { useShyft } from "@/context/shyftContext";
-import { RiPlayListAddFill } from "react-icons/ri";
+import SearchMember from "./SearchMember";
 
 const ChatList = (props) => {
   const pathName = usePathname();
@@ -45,7 +41,7 @@ const ChatList = (props) => {
               <div
                 className="w-[50px] aspect-square rounded-xl
              bg-[#191919] flex items-center justify-center
-              text-[#4C4C4C] text-[22px]"
+              text-[#4C4C4C] text-[22px] font-bold"
               >
                 {getNameInitials(props?.item?.otherUser?.username ?? "B")}
               </div>
@@ -82,7 +78,7 @@ const ChatList = (props) => {
                 />
               )}
               {props?.item?.unreadMessage !== 0 ? (
-                <div className="px-[5px] py-[2px] rounded-full bg-[#3772FF] text-[10px] text-black">
+                <div className="px-[5px] py-[2px] rounded-full bg-[#3772FF] text-[10px] text-white">
                   {props.item.unreadMessage}
                 </div>
               ) : (
@@ -107,7 +103,8 @@ const GroupList = (props) => {
   const pathName = usePathname();
   return (
     <>
-      <button
+      <Link
+        href={`/chats/groups/${props?.group?._id}`}
         className={`w-full h-[60px] inline-flex ${
           props.siderWidth < 188 ? "justify-center" : "justify-between"
         } mb-[5px] px-[12px] py-[5px] hover:bg-[#3772FF] hover:bg-opacity-5 focus:bg-[#3772FF] focus:bg-opacity-5 ${
@@ -115,9 +112,6 @@ const GroupList = (props) => {
             ? "bg-[#3772FF] bg-opacity-5"
             : ""
         } rounded-[10px] items-center`}
-        onClick={() => {
-          router.push(`/chats/groups/${props?.group?._id}`);
-        }}
       >
         <div className="inline-flex items-center">
           {props.group?.avatar ? (
@@ -174,7 +168,7 @@ const GroupList = (props) => {
               />
             )}
             {props?.group?.unreadMessage !== (0 || null) ? (
-              <div className="px-[5px] py-[2px] rounded-full bg-[#3772FF] text-[10px] text-black">
+              <div className="px-[5px] py-[2px] rounded-full bg-[#3772FF] text-[10px] text-white">
                 {props?.group?.unreadMessage}
               </div>
             ) : (
@@ -188,7 +182,7 @@ const GroupList = (props) => {
             )}
           </div>
         </div>
-      </button>
+      </Link>
     </>
   );
 };
@@ -262,15 +256,13 @@ const CommunityList = (props) => {
           <span className="tooltip ml-[100px] w-[150px] mt-[-2px] h-[50px] rounded-[12px] bg-[#3772FF] backdrop-blur-xl bg-opacity-35 p-1 text-left font-normal text-white shadow-lg flex items-center justify-center text-[14px]">
             {props.item.name}
           </span>
-          <button
+          <Link
+            href={`/community/${props.item._id}`}
             className={`w-full flex items-center justify-center mt-[17px] relative hover:opacity-70 ${
               props.item.id === "id_3"
                 ? "border-r-[3px] border-r-[#3772FF] rounded-l-full"
                 : ""
             } `}
-            onClick={() => {
-              router.push(`/community/${props.item._id}`);
-            }}
           >
             <div className="relative">
               <Image
@@ -302,8 +294,8 @@ const CommunityList = (props) => {
             {props.item?.avatar == null && (
               <div
                 className="w-[45px] aspect-square rounded-xl
-             bg-[#191919] flex items-center justify-center
-              text-[#4C4C4C] text-[22px]"
+             bg-[#1f1f1f] flex items-center justify-center
+              text-[#8f8e8e] text-[22px] font-bold"
               >
                 {getNameInitials(props.item?.name ?? "B")}
               </div>
@@ -326,14 +318,13 @@ const CommunityList = (props) => {
                 <div className="absolute border-r-[3px] rounded-l-full border-r-[#3772FF] h-full right-0"></div>
               </>
             ) : null}
-          </button>
+          </Link>
         </div>
       </>
     );
   };
   let handle = document.querySelector(".resize-handle1");
   let sidebar = document.querySelector(".resize-current1");
-  const { createMarketplace } = useShyft();
 
   const [change, setChange] = useState(true);
 
@@ -384,8 +375,6 @@ const CommunityList = (props) => {
     };
   }, [change]);
 
-  const { setColId } = useShyft();
-
   const handleSetColId = () => {
     // Split the pathName string into an array of parts
     const parts = pathName.split("/");
@@ -395,6 +384,8 @@ const CommunityList = (props) => {
 
     setColId(colId);
   };
+
+  const [visibleSearch, setVisibleSeach] = useState(false);
 
   if (pathName.includes(`/join/`)) return;
 
@@ -436,38 +427,15 @@ const CommunityList = (props) => {
                   width={0}
                   height={0}
                   alt=""
-                  className="w-[35px] h-auto mr-[8px]"
+                  className="w-[35px] h-[35px] mr-[8px] cursor-pointer hover:opacity-70"
+                  onClick={() => setVisibleSeach(!visibleSearch)}
                 />
-                <button
-                  onClick={() => {
-                    setDropdown(!dropdown);
-                  }}
-                  className="hover:opacity-70 transition-all duration-100"
-                >
-                  <Image
-                    src="/icon/create_chat.svg"
-                    width={0}
-                    height={0}
-                    alt=""
-                    className="w-[35px] h-auto"
-                  />
-                </button>
-              </div>
-            </div>
-            <div
-              className={`flex flex-col ${
-                siderWidth < 100 && "justify-center w-full"
-              }`}
-            >
-              <div
-                className={`flex ${
-                  siderWidth < 193 && "justify-center w-full"
-                }`}
-              >
-                <div className="relative">
+                <div className="relative h-fit flex flex-col justify-center">
                   <button
-                    className="w-[50px] aspect-square rounded-full bg-[#3772FF] bg-opacity-20 flex items-center justify-center mt-[20px] hover:opacity-70 transition-all"
-                    onClick={() => setDropdown(!dropdown)}
+                    onClick={() => {
+                      setDropdown(!dropdown);
+                    }}
+                    className="hover:opacity-70 transition-all duration-100 w-[35px] h-[35px] flex justify-center items-center bg-[#3D3A3A] rounded-full"
                   >
                     <Image
                       src="/icon/plus.svg"
@@ -478,7 +446,7 @@ const CommunityList = (props) => {
                     />
                   </button>
                   {dropdown && (
-                    <div className="absolute right-[-185px] top-[20px] w-[160px] bg-[#434343] bg-opacity-[36%] rounded-[10px] px-[20px] py-[10px] backdrop-blur z-20">
+                    <div className="absolute right-[-175px] top-[10px] w-[160px] bg-[#434343] bg-opacity-[70%] rounded-[10px] px-[20px] py-[10px] backdrop-blur z-20">
                       <button className="inline-flex items-center">
                         <div>
                           <Image
@@ -518,6 +486,32 @@ const CommunityList = (props) => {
                   )}
                 </div>
               </div>
+            </div>
+            {/* <div
+              className={`flex flex-col ${
+                siderWidth < 100 && "justify-center w-full"
+              }`}
+            >
+              <div
+                className={`flex ${
+                  siderWidth < 193 && "justify-center w-full"
+                }`}
+              >
+                <div className="relative">
+                  <button
+                    className="w-[50px] aspect-square rounded-full bg-[#3772FF] bg-opacity-20 flex items-center justify-center mt-[20px] hover:opacity-70 transition-all"
+                    onClick={() => setDropdown(!dropdown)}
+                  >
+                    <Image
+                      src="/icon/plus.svg"
+                      width={0}
+                      height={0}
+                      alt=""
+                      className="w-[17px] h-auto"
+                    />
+                  </button>
+                </div>
+              </div>
               <div
                 className={`flex  ${
                   siderWidth < 193 ? "justify-center w-full ml-0" : "ml-[12px]"
@@ -525,102 +519,109 @@ const CommunityList = (props) => {
               >
                 <p className="text-[12px] text-[#989898] mt-[10px]">Add</p>
               </div>
-            </div>
-
-            <div
-              className={`w-full grid grid-cols-3 gap-[20px] mt-[30px] ${
-                siderWidth < 250 && "hidden"
-              }`}
-            >
-              <button
-                className={`rounded-full  text-[14px] font-bold py-[7px] hover:bg-[#3772FF] hover:bg-opacity-70 transition-all duration-100 ${
-                  category === "chat"
-                    ? "bg-[#3772FF] text-black"
-                    : "text-[#606060]"
-                }`}
-                onClick={() => {
-                  setCategory("chat");
-                }}
-              >
-                Chat
-              </button>
-              <button
-                className={`rounded-full  text-[14px] font-bold py-[7px] hover:bg-[#3772FF] hover:bg-opacity-70 transition-all duration-100 ${
-                  category === "status"
-                    ? "bg-[#3772FF] text-black"
-                    : "text-[#606060]"
-                }`}
-                onClick={() => setCategory("status")}
-              >
-                Status
-              </button>
-              <button
-                className={`rounded-full  text-[14px] font-bold py-[7px] hover:bg-[#3772FF] hover:bg-opacity-70 transition-all duration-100 ${
-                  category === "call"
-                    ? "bg-[#3772FF] text-black"
-                    : "text-[#606060]"
-                }`}
-                onClick={() => {
-                  setCategory("call");
-                }}
-              >
-                Calls
-              </button>
-            </div>
-            <div
-              className={`w-full h-[40px] bg-[#393939] bg-opacity-35 rounded-full inline-flex items-center px-[15px] justify-between mt-[20px] ${
-                siderWidth < 200 && "hidden"
-              }`}
-            >
-              <div className="inline-flex text-[13px] items-center">
-                <div>
+            </div> */}
+            {visibleSearch ? (
+              <>
+                <SearchMember siderWidth={siderWidth} />
+              </>
+            ) : (
+              <>
+                <div
+                  className={`w-full grid grid-cols-3 gap-[20px] mt-[30px] ${
+                    siderWidth < 250 && "hidden"
+                  }`}
+                >
+                  <button
+                    className={`rounded-full  text-[14px] font-bold py-[7px] hover:bg-[#3772FF] hover:text-white hover:bg-opacity-70 transition-all duration-100 ${
+                      category === "chat"
+                        ? "bg-[#3772FF] text-white"
+                        : "text-[#606060]"
+                    }`}
+                    onClick={() => {
+                      setCategory("chat");
+                    }}
+                  >
+                    Chat
+                  </button>
+                  <button
+                    className={`rounded-full  text-[14px] font-bold py-[7px] hover:bg-[#3772FF] hover:text-white hover:bg-opacity-70 transition-all duration-100 ${
+                      category === "status"
+                        ? "bg-[#3772FF] text-white"
+                        : "text-[#606060]"
+                    }`}
+                    onClick={() => setCategory("status")}
+                  >
+                    Status
+                  </button>
+                  <button
+                    className={`rounded-full  text-[14px] font-bold py-[7px] hover:bg-[#3772FF] hover:text-white hover:bg-opacity-70 transition-all duration-100 ${
+                      category === "call"
+                        ? "bg-[#3772FF] text-white"
+                        : "text-[#606060]"
+                    }`}
+                    onClick={() => {
+                      setCategory("call");
+                    }}
+                  >
+                    Calls
+                  </button>
+                </div>
+                <div
+                  className={`w-full h-[40px] bg-[#393939] bg-opacity-35 rounded-full inline-flex items-center px-[15px] justify-between mt-[20px] ${
+                    siderWidth < 200 && "hidden"
+                  }`}
+                >
+                  <div className="inline-flex text-[13px] items-center">
+                    <div>
+                      <Image
+                        src="/icon/archieve.svg"
+                        width={0}
+                        height={0}
+                        alt=""
+                        className="w-[15px] h-auto"
+                      />
+                    </div>
+                    <p className="mt-[3px] ml-[5px]">Archived</p>
+                  </div>
+                  <div className="bg-[#3772FF] text-[12px] text-white px-[7px] rounded-full">
+                    23
+                  </div>
+                </div>
+                <div
+                  className={`w-[140px] h-[40px] mt-[20px] rounded-full border-[1px] border-[#353535] flex items-center px-[20px] text-[12px] text-[#797C7B] ${
+                    siderWidth < 200 && "hidden"
+                  }`}
+                >
                   <Image
-                    src="/icon/archieve.svg"
+                    alt=""
                     width={0}
                     height={0}
-                    alt=""
-                    className="w-[15px] h-auto"
+                    src="/icon/pin.svg"
+                    className="w-[15px] h-auto mr-[10px]"
                   />
+                  Pined Chats
                 </div>
-                <p className="mt-[3px] ml-[5px]">Archived</p>
-              </div>
-              <div className="bg-[#3772FF] text-[12px] text-black px-[7px] rounded-full">
-                23
-              </div>
-            </div>
-            <div
-              className={`w-[140px] h-[40px] mt-[20px] rounded-full border-[1px] border-[#353535] flex items-center px-[20px] text-[12px] text-[#797C7B] ${
-                siderWidth < 200 && "hidden"
-              }`}
-            >
-              <Image
-                alt=""
-                width={0}
-                height={0}
-                src="/icon/pin.svg"
-                className="w-[15px] h-auto mr-[10px]"
-              />
-              Pined Chats
-            </div>
-            <div className="mt-[20px]">
-              {userDetail?.groups?.map((group, index) => (
-                <GroupList
-                  key={index}
-                  usersTyping={usersTyping}
-                  group={group.groupId}
-                  siderWidth={siderWidth}
-                />
-              ))}
-              {chats?.messages?.map((item, index) => (
-                <div key={index}>
-                  <ChatList
-                    usersTyping={usersTyping}
-                    item={item}
-                    siderWidth={siderWidth}
-                  />
+                <div className="mt-[20px]">
+                  {userDetail?.groups?.map((group, index) => (
+                    <GroupList
+                      key={index}
+                      usersTyping={usersTyping}
+                      group={group.groupId}
+                      siderWidth={siderWidth}
+                    />
+                  ))}
+                  {chats?.messages?.map((item, index) => (
+                    <div key={index}>
+                      <ChatList
+                        usersTyping={usersTyping}
+                        item={item}
+                        siderWidth={siderWidth}
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </>
+            )}
           </div>
         </div>
       ) : (

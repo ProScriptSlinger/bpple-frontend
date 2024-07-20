@@ -41,7 +41,7 @@ const InCallModal = ({ cancelCall, callDetails, isMuted, toggleMute }) => {
               className=" gap-1 flex flex-col items-center justify-center"
               onClick={() => toggleMute()}
             >
-              <div className=" w-[50px] text-black h-[50px] rounded-full flex items-center justify-center  bg-[#3772FF]">
+              <div className=" w-[50px] text-white h-[50px] rounded-full flex items-center justify-center  bg-[#3772FF]">
                 {isMuted ? (
                   <CiMicrophoneOn size={24} />
                 ) : (

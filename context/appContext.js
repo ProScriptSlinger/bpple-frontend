@@ -3,9 +3,11 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { handleEndpoint } from "../utils/api/handleEndpoint";
 import { toast } from "react-toastify";
-import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
-import { useAccount, useDisconnect } from "wagmi";
-import { useWeb3Modal } from "@web3modal/wagmi/react";
+// import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
+// import { useAccount, useDisconnect } from "wagmi";
+// import { useWeb3Modal } from "@web3modal/wagmi/react";
+import { usePrivy, useWallets } from "@privy-io/react-auth";
+import { useMemo } from "react";
 
 const AuthContext = createContext();
 
@@ -14,6 +16,7 @@ export function useUser() {
 }
 
 export function AuthProvider({ children }) {
+  const { wallets } = useWallets();
   const [pending, setPending] = useState(true);
   const [userDetail, setUserDetail] = useState(null);
   const [friendRequestsReceived, setFriendRequestsReceived] = useState([]);
@@ -26,13 +29,27 @@ export function AuthProvider({ children }) {
   const [user_group_messages, setUser_group_messages] = useState({});
   const [community_messages, setCommunity_messages] = useState({});
   const [communities, setCommunities] = useState([]);
-  const { disconnect } = useDisconnect();
 
   const [currentCommunity, setCurrentCommunity] = useState(null);
+  const [wallet, setWallet] = useState();
+  const memoizedValues = useMemo(() => {
+    if (wallet) {
+      return {
+        address: wallet.address,
+        disconnect: wallet.disconnect,
+        isConnected: wallet.isConnected,
+      };
+    }
+    return {}; // Return an empty object if wallet is undefined
+  }, [wallet]);
 
-  const { address, isConnecting, isConnected, isDisconnected, status } =
-    useAccount();
-  const { open } = useWeb3Modal();
+  const { address, disconnect, isConnected } = memoizedValues;
+  useEffect(() => {
+    if (wallets[0]) setWallet(wallets[0]);
+  }, [wallets]);
+  // const { address, isConnecting, isConnected, isDisconnected, status } =
+  //   useAccount();
+  // const { open } = useWeb3Modal();
 
   const getUserByAddress = async () => {
     try {
@@ -100,7 +117,7 @@ export function AuthProvider({ children }) {
     };
 
     getUser();
-  }, [address, userDetail]);
+  }, [address, wallets]);
 
   const getUser = async () => {
     try {
@@ -283,18 +300,18 @@ export function AuthProvider({ children }) {
     setChats,
     getUserByAddress,
     address,
-    isConnecting,
+    // connectWallet,
+    // isConnecting,
     isConnected,
-    isDisconnected,
+    // isDisconnected,
     disconnect,
-    open,
+    // open,
     setPending,
     communities,
     getCommunities,
     // solanaConnect,
     currentCommunity,
     setCurrentCommunity,
-    status,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

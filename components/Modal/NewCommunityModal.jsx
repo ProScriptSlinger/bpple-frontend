@@ -420,7 +420,7 @@ const NewCommunityModal = () => {
           </div>
           <div className="h-fit flex flex-col items-center absolute bottom-0 left-0 px-8 w-full bg-[#171717]">
             <button
-              className="w-full mt-4 h-[40px] flex-none text-black disabled:bg-[#212121] disabled:text-[#878787] rounded-[10px] bg-[#3772FF] mb-[20px] bottom-0"
+              className="w-full mt-4 h-[40px] flex-none text-white disabled:bg-[#212121] disabled:text-[#878787] rounded-[10px] bg-[#3772FF] mb-[20px] bottom-0"
               // disabled={disable || creating}
               onClick={handleCreate}
             >

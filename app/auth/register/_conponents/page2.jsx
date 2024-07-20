@@ -38,7 +38,7 @@ const Page2 = ({ onLogin, userData }) => {
         </div>
         <div className="w-full inline-flex justify-center mt-[40px]">
           <button
-            className="w-[250px] h-[40px] bg-[#3772FF] rounded-[12px] text-black font-abeezeeItalic text-[12px] hover:opacity-70 transition-all duration-100"
+            className="w-[250px] h-[40px] bg-[#3772FF] rounded-[12px] text-white font-abeezeeItalic text-[12px] hover:opacity-70 transition-all duration-100"
             onClick={onLogin}
           >
             Log in

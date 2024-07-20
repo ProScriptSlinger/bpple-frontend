@@ -15,7 +15,7 @@ const Friend = () => {
         <button
           className={`px-[30px] pt-[10px] pb-[8px] inline-flex items-center w-[162px] flex-none ${
             category === "add"
-              ? "bg-[#3772FF] text-black"
+              ? "bg-[#3772FF] text-white"
               : "bg-[#1E1E1E] text-[#6D6D6D]"
           } text-[14px] inline-flex font-bold rounded-full mr-[10px]`}
           onClick={() => setCategory("add")}
@@ -42,7 +42,7 @@ const Friend = () => {
         <button
           className={`px-[20px] py-[12px] w-[130px] flex-none ${
             category === "request"
-              ? "bg-[#3772FF] text-black"
+              ? "bg-[#3772FF] text-white"
               : "bg-[#1E1E1E] text-[#6D6D6D]"
           } text-[14px] inline-flex font-bold rounded-full mr-[10px]`}
           onClick={() => setCategory("request")}
@@ -52,7 +52,7 @@ const Friend = () => {
         <button
           className={`px-[20px] py-[12px] w-[153px] flex-none ${
             category === "suggestion"
-              ? "bg-[#3772FF] text-black"
+              ? "bg-[#3772FF] text-white"
               : "bg-[#1E1E1E] text-[#6D6D6D]"
           } text-[14px] inline-flex font-bold rounded-full mr-[10px] items-center`}
           onClick={() => setCategory("suggestion")}
@@ -71,7 +71,7 @@ const Friend = () => {
         <button
           className={`px-[20px] py-[12px] w-[130px] flex-none ${
             category === "requests"
-              ? "bg-[#3772FF] text-black"
+              ? "bg-[#3772FF] text-white"
               : "bg-[#1E1E1E] text-[#6D6D6D]"
           } text-[14px] inline-flex font-bold rounded-full mr-[10px] items-center`}
           onClick={() => setCategory("requests")}
@@ -90,8 +90,8 @@ const Friend = () => {
         <button
           className={`px-[20px] py-[12px] w-[92px] flex-none ${
             category === "blocked"
-              ? "bg-[#3772FF] text-black"
-              : "bg-[#FF5252] bg-opacity-40 text-[#FF5252]"
+              ? "bg-[#3772FF] text-white"
+              : "bg-[#fa6262] bg-opacity-40 text-[#FF5252]"
           } text-[14px] inline-flex font-bold rounded-full mr-[10px]`}
           onClick={() => setCategory("blocked")}
         >

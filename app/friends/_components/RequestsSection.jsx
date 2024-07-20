@@ -115,7 +115,7 @@ const RequestsSection = ({ friendRequestsReceived }) => {
                       handleAcceptFriendRequest(request, request.sender)
                     }
                     disabled={accepting || rejecting}
-                    className=" w-[30px] h-[30px]  disabled:bg-[#282828]  disabled:text-[#6D6D6D] bg-[#3772FF] text-black flex items-center justify-center rounded-full"
+                    className=" w-[30px] h-[30px]  disabled:bg-[#282828]  disabled:text-[#6D6D6D] bg-[#3772FF] text-white flex items-center justify-center rounded-full"
                   >
                     {accepting ? (
                       <AiOutlineLoading3Quarters className=" animate-spin" />

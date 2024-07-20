@@ -1,24 +1,46 @@
+"use client";
 import Image from "next/image";
-import { useUser } from "../../context/appContext";
-import { useWalletInfo } from "@web3modal/wagmi/react";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useEffect } from "react";
+import { useUser } from "@/context/appContext";
+import { useConnectWallet } from "@privy-io/react-auth";
+import { usePrivy, useWallets } from "@privy-io/react-auth";
+import { useRouter } from "next/navigation";
+const Header = (props) => {
+  const router = useRouter();
+  const returnUrl = props.returnUrl;
+  const { wallets, ready } = useWallets();
+  // const wallet = wallets[0]?.meta?.icon ? wallets[0] : wallets[1];
+  const wallet = wallets[0];
+  const { connectWallet } = useConnectWallet({
+    onSuccess: (wallet) => {
+      console.log(wallet);
+      // Any logic you'd like to execute after a user successfully connects their wallet
+      console.log("connected wallet ------>", router);
+      if (returnUrl) {
+        router.push(decodeURIComponent(returnUrl)); // Decode the URL
+      } else router.push("/home");
+      // setAddress(wallet.address);
+    },
+    onError: (error) => {
+      console.log(error);
+      // Any logic you'd like to execute after a user exits the connection flow or there is an error
+    },
+  });
 
-const Header = () => {
-  const {
-    address,
-    pending,
-    isConnecting,
-    isConnected,
-    isDisconnected,
-    open,
-    status,
-  } = useUser();
+  const handleConnect = () => connectWallet();
+  // !wallet
+  //   ? connectWallet()
+  //   : wallet
+  //       .loginOrLink()
+  //       .then(() => router.push("/home"))
+  //       .catch((err) => console.log("err ----->", err));
 
   useEffect(() => {
-    console.log("wallet status ------->", status);
-  }, []);
+    console.log("wallet status ---->", wallets);
+  }, [wallet]);
 
-  const { walletInfo } = useWalletInfo();
+  // console.log()
   const CommunityCard = () => {
     return (
       <div className="hidden md:block">
@@ -72,32 +94,15 @@ const Header = () => {
         />
         <CommunityCard />
       </div>
-      <div
-        onClick={() => open({ view: address ? "Account" : "Networks" })}
+      <button
+        // disabled={!wallets[0]}
+        onClick={() => handleConnect()}
         className="cursor-pointer w-[197px] h-[57px] px-4 py-3 rounded-[90px] border hover:bg-[#17181A] border-blue-500 justify-center items-center gap-3 inline-flex"
       >
         <div className="text-center text-white text-sm font-bold font-['Poppins']  leading-none">
-          {walletInfo?.icon && (
-            <img
-              src={walletInfo.icon}
-              alt={"logo"}
-              className="w-[25px] h-auto"
-            />
-          )}
-          {(status == "connecting" || status == "reconnecting") && (
-            <div className="ml-[7px] mr-[7px]">Connect Wallet</div>
-          )}
-          {/* {pending && <div className="ml-[7px] mr-[7px]">Loading...</div>} */}
-          {status == "disconnected" && (
-            <div className="ml-[7px] mr-[7px]">Connect Wallet</div>
-          )}
-          {status == "connected" && address && (
-            <div className="ml-[7px] mr-[7px]">
-              {`${address.slice(0, 5)}...${address.slice(-5)}`}
-            </div>
-          )}
+          Connect Wallet
         </div>
-      </div>
+      </button>
     </div>
   );
 };

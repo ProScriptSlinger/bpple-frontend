@@ -55,7 +55,7 @@ const NftBuyConfirmModal = (props) => {
                 Cancel
               </button>
               <button
-                className="w-full h-[40px] bg-[#3772FF] text-black font-bold rounded-full text-[13px]"
+                className="w-full h-[40px] bg-[#3772FF] text-white font-bold rounded-full text-[13px]"
                 onClick={() => setNftBuyConfirmModal(false)}
               >
                 Confirm

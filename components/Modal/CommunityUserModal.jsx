@@ -158,7 +158,7 @@ const CommunityUserModal = () => {
               </div>
             </div>
             <button
-              className="mt-[100px] w-full h-[50px] bg-[#3772FF] text-black rounded-[12px] font-bold bottom-0 flex-none"
+              className="mt-[100px] w-full h-[50px] bg-[#3772FF] text-white rounded-[12px] font-bold bottom-0 flex-none"
               onClick={() => setCommunityMemberProfileModal(false)}
             >
               Save

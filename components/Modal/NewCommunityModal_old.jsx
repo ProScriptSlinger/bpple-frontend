@@ -137,7 +137,7 @@ const NewCommunityModal = () => {
                 </p>
               </div>
               <button
-                className="w-full h-[40px] flex-none disabled:bg-[#212121] disabled:text-[#878787] rounded-[12px] bg-[#3772FF] text-black mb-[20px] bottom-0"
+                className="w-full h-[40px] flex-none disabled:bg-[#212121] disabled:text-[#878787] rounded-[12px] bg-[#3772FF] text-white mb-[20px] bottom-0"
                 disabled={disable || creating}
                 onClick={handlePage}
               >
@@ -190,7 +190,7 @@ const NewCommunityModal = () => {
                 onClick={handleCreate}
                 disabled={creating}
               >
-                <p className="text-black font-bold">Create</p>
+                <p className="text-white font-bold">Create</p>
               </button>
               <div className="w-full flex items-center justify-center bottom-0 mb-[20px]">
                 <button

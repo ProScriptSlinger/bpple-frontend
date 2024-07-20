@@ -28,7 +28,7 @@ const SiderList1 = (props) => {
           pathname={props.pathname}
           siderWidth={props.siderWidth}
         />
-        {/* <ListComponent
+        <ListComponent
           _name="Friends"
           _icon="/icon/community.svg"
           _clickedIcon="/icon/community_blue.svg"
@@ -36,7 +36,7 @@ const SiderList1 = (props) => {
           pathname={props.pathname}
           siderWidth={props.siderWidth}
         />
-        <ListComponent
+        {/* <ListComponent
           _name="NFTs"
           _icon="/icon/NFT.svg"
           _clickedIcon="/icon/NFT_blue.svg"

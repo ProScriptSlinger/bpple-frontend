@@ -44,7 +44,7 @@ const WalletRegisterPage = () => {
               Cancel
             </button>
             <button
-              className="bg-[#3772FF] w-[120px] h-[40px] rounded-full text-black text-[13px] font-bold hover:bg-opacity-75 transition-all duration-100"
+              className="bg-[#3772FF] w-[120px] h-[40px] rounded-full text-white text-[13px] font-bold hover:bg-opacity-75 transition-all duration-100"
               onClick={() => {
                 router.push("/auth/signup");
               }}

@@ -267,7 +267,7 @@ const NewChannelModal = () => {
                 </div>
               </div>
               <button
-                className="w-full h-[40px] rounded-[12px] bg-[#3772FF] text-black mt-[20px] mb-[30px] bottom-0 flex-none"
+                className="w-full h-[40px] rounded-[12px] bg-[#3772FF] text-white mt-[20px] mb-[30px] bottom-0 flex-none"
                 onClick={handleCreate}
               >
                 Create
@@ -324,7 +324,7 @@ const NewChannelModal = () => {
                 </p>
               </div>
               <button
-                className="w-full h-[40px] rounded-[12px] bg-[#3772FF] text-black mt-[20px] mb-[30px] disabled:bg-[#212121] disabled:text-[#878787] bottom-0 flex-none"
+                className="w-full h-[40px] rounded-[12px] bg-[#3772FF] text-white mt-[20px] mb-[30px] disabled:bg-[#212121] disabled:text-[#878787] bottom-0 flex-none"
                 onClick={handleCreate}
                 disabled={disable}
               >

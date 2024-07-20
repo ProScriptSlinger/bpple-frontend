@@ -124,7 +124,7 @@ const RecordingModal = (props) => {
                     />
                     <div className=" flex items-center gap-10 justify-center mt-4">
                       <button onClick={startRecording}>
-                        <div className=" w-[50px] text-black h-[50px] rounded-full flex items-center justify-center  bg-[#3772FF]">
+                        <div className=" w-[50px] text-white h-[50px] rounded-full flex items-center justify-center  bg-[#3772FF]">
                           {status == "idle" ? (
                             <FaPlay size={24} />
                           ) : (

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSettingModal } from "../../context/communitysetting";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
@@ -9,13 +9,16 @@ const CommunityProfileModal = () => {
     communityProfileModal,
     setCommunityProfileModal,
     communityProfileInModal,
-  } = useSettingModal(false);
+  } = useSettingModal();
   const [dropdown, setDropdown] = useState(false);
   const router = useRouter();
   const pathName = usePathname();
-
+  useEffect(() => {
+    console.log("community profile ------>", communityProfileInModal);
+  }, [communityProfileInModal]);
   const handleCopy = async (text) => {
     try {
+      console.log("community id ------->", communityProfileInModal, text);
       await navigator.clipboard.writeText(text);
       alert("Link copied to clipboard!");
     } catch (error) {
@@ -33,7 +36,20 @@ const CommunityProfileModal = () => {
       >
         <div className="w-[400px] h-full bg-[#171717] px-[26px] pt-[50px] pb-[50px] flex-col flex">
           <div className="w-full inline-flex justify-between items-center">
-            <p className="text-[17px]">Community Profile</p>
+            {/* <p className="text-[17px]">Community Profile</p> */}
+            <button
+              className="w-[340px] inline-flex items-center "
+              onClick={() => setCommunityProfileModal(false)}
+            >
+              <Image
+                className="mr-[30px] w-[30px] h-auto"
+                src="/icon/back_bgwhite.svg"
+                width={0}
+                height={0}
+                alt=""
+              />
+              <p className="text-[22px]">Community Profile</p>
+            </button>
             <button
               onClick={() => {
                 setDropdown(!dropdown);
@@ -127,7 +143,7 @@ const CommunityProfileModal = () => {
             </p>
             <div className="inline-flex w-full justify-center mt-[20px]">
               <button className="w-[85px] h-[32px] bg-[#3772FF] rounded-full inline-flex items-center justify-center mr-[10px]">
-                <p className="text-[10px] text-black font-bold">Joined</p>
+                <p className="text-[10px] text-white font-bold">Joined</p>
                 <Image
                   className="mt-[1px] ml-[10px] w-[10px] h-auto"
                   src="/icon/dropdown.svg"
@@ -213,16 +229,16 @@ const CommunityProfileModal = () => {
               </button>
             </div>
             <div className="w-full grid grid-cols-4 text-[13px] font-bold gap-[10px]">
-              <button className="h-[40px] rounded-full focus:bg-[#3772FF] focus:text-black text-[#606060]">
+              <button className="h-[40px] rounded-full focus:bg-[#3772FF] focus:text-white text-[#606060]">
                 Media
               </button>
-              <button className="h-[40px] rounded-full focus:bg-[#3772FF] focus:text-black text-[#606060]">
+              <button className="h-[40px] rounded-full focus:bg-[#3772FF] focus:text-white text-[#606060]">
                 Documents
               </button>
-              <button className="h-[40px] rounded-full focus:bg-[#3772FF] focus:text-black text-[#606060]">
+              <button className="h-[40px] rounded-full focus:bg-[#3772FF] focus:text-white text-[#606060]">
                 Voices
               </button>
-              <button className="h-[40px] rounded-full focus:bg-[#3772FF] focus:text-black text-[#606060]">
+              <button className="h-[40px] rounded-full focus:bg-[#3772FF] focus:text-white text-[#606060]">
                 Links
               </button>
             </div>
@@ -243,7 +259,7 @@ const CommunityProfileModal = () => {
                 `${window.location.origin}/community/join/${communityProfileInModal?._id}`
               )
             }
-            className="w-full h-[50px] bg-[#3772FF] mt-[20px] rounded-[12px] flex items-center justify-center text-black font-bold"
+            className="w-full h-[50px] bg-[#3772FF] mt-[20px] rounded-[12px] flex items-center justify-center text-white font-bold"
           >
             <Image
               src="/icon/send.svg"

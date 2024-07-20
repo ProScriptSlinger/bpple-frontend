@@ -67,7 +67,7 @@ const NftListModal = () => {
               Are you sure you want to List <br /> for {price || 0} SOL?
             </p>
             <button
-              className="w-full h-[40px] bg-[#3772FF] text-black font-bold rounded-full text-[13px] mt-[80px] flex justify-center items-center"
+              className="w-full h-[40px] bg-[#3772FF] text-white font-bold rounded-full text-[13px] mt-[80px] flex justify-center items-center"
               onClick={handleList}
             >
               {isLoading ? (

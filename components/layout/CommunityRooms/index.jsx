@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useSiderBar } from "../../../context/siderbar";
-import { useUser } from "../../../context/appContext";
+// import { useUser } from "../../../context/appContext";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { FiPlus } from "react-icons/fi";
 import { HiHashtag } from "react-icons/hi2";
@@ -13,7 +13,7 @@ const CommunityRooms = (props) => {
   const [communityRoomsSiderWidth, setCommunityRoomsSiderWidth] = useState(200);
   const { communityId } = useParams();
   const { handleCloseSiderBar } = useSiderBar();
-  const { communities, userDetail } = useUser();
+  // const { communities, userDetail } = useUser();
   const [community, setCommunity] = useState(null);
   const router = useRouter();
   const pathName = usePathname();

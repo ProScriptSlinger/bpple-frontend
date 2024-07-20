@@ -168,7 +168,7 @@ const CommunityHeader = (props) => {
   };
   return (
     <div className="font-poppins">
-      <div className="flex flex-col relative border-b-[#2A2A2A] border-b-[1px] pb-2">
+      <div className="flex flex-col relative border-b-[#2A2A2A] border-b-[1px] pb-2 bg-[#111111]">
         <div
           className={`w-full flex px-4  justify-between items-center ${
             calling ? "flex-row" : ""
@@ -517,7 +517,7 @@ const CommunityHeader = (props) => {
               </>
             )} */}
 
-            <button
+            {/* <button
               className="w-[45px] h-[45px] bg-[#252525] mx-4 rounded-[12px] flex items-center justify-center flex-none hover:opacity-70"
               onClick={() => router.push("/notification")}
             >
@@ -528,7 +528,7 @@ const CommunityHeader = (props) => {
                 src={"/icon/ring.svg"}
                 className="w-[20px] h-auto"
               />
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="border-b-[1px] border-b-[#2A2A2A] w-full py-1" />

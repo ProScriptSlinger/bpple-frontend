@@ -81,7 +81,7 @@ const Page4 = () => {
             >
               Great Your Password is matched!
             </div>
-            <button className="w-full rounded-[12px] bg-[#3772FF] h-[45px] text-black mt-[100px] font-abeezeeItalic hover:bg-opacity-70 transition-all duration-100">
+            <button className="w-full rounded-[12px] bg-[#3772FF] h-[45px] text-white mt-[100px] font-abeezeeItalic hover:bg-opacity-70 transition-all duration-100">
               Confirm
             </button>
           </div>

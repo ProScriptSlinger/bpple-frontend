@@ -103,9 +103,9 @@ const VerifyOtpPage = ({
           <RiMailSendLine size={16} className="mr-[10px]" />
           Re send <div className="text-[#3772FF] ml-[5px]">Otp</div>
         </button>
-        <div className="w-full flex justify-center mt-[150px] text-black">
+        <div className="w-full flex justify-center mt-[150px] text-white">
           <button
-            className="w-[270px] mx-auto h-[40px] rounded-[12px]  flex items-center justify-center disabled:bg-[#282828] bg-[#3772FF] disabled:text-[#6D6D6D] text-black font-abeezeeItalic hover:opacity-70 transition-all duration-100"
+            className="w-[270px] mx-auto h-[40px] rounded-[12px]  flex items-center justify-center disabled:bg-[#282828] bg-[#3772FF] disabled:text-[#6D6D6D] text-white font-abeezeeItalic hover:opacity-70 transition-all duration-100"
             onClick={handleOtpVerify}
             disabled={disableOtpBtn || isSendingotp || isVerifingOtp}
           >

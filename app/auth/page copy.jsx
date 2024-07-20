@@ -61,7 +61,7 @@ const Auth = () => {
               <Link href={"/auth/register"}>
                 <button
                   className={
-                    "w-[50%] h-full rounded-full bg-[#3772FF] text-black font-abeezeeItalic text-[13px] hover:bg-opacity-70 transition-all duration-100"
+                    "w-[50%] h-full rounded-full bg-[#3772FF] text-white font-abeezeeItalic text-[13px] hover:bg-opacity-70 transition-all duration-100"
                   }
                 >
                   Register

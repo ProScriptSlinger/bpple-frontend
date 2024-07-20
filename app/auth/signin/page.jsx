@@ -169,7 +169,7 @@ const Register = () => {
           <div className="w-full flex justify-center mt-[20px]">
             <button
               type="submit"
-              className={`desktop:w-[65%] w-[90%] flex items-center justify-center font-abeezeeItalic disabled:bg-[#282828] bg-[#3772FF] disabled:text-[#6D6D6D] text-black mt-[20px] text-[15px] rounded-[15px] font-bold py-[15px] relative transition-all duration-300 hover:bg-opacity-[70%]`}
+              className={`desktop:w-[65%] w-[90%] flex items-center justify-center font-abeezeeItalic disabled:bg-[#282828] bg-[#3772FF] disabled:text-[#6D6D6D] text-white mt-[20px] text-[15px] rounded-[15px] font-bold py-[15px] relative transition-all duration-300 hover:bg-opacity-[70%]`}
               disabled={disable}
               onClick={handleSubmit}
             >

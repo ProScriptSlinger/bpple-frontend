@@ -188,7 +188,7 @@ const NFT = () => {
               <button
                 className={`w-[130px] h-[45px] flex justify-center items-center rounded-full border border-[#3772FF] text-[#3772FF] mr-[10px] ${
                   !isLoading && "hover:bg-[#3772FF]"
-                } hover:text-black`}
+                } hover:text-white`}
                 onClick={handleMint}
                 disabled={isLoading}
               >

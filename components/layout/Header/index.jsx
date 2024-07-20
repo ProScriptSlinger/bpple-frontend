@@ -42,7 +42,7 @@ const Header = () => {
     return;
   return (
     <>
-      <div className="w-full py-2 flex-none prevent-select bg-[#111111]">
+      <div className="w-full pt-2 flex-none prevent-select bg-[#111111]">
         {pathname === "/notification" ? (
           <NotificationHeader />
         ) : pathname.includes("/community/") || pathname === "/community" ? (

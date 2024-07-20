@@ -136,7 +136,7 @@ const CommunitySetting = (props) => {
             </div> */}
             <Link href={`/community/edit-marketplace`}>
               <div
-                className={`w-[200px] h-[45px] flex justify-center items-center rounded-full border border-[#3772FF] text-[#3772FF] mr-[10px] ${"hover:bg-[#3772FF] hover:text-black"} `}
+                className={`w-[200px] h-[45px] flex justify-center items-center rounded-full border border-[#3772FF] text-[#3772FF] mr-[10px] ${"hover:bg-[#3772FF] hover:text-white"} `}
                 // disabled={nftListModal || nftUnListModal}
                 // onClick={() => router.push(`/community/edit-marketplace`)}
               >

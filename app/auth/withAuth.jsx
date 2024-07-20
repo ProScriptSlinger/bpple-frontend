@@ -1,73 +1,60 @@
 "use client";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useUser } from "../../context/appContext";
-
+import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { handleEndpoint } from "../../utils/api/handleEndpoint";
 import Link from "next/link";
-import { disconnect } from "process";
+import { toast } from "react-toastify";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const withAuth = (WrappedComponent) => {
   const Wrapper = (props) => {
     const router = useRouter();
     const pathname = usePathname();
-    const {
-      pending,
-      isDisconnected,
-      userDetail,
-      getUserByAddress,
-      address,
-      isConnected,
-      disconnect,
-    } = useUser();
+    const { isConnected, getUserByAddress, address, userDetail, disconnect } =
+      useUser();
     const [newModal, setModal] = useState(false);
-
+    const { wallets, ready } = useWallets();
+    const wallet = wallets[0];
     useLayoutEffect(() => {
-      console.log("user detail ------>", userDetail);
-      if (!pending) {
-        if (address && !userDetail) {
-          setModal(true);
-        } else {
-          setModal(false);
-        }
+      if (pathname.includes("/home") && wallet?.address && !userDetail) {
+        setModal(true);
+      } else {
+        setModal(false);
+      }
 
-        if ((address && isConnected) || userDetail?.email) {
-          if (pathname.includes("/auth")) {
-            router.push("/home");
-          }
-        } else {
-          if (!pathname.includes("/auth")) {
-            router.push("/auth");
-          }
+      if (wallet?.address) {
+        if (pathname.includes("/auth")) {
+          // router.push("/home");
         }
-
-        if (isDisconnected && !userDetail?.email) {
-          if (!pathname.includes("/auth")) {
-            router.push("/auth");
-          }
+      } else {
+        if (!pathname.includes("/auth")) {
+          // router.push("/auth");
+          router.push(`/auth?returnUrl=${encodeURIComponent(pathname)}`);
+          console.log('!pathname.includes("/auth"', wallet?.address, pathname);
         }
       }
-    }, [
-      pending,
-      address,
-      userDetail,
-      router,
-      isConnected,
-      isDisconnected,
-      pathname,
-    ]);
+
+      if (!ready && !address) {
+        if (!pathname.includes("/auth")) {
+          router.push(`/auth?returnUrl=${encodeURIComponent(pathname)}`);
+          console.log("ready && !wallet", ready, wallet);
+        }
+      }
+    }, [wallet, router, pathname]);
 
     return (
       <>
         <WrappedComponent {...props} />
-        {((!pending && isConnected) ||
-          (isConnected && address && !pending && !userDetail)) && (
+        {(isConnected || (isConnected && address && !userDetail)) && (
           <Modal
             newModal={newModal}
             setModal={setModal}
             address={address}
             getUserByAddress={getUserByAddress}
             router={router}
+            disconnect={disconnect}
           />
         )}
       </>
@@ -102,6 +89,7 @@ const Modal = ({ newModal, setModal, address, router }) => {
         router.push("/home");
       }
     } catch (error) {
+      toast.error(error.message);
       console.log(error);
     } finally {
       setUpdating(false);
@@ -113,6 +101,7 @@ const Modal = ({ newModal, setModal, address, router }) => {
     // router.push("/auth");
     disconnect();
     setLogout(false);
+    setModal(false);
     localStorage.clear();
   };
 
@@ -154,11 +143,18 @@ const Modal = ({ newModal, setModal, address, router }) => {
             </div>
             <div className=" grid w-full gap-4 bottom-0 ">
               <button
-                className="w-full h-[40px] rounded-[12px] bg-[#3772FF] text-black mt-[20px] flex-none"
+                className="w-full h-[40px] rounded-[12px] bg-[#3772FF] text-white mt-[20px] flex-none"
                 onClick={handleCreate}
                 disabled={updating}
               >
-                Done
+                {updating ? (
+                  <AiOutlineLoading3Quarters
+                    size={24}
+                    className=" animate-spin "
+                  />
+                ) : (
+                  "Done"
+                )}
               </button>
               <Link href={"/auth"}>
                 <button

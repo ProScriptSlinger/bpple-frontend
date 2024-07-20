@@ -38,8 +38,8 @@ const ChatsHeader = () => {
   if (pathname.includes(`/chats/groups/`)) return <GroupHeader />;
 
   return (
-    <>
-      <div className="w-full inline-flex justify-between mt-[40px]">
+    <div className="border-b-[#2A2A2A] border-b-[1px] px-4">
+      <div className="w-full inline-flex justify-between gap-4 mt-[20px] mb-[10px]">
         {loading && (
           <div className={`inline-flex items-center`}>
             <div className="w-[45px] aspect-square rounded-full bg-[#171717] animate-pulse"></div>
@@ -86,7 +86,7 @@ const ChatsHeader = () => {
             </p>
           </div>
         </button>
-        <div className=" flex-1 relative">
+        <div className=" flex-1 relative max-w-[400px]">
           {loading && (
             <div className="w-full rounded-[10px] bg-[#171717] animate-pulse h-[40px]"></div>
           )}
@@ -154,7 +154,7 @@ const ChatsHeader = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default ChatsHeader;

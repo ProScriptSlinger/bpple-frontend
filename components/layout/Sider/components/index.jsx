@@ -107,7 +107,7 @@ const _renderLinkItem = (props) => {
               )}
             </>
           ) : null} */}
-          <div className="fixed z-50 left-[70px] flex items-center h-[40px] px-4 bg-[#3772FF] bg-opacity-35 rounded-lg side-item-des">
+          <div className="fixed z-50 left-[70px] flex items-center h-[40px] px-4 bg-[#1c3e8f] bg-opacity-70 rounded-lg side-item-des">
             <p>{props._name}</p>
           </div>
         </li>

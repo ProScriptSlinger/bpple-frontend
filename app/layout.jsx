@@ -5,7 +5,7 @@ import FooterLoader from "../components/layout/Footer/loader";
 import CommunityListLoader from "../components/layout/CommunityList/loader";
 import CommunityRoomsLoader from "../components/layout/CommunityRooms/loader";
 import SiderLoader from "../components/layout/Sider/loading";
-import Web3ModalProvider from "../context/Web3ModalProvider";
+import AppWalletProvider from "../context/AppWalletProvider";
 import { headers } from "next/headers";
 import NextTopLoader from "nextjs-toploader";
 import { cookieToInitialState } from "wagmi";
@@ -82,11 +82,10 @@ const NftTransferModal = dynamic(() =>
   import("@/components/Modal/NftTransferModal")
 );
 export default function RootLayout({ children }) {
-  const initialState = cookieToInitialState(config, headers().get("cookie"));
   return (
     <html lang="en">
       <body className="font-ttfirs bg-cover bg-center bg-[url('/community/bg.svg')] -z-10 bg-[#121212] fixed left-0 right-0 top-0 bottom-0 flex flex-row">
-        <Web3ModalProvider initialState={initialState}>
+        <AppWalletProvider>
           <Provider>
             <ToastContainer
               position="top-right"
@@ -123,7 +122,7 @@ export default function RootLayout({ children }) {
             <NftUnListModal />
             <NftTransferModal />
           </Provider>
-        </Web3ModalProvider>
+        </AppWalletProvider>
       </body>
     </html>
   );

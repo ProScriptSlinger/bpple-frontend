@@ -117,7 +117,7 @@ const Notification = () => {
         <button
           className={`${
             currentCategory === title
-              ? "bg-[#3772FF] text-black"
+              ? "bg-[#3772FF] text-white"
               : "bg-[#1E1E1E] text-[#6D6D6D]"
           } items-center justify-center px-[20px] py-[10px] text-[12px] rounded-full font-ttfirs font-[600] inline-flex`}
           onClick={() => {
@@ -129,7 +129,7 @@ const Notification = () => {
             <div
               className={`${
                 currentCategory === title
-                  ? "bg-black text-black"
+                  ? "bg-black text-white"
                   : "bg-[#3772FF] text-[#3772FF]"
               } bg-opacity-10 text-[10px] px-[10px] py-[2px] rounded-full ml-[5px] font-thin`}
             >

@@ -150,7 +150,7 @@ const NewRoomModal = () => {
               </p>
             </div>
             <button
-              className="w-full h-[40px] disabled:bg-[#282828] disabled:text-[#6D6D6D] rounded-[12px] bg-[#3772FF] text-black mt-[20px] bottom-0 flex-none"
+              className="w-full h-[40px] disabled:bg-[#282828] disabled:text-[#6D6D6D] rounded-[12px] bg-[#3772FF] text-white mt-[20px] bottom-0 flex-none"
               onClick={handleCreate}
               disabled={creating}
             >

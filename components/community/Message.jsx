@@ -97,7 +97,7 @@ const MessageComponent = (message, rightFlag) => {
             className="w-[60px] h-auto"
           />
         </div>
-        <p className="text-[10px] ml-4 text-black">{message.length}</p>
+        <p className="text-[10px] ml-4 text-white">{message.length}</p>
       </div>
     );
   } else if (message?.type === "file") {

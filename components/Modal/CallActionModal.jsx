@@ -124,7 +124,6 @@ const CallActionModal = () => {
     navigator.mediaDevices
       .enumerateDevices()
       .then((devices) => {
-        console.log("devices ------->", devices);
         let cameraAvailable = false;
         let microphoneAvailable = false;
 
@@ -137,11 +136,6 @@ const CallActionModal = () => {
         });
 
         if (cameraAvailable || microphoneAvailable) {
-          console.log(
-            `Camera or microphone are available.`,
-            cameraAvailable,
-            microphoneAvailable
-          );
           // Proceed with getUserMedia
           navigator.mediaDevices
             .getUserMedia({ audio: true, video: true })
@@ -406,7 +400,7 @@ const CallActionModal = () => {
                       onClick={() => setVolumeMute(!isVolumeMute)}
                     >
                       <div
-                        className={` w-[50px] text-black h-[50px] rounded-full flex items-center justify-center bg-opacity-70  ${
+                        className={` w-[50px] text-white h-[50px] rounded-full flex items-center justify-center bg-opacity-70  ${
                           isVolumeMute ? "bg-[#3772FF]" : "bg-[#1F1F1F]"
                         }`}
                       >
@@ -422,7 +416,7 @@ const CallActionModal = () => {
                       onClick={() => toggleStopCamera()}
                     >
                       <div
-                        className={` w-[50px] text-black h-[50px] rounded-full flex items-center justify-center bg-opacity-70  ${
+                        className={` w-[50px] text-white h-[50px] rounded-full flex items-center justify-center bg-opacity-70  ${
                           isCameraStopped ? "bg-[#3772FF]" : "bg-[#1F1F1F]"
                         }`}
                       >
@@ -438,7 +432,7 @@ const CallActionModal = () => {
                       onClick={() => toggleMute()}
                     >
                       <div
-                        className={` w-[50px] text-black h-[50px] rounded-full flex items-center justify-center bg-opacity-70  ${
+                        className={` w-[50px] text-white h-[50px] rounded-full flex items-center justify-center bg-opacity-70  ${
                           isMuted ? "bg-[#3772FF]" : "bg-[#1F1F1F]"
                         }`}
                       >

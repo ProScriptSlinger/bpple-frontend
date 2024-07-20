@@ -3,7 +3,7 @@ import Image from "next/image";
 const Footer = () => {
   const Badge = () => {
     return (
-      <div className="w-fit h-[53px] bg-neutral-900 rounded-[20px] border border-neutral-700 justify-center items-center gap-2 md:gap-8 inline-flex px-2">
+      <div className="w-fit h-[53px] bg-neutral-900 rounded-[20px] border border-neutral-700 justify-center items-center gap-2 inline-flex px-2">
         <div className="w-9 h-[35px] p-1.5 bg-zinc-800 rounded-[20px] justify-center items-center gap-2 flex">
           <Image
             alt="guard"
