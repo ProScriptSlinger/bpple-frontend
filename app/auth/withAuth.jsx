@@ -12,8 +12,14 @@ const withAuth = (WrappedComponent) => {
   const Wrapper = (props) => {
     const router = useRouter();
     const pathname = usePathname();
-    const { isConnected, getUserByAddress, address, userDetail, disconnect } =
-      useUser();
+    const {
+      isConnected,
+      getUserByAddress,
+      address,
+      userDetail,
+      disconnect,
+      pending,
+    } = useUser();
     const [newModal, setModal] = useState(false);
     const { wallets, ready } = useWallets();
     const wallet = wallets[0];
@@ -24,7 +30,13 @@ const withAuth = (WrappedComponent) => {
           .isConnected()
           .then((res) => console.log("isWalletConnected ------>", res));
       }
-      if (pathname.includes("/home") && wallet?.address && !userDetail) {
+      if (
+        pathname.includes("/home") &&
+        wallet?.address &&
+        !userDetail &&
+        !pending
+      ) {
+        console.log("userDetail info ------>", wallet.address, userDetail);
         setModal(true);
       } else {
         setModal(false);
@@ -154,10 +166,12 @@ const Modal = ({ newModal, setModal, address, router }) => {
                 disabled={updating}
               >
                 {updating ? (
-                  <AiOutlineLoading3Quarters
-                    size={24}
-                    className=" animate-spin "
-                  />
+                  <div className="flex justify-center items-center w-full">
+                    <AiOutlineLoading3Quarters
+                      size={24}
+                      className=" animate-spin "
+                    />
+                  </div>
                 ) : (
                   "Done"
                 )}

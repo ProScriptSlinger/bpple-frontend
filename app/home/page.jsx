@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import RecommandLoader from "../../components/home/Trending/loader";
 import LastCommunityLoader from "../../components/home/NewLaunch/loader";
 import { handleEndpoint } from "@/utils/api/handleEndpoint";
-
+import { useUser } from "@/context/appContext";
 const Slider = dynamic(() => import("../../components/home/Slider"), {
   ssr: false,
   loading: () => <SliderLoader />,
@@ -20,6 +20,7 @@ const Trending = dynamic(
 );
 
 const Home = () => {
+  const { pending, userDetail } = useUser();
   const [newCommunities, setNewCommunities] = useState([]);
   const [isNewLoading, setNewLoading] = useState(false);
   const fetchCommunities = async () => {
@@ -36,8 +37,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetchCommunities();
-  }, []);
+    if (pending == false && userDetail) fetchCommunities();
+  }, [pending]);
   return (
     <>
       <div className="w-full mobile:px-[50px] px-[20px] h-full overflow-auto prevent-select py-4 z-20">

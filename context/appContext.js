@@ -29,7 +29,7 @@ export function AuthProvider({ children }) {
   const [user_group_messages, setUser_group_messages] = useState({});
   const [community_messages, setCommunity_messages] = useState({});
   const [communities, setCommunities] = useState([]);
-
+  const [isRegistered, setRegistered] = useState(false);
   const [currentCommunity, setCurrentCommunity] = useState(null);
   const [wallet, setWallet] = useState();
   const memoizedValues = useMemo(() => {
@@ -117,7 +117,7 @@ export function AuthProvider({ children }) {
     };
 
     getUser();
-  }, [address, wallets]);
+  }, [address, wallet]);
 
   const getUser = async () => {
     try {
@@ -306,6 +306,7 @@ export function AuthProvider({ children }) {
     disconnect,
     // open,
     setPending,
+    pending,
     communities,
     getCommunities,
     // solanaConnect,
