@@ -10,10 +10,10 @@ const BestCollection = dynamic(() =>
   import("../../components/marketplace/BestCollection")
 );
 const NewNFTS = dynamic(() => import("../../components/marketplace/MarketNFT"));
-const NFTList = dynamic(() => import("../../components/marketplace/NFTList"), {
-  ssr: false,
-  loading: () => <NFTListLoader />,
-});
+// const NFTList = dynamic(() => import("../../components/marketplace/NFTList"), {
+//   ssr: false,
+//   loading: () => <NFTListLoader />,
+// });
 const Page = () => {
   const { fetchListings, activeNFTs } = useShyft();
   const { address } = useUser();
@@ -72,13 +72,13 @@ const Page = () => {
               </div>
             </div>
           </div>
-          <div className="w-full mt-[20px] overflow-auto">
+          {/* <div className="w-full mt-[20px] overflow-auto">
             {activeNFTs.map((item, index) => (
               <div key={index}>
                 <NFTList item={item} index={index} />
               </div>
             ))}
-          </div>
+          </div> */}
           <div className="w-full h-[60px]"></div>
         </div>
       </div>
