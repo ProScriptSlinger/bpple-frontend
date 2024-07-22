@@ -7,13 +7,16 @@ import NFTListLoader from "@/components/marketplace/NFTListLoader";
 const BestCollection = dynamic(() =>
   import("@/components/marketplace/BestCollection")
 );
-const NewNFTS = dynamic(() => import("@/components/marketplace/NewNFTs"));
-const NFTList = dynamic(() => import("@/components/marketplace/NFTList"), {
-  ssr: false,
-  loading: () => <NFTListLoader />,
-});
-const Page = () => {
-  const router = useRouter();
+// const NewNFTS = dynamic(() => import("@/components/marketplace/NewNFTs"));
+const NewCommunityItem = dynamic(
+  () => import("@/components/marketplace/NewCommunityItem"),
+  {
+    ssr: false,
+    loading: () => <NFTListLoader />,
+  }
+);
+const Page = (props) => {
+  const { newCommunities, isNewLoading } = props;
   const bestCollections = [
     { link: "/marketplace/1.svg", avatar: "/avatar/18.svg", id: 1 },
     { link: "/marketplace/2.svg", avatar: "/avatar/18.svg", id: 2 },
@@ -142,9 +145,9 @@ const Page = () => {
             </div>
           </div>
           <div className="w-full mt-[20px] overflow-auto">
-            {newNfts.map((item, index) => (
+            {newCommunities.map((item, index) => (
               <div key={index}>
-                <NFTList item={item} index={index} />
+                <NewCommunityItem item={item} index={index} />
               </div>
             ))}
           </div>

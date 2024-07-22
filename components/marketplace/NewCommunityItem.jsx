@@ -1,20 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { BlueBtn } from "../home/Trending/Item";
-const NFTList = (props) => {
+import { getNameInitials } from "@/utils/functions/getNameInitials";
+const NewCommunityItem = (props) => {
+  const { item, isLoading } = props;
+  useEffect(() => console.log(props.item));
   return (
     <>
       <button className="w-full h-[60px] bg-[#181818] inline-flex justify-between px-[40px] mb-[20px] rounded-[12px] min-w-[600px] items-center hover:bg-opacity-70">
         <div className="inline-flex items-center">
           <p>{props.index + 1}</p>
-          <Image
-            src={props.item.logo}
-            width={0}
-            height={0}
-            alt=""
-            className="w-[40px] ml-[30px]"
-          />
-          <p className="text-[12px] ml-[10px]">Claynosaurz</p>
+          {item?.avatar ? (
+            <Image
+              src={item?.avatar}
+              width={0}
+              height={0}
+              alt=""
+              className="w-[40px] ml-[30px] rounded-md"
+            />
+          ) : (
+            <div
+              className="w-[40px] h-[40px] ml-[30px] rounded-md aspect-square
+             bg-[#222222] flex items-center justify-center
+              text-[#4C4C4C] text-[30px]"
+            >
+              {getNameInitials(item?.name ?? "B")}
+            </div>
+          )}
+          <p className="text-[12px] ml-[10px]">{item?.name}</p>
         </div>
         <div className="inline-flex items-center gap-[15px]">
           <div>
@@ -78,4 +91,4 @@ const NFTList = (props) => {
     </>
   );
 };
-export default NFTList;
+export default NewCommunityItem;

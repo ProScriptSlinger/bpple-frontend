@@ -5,6 +5,7 @@ import { handleEndpoint } from "@/utils/api/handleEndpoint";
 import { useUser } from "@/context/appContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { getNameInitials } from "../../../utils/functions/getNameInitials";
 
 const SearchMember = (props) => {
   const [search, setSearch] = useState("");
@@ -61,14 +62,29 @@ const SearchMember = (props) => {
           }  bg-opacity-5 rounded-[10px] items-center`}
         >
           <div className="inline-flex items-center">
-            <Image
-              src={avatar ?? "/avatar/2.svg"}
-              className="w-[50px] aspect-square rounded-xl
-               object-cover bg-[#191919] flex items-center justify-center "
-              width={200}
-              height={200}
-              alt={username}
-            />
+            {avatar ? (
+              <Image
+                src={avatar}
+                className="w-[50px] aspect-square rounded-xl
+                 object-cover bg-[#191919] flex items-center justify-center "
+                width={200}
+                height={200}
+                alt={username}
+              />
+            ) : (
+              <div
+                className="w-[40px] aspect-square rounded-full
+             bg-[#191919] flex items-center justify-center
+              text-[#4C4C4C] text-[22px] side-item-icon"
+              >
+                {getNameInitials(username ?? "B I")}
+                <div
+                  className={`capitalize font-ttfirs  items-center flex rounded-lg  fixed left-[70px] px-2 h-[40px] side-item-des bg-[#3772FF] bg-opacity-35 `}
+                >
+                  <div className="text-[14px]">{username}</div>
+                </div>
+              </div>
+            )}
             <div className={`ml-[10px] ${siderWidth < 250 && "hidden"}`}>
               <p className="text-left capitalize">{username}</p>
             </div>

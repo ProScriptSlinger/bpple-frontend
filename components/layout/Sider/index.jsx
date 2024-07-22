@@ -94,7 +94,7 @@ const Sider = () => {
 
           <SiderList pathname={pathname} siderWidth={siderWidth} />
 
-          <div className="bottom-0">
+          <div className="bottom-0 z-50">
             <ul className="text-white text-md mt-5">
               <button
                 className={`mt-[35px] inline-flex w-full transition-all duration-100 justify-center

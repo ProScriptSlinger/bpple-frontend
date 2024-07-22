@@ -25,7 +25,6 @@ import Picker from "@emoji-mart/react";
 const ChatDmFooter = () => {
   const [recordingModal, setRecordingModal] = useState(false);
   const [text, setText] = useState("");
-  const [chat, setChat] = useState(null);
   const { chats, userDetail } = useUser();
   const { socket } = useSocket();
 
@@ -45,7 +44,7 @@ const ChatDmFooter = () => {
 
   const { id } = useParams();
   const pathname = usePathname();
-  useDMsById(id, chats, setChat);
+  const [isLoading, chat] = useDMsById(id, chats);
 
   const handleIstyping = (e) => {
     setText(e.target.value);
