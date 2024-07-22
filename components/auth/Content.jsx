@@ -28,16 +28,10 @@ const Content = () => {
     <div className="flex-col md:flex-col md:flex lg:flex-col xl:flex-row  justify-between items-center xl:items-start 2xl:items-center pr-0 sm:pr-6 pl-0 2xl:px-[60px] pb-4 min-h-[65vh] h-fit">
       <div className="pt-10 pl-4 sm:pt-20 sm:pl-9  w-full">
         <div className="flex items-center justify-between ">
-          <div className="flex flex-col w-full 2xl:text-[93px] 2xl:leading-[93px]  md:text-[70px] md:leading-[70px] text-[50px] leading-[50px]">
-            <span className="text-blue-500 font-semibold font-['Poppins']">
-              Create
-            </span>
-            <span className="text-white font-normal font-['Poppins'] italic">
-              Launch
-            </span>
-            <span className="text-white font-normal font-['Poppins']">
-              Trade
-            </span>
+          <div className="flex flex-col w-full font-poppins 2xl:text-[93px] 2xl:leading-[93px]  md:text-[70px] md:leading-[70px] text-[50px] leading-[50px]">
+            <span className="text-blue-500 font-semibold ">Create</span>
+            <span className="text-white font-normal italic">Launch</span>
+            <span className="text-white font-normal">Trade</span>
           </div>
           <Image
             width={0}
@@ -47,17 +41,15 @@ const Content = () => {
             className={"w-[294px] h-[84px] mr-[-40px] z-50 hidden xl:block"}
           />
         </div>
-        <div className="flex 2xl:text-[93px] 2xl:leading-[93px]  md:text-[70px] md:leading-[70px] text-[50px] leading-[50px]">
-          <span className="text-white mr-4 font-semibold font-['Poppins'] text-nowrap">
+        <div className="flex font-poppins 2xl:text-[93px] 2xl:leading-[93px]  md:text-[70px] md:leading-[70px] sm:text-[50px] text-[40px] leading-[50px]">
+          <span className="text-white mr-4 font-semibold text-nowrap">
             Better than
           </span>
-          <span className="text-blue-500 pb-0 font-semibold font-['Poppins']">
+          <span className="text-blue-500 pb-0 font-semibold">
             ever
-            <div className="w-[111px] md:w-[157px]  2xl:w-[210px] border-b-8 border-blue-500 mt-[-5px]" />
+            <div className="w-[90px] sm:w-[111px] md:w-[155px]  2xl:w-[210px] border-b-8 border-blue-500 mt-[-5px]" />
           </span>
-          <span className="text-blue-500 font-semibold font-['Poppins']">
-            .
-          </span>
+          <span className="text-blue-500 font-semibold">.</span>
         </div>
         <div class="pt-6 w-full text-left text-gray-300 text-[18px] 2xl:text-[20px]  font-poppins hidden xl:block font-semibold leading-6 break-words">
           Experience the Next Generation of Community-Driven Trading.
