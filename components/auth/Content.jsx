@@ -65,7 +65,7 @@ const Content = () => {
       </div>
       <div className="flex w-full md:w-fit justify-center xl:justify-start">
         <div className="flex flex-col w-fit ">
-          <div className="mt-4 w-[371px] md:w-[505px] mb-16 md:mb-0 2xl:w-[567px] h-fit p-[5px] md:p-[20px] bg-neutral-900 rounded-[40px] border border-gray-800 flex-col inline-flex overflow-hidden items-center">
+          <div className="mt-4 w-[371px] md:w-[505px] mb-16 md:mb-0 2xl:w-[567px] h-fit p-[5px] lg:p-[20px] bg-neutral-900 rounded-[40px] border border-gray-800 flex-col inline-flex overflow-hidden items-center">
             <Grid />
             <Image
               width={0}
@@ -73,13 +73,13 @@ const Content = () => {
               src={"/images/landing_banner.svg"}
               alt={"landing-banner"}
               className={
-                "w-[313px] md:w-[416px] 2xl:w-[468px] h-[261.34px] rounded-[232px]"
+                "w-[313px] lg:w-[416px] 2xl:w-[468px] h-[261.34px] rounded-[232px]"
               }
             />
-            <div className="w-[370.06px] text-center md:text-left mt-4 h-11 text-white 2xl:text-[32px] font-normal font-['Sora'] leading-[48px] text-[23px] md:text-[25px]">
+            <div className="w-[370.06px] text-center lg::text-left mt-4 h-11 text-white 2xl:text-[32px] font-normal font-['Sora'] leading-[48px] text-[23px] md:text-[25px]">
               Do everything in one place.
             </div>
-            <div className="w-[370.06px] mt-4 h-[88.03px] text-[16px] text-gray-500 text-base font-light font-['Sora'] leading-normal hidden md:block">
+            <div className="w-[370.06px] mt-4 h-[88.03px] text-[16px] text-gray-500 text-base font-light font-['Sora'] leading-normal hidden lg:block">
               Create tokens, build communities, and trade seamlessly in our
               all-in-one platform. <br />
               Experience effortless integration of trading and community
