@@ -32,6 +32,7 @@ export function AuthProvider({ children }) {
   const [isRegistered, setRegistered] = useState(false);
   const [currentCommunity, setCurrentCommunity] = useState(null);
   const [wallet, setWallet] = useState();
+  const [dataLoading, setUserDataLoading] = useState(false);
   const memoizedValues = useMemo(() => {
     if (wallet) {
       return {
@@ -154,7 +155,9 @@ export function AuthProvider({ children }) {
 
   const getUserData = async () => {
     if (userDetail) {
+      console.log("getUserData ------->", userDetail._id);
       try {
+        setCommunities([]);
         const communityResponse = await handleEndpoint(
           null,
           `community/${userDetail._id}/user`,
@@ -253,7 +256,7 @@ export function AuthProvider({ children }) {
   };
   useEffect(() => {
     getUserData();
-  }, [userDetail]);
+  }, [address, wallet, userDetail]);
 
   // useEffect(() => {
   //   solanaConnect();
