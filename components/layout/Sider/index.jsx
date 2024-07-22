@@ -14,6 +14,8 @@ const Sider = () => {
   const router = useRouter();
   const pathname = usePathname();
   const { wallets } = useWallets();
+  if (pathname.includes(`/join/`)) return;
+  if (pathname.includes(`/auth`)) return;
   // const wallet = wallets[0]?.meta?.icon ? wallets[0] : wallets[1];
   const wallet = wallets[0];
   // const [siderWidth, setSiderWidth] = useState(300);
@@ -41,7 +43,7 @@ const Sider = () => {
   };
 
   const handleLogout = async () => {
-    disconnect();
+    wallet.disconnect();
     setUserDetail(null);
     router.push("/auth");
     setLogout(false);
@@ -49,8 +51,6 @@ const Sider = () => {
   };
 
   const [loading, setLoading] = useState(true);
-
-  if (pathname.includes(`/join/`)) return;
 
   return (
     <>
@@ -94,7 +94,7 @@ const Sider = () => {
 
           <SiderList pathname={pathname} siderWidth={siderWidth} />
 
-          <div className="bottom-0 z-50">
+          <div className="bottom-0 z-10">
             <ul className="text-white text-md mt-5">
               <button
                 className={`mt-[35px] inline-flex w-full transition-all duration-100 justify-center

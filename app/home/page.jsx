@@ -40,7 +40,7 @@ const Home = () => {
   }, []);
   return (
     <>
-      <div className="w-full mobile:px-[50px] px-[20px] h-full overflow-auto prevent-select py-4">
+      <div className="w-full mobile:px-[50px] px-[20px] h-full overflow-auto prevent-select py-4 z-20">
         <Slider />
         <Trending newCommunities={newCommunities} isNewLoading={isNewLoading} />
       </div>

@@ -6,6 +6,7 @@ const Loading = () => {
   const pathname = usePathname();
 
   if (pathname.includes(`/join/`)) return;
+  if (pathname.includes(`/auth`)) return;
 
   return (
     <>

@@ -354,6 +354,7 @@ const CommunityList = (props) => {
   const [visibleSearch, setVisibleSearch] = useState(false);
 
   if (pathName.includes(`/join/`)) return;
+  if (pathName.includes(`/auth`)) return;
 
   return (
     <>

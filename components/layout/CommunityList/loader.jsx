@@ -5,6 +5,7 @@ const Loader = () => {
   const pathname = usePathname();
 
   if (pathname.includes(`/join/`)) return;
+  if (pathname.includes(`/auth`)) return;
 
   return (
     <>

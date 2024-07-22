@@ -18,6 +18,12 @@ const withAuth = (WrappedComponent) => {
     const { wallets, ready } = useWallets();
     const wallet = wallets[0];
     useLayoutEffect(() => {
+      console.log("useLayoutEffect ------->", wallet);
+      if (wallet) {
+        const isConnected = wallet
+          .isConnected()
+          .then((res) => console.log("isWalletConnected ------>", res));
+      }
       if (pathname.includes("/home") && wallet?.address && !userDetail) {
         setModal(true);
       } else {

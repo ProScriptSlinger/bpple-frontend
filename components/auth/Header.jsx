@@ -23,6 +23,7 @@ const Header = (props) => {
       // setAddress(wallet.address);
     },
     onError: (error) => {
+      router.push("/auth")
       console.log(error);
       // Any logic you'd like to execute after a user exits the connection flow or there is an error
     },
