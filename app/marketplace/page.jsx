@@ -31,11 +31,11 @@ const Page = () => {
           <p className="text-[20px]">Best & Trends Collections</p>
           <div className="w-full h-[200px] overflow-auto">
             <div className="mt-[20px] w-full overflow-auto inline-flex gap-[15px] absolute">
-              {bestCollections.map((item, index) => (
+              {/* {bestCollections.map((item, index) => (
                 <div key={index}>
                   <BestCollection item={item} />
                 </div>
-              ))}
+              ))} */}
             </div>
           </div>
           <p className="text-[20px]">Explore New NFTs</p>

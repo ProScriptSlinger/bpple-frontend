@@ -30,16 +30,6 @@ const Page = (props) => {
     { link: "/marketplace/2.svg", avatar: "/avatar/18.svg", id: 10 },
     { link: "/marketplace/3.svg", avatar: "/avatar/18.svg", id: 11 },
   ];
-  const newNfts = [
-    { logo: "/marketplace/logo.svg" },
-    { logo: "/marketplace/logo.svg" },
-    { logo: "/marketplace/logo.svg" },
-    { logo: "/marketplace/logo.svg" },
-    { logo: "/marketplace/logo.svg" },
-    { logo: "/marketplace/logo.svg" },
-    { logo: "/marketplace/logo.svg" },
-    { logo: "/marketplace/logo.svg" },
-  ];
   return (
     <>
       <div className="w-full h-full pt-[30px] pb-[50px] prevent-select">

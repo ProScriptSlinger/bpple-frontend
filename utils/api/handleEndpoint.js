@@ -31,10 +31,8 @@ const handleEndpoint = async (userData, endpoint, method, token) => {
     } else if (error.request) {
       // The request was made but no response was received
       toast.error("No response received from server");
-      toast.error("No response received from server");
     } else {
       // Something happened in setting up the request that triggered an error
-      toast.error("Error setting up the request");
       toast.error("Error setting up the request");
     }
   }
