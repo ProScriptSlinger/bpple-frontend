@@ -14,8 +14,7 @@ const Sider = () => {
   const router = useRouter();
   const pathname = usePathname();
   const { wallets } = useWallets();
-  if (pathname.includes(`/join/`)) return;
-  if (pathname.includes(`/auth`)) return;
+
   // const wallet = wallets[0]?.meta?.icon ? wallets[0] : wallets[1];
   const wallet = wallets[0];
   // const [siderWidth, setSiderWidth] = useState(300);
@@ -51,6 +50,8 @@ const Sider = () => {
   };
 
   const [loading, setLoading] = useState(true);
+  if (pathname.includes(`/join/`)) return;
+  if (pathname.includes(`/auth`)) return;
 
   return (
     <>
