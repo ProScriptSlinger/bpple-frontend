@@ -30,62 +30,6 @@ const Page = (props) => {
     { link: "/marketplace/2.svg", avatar: "/avatar/18.svg", id: 10 },
     { link: "/marketplace/3.svg", avatar: "/avatar/18.svg", id: 11 },
   ];
-  const explorer = [
-    {
-      link: "/marketplace/explore/1.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 1,
-    },
-    {
-      link: "/marketplace/explore/2.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 2,
-    },
-    {
-      link: "/marketplace/explore/3.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 3,
-    },
-    {
-      link: "/marketplace/explore/4.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 4,
-    },
-    {
-      link: "/marketplace/explore/1.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 5,
-    },
-    {
-      link: "/marketplace/explore/2.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 6,
-    },
-    {
-      link: "/marketplace/explore/3.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 7,
-    },
-    {
-      link: "/marketplace/explore/4.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 8,
-    },
-    {
-      link: "/marketplace/explore/1.svg",
-      avatar: "/avatar/2.svg",
-      user: "/avatar/17.svg",
-      id: 9,
-    },
-  ];
   const newNfts = [
     { logo: "/marketplace/logo.svg" },
     { logo: "/marketplace/logo.svg" },
@@ -145,11 +89,15 @@ const Page = (props) => {
             </div>
           </div>
           <div className="w-full mt-[20px] overflow-auto">
-            {newCommunities.map((item, index) => (
-              <div key={index}>
-                <NewCommunityItem item={item} index={index} />
-              </div>
-            ))}
+            {isNewLoading ? (
+              <></>
+            ) : (
+              newCommunities.map((item, index) => (
+                <div key={index}>
+                  <NewCommunityItem item={item} index={index} />
+                </div>
+              ))
+            )}
           </div>
           <div className="w-full h-[60px]"></div>
         </div>
