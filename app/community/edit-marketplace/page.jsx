@@ -79,7 +79,7 @@ const Page = () => {
         </div>
         <div className="w-full mt-[20px] relative h-[250px] overflow-auto">
           <div className="w-full overflow-auto inline-flex gap-[10px] absolute">
-            {activeNFTs.map((item, index) => (
+            {/* {activeNFTs.map((item, index) => (
               <div
                 key={index}
                 className="flex flex-col gap-2 items-center"
@@ -92,7 +92,7 @@ const Page = () => {
                   <MdRadioButtonUnchecked className=" left-1 top-1 text-[30px] color-main  cursor-pointer" />
                 )}
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
 

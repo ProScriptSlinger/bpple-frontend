@@ -32,11 +32,11 @@ const Page = () => {
         </div>
         <div className="w-full mt-[20px] relative h-[250px] overflow-auto">
           <div className="w-full overflow-auto inline-flex gap-[10px] absolute">
-            {activeNFTs.map((item, index) => (
+            {/* {activeNFTs.map((item, index) => (
               <div key={index} className="flex flex-col gap-2 items-center">
                 {list.includes(item.nft.mint) && <NewNFTS item={item} />}
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
 
