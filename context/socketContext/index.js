@@ -100,7 +100,6 @@ export function SocketIoProvider({ children }) {
         }
 
         if (!socket.current.hasListeners("new-message-to-group")) {
-          console.log("Adding new-message-to-group listener...");
           socket.current.on("new-message-to-group", (message) => {
             // console.log("Received new-message-to-group:", message);
 

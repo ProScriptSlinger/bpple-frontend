@@ -10,38 +10,27 @@ const Header = (props) => {
   const router = useRouter();
   const returnUrl = props.returnUrl;
   const { wallets, ready } = useWallets();
-  // const wallet = wallets[0]?.meta?.icon ? wallets[0] : wallets[1];
   const wallet = wallets[0];
+  const { getUser, setWalletConnected, setUserDetail } = useUser();
   const { connectWallet } = useConnectWallet({
     onSuccess: (wallet) => {
-      console.log(wallet);
-      // Any logic you'd like to execute after a user successfully connects their wallet
-      console.log("connected wallet ------>", router);
-      if (returnUrl) {
-        router.push(decodeURIComponent(returnUrl)); // Decode the URL
-      } else router.push("/home");
-      // setAddress(wallet.address);
+      setWalletConnected(true);
+      setUserDetail(null);
+      getUser();
     },
     onError: (error) => {
-      router.push("/auth")
+      router.push("/auth");
       console.log(error);
       // Any logic you'd like to execute after a user exits the connection flow or there is an error
     },
   });
 
   const handleConnect = () => connectWallet();
-  // !wallet
-  //   ? connectWallet()
-  //   : wallet
-  //       .loginOrLink()
-  //       .then(() => router.push("/home"))
-  //       .catch((err) => console.log("err ----->", err));
 
   useEffect(() => {
     console.log("wallet status ---->", wallets);
   }, [wallet]);
 
-  // console.log()
   const CommunityCard = () => {
     return (
       <div className="hidden md:block">

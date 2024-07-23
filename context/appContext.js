@@ -33,6 +33,8 @@ export function AuthProvider({ children }) {
   const [currentCommunity, setCurrentCommunity] = useState(null);
   const [wallet, setWallet] = useState();
   const [dataLoading, setUserDataLoading] = useState(false);
+  const [isWalletConnected, setWalletConnected] = useState(false);
+
   const memoizedValues = useMemo(() => {
     if (wallet) {
       return {
@@ -54,7 +56,8 @@ export function AuthProvider({ children }) {
 
   const getUserByAddress = async () => {
     try {
-      if (!address || !isConnected || userDetail?.email) return;
+      console.log("wallet address ------>", address);
+      if (!address) return;
       const response = await handleEndpoint(
         null,
         `user/by_address/${address}`,
@@ -67,9 +70,11 @@ export function AuthProvider({ children }) {
       } else {
         // Handle empty response or other conditions
         console.log("Empty response or other condition");
+        setUserDetail(null);
       }
     } catch (error) {
       console.error("Error fetching user details:", error);
+      setUserDetail(null);
       // Handle error, such as setting an error state or displaying a message
     }
   };
@@ -89,54 +94,34 @@ export function AuthProvider({ children }) {
     }
   };
 
-  useEffect(() => {
-    const getUser = async () => {
-      if (userDetail) return;
-
-      try {
-        setPending(true);
-        const addresResponse = await getUserByAddress();
-        const tokenResponse = await getUserwithToken();
-        console.log("address response ------> ", addresResponse);
-        if (addresResponse && tokenResponse) {
-          setUserDetail({ ...tokenResponse, ...addresResponse.user });
-        }
-
-        if (addresResponse) {
-          localStorage.setItem("bipple_token", addresResponse.token);
-          setUserDetail(addresResponse.user);
-        }
-
-        if (tokenResponse) {
-          setUserDetail(tokenResponse);
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setPending(false);
-      }
-    };
-
-    getUser();
-  }, [address, wallet]);
-
   const getUser = async () => {
+    console.log("getUser ----->", address);
     try {
+      setPending(true);
+
       const addresResponse = await getUserByAddress();
       const tokenResponse = await getUserwithToken();
-      console.log("address response -------> ", addresResponse);
+      console.log("address response ------> ", addresResponse);
       if (addresResponse && tokenResponse) {
         setUserDetail({ ...tokenResponse, ...addresResponse.user });
       } else if (addresResponse) {
+        localStorage.setItem("bipple_token", addresResponse.token);
         setUserDetail(addresResponse.user);
       } else if (tokenResponse) {
         setUserDetail(tokenResponse);
       }
+
+      if (!addresResponse) setUserDetail(null);
     } catch (error) {
       console.log(error);
     } finally {
+      setPending(false);
     }
   };
+
+  useEffect(() => {
+    getUser();
+  }, [address, wallet, isWalletConnected]);
 
   const getCommunities = async () => {
     if (userDetail) {
@@ -155,7 +140,6 @@ export function AuthProvider({ children }) {
 
   const getUserData = async () => {
     if (userDetail) {
-      console.log("getUserData ------->", userDetail._id);
       try {
         setCommunities([]);
         const communityResponse = await handleEndpoint(
@@ -167,7 +151,6 @@ export function AuthProvider({ children }) {
 
         if (communityResponse) {
           setCommunities(communityResponse);
-          console.log("Communities updated", communityResponse);
         }
       } catch (error) {
         console.error("Error fetching communities:", error);
@@ -215,7 +198,6 @@ export function AuthProvider({ children }) {
 
         if (sentResponse.ok) {
           setFriendRequestsSent(sentResponse.requests);
-          console.log("Friend requests sent updated", sentResponse);
         }
       } catch (error) {
         console.error("Error fetching sent friend requests:", error);
@@ -231,7 +213,6 @@ export function AuthProvider({ children }) {
 
         if (sentResponse.ok) {
           setRequestsSent(sentResponse.requests);
-          console.log("Requests sent updated", sentResponse);
         }
       } catch (error) {
         console.error("Error fetching sent requests:", error);
@@ -247,7 +228,6 @@ export function AuthProvider({ children }) {
 
         if (chatResponse) {
           setChats(chatResponse);
-          console.log("Chats updated", chatResponse);
         }
       } catch (error) {
         console.error("Error fetching chats:", error);
@@ -316,6 +296,8 @@ export function AuthProvider({ children }) {
     currentCommunity,
     setCurrentCommunity,
     getUserData,
+    isWalletConnected,
+    setWalletConnected,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

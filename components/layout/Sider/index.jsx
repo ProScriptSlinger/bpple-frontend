@@ -24,7 +24,8 @@ const Sider = () => {
   const [closeButton, setCloseButton] = useState(true);
   const [transition, setTransition] = useState(true);
 
-  const { setUserDetail, userDetail, address, disconnect } = useUser();
+  const { setUserDetail, userDetail, address, disconnect, setWalletConnected } =
+    useUser();
 
   // const { walletInfo } = useWalletInfo();
 
@@ -43,6 +44,7 @@ const Sider = () => {
 
   const handleLogout = async () => {
     wallet.disconnect();
+    setWalletConnected(false);
     setUserDetail(null);
     router.push("/auth");
     setLogout(false);

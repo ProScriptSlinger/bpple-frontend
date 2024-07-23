@@ -19,6 +19,7 @@ const withAuth = (WrappedComponent) => {
       userDetail,
       disconnect,
       pending,
+      isWalletConnected,
     } = useUser();
     const [newModal, setModal] = useState(false);
     const { wallets, ready } = useWallets();
@@ -31,20 +32,20 @@ const withAuth = (WrappedComponent) => {
           .then((res) => console.log("isWalletConnected ------>", res));
       }
       if (
-        pathname.includes("/home") &&
-        wallet?.address &&
+        pathname.includes("/auth") &&
+        isWalletConnected &&
         !userDetail &&
         !pending
       ) {
         console.log("userDetail info ------>", wallet.address, userDetail);
-        setModal(true);
+        // setModal(true);
       } else {
         setModal(false);
       }
 
-      if (wallet?.address) {
+      if (isWalletConnected && userDetail) {
         if (pathname.includes("/auth")) {
-          // router.push("/home");
+          router.push("/home");
         }
       } else {
         if (!pathname.includes("/auth")) {
@@ -54,13 +55,13 @@ const withAuth = (WrappedComponent) => {
         }
       }
 
-      if (!ready && !address) {
+      if (!isWalletConnected && !address) {
         if (!pathname.includes("/auth")) {
           router.push(`/auth?returnUrl=${encodeURIComponent(pathname)}`);
           console.log("ready && !wallet", ready, wallet);
         }
       }
-    }, [wallet, router, pathname]);
+    }, [wallet, router, pathname, isWalletConnected]);
 
     return (
       <>
