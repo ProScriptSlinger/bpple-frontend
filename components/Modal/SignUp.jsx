@@ -6,6 +6,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { handleEndpoint } from "@/utils/api/handleEndpoint";
 import { toast } from "react-toastify";
 import { useUser } from "@/context/appContext";
+import { useRouter } from "next/navigation";
 
 const SignUp = (props) => {
   const { setModalOpen } = props;
@@ -15,6 +16,7 @@ const SignUp = (props) => {
   const handleName = (e) => {
     setUsername(e.target.value);
   };
+  const router = useRouter();
 
   const handleCreate = async () => {
     try {
