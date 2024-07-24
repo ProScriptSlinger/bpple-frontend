@@ -24,7 +24,9 @@ const Auth = () => {
   useEffect(() => {
     console.log("auth page ------>", isWalletConnected, userDetail);
     if (isWalletConnected && !userDetail && !pending) setModalOpen(true);
+    // 1000 milliseconds (1 second) delay;
     else if (isWalletConnected && userDetail) {
+      clearTimeout(timer); // Clear the timer if conditions change
       setModalOpen(false);
       router.push("/home");
     }
@@ -49,7 +51,9 @@ const Auth = () => {
           className="w-[80vw] lg:w-[70vw] h-[900px] absolute top-[40px] left-[200px] lg:left-[100px] opacity-30"
         />
       </div>
-      {modalOpen && <SignUp setModalOpen={setModalOpen} />}
+      {modalOpen && (
+        <SignUp modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      )}
     </>
   );
 };

@@ -11,7 +11,7 @@ import { TfiNewWindow } from "react-icons/tfi";
 import { LuFileCheck } from "react-icons/lu";
 
 const SignUp = (props) => {
-  const { setModalOpen } = props;
+  const { setModalOpen, modalOpen } = props;
   const { address, getUser } = useUser();
   const [updating, setUpdating] = useState(false);
   const [username, setUsername] = useState("");
@@ -41,12 +41,24 @@ const SignUp = (props) => {
       setUpdating(false);
     }
   };
+  const [isOpen, setOpen] = useState(false);
+  useEffect(() => {
+    let timer;
+    if (setModalOpen)
+      timer = setTimeout(() => {
+        setOpen(true);
+      }, 1500);
+  }, [modalOpen]);
 
   return (
     <div>
       <div className=" z-50 text-[14px] bg-[] w-full font-ttfirs fixed  top-0 right-0 h-screen flex items-center justify-center">
         <div className=" bg-[#22252D]/90  z-0 text-[14px] w-full font-ttfirs fixed  top-0 right-0 h-screen flex items-center justify-center " />
-        <div className=" w-full z-2 max-w-[350px] p-4 mx-auto bg-[#171717] backdrop-blur-xl  rounded-3xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.4)] ">
+        <div
+          className={`transition-all ${
+            isOpen ? "opacity-100" : "opacity-0"
+          } w-full z-2 max-w-[350px]  p-4 mx-auto bg-[#171717] backdrop-blur-xl  rounded-3xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.4)] `}
+        >
           <div className="w-full flex justify-end">
             <button
               onClick={() => {
