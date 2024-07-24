@@ -21,25 +21,27 @@ const SignUp = (props) => {
   const router = useRouter();
 
   const handleCreate = async () => {
-    try {
-      setUpdating(true);
-      const response = await handleEndpoint(
-        { address: address, username: username },
-        `auth/register-with-address`,
-        "post",
-        null
-      );
-      if (response && response.ok) {
-        await getUser();
-        setModalOpen(false);
-        router.push("/home");
+    if (username == "") toast.warning("Please input user name.");
+    else
+      try {
+        setUpdating(true);
+        const response = await handleEndpoint(
+          { address: address, username: username },
+          `auth/register-with-address`,
+          "post",
+          null
+        );
+        if (response && response.ok) {
+          await getUser();
+          setModalOpen(false);
+          router.push("/home");
+        }
+      } catch (error) {
+        toast.error(error.message);
+        console.log(error);
+      } finally {
+        setUpdating(false);
       }
-    } catch (error) {
-      toast.error(error.message);
-      console.log(error);
-    } finally {
-      setUpdating(false);
-    }
   };
   const [isOpen, setOpen] = useState(false);
   useEffect(() => {
@@ -143,6 +145,15 @@ const SignUp = (props) => {
                   "Accept"
                 )}
               </button>
+            </div>
+            <div className="flex gap-2 items-center mt-4">
+              <Image
+                width={0}
+                height={0}
+                className="w-[15px]"
+                src={"/icon/logo_gray.svg"}
+              />
+              <p className="text-[#9D9D9D] text-[15px]">Protected by Bipple</p>
             </div>
           </div>
         </div>
