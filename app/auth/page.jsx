@@ -26,7 +26,6 @@ const Auth = () => {
     if (isWalletConnected && !userDetail && !pending) setModalOpen(true);
     // 1000 milliseconds (1 second) delay;
     else if (isWalletConnected && userDetail) {
-      clearTimeout(timer); // Clear the timer if conditions change
       setModalOpen(false);
       router.push("/home");
     }

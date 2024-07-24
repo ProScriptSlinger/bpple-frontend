@@ -50,6 +50,7 @@ const SignUp = (props) => {
       timer = setTimeout(() => {
         setOpen(true);
       }, 1500);
+    else clearTimeout(timer); // Clear the timer if conditions change
   }, [modalOpen]);
 
   return (
