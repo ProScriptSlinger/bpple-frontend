@@ -121,44 +121,44 @@ const CallActionModal = () => {
   ];
 
   useEffect(() => {
-    navigator.mediaDevices
-      .enumerateDevices()
-      .then((devices) => {
-        let cameraAvailable = false;
-        let microphoneAvailable = false;
+    // navigator.mediaDevices
+    //   .enumerateDevices()
+    //   .then((devices) => {
+    //     let cameraAvailable = false;
+    //     let microphoneAvailable = false;
 
-        devices.forEach((device) => {
-          if (device.kind === "videoinput") {
-            cameraAvailable = true;
-          } else if (device.kind === "audioinput") {
-            microphoneAvailable = true;
-          }
-        });
+    //     devices.forEach((device) => {
+    //       if (device.kind === "videoinput") {
+    //         cameraAvailable = true;
+    //       } else if (device.kind === "audioinput") {
+    //         microphoneAvailable = true;
+    //       }
+    //     });
 
-        if (cameraAvailable || microphoneAvailable) {
-          // Proceed with getUserMedia
-          navigator.mediaDevices
-            .getUserMedia({ audio: true, video: true })
-            .then((stream) => {
-              setStream(stream);
-              if (myVideoRef.current) {
-                myVideoRef.current.srcObject = stream;
-              }
-            })
-            .catch((error) => {
-              console.error("Error accessing audio and video stream:", error);
-            });
-        } else {
-          console.log("Camera or microphone is not available.");
-          toast.warning(
-            "Camera or microphone is not available. Plz check your camera."
-          );
-          // Handle the case where camera or microphone is not available
-        }
-      })
-      .catch((error) => {
-        console.error("Error enumerating media devices:", error);
-      });
+    //     if (cameraAvailable || microphoneAvailable) {
+    //       // Proceed with getUserMedia
+    //       navigator.mediaDevices
+    //         .getUserMedia({ audio: true, video: true })
+    //         .then((stream) => {
+    //           setStream(stream);
+    //           if (myVideoRef.current) {
+    //             myVideoRef.current.srcObject = stream;
+    //           }
+    //         })
+    //         .catch((error) => {
+    //           console.error("Error accessing audio and video stream:", error);
+    //         });
+    //     } else {
+    //       console.log("Camera or microphone is not available.");
+    //       toast.warning(
+    //         "Camera or microphone is not available. Plz check your camera."
+    //       );
+    //       // Handle the case where camera or microphone is not available
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error enumerating media devices:", error);
+    //   });
     return () => {
       if (peerRef.current) {
         peerRef.current.destroy();
