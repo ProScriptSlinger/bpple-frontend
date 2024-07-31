@@ -79,9 +79,13 @@ const Page = (props) => {
             </div>
           </div>
           <div className="w-full mt-[20px] overflow-auto">
-            {isNewLoading || !newCommunities ? (
+            {isNewLoading ? (
               <div className="flex justify-center py-4 text-white text-[25px]">
                 Loading...
+              </div>
+            ) : !newCommunities ? (
+              <div className="flex justify-center py-4 text-white text-[25px]">
+                No Content
               </div>
             ) : (
               newCommunities.map((item, index) => (

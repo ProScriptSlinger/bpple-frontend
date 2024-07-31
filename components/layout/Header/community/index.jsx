@@ -167,7 +167,7 @@ const CommunityHeader = (props) => {
     setModalType(type);
   };
   return (
-    <div className="font-poppins">
+    <div className="font-poppins pt-4">
       <div className="flex flex-col relative border-b-[#2A2A2A] border-b-[1px] pb-2 bg-[#111111]">
         <div
           className={`w-full flex px-4  justify-between items-center ${

@@ -32,6 +32,7 @@ export function SocketIoProvider({ children }) {
     requestsReceived,
     setRequestsReceived,
     setRequestsSent,
+    getChatById,
   } = useUser();
 
   useEffect(() => {
@@ -96,6 +97,16 @@ export function SocketIoProvider({ children }) {
             // console.log("Received friend:", request);
 
             setRequestsReceived((prev) => [...prev, request]);
+          });
+        }
+
+        if (!socket.current.hasListeners("new-chat-received")) {
+          socket.current.on("new-chat-received", (data) => {
+            console.log("new-chat-received:", data);
+            getChatById();
+            socket.current.on("join-room", {
+              room_id: data?.dmId,
+            });
           });
         }
 
@@ -260,7 +271,7 @@ export function SocketIoProvider({ children }) {
 
       if (!socket.current.hasListeners("new-direct-message")) {
         socket.current.on("new-direct-message", (message) => {
-          // console.log("new-direct-message", message);
+          console.log("new-direct-message", message);
 
           setUser_messages((prevMessages) => {
             const updatedMessages = { ...prevMessages };

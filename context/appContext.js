@@ -123,6 +123,23 @@ export function AuthProvider({ children }) {
     getUser();
   }, [address, wallet, isWalletConnected]);
 
+  const getChatById = async () => {
+    try {
+      const chatResponse = await handleEndpoint(
+        null,
+        `chat/${userDetail.user_id}`,
+        "get",
+        null
+      );
+
+      if (chatResponse) {
+        setChats(chatResponse);
+      }
+    } catch (error) {
+      console.error("Error fetching chats:", error);
+    }
+  };
+
   const getCommunities = async () => {
     if (userDetail) {
       const communityResponse = await handleEndpoint(
@@ -218,20 +235,7 @@ export function AuthProvider({ children }) {
         console.error("Error fetching sent requests:", error);
       }
 
-      try {
-        const chatResponse = await handleEndpoint(
-          null,
-          `chat/${userDetail.user_id}`,
-          "get",
-          null
-        );
-
-        if (chatResponse) {
-          setChats(chatResponse);
-        }
-      } catch (error) {
-        console.error("Error fetching chats:", error);
-      }
+      await getChatById();
     }
   };
   useEffect(() => {
@@ -298,6 +302,7 @@ export function AuthProvider({ children }) {
     getUserData,
     isWalletConnected,
     setWalletConnected,
+    getChatById,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

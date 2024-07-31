@@ -77,7 +77,10 @@ const SignUp = (props) => {
             </button>
           </div>
           <div className="flex flex-col w-full items-center">
-            <LuFileCheck color="#3772FF" className="w-[50px] h-[50px]" />
+            <LuFileCheck
+              color="#3772FF"
+              className="w-[50px] h-[50px] color-main"
+            />
             <div className="text-[#9D9D9D] text-[20px] mt-4">One last step</div>
             <div className="text-[#9D9D9D] text-[15px] w-fit text-center mt-2">
               By signing up, you agree to our terms and privacy policy.
@@ -105,7 +108,7 @@ const SignUp = (props) => {
               </div>
               <TfiNewWindow
                 color="#9D9D9D"
-                className="w-[20px] mt-[5px] h-auto absolute right-4 top-2 text-[#9D9D9D]"
+                className="w-[20px] mt-[5px] h-auto absolute right-4 top-2 text-[#9D9D9D] color-main"
               />
             </div>
             <div className="relative w-full mt-4 cursor-pointer">
@@ -117,7 +120,7 @@ const SignUp = (props) => {
               </div>
               <TfiNewWindow
                 color="#9D9D9D"
-                className="w-[20px] mt-[5px] h-auto absolute right-4 top-2"
+                className="w-[20px] mt-[5px] h-auto absolute right-4 top-2 color-main"
               />
             </div>
             <div className="flex justify-between w-full gap-4 bottom-0 ">

@@ -6,6 +6,7 @@ import { useUser } from "@/context/appContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getNameInitials } from "../../../utils/functions/getNameInitials";
+import { useSocket } from "@/context/socketContext";
 
 const SearchMember = (props) => {
   const [search, setSearch] = useState("");
@@ -13,9 +14,9 @@ const SearchMember = (props) => {
   const [loading, setLoading] = useState(false);
   const [activeUser, setActiveUser] = useState();
   const { userDetail, getUserData } = useUser();
-  console.log("userDetail ------>", userDetail);
   const { siderWidth } = props;
   const router = useRouter();
+  const { socket } = useSocket();
 
   const fetchUsers = async () => {
     try {
@@ -27,7 +28,6 @@ const SearchMember = (props) => {
         null
       );
       setLoading(false);
-      console.log("Fetch Users Func Response------>", response, userDetail);
       setFoundUsers(response);
     } catch (err) {
       console.log(err);
@@ -35,9 +35,8 @@ const SearchMember = (props) => {
     }
   };
 
-  const handleAddChart = async (_id) => {
+  const handleAddChart = async (_id, user_id) => {
     setLoading(true);
-    console.log("userId ----->", _id);
     const res = await handleEndpoint(
       null,
       `chat/add-chat/${userDetail._id}-${_id}`,
@@ -45,18 +44,21 @@ const SearchMember = (props) => {
       null
     );
     await getUserData();
-    console.log("handleAddChart ------>", res);
     props.setVisibleSearch(false);
+    socket.current.emit("friend-start-chat", {
+      dmId: res.dmID,
+      senderId: user_id,
+    });
     setLoading(false);
     router.push(`/chats/${res.dmID}`);
   };
 
   const UserItem = (props) => {
-    const { username, avatar, onClick, _id } = props;
+    const { username, avatar, onClick, _id, user_id } = props;
     return (
       <>
         <button
-          onClick={() => onClick(_id)}
+          onClick={() => onClick(_id, user_id)}
           className={`w-full h-[60px] inline-flex justify-between bg-[#3772FF] mb-[5px] px-[12px] py-[5px] hover:bg-opacity-5 focus:bg-opacity-5 ${
             activeUser == _id ? "border-[#9D9D9D] border-[1px]" : ""
           }  bg-opacity-5 rounded-[10px] items-center`}
