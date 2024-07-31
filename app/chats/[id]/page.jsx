@@ -197,6 +197,7 @@ const Page = () => {
       if (reponse) {
         setStored_Messages(reponse);
         console.log("good");
+        setMessages();
       }
     };
 
